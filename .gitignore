@@ -32,6 +32,7 @@ wp-content/plugins/*
 # !wp-content/plugins/my-directory-plugin/
 !wp-content/plugins/event-espresso/
 !wp-content/plugins/espresso-multiple/
+!wp-content/plugins/espresso-ticketing/
 
 # Ignore everything in the "themes" directory, except the themes you
 # specify (see the commented-out example for a hint on how to do this.)
