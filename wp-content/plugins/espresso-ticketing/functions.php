@@ -119,118 +119,150 @@ function espresso_ticket_template_files() {
 //Creates the ticket pdf
 function espresso_ticket_launch($attendee_id=0, $registration_id=0){
 	global $wpdb, $org_options;
-	$data = new stdClass;
+
+
+	$attendee_string = $attendee_id;
+	$registration_string = $registration_id;
 
 	//Make sure we have attendee data
 	if ($attendee_id==0 || $registration_id==0)
 		return;
 
-	//Get the event record
-    $sql = "SELECT ed.*, et.css_file, et.template_file, et.ticket_content, et.ticket_logo_url ";
-    isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= ", v.id venue_id, v.name venue_name, v.address venue_address, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta " : '';
-    $sql .= " FROM " . EVENTS_DETAIL_TABLE . " ed ";
-    isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = ed.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = r.venue_id " : '';
-    $sql .= " JOIN " . EVENTS_ATTENDEE_TABLE . " ea ON ea.event_id=ed.id ";
-	$sql .= " LEFT JOIN " . EVENTS_TICKET_TEMPLATES . " et ON et.id=ed.ticket_id ";
-    $sql .= " WHERE ea.id = '" . $attendee_id . "' AND ea.registration_id = '" . $registration_id . "' ";
-	//echo $sql;
-    $data->event = $wpdb->get_row($sql, OBJECT);
+	/* CUSTOM CODE by GARY RECKARD 2013-02-09 */
+	$attendee_id_array = explode('|',$attendee_id);
+	$registration_id_array = explode('|',$registration_id);
 
-	//Get the attendee record
-    $sql = "SELECT ea.* FROM " . EVENTS_ATTENDEE_TABLE . " ea WHERE ea.id = '" . $attendee_id . "' AND ea.registration_id = '" . $registration_id . "' ";
-    $data->attendee = $wpdb->get_row($sql, OBJECT);
+	$return_content = "";
+
+	$header_shown = false;
 	
-	if (empty($data->attendee)){
-		//echo 'Invalid data supplied.';
-		return;
-	}
 
-	//Get the primary/first attendee
-	$data->primary_attendee = espresso_is_primary_attendee($data->attendee->id) == true ? true : false;
+	foreach($attendee_id_array as $index => $attendee_id){
+		$registration_id = $registration_id_array[$index];
 
-	//unserialize the event meta
-	$data->event->event_meta = unserialize($data->event->event_meta);
 
-	//Get the registration date
-	$data->attendee->registration_date = $data->attendee->date;
+		$data = new stdClass;
+		//Get the event record
+		$sql = "SELECT ed.*, et.css_file, et.template_file, et.ticket_content, et.ticket_logo_url ";
+		isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= ", v.id venue_id, v.name venue_name, v.address venue_address, v.city venue_city, v.state venue_state, v.zip venue_zip, v.country venue_country, v.meta venue_meta " : '';
+		$sql .= " FROM " . EVENTS_DETAIL_TABLE . " ed ";
+		isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y' ? $sql .= " LEFT JOIN " . EVENTS_VENUE_REL_TABLE . " r ON r.event_id = ed.id LEFT JOIN " . EVENTS_VENUE_TABLE . " v ON v.id = r.venue_id " : '';
+		$sql .= " JOIN " . EVENTS_ATTENDEE_TABLE . " ea ON ea.event_id=ed.id ";
+		$sql .= " LEFT JOIN " . EVENTS_TICKET_TEMPLATES . " et ON et.id=ed.ticket_id ";
+		$sql .= " WHERE ea.id = '" . $attendee_id . "' AND ea.registration_id = '" . $registration_id . "' ";
+		//echo $sql;
+		$data->event = $wpdb->get_row($sql, OBJECT);
 
-	//Get the CSS file
-	$data->event->css_file = (!empty($data->event->css_file) && $data->event->css_file > '0') ? $data->event->css_file : 'simple.css';
-	//echo $data->event->css_file;
-
-	//Get the HTML file
-	$data->event->template_file = (!empty($data->event->template_file) && $data->event->template_file > '0') ? $data->event->template_file : 'index.php';
-
-	//Venue information
-    if (isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y') {
-		$data->event->venue_id = !empty($data->event->venue_id)?$data->event->venue_id:'';
-		$data->event->venue_name = !empty($data->event->venue_name)?$data->event->venue_name:'';
-		$data->event->address = !empty($data->event->venue_address)?$data->event->venue_address:'';
-		$data->event->address2 = !empty($data->event->venue_address2)?$data->event->venue_address2:'';
-		$data->event->city = !empty($data->event->venue_city)?$data->event->venue_city:'';
-		$data->event->state = !empty($data->event->venue_state)?$data->event->venue_state:'';
-		$data->event->zip = !empty($data->event->venue_zip)?$data->event->venue_zip:'';
-		$data->event->country = !empty($data->event->venue_country)?$data->event->venue_country:'';
-		$data->event->venue_meta = !empty($data->event->venue_meta)?unserialize($data->event->venue_meta):'';
-    } else {
-        $data->event->venue_name = !empty($data->event->venue_title)?$data->event->venue_title:'';
-    }
-
-	//Create the Gravatar image
-	$data->gravatar = '<img src="' . espresso_get_gravatar($data->attendee->email, $size = '100', $default = 'http://www.gravatar.com/avatar/' ) . '" alt="Gravatar">';
-
-	//Google map IMAGE creation
-	$data->event->google_map_image = espresso_google_map_link(array('id' => $data->event->venue_id, 'address' => $data->event->address, 'city' => $data->event->city, 'state' => $data->event->state, 'zip' => $data->event->zip, 'country' => $data->event->country, 'type'=>'map'));
-
-	//Google map LINK creation
-	$data->event->google_map_link = espresso_google_map_link(array('address' => $data->event->address, 'city' => $data->event->city, 'state' => $data->event->state, 'zip' => $data->event->zip, 'country' => $data->event->country, 'type'=>'text'));
-
-	//Create the logo
-	$data->event->ticket_logo_image = '';
-	$data->event->ticket_logo_url = empty($data->event->ticket_logo_url) ? $org_options['default_logo_url']: $data->event->ticket_logo_url;
-	if ( !empty($data->event->ticket_logo_url) ){
-		$image_size = getimagesize($data->event->ticket_logo_url);
-		$data->event->ticket_logo_image = '<img src="'.$data->event->ticket_logo_url.'" '.$image_size[3].' alt="logo" /> ';
-	}
-
-	//Create the QR Code image
-	$data->qr_code = espresso_ticket_qr_code( array(
-		'attendee_id' => $data->attendee->id,
-		'event_name' => stripslashes_deep($data->event->event_name),
-		'attendee_first' => $data->attendee->fname,
-		'attendee_last' => $data->attendee->lname,
-		'registration_id' => $data->attendee->registration_id,
-		'event_code' => $data->event->event_code,
-		'ticket_type' => $data->attendee->price_option,
-		'event_time' => $data->attendee->event_time,
-		'final_price' => $data->attendee->final_price,
-	));
-
-	//Build the seating assignment
-	$seatingchart_tag = '';
-	if (defined("ESPRESSO_SEATING_CHART")) {
-		if (class_exists("seating_chart")) {
-			if ( seating_chart::check_event_has_seating_chart($data->attendee->event_id)) {
-				$rs = $wpdb->get_row("select scs.* from ".EVENTS_SEATING_CHART_EVENT_SEAT_TABLE." sces inner join ".EVENTS_SEATING_CHART_SEAT_TABLE." scs on sces.seat_id = scs.id where sces.attendee_id = ".$attendee_id);
-				if ( $rs !== NULL ) {
-					 $data->attendee->seatingchart_tag = $rs->custom_tag." ".$rs->seat." ".$rs->row;
-				}
-			}
+		//Get the attendee record
+		$sql = "SELECT ea.* FROM " . EVENTS_ATTENDEE_TABLE . " ea WHERE ea.id = '" . $attendee_id . "' AND ea.registration_id = '" . $registration_id . "' ";
+		$data->attendee = $wpdb->get_row($sql, OBJECT);
+		
+		if (empty($data->attendee)){
+			//echo 'Invalid data supplied.';
+			return;
 		}
+
+		//Get the primary/first attendee
+		$data->primary_attendee = espresso_is_primary_attendee($data->attendee->id) == true ? true : false;
+
+		//unserialize the event meta
+		$data->event->event_meta = unserialize($data->event->event_meta);
+
+		//Get the registration date
+		$data->attendee->registration_date = $data->attendee->date;
+
+		//Get the CSS file
+		$data->event->css_file = (!empty($data->event->css_file) && $data->event->css_file > '0') ? $data->event->css_file : 'simple.css';
+		//echo $data->event->css_file;
+
+		//Get the HTML file
+		$data->event->template_file = (!empty($data->event->template_file) && $data->event->template_file > '0') ? $data->event->template_file : 'index.php';
+
+		//Venue information
+		if (isset($org_options['use_venue_manager']) && $org_options['use_venue_manager'] == 'Y') {
+			$data->event->venue_id = !empty($data->event->venue_id)?$data->event->venue_id:'';
+			$data->event->venue_name = !empty($data->event->venue_name)?$data->event->venue_name:'';
+			$data->event->address = !empty($data->event->venue_address)?$data->event->venue_address:'';
+			$data->event->address2 = !empty($data->event->venue_address2)?$data->event->venue_address2:'';
+			$data->event->city = !empty($data->event->venue_city)?$data->event->venue_city:'';
+			$data->event->state = !empty($data->event->venue_state)?$data->event->venue_state:'';
+			$data->event->zip = !empty($data->event->venue_zip)?$data->event->venue_zip:'';
+			$data->event->country = !empty($data->event->venue_country)?$data->event->venue_country:'';
+			$data->event->venue_meta = !empty($data->event->venue_meta)?unserialize($data->event->venue_meta):'';
+		} else {
+			$data->event->venue_name = !empty($data->event->venue_title)?$data->event->venue_title:'';
+		}
+
+		//Create the Gravatar image
+		$data->gravatar = '<img src="' . espresso_get_gravatar($data->attendee->email, $size = '100', $default = 'http://www.gravatar.com/avatar/' ) . '" alt="Gravatar">';
+
+
+		//Google map LINK creation
+		$data->event->google_map_link = espresso_google_map_link(array('address' => $data->event->address, 'city' => $data->event->city, 'state' => $data->event->state, 'zip' => $data->event->zip, 'country' => $data->event->country, 'type'=>'text'));
+
+		//Create the logo
+		$data->event->ticket_logo_image = '';
+		$data->event->ticket_logo_url = empty($data->event->ticket_logo_url) ? $org_options['default_logo_url']: $data->event->ticket_logo_url;
+		if ( !empty($data->event->ticket_logo_url) ){
+			$image_size = getimagesize($data->event->ticket_logo_url);
+			$data->event->ticket_logo_image = '<img src="'.$data->event->ticket_logo_url.'" '.$image_size[3].' alt="logo" /> ';
+		}
+
+		//Create the QR Code image
+		$data->qr_code = espresso_ticket_qr_code( array(
+			'attendee_id' => $data->attendee->id,
+			'event_name' => stripslashes_deep($data->event->event_name),
+			'attendee_first' => $data->attendee->fname,
+			'attendee_last' => $data->attendee->lname,
+			'registration_id' => $data->attendee->registration_id,
+			'event_code' => $data->event->event_code,
+			'ticket_type' => $data->attendee->price_option,
+			'event_time' => $data->attendee->event_time,
+			'final_price' => $data->attendee->final_price,
+		));
+
+
+
+		//Build the ticket name
+		$ticket_name = sanitize_title_with_dashes($data->attendee->id.' '.$data->attendee->fname.' '.$data->attendee->lname);
+
+		if($header_shown == false){
+			ob_start();
+			require_once(EVENT_ESPRESSO_UPLOAD_DIR . 'tickets/templates/header.php');
+			$header = ob_get_contents();
+			ob_end_clean();
+			$header_shown = true;
+
+		}
+
+		ob_start();
+		//Get the HTML as an object
+		if (file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "tickets/templates/index.php")) {
+			require(EVENT_ESPRESSO_UPLOAD_DIR . 'tickets/templates/'.$data->event->template_file);
+		} else {
+			require('templates/index.php');
+		}
+		$content[$index] = ob_get_contents();
+		ob_end_clean();
+		$content[$index] = espresso_replace_ticket_shortcodes($content[$index], $data);
+
+
 	}
 
-	//Build the ticket name
-	$ticket_name = sanitize_title_with_dashes($data->attendee->id.' '.$data->attendee->fname.' '.$data->attendee->lname);
 
-	//Get the HTML as an object
-    ob_start();
-	if (file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "tickets/templates/index.php")) {
-		require_once(EVENT_ESPRESSO_UPLOAD_DIR . 'tickets/templates/'.$data->event->template_file);
-	} else {
-		require_once('templates/index.php');
-	}
-	$content = ob_get_clean();
-	$content = espresso_replace_ticket_shortcodes($content, $data);
+
+	$output = "";
+
+	/* append the footer */
+	ob_start();
+	require_once(EVENT_ESPRESSO_UPLOAD_DIR . 'tickets/templates/footer.php');
+	$footer = ob_get_contents();
+	ob_end_clean();
+
+
+	$output .= $header;
+	foreach($content as $ticket) $output .= $ticket;
+	$output .= $footer;
 
 	//Check if debugging or mobile is set
 	if ( (isset($_REQUEST['pdf']) && $_REQUEST['pdf']==true)){
@@ -238,14 +270,16 @@ function espresso_ticket_launch($attendee_id=0, $registration_id=0){
 		define('DOMPDF_ENABLE_REMOTE',true);
 		require_once(EVENT_ESPRESSO_PLUGINFULLPATH . '/tpc/dompdf/dompdf_config.inc.php');
 		$dompdf = new DOMPDF();
-		$dompdf->load_html($content);
+		$dompdf->load_html($output);
 		//$dompdf->set_paper('A4', 'landscape');
 		$dompdf->render();
-		$dompdf->stream($ticket_name.".pdf", array("Attachment" => false));
+		$dompdf->stream("ticket.pdf", array("Attachment" => false));
 		exit(0);
 	}
 
-	echo $content;
+	echo $output;
+
+
 	exit(0);
 
 }
