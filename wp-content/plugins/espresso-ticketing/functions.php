@@ -117,6 +117,7 @@ function espresso_ticket_template_files() {
 
 
 //Creates the ticket pdf
+//Modified by gary reckard feb 2013, to accept multiple attendee and reg ids
 function espresso_ticket_launch($attendee_id=0, $registration_id=0){
 	global $wpdb, $org_options;
 
