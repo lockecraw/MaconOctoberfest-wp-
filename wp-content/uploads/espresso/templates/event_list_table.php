@@ -38,6 +38,7 @@ function display_event_espresso_cat_date_max($max_days="null", $event_category_i
 }
 //Events Custom Table Listing - Shows the events on your page in matching table.
 function event_espresso_get_event_list_table($sql){
+echo "event_list_table.php";
   event_espresso_session_start();
   if(!isset($_SESSION['event_espresso_sessionid'])){
     $sessionid = (mt_rand(100,999).time());

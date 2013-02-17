@@ -1,4 +1,5 @@
 <?php
+echo "event_list_secondary.php";
 //This is a template file for displaying a list of events on a page. These functions are used with the {ESPRESSO_EVENTS} shortcode.
 //This file should be stored in your wp-content/uploads/espresso/ folder.
 

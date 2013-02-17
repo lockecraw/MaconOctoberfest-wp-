@@ -132,3 +132,589 @@ mc_gross=312.00, protection_eligibility=Ineligible, item_number1=, tax=0.00, ite
 IPN Response from gateway Server:
  VERIFIED
 
+[02/16/2013 1:36 PM] - Errors from IPN Validation:
+
+Using BUILT-IN PHP curl methods
+key = mc_gross
+value = 300.00
+key = protection_eligibility
+value = Ineligible
+key = item_number1
+value = 
+key = payer_id
+value = Q3QDE94Q37NSU
+key = tax
+value = 0.00
+key = payment_date
+value = 10:35:58 Feb 16, 2013 PST
+key = payment_status
+value = Completed
+key = charset
+value = windows-1252
+key = mc_shipping
+value = 0.00
+key = mc_handling
+value = 0.00
+key = first_name
+value = Attendee
+key = mc_fee
+value = 9.00
+key = notify_version
+value = 3.7
+key = custom
+value = 
+key = payer_status
+value = verified
+key = business
+value = macons_1361037758_biz@gmail.com
+key = num_cart_items
+value = 1
+key = mc_handling1
+value = 0.00
+key = verify_sign
+value = AgVS2D2uwPWv4ELVO8EtOl-XEzzSA6UDXHYMQ8nvX35RDRABBLUKvVHU
+key = payer_email
+value = maconb_1361037915_per@gmail.com
+key = mc_shipping1
+value = 0.00
+key = tax1
+value = 0.00
+key = txn_id
+value = 7FY60996D2744251P
+key = payment_type
+value = instant
+key = last_name
+value = Tester
+key = item_name1
+value = General Admission for Test Event Multiple Attendees. Attendee: Monkey McButterpants
+key = receiver_email
+value = macons_1361037758_biz@gmail.com
+key = payment_fee
+value = 9.00
+key = quantity1
+value = 3
+key = receiver_id
+value = F8YBLS4MJL6XW
+key = txn_type
+value = cart
+key = mc_gross_1
+value = 300.00
+key = mc_currency
+value = USD
+key = residence_country
+value = US
+key = test_ipn
+value = 1
+key = transaction_subject
+value = Shopping CartGeneral Admission for Test Event Multiple Attendees. Attendee: Monkey McButterpants
+key = payment_gross
+value = 300.00
+key = ipn_track_id
+value = a785120712a1c
+Success Setting host: https://www.sandbox.paypal.com/cgi-bin/webscr
+Success Setting request type to post
+Success Setting post fields: mc_gross=300.00&amp;protection_eligibility=Ineligible&amp;item_number1=&amp;payer_id=Q3QDE94Q37NSU&amp;tax=0.00&amp;payment_date=10%3A35%3A58+Feb+16%2C+2013+PST&amp;payment_status=Completed&amp;charset=windows-1252&amp;mc_shipping=0.00&amp;mc_handling=0.00&amp;first_name=Attendee&amp;mc_fee=9.00&amp;notify_version=3.7&amp;custom=&amp;payer_status=verified&amp;business=macons_1361037758_biz%40gmail.com&amp;num_cart_items=1&amp;mc_handling1=0.00&amp;verify_sign=AgVS2D2uwPWv4ELVO8EtOl-XEzzSA6UDXHYMQ8nvX35RDRABBLUKvVHU&amp;payer_email=maconb_1361037915_per%40gmail.com&amp;mc_shipping1=0.00&amp;tax1=0.00&amp;txn_id=7FY60996D2744251P&amp;payment_type=instant&amp;last_name=Tester&amp;item_name1=General+Admission+for+Test+Event+Multiple+Attendees.+Attendee%3A+Monkey+McButterpants&amp;receiver_email=macons_1361037758_biz%40gmail.com&amp;payment_fee=9.00&amp;quantity1=3&amp;receiver_id=F8YBLS4MJL6XW&amp;txn_type=cart&amp;mc_gross_1=300.00&amp;mc_currency=USD&amp;residence_country=US&amp;test_ipn=1&amp;transaction_subject=Shopping+CartGeneral+Admission+for+Test+Event+Multiple+Attendees.+Attendee%3A+Monkey+McButterpants&amp;payment_gross=300.00&amp;ipn_track_id=a785120712a1c&amp;cmd=_notify-validate
+Success Setting Fain On Error
+Success Setting return transfer
+Success Setting Timeout
+Success Setting verbose mode
+Errors resulting from the execution of curl transfer: [02/16/2013 1:36 PM] - SUCCESS!
+IPN POST Vars from gateway:
+mc_gross=300.00, protection_eligibility=Ineligible, item_number1=, payer_id=Q3QDE94Q37NSU, tax=0.00, payment_date=10:35:58 Feb 16, 2013 PST, payment_status=Completed, charset=windows-1252, mc_shipping=0.00, mc_handling=0.00, first_name=Attendee, mc_fee=9.00, notify_version=3.7, custom=, payer_status=verified, business=macons_1361037758_biz@gmail.com, num_cart_items=1, mc_handling1=0.00, verify_sign=AgVS2D2uwPWv4ELVO8EtOl-XEzzSA6UDXHYMQ8nvX35RDRABBLUKvVHU, payer_email=maconb_1361037915_per@gmail.com, mc_shipping1=0.00, tax1=0.00, txn_id=7FY60996D2744251P, payment_type=instant, last_name=Tester, item_name1=General Admission for Test Event Multiple Attendees. Attendee: Monkey McButterpants, receiver_email=macons_1361037758_biz@gmail.com, payment_fee=9.00, quantity1=3, receiver_id=F8YBLS4MJL6XW, txn_type=cart, mc_gross_1=300.00, mc_currency=USD, residence_country=US, test_ipn=1, transaction_subject=Shopping CartGeneral Admission for Test Event Multiple Attendees. Attendee: Monkey McButterpants, payment_gross=300.00, ipn_track_id=a785120712a1c, 
+IPN Response from gateway Server:
+ VERIFIED
+
+[02/16/2013 1:49 PM] - Errors from IPN Validation:
+
+Using BUILT-IN PHP curl methods
+key = mc_gross
+value = 462.00
+key = protection_eligibility
+value = Ineligible
+key = item_number1
+value = 
+key = tax
+value = 0.00
+key = item_number2
+value = 
+key = payer_id
+value = Q3QDE94Q37NSU
+key = item_number3
+value = 
+key = item_number4
+value = 
+key = payment_date
+value = 10:49:02 Feb 16, 2013 PST
+key = payment_status
+value = Completed
+key = charset
+value = windows-1252
+key = mc_shipping
+value = 0.00
+key = mc_handling
+value = 0.00
+key = first_name
+value = Attendee
+key = mc_fee
+value = 13.70
+key = notify_version
+value = 3.7
+key = custom
+value = 
+key = payer_status
+value = verified
+key = business
+value = macons_1361037758_biz@gmail.com
+key = num_cart_items
+value = 4
+key = mc_handling1
+value = 0.00
+key = mc_handling2
+value = 0.00
+key = mc_handling3
+value = 0.00
+key = mc_handling4
+value = 0.00
+key = verify_sign
+value = A3x.cXEkk5XyWVgIMLgLjH36y7vnAgTCcieFn4g56hwUS9nBWigWxwEs
+key = payer_email
+value = maconb_1361037915_per@gmail.com
+key = mc_shipping1
+value = 0.00
+key = mc_shipping2
+value = 0.00
+key = mc_shipping3
+value = 0.00
+key = tax1
+value = 0.00
+key = mc_shipping4
+value = 0.00
+key = tax2
+value = 0.00
+key = tax3
+value = 0.00
+key = tax4
+value = 0.00
+key = txn_id
+value = 0YN59466F3752273C
+key = payment_type
+value = instant
+key = last_name
+value = Tester
+key = item_name1
+value = General Admission for Test Event Multiple Attendees. Attendee: Locke Crawford
+key = receiver_email
+value = macons_1361037758_biz@gmail.com
+key = item_name2
+value = General Admission for T-Shirt. Attendee: Locke Crawford
+key = payment_fee
+value = 13.70
+key = item_name3
+value = General Admission for Founders Evening. Attendee: Locke Crawford
+key = item_name4
+value = General Admission for Breweries and Music. Attendee: Locke Crawford
+key = quantity1
+value = 3
+key = quantity2
+value = 1
+key = receiver_id
+value = F8YBLS4MJL6XW
+key = quantity3
+value = 1
+key = txn_type
+value = cart
+key = quantity4
+value = 1
+key = mc_gross_1
+value = 300.00
+key = mc_currency
+value = USD
+key = mc_gross_2
+value = 12.00
+key = mc_gross_3
+value = 0.00
+key = residence_country
+value = US
+key = test_ipn
+value = 1
+key = mc_gross_4
+value = 150.00
+key = transaction_subject
+value = Shopping CartGeneral Admission for Test Event Multiple Attendees. Attendee: Locke CrawfordGeneral Admission for T-Shirt. Attendee: Locke CrawfordGeneral Admission for Founders Evening. Attendee: Locke CrawfordGeneral Admission for Breweries and Music. Att
+key = payment_gross
+value = 462.00
+key = ipn_track_id
+value = ee6e9fb9b6108
+Success Setting host: https://www.sandbox.paypal.com/cgi-bin/webscr
+Success Setting request type to post
+Success Setting post fields: mc_gross=462.00&amp;protection_eligibility=Ineligible&amp;item_number1=&amp;tax=0.00&amp;item_number2=&amp;payer_id=Q3QDE94Q37NSU&amp;item_number3=&amp;item_number4=&amp;payment_date=10%3A49%3A02+Feb+16%2C+2013+PST&amp;payment_status=Completed&amp;charset=windows-1252&amp;mc_shipping=0.00&amp;mc_handling=0.00&amp;first_name=Attendee&amp;mc_fee=13.70&amp;notify_version=3.7&amp;custom=&amp;payer_status=verified&amp;business=macons_1361037758_biz%40gmail.com&amp;num_cart_items=4&amp;mc_handling1=0.00&amp;mc_handling2=0.00&amp;mc_handling3=0.00&amp;mc_handling4=0.00&amp;verify_sign=A3x.cXEkk5XyWVgIMLgLjH36y7vnAgTCcieFn4g56hwUS9nBWigWxwEs&amp;payer_email=maconb_1361037915_per%40gmail.com&amp;mc_shipping1=0.00&amp;mc_shipping2=0.00&amp;mc_shipping3=0.00&amp;tax1=0.00&amp;mc_shipping4=0.00&amp;tax2=0.00&amp;tax3=0.00&amp;tax4=0.00&amp;txn_id=0YN59466F3752273C&amp;payment_type=instant&amp;last_name=Tester&amp;item_name1=General+Admission+for+Test+Event+Multiple+Attendees.+Attendee%3A+Locke+Crawford&amp;receiver_email=macons_1361037758_biz%40gmail.com&amp;item_name2=General+Admission+for+T-Shirt.+Attendee%3A+Locke+Crawford&amp;payment_fee=13.70&amp;item_name3=General+Admission+for+Founders+Evening.+Attendee%3A+Locke+Crawford&amp;item_name4=General+Admission+for+Breweries+and+Music.+Attendee%3A+Locke+Crawford&amp;quantity1=3&amp;quantity2=1&amp;receiver_id=F8YBLS4MJL6XW&amp;quantity3=1&amp;txn_type=cart&amp;quantity4=1&amp;mc_gross_1=300.00&amp;mc_currency=USD&amp;mc_gross_2=12.00&amp;mc_gross_3=0.00&amp;residence_country=US&amp;test_ipn=1&amp;mc_gross_4=150.00&amp;transaction_subject=Shopping+CartGeneral+Admission+for+Test+Event+Multiple+Attendees.+Attendee%3A+Locke+CrawfordGeneral+Admission+for+T-Shirt.+Attendee%3A+Locke+CrawfordGeneral+Admission+for+Founders+Evening.+Attendee%3A+Locke+CrawfordGeneral+Admission+for+Breweries+and+Music.+Att&amp;payment_gross=462.00&amp;ipn_track_id=ee6e9fb9b6108&amp;cmd=_notify-validate
+Success Setting Fain On Error
+Success Setting return transfer
+Success Setting Timeout
+Success Setting verbose mode
+Errors resulting from the execution of curl transfer: [02/16/2013 1:49 PM] - SUCCESS!
+IPN POST Vars from gateway:
+mc_gross=462.00, protection_eligibility=Ineligible, item_number1=, tax=0.00, item_number2=, payer_id=Q3QDE94Q37NSU, item_number3=, item_number4=, payment_date=10:49:02 Feb 16, 2013 PST, payment_status=Completed, charset=windows-1252, mc_shipping=0.00, mc_handling=0.00, first_name=Attendee, mc_fee=13.70, notify_version=3.7, custom=, payer_status=verified, business=macons_1361037758_biz@gmail.com, num_cart_items=4, mc_handling1=0.00, mc_handling2=0.00, mc_handling3=0.00, mc_handling4=0.00, verify_sign=A3x.cXEkk5XyWVgIMLgLjH36y7vnAgTCcieFn4g56hwUS9nBWigWxwEs, payer_email=maconb_1361037915_per@gmail.com, mc_shipping1=0.00, mc_shipping2=0.00, mc_shipping3=0.00, tax1=0.00, mc_shipping4=0.00, tax2=0.00, tax3=0.00, tax4=0.00, txn_id=0YN59466F3752273C, payment_type=instant, last_name=Tester, item_name1=General Admission for Test Event Multiple Attendees. Attendee: Locke Crawford, receiver_email=macons_1361037758_biz@gmail.com, item_name2=General Admission for T-Shirt. Attendee: Locke Crawford, payment_fee=13.70, item_name3=General Admission for Founders Evening. Attendee: Locke Crawford, item_name4=General Admission for Breweries and Music. Attendee: Locke Crawford, quantity1=3, quantity2=1, receiver_id=F8YBLS4MJL6XW, quantity3=1, txn_type=cart, quantity4=1, mc_gross_1=300.00, mc_currency=USD, mc_gross_2=12.00, mc_gross_3=0.00, residence_country=US, test_ipn=1, mc_gross_4=150.00, transaction_subject=Shopping CartGeneral Admission for Test Event Multiple Attendees. Attendee: Locke CrawfordGeneral Admission for T-Shirt. Attendee: Locke CrawfordGeneral Admission for Founders Evening. Attendee: Locke CrawfordGeneral Admission for Breweries and Music. Att, payment_gross=462.00, ipn_track_id=ee6e9fb9b6108, 
+IPN Response from gateway Server:
+ VERIFIED
+
+[02/16/2013 1:55 PM] - Errors from IPN Validation:
+
+Using BUILT-IN PHP curl methods
+key = mc_gross
+value = 562.00
+key = protection_eligibility
+value = Ineligible
+key = item_number1
+value = 
+key = tax
+value = 0.00
+key = item_number2
+value = 
+key = payer_id
+value = Q3QDE94Q37NSU
+key = item_number3
+value = 
+key = item_number4
+value = 
+key = payment_date
+value = 10:55:02 Feb 16, 2013 PST
+key = payment_status
+value = Completed
+key = charset
+value = windows-1252
+key = mc_shipping
+value = 0.00
+key = mc_handling
+value = 0.00
+key = first_name
+value = Attendee
+key = mc_fee
+value = 16.60
+key = notify_version
+value = 3.7
+key = custom
+value = 
+key = payer_status
+value = verified
+key = business
+value = macons_1361037758_biz@gmail.com
+key = num_cart_items
+value = 4
+key = mc_handling1
+value = 0.00
+key = mc_handling2
+value = 0.00
+key = mc_handling3
+value = 0.00
+key = mc_handling4
+value = 0.00
+key = verify_sign
+value = AzPYJ4Ob1h34CQk1Zy0Ys5wty.2vAP9kWnptGy6Akffpgn6xv-iUgDM1
+key = payer_email
+value = maconb_1361037915_per@gmail.com
+key = mc_shipping1
+value = 0.00
+key = mc_shipping2
+value = 0.00
+key = mc_shipping3
+value = 0.00
+key = tax1
+value = 0.00
+key = mc_shipping4
+value = 0.00
+key = tax2
+value = 0.00
+key = tax3
+value = 0.00
+key = tax4
+value = 0.00
+key = txn_id
+value = 6X703988FF633631T
+key = payment_type
+value = instant
+key = last_name
+value = Tester
+key = item_name1
+value = General Admission for Test Event Multiple Attendees. Attendee: Garvey Rockhard
+key = receiver_email
+value = macons_1361037758_biz@gmail.com
+key = item_name2
+value = General Admission for T-Shirt. Attendee: Garvey Rockhard
+key = payment_fee
+value = 16.60
+key = item_name3
+value = General Admission for Founders Evening. Attendee: Garvey Rockhard
+key = item_name4
+value = General Admission for Breweries and Music. Attendee: Garvey Rockhard
+key = quantity1
+value = 4
+key = quantity2
+value = 1
+key = receiver_id
+value = F8YBLS4MJL6XW
+key = quantity3
+value = 1
+key = txn_type
+value = cart
+key = quantity4
+value = 1
+key = mc_gross_1
+value = 400.00
+key = mc_currency
+value = USD
+key = mc_gross_2
+value = 12.00
+key = mc_gross_3
+value = 0.00
+key = residence_country
+value = US
+key = test_ipn
+value = 1
+key = mc_gross_4
+value = 150.00
+key = transaction_subject
+value = Shopping CartGeneral Admission for Test Event Multiple Attendees. Attendee: Garvey RockhardGeneral Admission for T-Shirt. Attendee: Garvey RockhardGeneral Admission for Founders Evening. Attendee: Garvey RockhardGeneral Admission for Breweries and Music.
+key = payment_gross
+value = 562.00
+key = ipn_track_id
+value = c7cbb015ed17a
+Success Setting host: https://www.sandbox.paypal.com/cgi-bin/webscr
+Success Setting request type to post
+Success Setting post fields: mc_gross=562.00&amp;protection_eligibility=Ineligible&amp;item_number1=&amp;tax=0.00&amp;item_number2=&amp;payer_id=Q3QDE94Q37NSU&amp;item_number3=&amp;item_number4=&amp;payment_date=10%3A55%3A02+Feb+16%2C+2013+PST&amp;payment_status=Completed&amp;charset=windows-1252&amp;mc_shipping=0.00&amp;mc_handling=0.00&amp;first_name=Attendee&amp;mc_fee=16.60&amp;notify_version=3.7&amp;custom=&amp;payer_status=verified&amp;business=macons_1361037758_biz%40gmail.com&amp;num_cart_items=4&amp;mc_handling1=0.00&amp;mc_handling2=0.00&amp;mc_handling3=0.00&amp;mc_handling4=0.00&amp;verify_sign=AzPYJ4Ob1h34CQk1Zy0Ys5wty.2vAP9kWnptGy6Akffpgn6xv-iUgDM1&amp;payer_email=maconb_1361037915_per%40gmail.com&amp;mc_shipping1=0.00&amp;mc_shipping2=0.00&amp;mc_shipping3=0.00&amp;tax1=0.00&amp;mc_shipping4=0.00&amp;tax2=0.00&amp;tax3=0.00&amp;tax4=0.00&amp;txn_id=6X703988FF633631T&amp;payment_type=instant&amp;last_name=Tester&amp;item_name1=General+Admission+for+Test+Event+Multiple+Attendees.+Attendee%3A+Garvey+Rockhard&amp;receiver_email=macons_1361037758_biz%40gmail.com&amp;item_name2=General+Admission+for+T-Shirt.+Attendee%3A+Garvey+Rockhard&amp;payment_fee=16.60&amp;item_name3=General+Admission+for+Founders+Evening.+Attendee%3A+Garvey+Rockhard&amp;item_name4=General+Admission+for+Breweries+and+Music.+Attendee%3A+Garvey+Rockhard&amp;quantity1=4&amp;quantity2=1&amp;receiver_id=F8YBLS4MJL6XW&amp;quantity3=1&amp;txn_type=cart&amp;quantity4=1&amp;mc_gross_1=400.00&amp;mc_currency=USD&amp;mc_gross_2=12.00&amp;mc_gross_3=0.00&amp;residence_country=US&amp;test_ipn=1&amp;mc_gross_4=150.00&amp;transaction_subject=Shopping+CartGeneral+Admission+for+Test+Event+Multiple+Attendees.+Attendee%3A+Garvey+RockhardGeneral+Admission+for+T-Shirt.+Attendee%3A+Garvey+RockhardGeneral+Admission+for+Founders+Evening.+Attendee%3A+Garvey+RockhardGeneral+Admission+for+Breweries+and+Music.&amp;payment_gross=562.00&amp;ipn_track_id=c7cbb015ed17a&amp;cmd=_notify-validate
+Success Setting Fain On Error
+Success Setting return transfer
+Success Setting Timeout
+Success Setting verbose mode
+Errors resulting from the execution of curl transfer: [02/16/2013 1:55 PM] - SUCCESS!
+IPN POST Vars from gateway:
+mc_gross=562.00, protection_eligibility=Ineligible, item_number1=, tax=0.00, item_number2=, payer_id=Q3QDE94Q37NSU, item_number3=, item_number4=, payment_date=10:55:02 Feb 16, 2013 PST, payment_status=Completed, charset=windows-1252, mc_shipping=0.00, mc_handling=0.00, first_name=Attendee, mc_fee=16.60, notify_version=3.7, custom=, payer_status=verified, business=macons_1361037758_biz@gmail.com, num_cart_items=4, mc_handling1=0.00, mc_handling2=0.00, mc_handling3=0.00, mc_handling4=0.00, verify_sign=AzPYJ4Ob1h34CQk1Zy0Ys5wty.2vAP9kWnptGy6Akffpgn6xv-iUgDM1, payer_email=maconb_1361037915_per@gmail.com, mc_shipping1=0.00, mc_shipping2=0.00, mc_shipping3=0.00, tax1=0.00, mc_shipping4=0.00, tax2=0.00, tax3=0.00, tax4=0.00, txn_id=6X703988FF633631T, payment_type=instant, last_name=Tester, item_name1=General Admission for Test Event Multiple Attendees. Attendee: Garvey Rockhard, receiver_email=macons_1361037758_biz@gmail.com, item_name2=General Admission for T-Shirt. Attendee: Garvey Rockhard, payment_fee=16.60, item_name3=General Admission for Founders Evening. Attendee: Garvey Rockhard, item_name4=General Admission for Breweries and Music. Attendee: Garvey Rockhard, quantity1=4, quantity2=1, receiver_id=F8YBLS4MJL6XW, quantity3=1, txn_type=cart, quantity4=1, mc_gross_1=400.00, mc_currency=USD, mc_gross_2=12.00, mc_gross_3=0.00, residence_country=US, test_ipn=1, mc_gross_4=150.00, transaction_subject=Shopping CartGeneral Admission for Test Event Multiple Attendees. Attendee: Garvey RockhardGeneral Admission for T-Shirt. Attendee: Garvey RockhardGeneral Admission for Founders Evening. Attendee: Garvey RockhardGeneral Admission for Breweries and Music., payment_gross=562.00, ipn_track_id=c7cbb015ed17a, 
+IPN Response from gateway Server:
+ VERIFIED
+
+[02/16/2013 2:07 PM] - Errors from IPN Validation:
+
+Using BUILT-IN PHP curl methods
+key = mc_gross
+value = 662.00
+key = protection_eligibility
+value = Ineligible
+key = item_number1
+value = 
+key = tax
+value = 0.00
+key = item_number2
+value = 
+key = payer_id
+value = Q3QDE94Q37NSU
+key = item_number3
+value = 
+key = item_number4
+value = 
+key = payment_date
+value = 11:07:41 Feb 16, 2013 PST
+key = payment_status
+value = Completed
+key = charset
+value = windows-1252
+key = mc_shipping
+value = 0.00
+key = mc_handling
+value = 0.00
+key = first_name
+value = Attendee
+key = mc_fee
+value = 19.50
+key = notify_version
+value = 3.7
+key = custom
+value = 
+key = payer_status
+value = verified
+key = business
+value = macons_1361037758_biz@gmail.com
+key = num_cart_items
+value = 4
+key = mc_handling1
+value = 0.00
+key = mc_handling2
+value = 0.00
+key = mc_handling3
+value = 0.00
+key = mc_handling4
+value = 0.00
+key = verify_sign
+value = AiPC9BjkCyDFQXbSkoZcgqH3hpacAZzygK9a87FUoIAadxeSMng8t80i
+key = payer_email
+value = maconb_1361037915_per@gmail.com
+key = mc_shipping1
+value = 0.00
+key = mc_shipping2
+value = 0.00
+key = mc_shipping3
+value = 0.00
+key = tax1
+value = 0.00
+key = mc_shipping4
+value = 0.00
+key = tax2
+value = 0.00
+key = tax3
+value = 0.00
+key = tax4
+value = 0.00
+key = txn_id
+value = 2MW930034X813014U
+key = payment_type
+value = instant
+key = last_name
+value = Tester
+key = item_name1
+value = General Admission for Test Event Multiple Attendees. Attendee: Gary Reckard
+key = receiver_email
+value = macons_1361037758_biz@gmail.com
+key = item_name2
+value = General Admission for Breweries and Music. Attendee: Gary Reckard
+key = payment_fee
+value = 19.50
+key = item_name3
+value = General Admission for Founders Evening. Attendee: Gary Reckard
+key = item_name4
+value = General Admission for T-Shirt. Attendee: Gary Reckard
+key = quantity1
+value = 5
+key = quantity2
+value = 1
+key = receiver_id
+value = F8YBLS4MJL6XW
+key = quantity3
+value = 1
+key = txn_type
+value = cart
+key = quantity4
+value = 1
+key = mc_gross_1
+value = 500.00
+key = mc_currency
+value = USD
+key = mc_gross_2
+value = 150.00
+key = mc_gross_3
+value = 0.00
+key = residence_country
+value = US
+key = test_ipn
+value = 1
+key = mc_gross_4
+value = 12.00
+key = transaction_subject
+value = Shopping CartGeneral Admission for Test Event Multiple Attendees. Attendee: Gary ReckardGeneral Admission for Breweries and Music. Attendee: Gary ReckardGeneral Admission for Founders Evening. Attendee: Gary ReckardGeneral Admission for T-Shirt. Attendee:
+key = payment_gross
+value = 662.00
+key = ipn_track_id
+value = 39c41d6a41c11
+Success Setting host: https://www.sandbox.paypal.com/cgi-bin/webscr
+Success Setting request type to post
+Success Setting post fields: mc_gross=662.00&amp;protection_eligibility=Ineligible&amp;item_number1=&amp;tax=0.00&amp;item_number2=&amp;payer_id=Q3QDE94Q37NSU&amp;item_number3=&amp;item_number4=&amp;payment_date=11%3A07%3A41+Feb+16%2C+2013+PST&amp;payment_status=Completed&amp;charset=windows-1252&amp;mc_shipping=0.00&amp;mc_handling=0.00&amp;first_name=Attendee&amp;mc_fee=19.50&amp;notify_version=3.7&amp;custom=&amp;payer_status=verified&amp;business=macons_1361037758_biz%40gmail.com&amp;num_cart_items=4&amp;mc_handling1=0.00&amp;mc_handling2=0.00&amp;mc_handling3=0.00&amp;mc_handling4=0.00&amp;verify_sign=AiPC9BjkCyDFQXbSkoZcgqH3hpacAZzygK9a87FUoIAadxeSMng8t80i&amp;payer_email=maconb_1361037915_per%40gmail.com&amp;mc_shipping1=0.00&amp;mc_shipping2=0.00&amp;mc_shipping3=0.00&amp;tax1=0.00&amp;mc_shipping4=0.00&amp;tax2=0.00&amp;tax3=0.00&amp;tax4=0.00&amp;txn_id=2MW930034X813014U&amp;payment_type=instant&amp;last_name=Tester&amp;item_name1=General+Admission+for+Test+Event+Multiple+Attendees.+Attendee%3A+Gary+Reckard&amp;receiver_email=macons_1361037758_biz%40gmail.com&amp;item_name2=General+Admission+for+Breweries+and+Music.+Attendee%3A+Gary+Reckard&amp;payment_fee=19.50&amp;item_name3=General+Admission+for+Founders+Evening.+Attendee%3A+Gary+Reckard&amp;item_name4=General+Admission+for+T-Shirt.+Attendee%3A+Gary+Reckard&amp;quantity1=5&amp;quantity2=1&amp;receiver_id=F8YBLS4MJL6XW&amp;quantity3=1&amp;txn_type=cart&amp;quantity4=1&amp;mc_gross_1=500.00&amp;mc_currency=USD&amp;mc_gross_2=150.00&amp;mc_gross_3=0.00&amp;residence_country=US&amp;test_ipn=1&amp;mc_gross_4=12.00&amp;transaction_subject=Shopping+CartGeneral+Admission+for+Test+Event+Multiple+Attendees.+Attendee%3A+Gary+ReckardGeneral+Admission+for+Breweries+and+Music.+Attendee%3A+Gary+ReckardGeneral+Admission+for+Founders+Evening.+Attendee%3A+Gary+ReckardGeneral+Admission+for+T-Shirt.+Attendee%3A&amp;payment_gross=662.00&amp;ipn_track_id=39c41d6a41c11&amp;cmd=_notify-validate
+Success Setting Fain On Error
+Success Setting return transfer
+Success Setting Timeout
+Success Setting verbose mode
+Errors resulting from the execution of curl transfer: [02/16/2013 2:07 PM] - SUCCESS!
+IPN POST Vars from gateway:
+mc_gross=662.00, protection_eligibility=Ineligible, item_number1=, tax=0.00, item_number2=, payer_id=Q3QDE94Q37NSU, item_number3=, item_number4=, payment_date=11:07:41 Feb 16, 2013 PST, payment_status=Completed, charset=windows-1252, mc_shipping=0.00, mc_handling=0.00, first_name=Attendee, mc_fee=19.50, notify_version=3.7, custom=, payer_status=verified, business=macons_1361037758_biz@gmail.com, num_cart_items=4, mc_handling1=0.00, mc_handling2=0.00, mc_handling3=0.00, mc_handling4=0.00, verify_sign=AiPC9BjkCyDFQXbSkoZcgqH3hpacAZzygK9a87FUoIAadxeSMng8t80i, payer_email=maconb_1361037915_per@gmail.com, mc_shipping1=0.00, mc_shipping2=0.00, mc_shipping3=0.00, tax1=0.00, mc_shipping4=0.00, tax2=0.00, tax3=0.00, tax4=0.00, txn_id=2MW930034X813014U, payment_type=instant, last_name=Tester, item_name1=General Admission for Test Event Multiple Attendees. Attendee: Gary Reckard, receiver_email=macons_1361037758_biz@gmail.com, item_name2=General Admission for Breweries and Music. Attendee: Gary Reckard, payment_fee=19.50, item_name3=General Admission for Founders Evening. Attendee: Gary Reckard, item_name4=General Admission for T-Shirt. Attendee: Gary Reckard, quantity1=5, quantity2=1, receiver_id=F8YBLS4MJL6XW, quantity3=1, txn_type=cart, quantity4=1, mc_gross_1=500.00, mc_currency=USD, mc_gross_2=150.00, mc_gross_3=0.00, residence_country=US, test_ipn=1, mc_gross_4=12.00, transaction_subject=Shopping CartGeneral Admission for Test Event Multiple Attendees. Attendee: Gary ReckardGeneral Admission for Breweries and Music. Attendee: Gary ReckardGeneral Admission for Founders Evening. Attendee: Gary ReckardGeneral Admission for T-Shirt. Attendee:, payment_gross=662.00, ipn_track_id=39c41d6a41c11, 
+IPN Response from gateway Server:
+ VERIFIED
+
+[02/16/2013 2:08 PM] - Errors from IPN Validation:
+
+Using BUILT-IN PHP curl methods
+key = mc_gross
+value = 150.00
+key = protection_eligibility
+value = Ineligible
+key = item_number1
+value = 
+key = payer_id
+value = Q3QDE94Q37NSU
+key = tax
+value = 0.00
+key = payment_date
+value = 11:08:55 Feb 16, 2013 PST
+key = payment_status
+value = Completed
+key = charset
+value = windows-1252
+key = mc_shipping
+value = 0.00
+key = mc_handling
+value = 0.00
+key = first_name
+value = Attendee
+key = mc_fee
+value = 4.65
+key = notify_version
+value = 3.7
+key = custom
+value = 
+key = payer_status
+value = verified
+key = business
+value = macons_1361037758_biz@gmail.com
+key = num_cart_items
+value = 1
+key = mc_handling1
+value = 0.00
+key = verify_sign
+value = AQU0e5vuZCvSg-XJploSa.sGUDlpANrUHqox5xm1nyeVsKQTcmkoLkNl
+key = payer_email
+value = maconb_1361037915_per@gmail.com
+key = mc_shipping1
+value = 0.00
+key = tax1
+value = 0.00
+key = txn_id
+value = 76X70418CW5032603
+key = payment_type
+value = instant
+key = last_name
+value = Tester
+key = item_name1
+value = General Admission for Breweries and Music. Attendee: Gary Reckard
+key = receiver_email
+value = macons_1361037758_biz@gmail.com
+key = payment_fee
+value = 4.65
+key = quantity1
+value = 1
+key = receiver_id
+value = F8YBLS4MJL6XW
+key = txn_type
+value = cart
+key = mc_gross_1
+value = 150.00
+key = mc_currency
+value = USD
+key = residence_country
+value = US
+key = test_ipn
+value = 1
+key = transaction_subject
+value = Shopping CartGeneral Admission for Breweries and Music. Attendee: Gary Reckard
+key = payment_gross
+value = 150.00
+key = ipn_track_id
+value = c1a5cb109b0e0
+Success Setting host: https://www.sandbox.paypal.com/cgi-bin/webscr
+Success Setting request type to post
+Success Setting post fields: mc_gross=150.00&amp;protection_eligibility=Ineligible&amp;item_number1=&amp;payer_id=Q3QDE94Q37NSU&amp;tax=0.00&amp;payment_date=11%3A08%3A55+Feb+16%2C+2013+PST&amp;payment_status=Completed&amp;charset=windows-1252&amp;mc_shipping=0.00&amp;mc_handling=0.00&amp;first_name=Attendee&amp;mc_fee=4.65&amp;notify_version=3.7&amp;custom=&amp;payer_status=verified&amp;business=macons_1361037758_biz%40gmail.com&amp;num_cart_items=1&amp;mc_handling1=0.00&amp;verify_sign=AQU0e5vuZCvSg-XJploSa.sGUDlpANrUHqox5xm1nyeVsKQTcmkoLkNl&amp;payer_email=maconb_1361037915_per%40gmail.com&amp;mc_shipping1=0.00&amp;tax1=0.00&amp;txn_id=76X70418CW5032603&amp;payment_type=instant&amp;last_name=Tester&amp;item_name1=General+Admission+for+Breweries+and+Music.+Attendee%3A+Gary+Reckard&amp;receiver_email=macons_1361037758_biz%40gmail.com&amp;payment_fee=4.65&amp;quantity1=1&amp;receiver_id=F8YBLS4MJL6XW&amp;txn_type=cart&amp;mc_gross_1=150.00&amp;mc_currency=USD&amp;residence_country=US&amp;test_ipn=1&amp;transaction_subject=Shopping+CartGeneral+Admission+for+Breweries+and+Music.+Attendee%3A+Gary+Reckard&amp;payment_gross=150.00&amp;ipn_track_id=c1a5cb109b0e0&amp;cmd=_notify-validate
+Success Setting Fain On Error
+Success Setting return transfer
+Success Setting Timeout
+Success Setting verbose mode
+Errors resulting from the execution of curl transfer: [02/16/2013 2:08 PM] - SUCCESS!
+IPN POST Vars from gateway:
+mc_gross=150.00, protection_eligibility=Ineligible, item_number1=, payer_id=Q3QDE94Q37NSU, tax=0.00, payment_date=11:08:55 Feb 16, 2013 PST, payment_status=Completed, charset=windows-1252, mc_shipping=0.00, mc_handling=0.00, first_name=Attendee, mc_fee=4.65, notify_version=3.7, custom=, payer_status=verified, business=macons_1361037758_biz@gmail.com, num_cart_items=1, mc_handling1=0.00, verify_sign=AQU0e5vuZCvSg-XJploSa.sGUDlpANrUHqox5xm1nyeVsKQTcmkoLkNl, payer_email=maconb_1361037915_per@gmail.com, mc_shipping1=0.00, tax1=0.00, txn_id=76X70418CW5032603, payment_type=instant, last_name=Tester, item_name1=General Admission for Breweries and Music. Attendee: Gary Reckard, receiver_email=macons_1361037758_biz@gmail.com, payment_fee=4.65, quantity1=1, receiver_id=F8YBLS4MJL6XW, txn_type=cart, mc_gross_1=150.00, mc_currency=USD, residence_country=US, test_ipn=1, transaction_subject=Shopping CartGeneral Admission for Breweries and Music. Attendee: Gary Reckard, payment_gross=150.00, ipn_track_id=c1a5cb109b0e0, 
+IPN Response from gateway Server:
+ VERIFIED
+
