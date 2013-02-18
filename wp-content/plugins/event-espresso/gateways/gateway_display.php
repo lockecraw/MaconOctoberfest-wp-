@@ -73,6 +73,7 @@ $data['event_name'] = isset($event_name) && !empty($event_name) ? $event_name : 
 $data['registration_id'] = $registration_id;
 $data['phone'] = isset($phone) && !empty($phone) ? $phone : '';
 //This file builds the gateways that are available
+
 echo '<div id="payment-options-dv" class="event-display-boxes ui-widget">';
 echo '<h2 class="section-heading ui-widget-header ui-corner-top">' . __('Please choose a payment option', 'event_espresso') . '</h2>';
 echo '<div class="event-data-display ui-widget-content ui-corner-bottom">';
@@ -98,4 +99,3 @@ echo '<p id="external-link-msg-pg"><img width="16" height="16" src="' . EVENT_ES
 
 wp_register_script( 'espresso_payment_page', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_payment_page.js', array( 'jquery' ), '1.0', TRUE );
 wp_enqueue_script( 'espresso_payment_page' );
-

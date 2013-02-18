@@ -22,21 +22,8 @@ if (!function_exists('register_attendees')) {
         
         global $wpdb, $org_options;
 
-
-		//get categories and ids
-		$cat_sql = "
-			SELECT
-				id,
-				category_identifier
-			FROM
-				".EVENTS_CATEGORY_TABLE."
-		";
-		$cats = $wpdb->get_results( $wpdb->prepare( $cat_sql, NULL ), ARRAY_A );
-
-		$cat_reference = array();
-		foreach($cats as $cat){
-			$cat_reference[$cat['id']] = $cat['category_identifier'];
-		}
+		//get category reference index array...
+		$cat_reference = get_category_reference_array();
 
 
         if (isset($_REQUEST['ee']) && $_REQUEST['ee'] != '') {

@@ -3,7 +3,6 @@
 //This is a template file for displaying a registration form for an event on a page.
 //There should be a copy of this file in your wp-content/uploads/espresso/ folder.
 ?>
-DONATION
 <div id="event_espresso_registration_form" class="event-display-boxes ui-widget donation-registration">
 	
 <?php
@@ -129,6 +128,7 @@ if ($reg_form_only == false) {
 				<input type="hidden" name="num_people" id="num_people-<?php echo $event_id; ?>" value="1">
 				<input type="hidden" name="use_coupon[<?php echo $event_id; ?>]" value="<?php echo $use_coupon_code; ?>" />
 				<input type="hidden" name="use_groupon[<?php echo $event_id; ?>]" value="<?php echo $use_groupon_code; ?>" />
+				<input type="hidden" name="is_donation" value="true" />
 	<?php
 					
 					wp_nonce_field('reg_nonce', 'reg_form_nonce');
