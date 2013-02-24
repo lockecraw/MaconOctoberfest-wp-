@@ -4,7 +4,7 @@
   Plugin URI: http://eventespresso.com/
   Description: Multi Events Registration addon for Event Espresso.
 
-  Version: 1.0.4
+  Version: 9991.0.4
 
   Author: Seth Shoultes
   Author URI: http://www.eventespresso.com
@@ -26,7 +26,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
  */
-define("ESPRESSO_MULTI_REG_VERSION", '1.0.4');
+define("ESPRESSO_MULTI_REG_VERSION", '9991.0.4');
 
 //Update notifications
 add_action('action_hook_espresso_multiple_update_api', 'ee_multiple_load_pue_update');
