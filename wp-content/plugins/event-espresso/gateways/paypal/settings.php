@@ -173,7 +173,7 @@ function event_espresso_display_paypal_settings() {
 								</option>
 							</select>
 							 </li>
-						
+
 						<li>
 							<label for="image_url">
 								<?php _e('Image URL (logo for payment page)', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=image_url_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
@@ -219,7 +219,7 @@ function event_espresso_display_paypal_settings() {
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $paypal_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
-						
+
 						<li>
 							<label for="button_url">
 								<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>

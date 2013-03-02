@@ -45,7 +45,7 @@ $this_event_id = $event_id;
 
 	</h3>
 <div class="event-data-display ui-widget-content ui-corner-bottom clearfix">
-	<?php 
+	<?php
 	$event->event_cost = empty($event->event_cost) ? '' : $event->event_cost;
 	?>
 	<div class="event-meta">
@@ -60,7 +60,7 @@ $this_event_id = $event_id;
 				<p id="p_event_price-<?php echo $event_id ?>" class="event_price"><?php echo __('Free Event', 'event_espresso'); ?></p>
 			<?php } ?>
 
-		<p id="event_date-<?php echo $event_id ?>"><span class="section-title"><?php _e('Date:', 'event_espresso'); ?></span>  <?php echo event_date_display($start_date, get_option('date_format')) ?> 
+		<p id="event_date-<?php echo $event_id ?>"><span class="section-title"><?php _e('Date:', 'event_espresso'); ?></span>  <?php echo event_date_display($start_date, get_option('date_format')) ?>
 			<?php //Add to calendar button
 			echo apply_filters('filter_hook_espresso_display_ical', $all_meta);?>
 		</p>
@@ -78,7 +78,7 @@ $this_event_id = $event_id;
 
 	<?php if ( (isset($location) && $location != '' ) && (isset($org_options['display_address_in_event_list']) && $org_options['display_address_in_event_list'] == 'Y') ) { ?>
 		<p class="event_address" id="event_address-<?php echo $event_id ?>"><span class="section-title"><?php echo __('Address:', 'event_espresso'); ?></span> <br />
-			
+
 			<span class="address-block">
 			<?php echo $venue_title; ?><br />
 			<?php echo stripslashes_deep($location); ?>
@@ -99,10 +99,7 @@ $this_event_id = $event_id;
 			<?php
 		}
 	} else {
-		if ($display_reg_form == 'Y' && $externalURL == '') {
-			?>			<p id="available_spaces-<?php echo $event_id ?>" class="spaces-available"><span class="section-title"><?php _e('Available Spaces:', 'event_espresso') ?></span> <?php echo get_number_of_attendees_reg_limit($event_id, 'available_spaces') ?></p>
-			<?php
-		}
+
 
 		/**
 		 * Load the multi event link.
@@ -111,7 +108,7 @@ $this_event_id = $event_id;
 		//echo event_espresso_get_status($event_id);
 		//print_r( event_espresso_get_is_active($event_id));
 
-		if ($multi_reg && event_espresso_get_status($event_id) == 'ACTIVE'/* && $display_reg_form == 'Y'*/) { 
+		if ($multi_reg && event_espresso_get_status($event_id) == 'ACTIVE'/* && $display_reg_form == 'Y'*/) {
 		// Uncomment && $display_reg_form == 'Y' in the line above to hide the add to cart link/button form the event list when the registration form is turned off.
 
 			$params = array(
@@ -138,21 +135,21 @@ $this_event_id = $event_id;
 			}else{
 			?>
 				<p id="register_link-<?php echo $event_id ?>" class="register-link-footer">
-					<a class="a_register_link ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" id="a_register_link-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('Register', 'event_espresso'); ?></a>
+					<a class="a_register_link ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" id="a_register_link-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('Donate', 'event_espresso'); ?></a>
 					<?php echo isset($cart_link) && $externalURL == '' ? $cart_link : ''; ?>
 				</p>
-	<?php 
+	<?php
 			}
-		} else { 
+		} else {
 	?>
 			<p id="register_link-<?php echo $event_id ?>" class="register-link-footer">
 				<a class="a_register_link ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" id="a_register_link-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>" title="<?php echo stripslashes_deep($event_name) ?>"><?php _e('View Details', 'event_espresso'); ?></a> <?php echo isset($cart_link) && $externalURL == '' ? $cart_link : ''; ?>
 			</p>
-			
+
 		<?php
 		}
 	}
 	?>
-	
+
 </div><!-- / .event-data-display -->
 </div><!-- / .event-display-boxes -->

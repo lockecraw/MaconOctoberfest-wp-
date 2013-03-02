@@ -3,8 +3,20 @@
 //This is a template file for displaying a registration form for an event on a page.
 //There should be a copy of this file in your wp-content/uploads/espresso/ folder.
 global $this_event_id;
+
 $this_event_id = $event_id;
 $num_attendees = ' - ' . $_SESSION['espresso_session']['events_in_session'][$event_id]['attendee_quantitiy'] . __(' attendees', 'event_espresso');
+
+$categories = array();
+if(isset($_SESSION['espresso_session']['events_in_session'][$event_id]['categories'])){
+	$categories = $_SESSION['espresso_session']['events_in_session'][$event_id]['categories'];
+}
+
+$is_donation = false;
+if(in_array('donation',$categories)){
+	$is_donation = true;
+}
+
 $attendee_quantity = ' x '.sprintf(_n('%d attendee', '%d attendees', $meta['attendee_quantity'], 'event_espresso'), $meta['attendee_quantity']);
 $display_description_on_multi_reg_page = isset( $org_options['display_description_on_multi_reg_page'] ) ? $org_options['display_description_on_multi_reg_page'] : 'N';
 ?>
@@ -24,7 +36,7 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 			<div class="event_description">
 			<?php
 				//Code to show the actual description. The Wordpress function "wpautop" adds formatting to your description.
-				echo espresso_format_content($event_desc); 
+				echo espresso_format_content($event_desc);
 			?></div>
 			<?php
 		}//End display description
@@ -71,36 +83,44 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 				<div class="multi_regis_wrapper_attendee-<?php echo $is_primary; ?>">
 					<div class="event-display-boxes">
 						<?php
-						echo '<h4 class="section-heading"><strong>'.__('Price Type:') . '</strong> ' . stripslashes_deep($meta['price_type']).$attendee_quantity.'</h4>';
-						echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $attendee_number . '</h3>';
-		
+						if(!$is_donation){
+							echo '<h4 class="section-heading"><strong>'.__('Price Type:') . '</strong> ' . stripslashes_deep($meta['price_type']).$attendee_quantity.'</h4>';
+							echo '<h3 class="section-heading">' . __('Attendee ', 'event_espresso') . $attendee_number . '</h3>';
+						}
+						else{
+							echo '<h4 class="section-heading"><strong>'.__('Donation Amount:') . '</strong> $' . number_format($events_in_session[$event_id]['cost'],2).'</h4>';
+
+						}
+
 						//This will be the main attendee
 						//$meta['attendee_number'] = 1;
 						$meta['attendee_number'] = $price_group_att_counter;
 						//echo "Attendee # ".$attendee_number;
-						
+
 						//Displays the copy from dropdown
 						if ($event_counter > 1) {
 							echo event_espresso_copy_dd($event_id, $meta);
 						}
-						
+
+
 						//Outputs the form questions.
 						echo event_espresso_add_question_groups($question_groups, $events_in_session[$event_id], $event_id, 1, $meta);
-						
+
+
 						//Displays the copy to all button
 						if ( $event_counter == 1 && $event_count > 1 || ($meta['attendee_quantity'] > 1 && $event_meta['additional_attendee_reg_info'] > 1) ) {
 							?>
 							<div class="event-messages ui-state-highlight">
 								<p class="instruct" style="position:relative;padding:1em;">
-									<span class="copy-all-button-wrapper" style="position:relative;z-index:10;">									
-										<?php _e('Copy above information to all forms?', 'event_espresso'); ?> <button type="button" class="copy-all-button" value="<?php echo $event_id . '|' . $meta['price_id']; ?>"><?php _e('Yes', 'event_espresso'); ?></button>										
+									<span class="copy-all-button-wrapper" style="position:relative;z-index:10;">
+										<?php _e('Copy above information to all forms?', 'event_espresso'); ?> <button type="button" class="copy-all-button" value="<?php echo $event_id . '|' . $meta['price_id']; ?>"><?php _e('Yes', 'event_espresso'); ?></button>
 									</span>
 									<span class="copy-all-button-success" style="display:none;position:absolute; top:.2em; left:0;padding:1em; border-radius:3px;z-index:1;background:#DCF3D9;"></span>
 								</p>
 							</div>
 							<?php
 						}
-						
+
 						?>
 					</div>
 				</div>
@@ -157,7 +177,7 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 						}
 					}
 				} else {
-					
+
 				}//End allow multiple
 				break;
 		}//End Switch statement to check the status of the event

@@ -1,5 +1,5 @@
 <?php if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
-do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');		
+do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 
 /* WARNING MODIFYING THIS AT YOUR OWN RISK  */
 /* Payments template page. Currently this just shows the registration data block.*/
@@ -38,19 +38,19 @@ if(isset($_REQUEST['is_donation']) && $_REQUEST['is_donation'] == 'true'){
 							<?php _e('Donor Name:','event_espresso'); ?>
 						</th>
 						<td  valign="top">
-							<span class="event_espresso_value"><?php echo stripslashes_deep($attendee_name)?> (<?php echo $attendee_email?>) 
-	<?php 
+							<span class="event_espresso_value"><?php echo stripslashes_deep($attendee_name)?> (<?php echo $attendee_email?>)
+	<?php
 							//echo '<a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$attendee_id.'&amp;regevent_action=edit_attendee&amp;primary='.$attendee_id.'&amp;event_id='.$event_id.'&amp;attendee_num='.$attendee_num.'">'. __('Edit', 'event_espresso').'</a>';  // removed p_id='.$p_id.'&amp; coupon_code='.$coupon_code.'&amp;groupon_code='.$groupon_code.'&amp;
-							
+
 							//Create additional attendees
 							$sql = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE;
 							$sql .= " WHERE registration_id = '" . espresso_registration_id( $attendee_id ) . "' AND id != '".$attendee_id."' ";
 							//echo $sql;
 							$x_attendees = $wpdb->get_results( $sql, ARRAY_A );
-							
+
 							if ( $wpdb->num_rows > 0 ) {
 								foreach ($x_attendees as $x_attendee) {
-								
+
 									$attendee_num++;
 									//echo $attendee_num;
 									//print_r($x_attendees);
@@ -74,19 +74,19 @@ if(isset($_REQUEST['is_donation']) && $_REQUEST['is_donation'] == 'true'){
 							<?php _e('Total Donation:','event_espresso'); ?>
 						</th>
 						<td>
-							<span class="event_espresso_value"><?php echo money_format('$%i', $donation_amount);  //echo $event_discount_label;?></span>
+							<span class="event_espresso_value"><?php echo "$".number_format($donation_amount,2);  //echo $event_discount_label;?></span>
 						</td>
 					</tr>
 				</table>
-				
-			</div>
-			
-			<p class="espresso_confirm_registration">
-				<input class="btn_event_form_submit ui-priority-primary ui-widget-content ui-corner-all" type="submit" name="confirm" id="confirm" value="<?php _e('Confirm Registration', 'event_espresso'); ?>&nbsp;&raquo;" />
-			</p>
-			
 
-									
+			</div>
+
+			<p class="espresso_confirm_registration">
+				<input class="btn_event_form_submit ui-priority-primary ui-widget-content ui-corner-all" type="submit" name="confirm" id="confirm" value="<?php _e('Confirm Donation', 'event_espresso'); ?>&nbsp;&raquo;" />
+			</p>
+
+
+
 			<?php /* This form builds the confirmation buttons */?>
 			<input name="confirm_registration" id="confirm_registration" type="hidden" value="true" />
 			<input type="hidden" name="attendee_id" id="attendee_id" value="<?php echo $attendee_id ?>" />
@@ -95,7 +95,7 @@ if(isset($_REQUEST['is_donation']) && $_REQUEST['is_donation'] == 'true'){
 			<input type="hidden" name="event_id" id="event_id-<?php echo $event_id;?>" value="<?php echo $event_id;?>">
 			<input type="hidden" name="is_donation" id="is_donation-<?php echo $event_id;?>" value="true">
 			<?php wp_nonce_field('reg_nonce', 'reg_form_nonce'); ?>
-			
+
 		</div>
 	</form>
 	<?php
@@ -145,7 +145,7 @@ else{
 					}
 
 					if ( $display_price ) {
-	?>	
+	?>
 						<tr>
 							<th scope="row" class="header">
 								<?php echo empty($price_type) ? __('Price per attendee:','event_espresso') : __('Type/Price per attendee:','event_espresso'); ?>
@@ -156,7 +156,7 @@ else{
 						</tr>
 	<?php
 					} else {
-					
+
 						// Added for seating chart addon
 						$price_range = seating_chart::get_price_range($event_id);
 						$price = "";
@@ -178,19 +178,19 @@ else{
 							<?php _e('Attendee Name:','event_espresso'); ?>
 						</th>
 						<td  valign="top">
-							<span class="event_espresso_value"><?php echo stripslashes_deep($attendee_name)?> (<?php echo $attendee_email?>) 
-	<?php 
+							<span class="event_espresso_value"><?php echo stripslashes_deep($attendee_name)?> (<?php echo $attendee_email?>)
+	<?php
 							echo '<a href="'.home_url().'/?page_id='.$event_page_id.'&amp;registration_id='.$registration_id.'&amp;id='.$attendee_id.'&amp;regevent_action=edit_attendee&amp;primary='.$attendee_id.'&amp;event_id='.$event_id.'&amp;attendee_num='.$attendee_num.'">'. __('Edit', 'event_espresso').'</a>';  // removed p_id='.$p_id.'&amp; coupon_code='.$coupon_code.'&amp;groupon_code='.$groupon_code.'&amp;
-							
+
 							//Create additional attendees
 							$sql = "SELECT * FROM " . EVENTS_ATTENDEE_TABLE;
 							$sql .= " WHERE registration_id = '" . espresso_registration_id( $attendee_id ) . "' AND id != '".$attendee_id."' ";
 							//echo $sql;
 							$x_attendees = $wpdb->get_results( $sql, ARRAY_A );
-							
+
 							if ( $wpdb->num_rows > 0 ) {
 								foreach ($x_attendees as $x_attendee) {
-								
+
 									$attendee_num++;
 									//echo $attendee_num;
 									//print_r($x_attendees);
@@ -227,15 +227,15 @@ else{
 						</td>
 					</tr>
 				</table>
-				
+
 			</div>
-			
+
 			<p class="espresso_confirm_registration">
 				<input class="btn_event_form_submit ui-priority-primary ui-widget-content ui-corner-all" type="submit" name="confirm" id="confirm" value="<?php _e('Confirm Registration', 'event_espresso'); ?>&nbsp;&raquo;" />
 			</p>
-			
+
 			<?php if ($display_questions != '') { ?>
-			
+
 			<div id="additional-conf-info" class="event-display-boxes">
 					<h3 class="event_title ui-widget-header ui-corner-top"><?php echo stripslashes_deep($attendee_name)?></h3>
 					<div id="additional-conf-info" class="event-data-display ui-widget-content ui-corner-bottom">
@@ -250,18 +250,18 @@ else{
 								</td>
 							</tr>
 						<?php } ?>
-						</table>              
+						</table>
 					</div>
-					<!-- / .event-data-display -->   
+					<!-- / .event-data-display -->
 				</div>
-				<!-- / .event-display-boxes -->   
-				
+				<!-- / .event-display-boxes -->
+
 				<p class="espresso_confirm_registration">
 					<input class="btn_event_form_submit ui-priority-primary ui-widget-content ui-corner-all" type="submit" name="confirm2" id="confirm2" value="<?php _e('Confirm Registration', 'event_espresso'); ?>&nbsp;&raquo;" />
 				</p>
-				
+
 			<?php	} ?>
-									
+
 			<?php /* This form builds the confirmation buttons */?>
 			<input name="confirm_registration" id="confirm_registration" type="hidden" value="true" />
 			<input type="hidden" name="attendee_id" id="attendee_id" value="<?php echo $attendee_id ?>" />
@@ -269,7 +269,7 @@ else{
 			<input type="hidden" name="regevent_action" id="regevent_action-<?php echo $event_id;?>" value="confirm_registration">
 			<input type="hidden" name="event_id" id="event_id-<?php echo $event_id;?>" value="<?php echo $event_id;?>">
 			<?php wp_nonce_field('reg_nonce', 'reg_form_nonce'); ?>
-			
+
 		</div>
 	</form>
 	<?php

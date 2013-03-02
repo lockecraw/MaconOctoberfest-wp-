@@ -42,9 +42,9 @@
   			</ul>
   	</div>
 		</div>
-	</div>	
+	</div>
 	<div id="topCartButtons">
-		<a id="topCartArrows" href="http://maconoctoberfest.com/wp/event-registration/?regevent_action=show_shopping_cart">Veiw Cart</a>
+		<a id="topCartArrows" href="<?php echo site_url(); ?>/event-registration/?regevent_action=show_shopping_cart">Veiw Cart</a>
 		<a id="topCartArrows" href="#">Check Out</a>
 	</div>
 	<div id="buttonHeader">
@@ -68,7 +68,7 @@
 					<li>Cyclo-Cross Bike Race</li>
 					<li>Teen Songwriting Competition</li>
 				</ul>
-			</div>	
+			</div>
 		</div>
 		</div>
 	</div>

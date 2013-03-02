@@ -5,12 +5,11 @@ if (!function_exists('multi_register_attendees')) {
 	function multi_register_attendees( $single_event_id = NULL, $event_id_sc =0, $meta = array(), $event = FALSE ) {
 
 		global $wpdb, $org_options;
-		
-		
-		
+
 		$events_in_session = $_SESSION['espresso_session']['events_in_session'];
 		$event_count = count($events_in_session);
-		
+		//print_a($events_in_session);
+
 		static $event_counter = 1;
 		static $attendee_number = 1;
 
@@ -30,7 +29,7 @@ if (!function_exists('multi_register_attendees')) {
 		$paypal_id = isset($org_options['paypal_id']) && !empty($org_options['paypal_id']) ? $org_options['paypal_id'] : '';
 
 		if ( ! $event ) {
-		
+
 			// the key we will eventually use in our query to find the event
 			$ID = $event_id_sc != '0' ? $event_id_sc : $_REQUEST['event_id'];
 
@@ -50,30 +49,30 @@ if (!function_exists('multi_register_attendees')) {
 				$result = $wpdb->get_row( $wpdb->prepare( $sql, $single_event_id ));
 				$ID = $result->id;
 			}
-			
-			
+
+
 			//Build event queries
 			$sql = "SELECT * FROM " . EVENTS_DETAIL_TABLE;
 			$sql.= " WHERE is_active='Y' ";
 			$sql.= " AND event_status != 'D' ";
 			$sql.= " AND id =%d LIMIT 0,1";
-			
+
 			//Support for diarise
-			if ( ! empty( $_REQUEST['post_event_id'] )) {			
+			if ( ! empty( $_REQUEST['post_event_id'] )) {
 				$sql = "SELECT * FROM " . EVENTS_DETAIL_TABLE;
 				$sql .= " WHERE post_id = %d ";
 				$sql .= " LIMIT 0,1";
 				$ID = absint( $_REQUEST['post_event_id'] );
 			}
-			
+
 			$event = $wpdb->get_row( $wpdb->prepare( $sql, $ID ));
-			
+
 		}
 
 
 		//Build the registration page
 		if ( $event ) {
-			
+
 			//These are the variables that can be used throughout the regsitration page
 			$event_id = $event->id;
 			$event_name = stripslashes_deep($event->event_name);
@@ -149,20 +148,20 @@ if (!function_exists('multi_register_attendees')) {
 				</script>
 				<?php
 			}
-			
+
 //*************  This is the start of the registration form. This is where you can start editing your display. *************
-			
+
 			//Get the number of attendees
-			$num_attendees = get_number_of_attendees_reg_limit($event_id, 'num_attendees'); 
+			$num_attendees = get_number_of_attendees_reg_limit($event_id, 'num_attendees');
 			//Gets a count of the available spaces
-			$available_spaces = get_number_of_attendees_reg_limit($event_id, 'available_spaces'); 
+			$available_spaces = get_number_of_attendees_reg_limit($event_id, 'available_spaces');
 			//Gets the number of available spaces
-			$number_available_spaces = get_number_of_attendees_reg_limit($event_id, 'number_available_spaces'); 
+			$number_available_spaces = get_number_of_attendees_reg_limit($event_id, 'number_available_spaces');
 			//Please visit http://eventespresso.com/forums/?p=247 for available parameters for the get_number_of_attendees_reg_limit() function.
-			
+
 			if ($available_spaces == "Unlimited" || $available_spaces >= $number_available_spaces) {
 				//(Shows the regsitration form if enough spaces exist)
-				
+
 				// SOLD OUT !!!
 				if ($num_attendees >= $reg_limit) {
 					?>
@@ -177,9 +176,9 @@ if (!function_exists('multi_register_attendees')) {
 						if (($num_attendees >= $reg_limit) && ($allow_overflow == 'Y' && $overflow_event_id != 0)) {
 						?>
 							<p id="register_link-<?php echo $overflow_event_id ?>" class="register-link-footer">
-								<a id="a_register_link-<?php echo $overflow_event_id ?>" 
-									class="a_register_link" 
-									href="<?php echo espresso_reg_url($overflow_event_id); ?>" 
+								<a id="a_register_link-<?php echo $overflow_event_id ?>"
+									class="a_register_link"
+									href="<?php echo espresso_reg_url($overflow_event_id); ?>"
 									title="<?php echo stripslashes_deep($event_name) ?>"
 								>
 									<?php _e('Join Waiting List', 'event_espresso'); ?>
@@ -189,10 +188,11 @@ if (!function_exists('multi_register_attendees')) {
 					</div>
 					<?php
 					// event_espresso_clear_session();
-					
+
 				} else {
 					 //If enough spaces exists then serve up the registration form
 					//As of version 3.0.17 the registration details have been moved to registration_form.php
+					echo "<hr />";
 					include('multi_registration_page_display.php');
 					$event_counter++;
 					echo '<input type="hidden" name="regevent_action" value="post_multi_attendee" />';
