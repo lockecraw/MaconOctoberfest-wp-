@@ -14,7 +14,7 @@ body {
 	font-family: "proxima-nova",sans-serif;
 	font-style: normal;
 	font-weight: 400;
-	font-size: 13px;
+	font-size: 14px;
 	color: #6F625A;
 	margin: 0px;
 
@@ -37,19 +37,27 @@ body {
 }
 /* Headings */
 
-h1, h2, h3, h4, h5, h6 {
-	font-weight: normal;
-	color: #111;
-}
 h1 {
-	font-size: 3em;
-	line-height: 1;
-	margin-bottom: 0.5em;
-        letter-spacing: -2px;
+	font-family: "museo",serif;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 25px;
+	color: #86311E;
+	line-height: 27px;
+	margin: 0px 0px 20px 0px;
 }
-.header h1 a {
-	color: #000!important;
+
+h2.title {
+	font-family: "futura-pt-condensed",sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 25px;
+	color: #CF7229;
+	text-transform: uppercase;
+	margin: 10px 0px;
 }
+
+
 h2 {
 	font-size: 2em;
 	margin-bottom: 0.75em;
