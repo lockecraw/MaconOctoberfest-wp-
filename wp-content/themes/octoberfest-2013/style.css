@@ -590,10 +590,29 @@ a:hover#register {
 	position: relative;
 }
 
+#beerSpoonFork {
+	width: 76px;
+	height: 96px;
+	background: no-repeat url('images/BeerForkSpoon.png');
+	display: block;
+	position: absolute;
+	right: -73px;
+	bottom: 100px;
+}
+
+/* Events Content ======================================== */
+#eventContent {
+	left: -35px;
+	float: left;
+	width: 635px;
+	position: relative;
+}
+
+
 
 /* links */
 a:link, a:visited {
-	color: #006699;
+	color: #006191;
 	text-decoration: none;
 	}
 	
@@ -746,5 +765,4 @@ a:hover {
 #post-entries {
         padding: 0px 0px 20px 0px;
         margin: 0px 0px 20px 0px;
-        border-bottom: solid 1px #ccc
 }
