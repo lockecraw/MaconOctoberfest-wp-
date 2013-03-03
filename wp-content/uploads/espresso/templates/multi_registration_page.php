@@ -175,7 +175,7 @@ if (!function_exists('multi_register_attendees')) {
 						// is there an overflow event ????
 						if (($num_attendees >= $reg_limit) && ($allow_overflow == 'Y' && $overflow_event_id != 0)) {
 						?>
-							<p id="register_link-<?php echo $overflow_event_id ?>" class="register-link-footer">
+							<div class="event-buttons" id="register_link-<?php echo $overflow_event_id ?>" class="register-link-footer">
 								<a id="a_register_link-<?php echo $overflow_event_id ?>"
 									class="a_register_link"
 									href="<?php echo espresso_reg_url($overflow_event_id); ?>"
@@ -183,7 +183,7 @@ if (!function_exists('multi_register_attendees')) {
 								>
 									<?php _e('Join Waiting List', 'event_espresso'); ?>
 								</a>
-							</p>
+							</div>
 						<?php } ?>
 					</div>
 					<?php
