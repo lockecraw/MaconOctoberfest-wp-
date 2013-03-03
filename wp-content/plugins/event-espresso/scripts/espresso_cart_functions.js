@@ -1,12 +1,12 @@
 jQuery(document).ready(function() {
 
     // clear firefox and safari cache
-    jQuery(window).unload( function() {}); 
-	
+    jQuery(window).unload( function() {});
+
 	if ( ! jQuery('#event_espresso_notifications').hasClass('no-hide') ) {
 		jQuery('#event_espresso_notifications').hide();
 	}
-	
+
 
     jQuery.ajaxSetup({
         cache: false,
@@ -99,7 +99,7 @@ jQuery(document).ready(function() {
 				} else {
 					jQuery('#event_espresso_notifications').fadeOut();
 				}
-				
+
             });
 
 
@@ -126,12 +126,12 @@ jQuery(document).ready(function() {
         return false;
 
     });
- 
+
 
 
 
     jQuery('.ee_delete_item_from_cart').live('click',function(){
- 
+
        var data = {
             item_type: 'event',
             id : jQuery(this).attr('id'),
@@ -141,11 +141,11 @@ jQuery(document).ready(function() {
         }
 
          EECART.delete_item(data);
-	 
+
         return false;
 
     });
- 
+
 
 
 
@@ -225,10 +225,10 @@ jQuery(document).ready(function() {
 
 	//Couppon codes
     jQuery('#event_espresso_shopping_cart :input[id^="price_option-"], .price_id, #event_espresso_coupon_code, #event_espresso_groupon_code').on( 'change', function(){
-	
+
         var me = jQuery(this);
 		//alert( 'me id = ' + me.attr("id") + "\n" +  'me type = ' + me.prop("type") );
-			
+
         if (me.prop('type') == "select-one"){ //only run the code if a select is modified
 
             //all selects have an id
@@ -365,7 +365,7 @@ jQuery(document).ready(function() {
 
 
     });
-		
+
 
 
    /*
@@ -373,15 +373,16 @@ jQuery(document).ready(function() {
      * they don't have to enter info again.
      */
 	jQuery('.copy-all-button').on( 'click', function() {
-	
+
 		var btn_clkd = jQuery(this);
 		var val = btn_clkd.val().split('|');
 		var from_event_id = val[0];
 		var from_price_id = val[1];
 		var from_attendee_no = '1';
-		
+
+
 		jQuery('.multi_regis_wrapper_attendee-additional .event_form_field :input').each(function(){
-	        // console.log(jQuery(this).attr('id') + ' > ' + jQuery(this).val());
+
 	        var val = jQuery(this).val();
 	        var name = jQuery(this).attr('name');
 	        var input_type = jQuery(this).attr('type');
@@ -391,28 +392,28 @@ jQuery(document).ready(function() {
 
 	        var copy_from = jQuery(":input[name='" + copy_field_name + "']");
 	        //console.log(jQuery(this).attr('name') + ' > ' + copy_field_name + ' > ' + copy_from.val());
-		 
+
 	        switch (input_type) {
-		 
+
 	            case 'text':
 	            case 'textarea':
 	                jQuery(this).val(copy_from.val());
 	                break;
-				 
+
 	            case 'radio':
 	            case 'checkbox':
 	                if (copy_from.attr('checked') && val == copy_from.val())
 	                    jQuery(this).attr("checked", "checked");
 	                break;
-				 
+
 	            default:
 	                jQuery(this).val(copy_from.val());
-				 
+
 			}
         		//console.log(jQuery('#multi_regis_form_fields-' + to + " input[name='" + new_name + "']").val());
 
         });
-	 	
+
 		btn_hght = btn_clkd.parent('.copy-all-button-wrapper').innerHeight();
 		btn_wdth = btn_clkd.parent('.copy-all-button-wrapper').innerWidth();
 		btn_clkd.parent().next('.copy-all-button-success').css({ 'height' : btn_hght, 'width' : btn_wdth }).fadeIn(100).fadeOut(2000);

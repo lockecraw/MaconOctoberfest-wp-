@@ -104,6 +104,7 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 
 
 						//Outputs the form questions.
+						//echo "DEBUG<br /><pre>".print_a($events_in_session[$event_id],true).", EventID: $event_id, Meta: $meta</pre>";
 						echo event_espresso_add_question_groups($question_groups, $events_in_session[$event_id], $event_id, 1, $meta);
 
 

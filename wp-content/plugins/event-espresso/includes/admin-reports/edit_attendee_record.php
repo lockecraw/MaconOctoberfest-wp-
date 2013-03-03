@@ -1,15 +1,18 @@
 <?php if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
-do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	
+do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 
 
 function edit_attendee_record() {
 
-	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
+	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 	global $wpdb, $org_options;
-	
-	$notifications['success'] = array(); 
-	$notifications['error']	 = array(); 
-	
+
+	//echo "<h1>DEBUG: In ".__FILE__." ----  ". __FUNCTION__."</h1>";
+
+	$notifications['success'] = array();
+	$notifications['error']	 = array();
+
+
 	$failed_nonce_msg = '
 <div id="message" class="error">
 	<p>
@@ -29,7 +32,7 @@ function edit_attendee_record() {
 		$id = isset($_REQUEST['id']) ? absint( $_REQUEST['id'] ) : '';
 		$registration_id = isset($_REQUEST['registration_id']) ? sanitize_text_field( $_REQUEST['registration_id'] ) : '';
 		$multi_reg = FALSE;
-		
+
 		// check for multi reg, additional attendees, and verify reg id for primary attendee
 		$SQL = "SELECT * FROM " . EVENTS_MULTI_EVENT_REGISTRATION_ID_GROUP_TABLE . " WHERE registration_id = %s";
 		$check = $wpdb->get_row( $wpdb->prepare( $SQL, $registration_id ));
@@ -40,9 +43,9 @@ function edit_attendee_record() {
 			$SQL .= "WHERE primary_registration_id = %s";
 			$registration_ids = $wpdb->get_results( $wpdb->prepare( $SQL, $registration_id ), ARRAY_A );
 			$multi_reg = TRUE;
-		} 
+		}
 
-		// find the primary attendee id so we know which form to present since the additional attendees will have a different form 
+		// find the primary attendee id so we know which form to present since the additional attendees will have a different form
 		$SQL = "SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id =%s AND is_primary = 1 ";
 		if ( $r = $wpdb->get_row( $wpdb->prepare( $SQL, $registration_id ))) {
 			$primary_attendee = !empty($r->id) ? $r->id : $id;
@@ -62,10 +65,10 @@ function edit_attendee_record() {
 			}
 
 			$upd_price = (float)number_format( abs( sanitize_text_field( $_REQUEST['final_price'] )), 2, '.', '' );
-			$upd_qty = absint( $_REQUEST['quantity'] );			
-			
-			$set_cols_and_values = array( 
-				'final_price'=>$upd_price, 
+			$upd_qty = absint( $_REQUEST['quantity'] );
+
+			$set_cols_and_values = array(
+				'final_price'=>$upd_price,
 				'quantity'=> $upd_qty
 			);
 			$set_format = array( '%f', '%d' );
@@ -75,13 +78,13 @@ function edit_attendee_record() {
 			$upd_success = $wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
 			// if there was an actual error
 			if ( $upd_success === FALSE ) {
-				$notifications['error'][] = __('An error occured. Attendee ticket price details could not be updated.', 'event_espresso'); 
+				$notifications['error'][] = __('An error occured. Attendee ticket price details could not be updated.', 'event_espresso');
 			} else {
-			
+
 				// now we need to gather all the ticket prices for all attendees for the entire registraion and calculate a new total cost
 				$upd_total = 0;
 				$SQL = "SELECT payment_status, amount_pd, final_price, quantity, is_primary FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id = %s";
-				if ( $attendee_tickets = $wpdb->get_results( $wpdb->prepare( $SQL, $registration_id ))) {			
+				if ( $attendee_tickets = $wpdb->get_results( $wpdb->prepare( $SQL, $registration_id ))) {
 					// loop thru tickets
 					foreach ( $attendee_tickets as $attendee_ticket ) {
 						// calculate total for each attendee and add to total cost
@@ -95,7 +98,7 @@ function edit_attendee_record() {
 				}
 				// format new total_cost
 				$upd_total = (float)number_format( $upd_total, 2, '.', '' );
-				
+
 				// compare new total_cost with amount_pd
 				if ( $upd_total == $amount_pd ) {
 					$upd_payment_status = __('Completed','event_espresso');
@@ -104,12 +107,12 @@ function edit_attendee_record() {
 				} elseif ( $upd_total < $amount_pd ) {
 					$upd_payment_status = __('Refund','event_espresso');
 				}
-				
+
 //				echo '<h4>$amount_pd : ' . $amount_pd . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //				echo '<h4>$payment_status : ' . $payment_status . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //				echo '<h4>$upd_total : ' . $upd_total . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //				echo '<h4>$upd_payment_status : ' . $upd_payment_status . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-				
+
 				// compare old payment status with new payment status and update if things have changed
 				if ( $upd_payment_status != $payment_status ) {
 					// update payment status for ALL attendees for the entire registration
@@ -121,10 +124,10 @@ function edit_attendee_record() {
 					$upd_success = $wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
 					// if there was an actual error
 					if ( $upd_success === FALSE ) {
-						$notifications['error'][] = __('An error occured while attempting to update the payment status for attendeefrom this registration.', 'event_espresso'); 
-					}					
+						$notifications['error'][] = __('An error occured while attempting to update the payment status for attendeefrom this registration.', 'event_espresso');
+					}
 				}
-				
+
 				// now update the primary registrant's total cost field'
 				$set_cols_and_values = array( 'total_cost'=>$upd_total );
 				$set_format = array( '%f' );
@@ -134,72 +137,72 @@ function edit_attendee_record() {
 				$upd_success = $wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
 				// if there was an actual error
 				if ( $upd_success === FALSE ) {
-					$notifications['error'][] = __('An error occured. The primary attendee ticket total could not be updated.', 'event_espresso'); 
-				} 	
-				
+					$notifications['error'][] = __('An error occured. The primary attendee ticket total could not be updated.', 'event_espresso');
+				}
+
 				// let's base our success on the lack of errors
-				$notifications['success'][] = empty( $notifications['error'] ) ? __('All attendee ticket price details have been successfully updated.', 'event_espresso') : __('Some attendee ticket price details were successfully updated, but the following error(s) may have prevented others from being updated:', 'event_espresso'); 	
-			
-			}			
+				$notifications['success'][] = empty( $notifications['error'] ) ? __('All attendee ticket price details have been successfully updated.', 'event_espresso') : __('Some attendee ticket price details were successfully updated, but the following error(s) may have prevented others from being updated:', 'event_espresso');
+
+			}
 		}
-		
-		
-		
-		
-		
+
+
+
+
+
 		// **************************************************************************
 		// **************************  DELETE ATTENDEE  **************************
 		// **************************************************************************
 		if ( ! empty($_REQUEST['attendee_action']) && $_REQUEST['attendee_action'] == 'delete_attendee' ) {
-		
+
 			if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'edit_attendee_' . $registration_id . '_delete_attendee_nonce' )) {
 				wp_die( $failed_nonce_msg );
 			}
-			
+
 			$SQL = "DELETE FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id =%d";
 			$del_results = $wpdb->query( $wpdb->prepare( $SQL, $id ));
-			
+
 			if ( $del_results === FALSE ) {
-				$notifications['error'][] = __('An error occured. The attendee could not be deleted.', 'event_espresso'); 
-			} elseif ( $del_results === 0 ) { 
-				$notifications['error'][] = __('The attendee record in the database could not be found and was therefore not deleted.', 'event_espresso'); 
+				$notifications['error'][] = __('An error occured. The attendee could not be deleted.', 'event_espresso');
+			} elseif ( $del_results === 0 ) {
+				$notifications['error'][] = __('The attendee record in the database could not be found and was therefore not deleted.', 'event_espresso');
 			} else {
 
 				if (defined('ESPRESSO_SEATING_CHART')) {
 					$SQL ="DELETE FROM " . EVENTS_SEATING_CHART_EVENT_SEAT_TABLE . " where attendee_id = %d";
 					if ( $wpdb->query( $wpdb->prepare( $SQL, $id ))  === FALSE ) {
-						$notifications['error'][] = __('An error occured. The attendee seating chart data could not be deleted.', 'event_espresso'); 
+						$notifications['error'][] = __('An error occured. The attendee seating chart data could not be deleted.', 'event_espresso');
 					}
 				}
-				
+
 				// get id's for all attendees from this registration
 				$SQL = "SELECT id from " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id = %s";
 				$attendees = $wpdb->query( $wpdb->prepare( $SQL, $registration_id ));
 				if ( $attendees === FALSE ) {
-					$notifications['error'][] = __('An error occured while attempting to retrieve additional attendee data from the database.', 'event_espresso'); 
+					$notifications['error'][] = __('An error occured while attempting to retrieve additional attendee data from the database.', 'event_espresso');
 				} else {
 					// update quantities for attendees
 					$SQL = " UPDATE " . EVENTS_ATTENDEE_TABLE . " SET quantity = IF(quantity IS NULL ,NULL,IF(quantity > 0,IF(quantity-1>0,quantity-1,1),0)) ";
 					$SQL .= "WHERE registration_id =%s";
 					if ( $wpdb->query( $wpdb->prepare( $SQL, $registration_id )) === FALSE ) {
-						$notifications['error'][] = __('An error occured while attempting to update additional attendee ticket quantities.', 'event_espresso'); 
+						$notifications['error'][] = __('An error occured while attempting to update additional attendee ticket quantities.', 'event_espresso');
 					}
-					
+
 					event_espresso_cleanup_multi_event_registration_id_group_data();
 
 				}
 
 				// let's base our success on the lack of errors
-				$notifications['success'][] = empty( $notifications['error'] ) ? __('All attendee details have been successfully deleted.', 'event_espresso') : __('One or more errors may have prevented some attendee details from being successfully deleted.', 'event_espresso'); 	
-				
+				$notifications['success'][] = empty( $notifications['error'] ) ? __('All attendee details have been successfully deleted.', 'event_espresso') : __('One or more errors may have prevented some attendee details from being successfully deleted.', 'event_espresso');
+
 			}
 
-			
+
 		// **************************************************************************
 		// **************************  UPDATE ATTENDEE  **************************
 		// **************************************************************************
 		} else if ( ! empty( $_REQUEST['attendee_action'] ) && $_REQUEST['attendee_action'] == 'update_attendee' ) {
-		
+
 			if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'edit_attendee_' . $registration_id . '_update_attendee_nonce' )) {
 				wp_die( $failed_nonce_msg );
 			}
@@ -207,22 +210,22 @@ function edit_attendee_record() {
 			$event_id = isset($_POST['event_id']) ? $_POST['event_id'] : '';
 			$txn_type = isset($_POST['txn_type']) ? $_POST['txn_type'] : '';
 
-			$set_cols_and_values = array( 
-					'fname'		=> isset($_POST['fname']) ? $_POST['fname'] : '', 
-					'lname'		=> isset($_POST['lname']) ? $_POST['lname'] : '', 
-					'address'		=> isset($_POST['address']) ? $_POST['address'] : '', 
-					'address2'	=> isset($_POST['address2']) ? $_POST['address2'] : '', 
-					'city'				=> isset($_POST['city']) ? $_POST['city'] : '', 
-					'state'			=> isset($_POST['state']) ? $_POST['state'] : '', 
-					'zip'				=> isset($_POST['zip']) ? $_POST['zip'] : '', 
-					'phone'		=> isset($_POST['phone']) ? $_POST['phone'] : '', 
-					'email'			=> isset($_POST['email']) ? $_POST['email'] : '' 
+			$set_cols_and_values = array(
+					'fname'		=> isset($_POST['fname']) ? $_POST['fname'] : '',
+					'lname'		=> isset($_POST['lname']) ? $_POST['lname'] : '',
+					'address'		=> isset($_POST['address']) ? $_POST['address'] : '',
+					'address2'	=> isset($_POST['address2']) ? $_POST['address2'] : '',
+					'city'				=> isset($_POST['city']) ? $_POST['city'] : '',
+					'state'			=> isset($_POST['state']) ? $_POST['state'] : '',
+					'zip'				=> isset($_POST['zip']) ? $_POST['zip'] : '',
+					'phone'		=> isset($_POST['phone']) ? $_POST['phone'] : '',
+					'email'			=> isset($_POST['email']) ? $_POST['email'] : ''
 			);
 			$set_format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' );
-			
+
 			// Update the time ?
 			if ( isset( $_POST['start_time_id'] )) {
-				$SQL = "SELECT ese.start_time, ese.end_time FROM " . EVENTS_START_END_TABLE . " ese WHERE ese.id=%d";				
+				$SQL = "SELECT ese.start_time, ese.end_time FROM " . EVENTS_START_END_TABLE . " ese WHERE ese.id=%d";
 				if ( $times = $wpdb->get_results( $wpdb->prepare( $SQL, absint( $_POST['start_time_id'] )))) {
 					foreach ($times as $time) {
 						$start_time = $time->start_time;
@@ -235,17 +238,17 @@ function edit_attendee_record() {
 			}
 
 			//printr( $_POST, '$_POST  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-			
+
 			$where_cols_and_values = array( 'id'=> $id );
 			$where_format = array( '%d' );
 			// run the update
 			$upd_success = $wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format );
 			// if there was an actual error
 			if ( $upd_success === FALSE ) {
-				$notifications['error'][] = __('An error occured. Attendee details could not be updated.', 'event_espresso'); 
+				$notifications['error'][] = __('An error occured. Attendee details could not be updated.', 'event_espresso');
 			}
-			
-		
+
+
 			// Added for seating chart addon
 			$booking_id = 0;
 			if (defined('ESPRESSO_SEATING_CHART')) {
@@ -261,7 +264,7 @@ function edit_attendee_record() {
 
 			// Insert Additional Questions From Post Here
 			$reg_id = $id;
-			
+
 			$SQL = "SELECT question_groups, event_meta FROM " . EVENTS_DETAIL_TABLE . " WHERE id = %d";
 			$questions = $wpdb->get_row( $wpdb->prepare( $SQL, $event_id ));
 
@@ -277,7 +280,7 @@ function edit_attendee_record() {
 				$questions_in .= $g_id . ',';
 			}
 			$questions_in = substr($questions_in, 0, -1);
-			
+
 			$group_name = '';
 			$counter = 0;
 
@@ -289,52 +292,52 @@ function edit_attendee_record() {
 			$SQL .= "JOIN " . EVENTS_QST_GROUP_TABLE . " qg on qg.id = qgr.group_id ";
 			$SQL .= "WHERE qgr.group_id in ( $questions_in ) ";
 			$SQL .= "AND (at.attendee_id IS NULL OR at.attendee_id = '%d') ";
-			$SQL .= "ORDER BY qg.id, q.id ASC";		
-			
-			$questions = $wpdb->get_results( $wpdb->prepare( $SQL, $id ));			
+			$SQL .= "ORDER BY qg.id, q.id ASC";
+
+			$questions = $wpdb->get_results( $wpdb->prepare( $SQL, $id ));
 //			printr( $questions, '$questions  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-			
-			$SQL = "SELECT id, question_id, answer FROM " . EVENTS_ANSWER_TABLE . " at WHERE at.attendee_id = %d";		
+
+			$SQL = "SELECT id, question_id, answer FROM " . EVENTS_ANSWER_TABLE . " at WHERE at.attendee_id = %d";
 			$answers = $wpdb->get_results( $wpdb->prepare( $SQL, $id ), OBJECT_K );
 			foreach ( $answers as $answer ) {
 				$answer_a[$answer->id] = $answer->question_id;
 			}
-			
+
 			if ($questions) {
 				foreach ($questions as $question) {
-					
+
 					//printr( $question, '$question  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-				
+
 					switch ($question->question_type) {
-					
+
 						case "TEXT" :
 						case "TEXTAREA" :
 						case "SINGLE" :
 						case "DROPDOWN" :
-						
+
 							if ( $question->system_name != '' ) {
 								$post_val = isset( $_POST[ $question->system_name ] ) ? $_POST[ $question->system_name ] : '';
 							} else {
 								$post_val = isset( $_POST[ $question->question_type . '_' . $question->a_id ] ) ? $_POST[ $question->question_type . '_' . $question->a_id ] : '';
 							}
 							$post_val = sanitize_text_field( stripslashes( $post_val ));
-							
+
 							break;
 						case "MULTIPLE" :
-						
+
 							$post_val = '';
 							for ( $i = 0; $i < count( $_POST[ $question->question_type . '_' . $question->a_id ] ); $i++ ) {
 								$post_val .= trim( $_POST[ $question->question_type . '_' . $question->a_id ][$i] ) . ",";
 							}
 							$post_val = sanitize_text_field( substr( stripslashes( $post_val ), 0, -1 ));
-							
+
 							break;
 					}
-					
+
 //					echo '<h4>$post_val : ' . $post_val . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //					echo '<h4>$question->id : ' . $question->q_id . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 //					printr( $answer_a, '$answer_a  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
-					
+
 					if ( in_array( $question->q_id, $answer_a )) {
 						// existing answer
 						$set_cols_and_values = array( 'answer'=> html_entity_decode( trim( $post_val ), ENT_QUOTES, 'UTF-8' ));
@@ -348,7 +351,7 @@ function edit_attendee_record() {
 
 					} else {
 						// new answer
-						$set_cols_and_values = array( 
+						$set_cols_and_values = array(
 							'registration_id'=>$registration_id,
 							'attendee_id'=>$id,
 							'question_id'=> $question->q_id,
@@ -359,14 +362,14 @@ function edit_attendee_record() {
 						$upd_success = $wpdb->insert( EVENTS_ANSWER_TABLE, $set_cols_and_values, $set_format );
 						//echo '<h4>last_query : ' . $wpdb->last_query . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
-					}				
+					}
 				}
 			}
-			
+
 
 			// let's base our success on the lack of errors
-			$notifications['success'][] = empty( $notifications['error'] ) ? __('All attendee details have been successfully updated.', 'event_espresso') : __('One or more errors may have prevented some attendee details from being successfully updated.', 'event_espresso'); 	
-				
+			$notifications['success'][] = empty( $notifications['error'] ) ? __('All attendee details have been successfully updated.', 'event_espresso') : __('One or more errors may have prevented some attendee details from being successfully updated.', 'event_espresso');
+
 		}
 
 
@@ -377,7 +380,7 @@ function edit_attendee_record() {
 
 		$counter = 0;
 		$additional_attendees = NULL;
-		
+
 		$SQL = "SELECT att.*, evt.event_name, evt.question_groups, evt.event_meta, evt.additional_limit FROM " . EVENTS_ATTENDEE_TABLE . " att ";
 		$SQL .= "JOIN " . EVENTS_DETAIL_TABLE . " evt ON att.event_id = evt.id ";
 		// are we looking for an additional attendee ?
@@ -393,11 +396,11 @@ function edit_attendee_record() {
 				$reg_ids = "'" . implode("','", $reg_ids) . "'";
 			} else {
 				$reg_ids = "'" . sanitize_text_field( $_REQUEST['registration_id'] ) . "'";
-			}		
+			}
 			$SQL .= " WHERE registration_id IN ( $reg_ids ) ORDER BY att.id";
 		}
 		$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, NULL ));
-		
+
 		foreach ($attendees as $attendee) {
 			if ( $counter == 0 ) {
 				$id = $attendee->id;
@@ -432,7 +435,7 @@ function edit_attendee_record() {
 
 				$start_date = $attendee->start_date;
 				$event_time = $attendee->event_time;
-				
+
 				// Added for seating chart addon
 				$booking_info = "";
 				if ( defined('ESPRESSO_SEATING_CHART') ){
@@ -451,7 +454,7 @@ function edit_attendee_record() {
 				if ( $is_additional_attendee && isset($event_meta['add_attendee_question_groups']) && $event_meta['add_attendee_question_groups'] != NULL ) {
 					$question_groups = $event_meta['add_attendee_question_groups'];
 				}
-				
+
 				$counter++;
 
 			} else {
@@ -460,10 +463,10 @@ function edit_attendee_record() {
 		}
 
 		// display success messages
-		if ( ! empty( $notifications['success'] )) { 
+		if ( ! empty( $notifications['success'] )) {
 			$success_msg = implode( $notifications['success'], '<br />' );
 		?>
-				
+
 <div id="message" class="updated fade">
 	<p>
 		<strong><?php echo $success_msg; ?></strong>
@@ -471,12 +474,12 @@ function edit_attendee_record() {
 </div>
 
 		<?php
-		 } 
+		 }
 		// display error messages
 		if ( ! empty( $notifications['error'] )) {
 			$error_msg = implode( $notifications['error'], '<br />' );
 		?>
-				
+
 <div id="message" class="error">
 	<p>
 		<strong><?php echo $error_msg; ?></strong>
@@ -484,8 +487,8 @@ function edit_attendee_record() {
 </div>
 
 		<?php } ?>
-		
-<div>		
+
+<div>
 	<p>
 		<a href="admin.php?page=events&event_id=<?php echo $event_id; ?>&event_admin_reports=list_attendee_payments">
 			<strong>&laquo;&nbsp;<?php _e('Back to Attendees List', 'event_espresso'); ?></strong>
@@ -513,7 +516,7 @@ function edit_attendee_record() {
 									<li>
 										<?php
 										$time_id = 0;
-										$SQL = "SELECT id FROM " . EVENTS_START_END_TABLE . " WHERE event_id=%d AND start_time =%s";										
+										$SQL = "SELECT id FROM " . EVENTS_START_END_TABLE . " WHERE event_id=%d AND start_time =%s";
 										if ( $event_time = $wpdb->get_row( $wpdb->prepare( $SQL, $event_id, $event_time ))) {
 											$time_id = $event_time->id;
 										}
@@ -594,7 +597,7 @@ function edit_attendee_record() {
 							</fieldset>
 						</form></td>
 					<td  width="50%" valign="top">
-						<?php if (count($additional_attendees) > 0) { ?> 
+						<?php if (count($additional_attendees) > 0) { ?>
 						<h4>
 							<?php _e('Additional Attendees', 'event_espresso'); ?>
 						</h4>
@@ -604,9 +607,9 @@ function edit_attendee_record() {
 									$attendee_num++;
 							?>
 							<li>
-								<?php 
+								<?php
 								// create edit link
-								$edit_att_url_params = array( 
+								$edit_att_url_params = array(
 									'event_admin_reports' => 'edit_attendee_record',
 									'form_action' => 'edit_attendee',
 									'registration_id' => $registration_id,
@@ -616,14 +619,14 @@ function edit_attendee_record() {
 								);
 								// add url params
 								$edit_attendee_link = add_query_arg( $edit_att_url_params, 'admin.php?page=events' );
-								?>								
+								?>
 								<a href="<?php echo $edit_attendee_link; ?>" title="<?php _e('Edit Attendee', 'event_espresso'); ?>">
 									<strong><?php echo $row['full_name']; ?></strong> (<?php echo $row['email']; ?>)
 								</a>
 								&nbsp;&nbsp;|&nbsp;&nbsp;
-								<?php 
+								<?php
 								// create delete link
-								$delete_att_url_params = array( 
+								$delete_att_url_params = array(
 									'event_admin_reports' => 'edit_attendee_record',
 									'form_action' => 'edit_attendee',
 									'attendee_action' => 'delete_attendee',
@@ -633,9 +636,9 @@ function edit_attendee_record() {
 								);
 								// add url params
 								$delete_attendee_link = add_query_arg( $delete_att_url_params, 'admin.php?page=events' );
-								// add nonce 
+								// add nonce
 								$delete_attendee_link = wp_nonce_url( $delete_attendee_link, 'edit_attendee_' . $registration_id . '_delete_attendee_nonce' );
-								?>								
+								?>
 								<a href="<?php echo $delete_attendee_link ?>" title="<?php _e('Delete Attendee', 'event_espresso'); ?>" onclick="return confirmDelete();">
 									<?php _e('Delete', 'event_espresso'); ?>
 								</a>
@@ -643,26 +646,26 @@ function edit_attendee_record() {
 							<?php } ?>
 						</ol>
 						<?php } ?>
-						
-						
+
+
 						<br/>
 						<h4 class="qrtr-margin"><?php _e('Ticket Prices', 'event_espresso'); ?></h4>
-						
+
 						<form method="POST" action="<?php echo $_SERVER['REQUEST_URI'] ?>&status=saved" class="espresso_form">
 							<fieldset>
 								<ul>
 									<li>
-											<strong class="att-tckt-prc-lbl"><?php _e('Payment Status:', 'event_espresso'); ?></strong> 
+											<strong class="att-tckt-prc-lbl"><?php _e('Payment Status:', 'event_espresso'); ?></strong>
 											<?php echo $payment_status; ?> <?php echo event_espresso_paid_status_icon($payment_status); ?>&nbsp;&nbsp;[&nbsp;<a href="admin.php?page=events&amp;attendee_pay=paynow&amp;form_action=payment&amp;registration_id=<?php echo $registration_id ?>&amp;event_admin_reports=enter_attendee_payments&amp;event_id=<?php echo $event_id ?>" title="<?php _e('Edit Payment', 'event_espresso'); ?>">
 											<?php _e('View/Edit Payment', 'event_espresso'); ?>
 											</a>&nbsp;]
 									</li>
 									<li>
-											<strong class="att-tckt-prc-lbl"><?php _e('Transaction ID:', 'event_espresso'); ?></strong> 
+											<strong class="att-tckt-prc-lbl"><?php _e('Transaction ID:', 'event_espresso'); ?></strong>
 											<?php echo !empty($txn_id) ? $txn_id : 'N/A'; ?>
 									</li>
 									<li>
-											<strong class="att-tckt-prc-lbl"><?php _e('Date Paid:', 'event_espresso'); ?></strong> 
+											<strong class="att-tckt-prc-lbl"><?php _e('Date Paid:', 'event_espresso'); ?></strong>
 											<?php echo !empty($payment_date) ? event_date_display($payment_date) : 'N/A' ?>
 									</li>
 									<li>
@@ -672,7 +675,7 @@ function edit_attendee_record() {
 											<?php echo $org_options['currency_symbol'] ?><?php echo $total_cost; ?>
 									</li>
 									<li>
-											<strong class="att-tckt-prc-lbl"><?php _e('Total Amount Paid to Date:', 'event_espresso'); ?></strong> 
+											<strong class="att-tckt-prc-lbl"><?php _e('Total Amount Paid to Date:', 'event_espresso'); ?></strong>
 											<?php echo $org_options['currency_symbol'] . $amount_pd; ?><?php //echo espresso_attendee_price(array('attendee_id' => $id, 'reg_total' => true)); ?>
 									</li>
 									<li>
@@ -697,17 +700,17 @@ function edit_attendee_record() {
 													<td align="center" valign="top">
 														<?php
 															// number of tickets currently purchased
-															$quantity = ! empty( $quantity ) ? $quantity : 1; 
+															$quantity = ! empty( $quantity ) ? $quantity : 1;
 															 // availalbe spaces left for event
 															$available_spaces = get_number_of_attendees_reg_limit( $event_id, 'number_available_spaces');
 															if ( $available_spaces != 'Unlimited' ) {
-																// first add our purchased tickets ($quantity) back into available spaces 
+																// first add our purchased tickets ($quantity) back into available spaces
 																// ( becuase a sold out show incluldes these tickets here, so admin should be allowed to play with these numbers - think about it )
 																$available_spaces += $quantity;
 																$attendee_limit = ($attendee_limit <= $available_spaces) ? $attendee_limit : $available_spaces;
 															}
 															// final check to make sure that attendee limit has to at LEAST be the number of tickets this attendee has already purchased
-															// otherwise the ticket quantity selector may display less than what this attendee has already purchased													
+															// otherwise the ticket quantity selector may display less than what this attendee has already purchased
 															$attendee_limit = $attendee_limit < $quantity ? $quantity : $attendee_limit;
 														?>
 														<select name="quantity" class="price_id">
@@ -729,8 +732,8 @@ function edit_attendee_record() {
 										</div>
 									</li>
 									<li>
-											<strong class="att-tckt-prc-lbl"><?php _e('Original Ticket Price:', 'event_espresso'); ?></strong> 
-											<?php echo $org_options['currency_symbol'] . '&nbsp;' . $orig_price; ?>&nbsp;&nbsp;/&nbsp;&nbsp;<?php _e('ticket', 'event_espresso'); ?>								
+											<strong class="att-tckt-prc-lbl"><?php _e('Original Ticket Price:', 'event_espresso'); ?></strong>
+											<?php echo $org_options['currency_symbol'] . '&nbsp;' . $orig_price; ?>&nbsp;&nbsp;/&nbsp;&nbsp;<?php _e('ticket', 'event_espresso'); ?>
 									</li>
 									<li>
 										<br/>

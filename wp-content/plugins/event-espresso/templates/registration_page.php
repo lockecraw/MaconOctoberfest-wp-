@@ -1,5 +1,6 @@
 <?php if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
-do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');		
+do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
+
 //As of version 3.0.17
 //This is a logic file for displaying a registration form for an event on a page. This file will do all of the backend data retrieval functions.
 //There should be a copy of this file in your wp-content/uploads/espresso/ folder.
@@ -11,15 +12,15 @@ if (!function_exists('register_attendees')) {
 		$data = (object)array( 'event' => NULL );
 		$template_name = ( 'registration_page_display.php' );
 		$path = locate_template( $template_name );
-		
-		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');		
+
+		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		//Run code for the seating chart addon
 		if ( function_exists('espresso_seating_version') ){
 			do_action('ee_seating_chart_css');
 			do_action('ee_seating_chart_js');
 			do_action('ee_seating_chart_flush_expired_seats');
 		}
-        
+
         global $wpdb, $org_options;
 
         if (isset($_REQUEST['ee']) && $_REQUEST['ee'] != '') {
@@ -79,7 +80,7 @@ if (!function_exists('register_attendees')) {
             $sql .= " WHERE post_id = '" . $_REQUEST['post_event_id'] . "' ";
             $sql .= " LIMIT 0,1";
         }
-		
+
         $data->event = $wpdb->get_row( $wpdb->prepare( $sql, NULL ), OBJECT);
         $num_rows = $wpdb->num_rows;
 
@@ -97,7 +98,7 @@ if (!function_exists('register_attendees')) {
             $display_desc = $data->event->display_desc;
 			if ( $reg_form_only == true )
 				$display_desc = "N";
-			
+
             $display_reg_form = $data->event->display_reg_form;
             $event_address = $data->event->address;
             $event_address2 = $data->event->address2;
@@ -240,13 +241,13 @@ if (!function_exists('register_attendees')) {
                 'end_date' => event_date_display($end_date, get_option('date_format')),
                 'google_map_link' => $google_map_link,
             );
-			
+
 			//print_r($all_meta);
 			//This function gets the status of the event.
 			$is_active = array();
 			$is_active = event_espresso_get_is_active(0, $all_meta);
 			//echo '<p>'.print_r(event_espresso_get_is_active($event_id, $all_meta)).'</p>';;
-			
+
             if ($org_options['use_captcha'] == 'Y' && empty($_REQUEST['edit_details'])) {
                 ?>
                 <script type="text/javascript">

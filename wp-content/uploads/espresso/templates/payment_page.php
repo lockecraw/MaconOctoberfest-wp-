@@ -2,11 +2,16 @@
 do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 //Confirmation Page Template
 
+?><h1>Debug: <?php echo __FILE__;?></h1><?php
 
 if(isset($_REQUEST['is_donation']) && $_REQUEST['is_donation'] == 'true'){
-	//if this is a confirmation page for a donation...
+	//if this is a confirmation page for a single donation...
 
-	$donation_amount = do_shortcode('[EE_ANSWER q="11" a="'.$attendee_id.'"]');
+
+	//$donation_amount = do_shortcode('[EE_ANSWER q="11" a="'.$attendee_id.'"]');
+	$donation_amount = $_REQUEST['donation_amount'];
+
+	echo "DEBUG: updating price in attendee table for attendee_id $attendee_id to ".number_format($donation_amount,2)."<br />";
 
 	//update the attendee record with the donation amount given...
 	$wpdb->update(

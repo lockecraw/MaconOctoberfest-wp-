@@ -1,6 +1,8 @@
 <?php if (!defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
 do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 
+?><h1>Debug: <?php echo __FILE__;?></h1><?php
+
 if(stristr($event_name,'donat')){
 ?>
 <div class="espresso_payment_overview event-display-boxes ui-widget" >

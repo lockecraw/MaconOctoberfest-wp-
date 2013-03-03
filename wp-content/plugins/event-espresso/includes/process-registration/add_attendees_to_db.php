@@ -577,7 +577,6 @@ if ( ! function_exists('event_espresso_add_attendees_to_db_multi')) {
 			$multi_reg = true;
 
 			$events_in_session = $_SESSION['espresso_session']['events_in_session'];
-			print_a($events_in_session);
 			if (event_espresso_invoke_cart_error($events_in_session)) {
 				return false;
 			}

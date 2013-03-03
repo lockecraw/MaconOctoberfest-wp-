@@ -9,6 +9,7 @@
 </div>
 <!-- end footer -->
 <?php wp_footer(); ?>
+<?php //print_a($_SESSION); ?>
 </div>
 </body>
 </html>

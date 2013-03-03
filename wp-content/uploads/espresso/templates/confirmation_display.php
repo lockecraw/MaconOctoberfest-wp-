@@ -10,7 +10,8 @@ if(isset($_REQUEST['is_donation']) && $_REQUEST['is_donation'] == 'true'){
 	//if this is a confirmation page for a donation...
 
 
-	$donation_amount = do_shortcode('[EE_ANSWER q="11" a="'.$attendee_id.'"]');
+	//$donation_amount = do_shortcode('[EE_ANSWER q="11" a="'.$attendee_id.'"]');
+	$donation_amount = $_REQUEST['donation_amount'];
 
 	$attendee_num = 1;
 
@@ -94,6 +95,7 @@ if(isset($_REQUEST['is_donation']) && $_REQUEST['is_donation'] == 'true'){
 			<input type="hidden" name="regevent_action" id="regevent_action-<?php echo $event_id;?>" value="confirm_registration">
 			<input type="hidden" name="event_id" id="event_id-<?php echo $event_id;?>" value="<?php echo $event_id;?>">
 			<input type="hidden" name="is_donation" id="is_donation-<?php echo $event_id;?>" value="true">
+			<input type="hidden" name="donation_amount" id="donation_amount-<?php echo $event_id;?>" value="<?php echo $donation_amount; ?>">
 			<?php wp_nonce_field('reg_nonce', 'reg_form_nonce'); ?>
 
 		</div>

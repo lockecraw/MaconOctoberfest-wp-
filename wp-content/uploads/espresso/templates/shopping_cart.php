@@ -5,7 +5,7 @@ if ( !function_exists( 'event_espresso_shopping_cart' ) ){
 function event_espresso_shopping_cart() {
 	global $wpdb, $org_options;
 		//session_destroy();
-	//echo "<pre>", print_r( $_SESSION ), "</pre>";
+	//print_a( $_SESSION );
 	$events_in_session = isset( $_SESSION['espresso_session']['events_in_session'] ) ? $_SESSION['espresso_session']['events_in_session'] : event_espresso_clear_session( TRUE );
 
 	if ( event_espresso_invoke_cart_error( $events_in_session ) )
@@ -88,23 +88,9 @@ function event_espresso_shopping_cart() {
 									<?php echo event_espresso_time_dropdown( $r->id, 0, 1, $_SESSION['espresso_session']['events_in_session'][$r->id]['start_time_id'] ); ?>
 								</div>
 
-								<?php //echo event_espresso_group_price_dropdown( $r->id, 0, 1, $_SESSION['espresso_session']['events_in_session'][$r->id]['price_id']); ?>
+								<?php echo event_espresso_group_price_dropdown( $r->id, 0, 1, $_SESSION['espresso_session']['events_in_session'][$r->id]['price_id']); ?>
 
 
-								<div class="event_form_field">
-									<label for="price_id_<?php echo $r->id; ?>" class="ee-reg-page-questions">Donation Amount<em>*</em></label>
-
-
-									<input
-										type="text"
-										name="price_id[<?php echo $r->id; ?>]"
-										id="price_id_<?php echo $r->id; ?>"
-										class="price_id required  ee-reg-page-questions ee-reg-page-text-input numeric-only"
-										value="0.00" />
-								</div>
-
-
-							<input type="hidden" name="is_donation[<?php echo $r->id; ?>]" value="true" />
 							<input type="hidden" name="event_name[<?php echo $r->id; ?>]" value="<?php echo $r->event_name; ?>" />
 							<input type="hidden" name="use_coupon[<?php echo $r->id; ?>]" value="<?php echo $r->use_coupon_code; ?>" />
 							<input type="hidden" name="use_groupon[<?php echo $r->id; ?>]" value="<?php echo $r->use_groupon_code; ?>" />

@@ -13,7 +13,8 @@ function new_excerpt_more($excerpt) {
 }
 add_filter('wp_trim_excerpt', 'new_excerpt_more');
 
-if ( function_exists( 'add_theme_support' ) ) { 
-  add_theme_support( 'post-thumbnails' ); 
+if ( function_exists( 'add_theme_support' ) ) {
+  add_theme_support( 'post-thumbnails' );
 }
+add_editor_style( 'style.css' );
 ?>

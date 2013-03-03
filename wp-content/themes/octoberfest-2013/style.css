@@ -1,4 +1,4 @@
-/*   
+/*
 Theme Name: Macon Octoberfest
 Author: Locke Crawford
 Author URI: Locke@LokkDesign.com
@@ -126,7 +126,7 @@ a:hover#scheduleHome {
 	background: no-repeat url('images/horizontalRibbon.png');
 	width: 977px;
 	height: 160px;
-	margin: -20px auto 0 auto;	
+	margin: -20px auto 0 auto;
 }
 a.arrow {
 	background: right no-repeat url('images/orangeArrow.png');
@@ -154,24 +154,24 @@ a:hover.arrow {
 	font-size: 36px;
 	color: #F3EDE4;
 	text-transform: uppercase;
-	list-style-type:none; 
-	list-style-position:outside; 
-	position:relative; 
+	list-style-type:none;
+	list-style-position:outside;
+	position:relative;
 }
 
 #navList ul {
-	padding: 0; 
+	padding: 0;
 	margin: 0;
-	list-style-type:none; 
-	list-style-position:outside; 
+	list-style-type:none;
+	list-style-position:outside;
 	position:relative;
-	 
+
 }
 
 #navList a {
 	color: #FFFFFF;
 	display: block;
-	
+
 	}
 
 #navList a:hover {
@@ -182,34 +182,34 @@ a:hover.arrow {
 
 #navList li {
 	float: left;
-	width: 200px;	
+	width: 200px;
 }
 #navList li a {
-	float: left;	
+	float: left;
 }
 
 #navList li.aboutHorizontal {
 	float: left;
 	width: 150px;
-	margin-left: 35px;	
+	margin-left: 35px;
 }
 
 
 #navList li.current_page_item a:active {
 	color: #F4AF16;
 	text-decoration: none;
-}	
+}
 
 
 #navList li.current_page_item a, #navList ul li.current_page_item a, #navList li.current_page_ancestor a{
 	color: #F4AF16;
-	
+
 }
 #navList li.current_page_item a:hover, #navList li.current_page_ancestor a:hover{
 	color:#FFFFFF;
 }
 #navList ul {
-	position: relative; 
+	position: relative;
 	z-index:6;
 	width: 175px;
 	font-family: "proxima-nova-condensed",sans-serif;
@@ -221,12 +221,12 @@ a:hover.arrow {
 }
 
 #navList ul a {
-	color: #FFFFFF; 
+	color: #FFFFFF;
 }
 
 #navList li.current_page_ancestor ul li a{
-	color: #FFFFFF; 
-	
+	color: #FFFFFF;
+
 }
 #navList li.current_page_ancestor ul li a:hover{
 	color: #FFFFFF;
@@ -234,7 +234,7 @@ a:hover.arrow {
 }
 
 #navList li ul li.current_page_item  a{
-	color: #FFFFFF; 
+	color: #FFFFFF;
 }
 
 #navList li ul {
@@ -249,10 +249,10 @@ a:hover.arrow {
 }
 
 #navList li ul a {
-	color: #FFFFFF; 
+	color: #FFFFFF;
 	float:left;
-	background: none; 
-	 
+	background: none;
+
 }
 #navList li ul a:hover {
 	color: #F4AF16;
@@ -269,7 +269,7 @@ a:hover.arrow {
 	top:auto;
 }
 #navList li ul ul {
-	left:12em; 
+	left:12em;
 }
 #navList li:hover ul ul, #navList li:hover ul ul ul, #navList li:hover ul ul ul ul {
 }
@@ -287,7 +287,7 @@ a:hover.arrow {
 
 #logo {
 	position: relative;
-	z-index: 2;	
+	z-index: 2;
 }
 
 a#logo {
@@ -317,7 +317,7 @@ a:hover#logo {
 }
 
 .verticalNavColumn {
-	padding: 95px 20px 0 35px;	
+	padding: 95px 20px 0 35px;
 }
 
 #verticalnavList {
@@ -330,24 +330,24 @@ a:hover#logo {
 	font-size: 36px;
 	color: #F3EDE4;
 	text-transform: uppercase;
-	list-style-type:none; 
-	list-style-position:outside; 
-	position:relative; 
+	list-style-type:none;
+	list-style-position:outside;
+	position:relative;
 	line-height: 40px;
 }
 
 #verticalnavList ul {
-	padding: 0; 
+	padding: 0;
 	margin: 0;
-	list-style-type:none; 
-	list-style-position:outside; 
+	list-style-type:none;
+	list-style-position:outside;
 	position:relative;
-	 
+
 }
 
 #verticalnavList a {
 	color: #FFFFFF;
-	
+
 	}
 
 #verticalnavList a:hover {
@@ -361,25 +361,25 @@ a:hover#logo {
 #verticalnavList li a {
 }
 
-#verticalnavList li.aboutHorizontal {	
+#verticalnavList li.aboutHorizontal {
 }
 
 
 #verticalnavList li.current_page_item a:active {
 	color: #F4AF16;
 	text-decoration: none;
-}	
+}
 
 
 #verticalnavList li.current_page_item a, #verticalnavList ul li.current_page_item a, #verticalnavList li.current_page_ancestor a{
 	color: #F4AF16;
-	
+
 }
 #verticalnavList li.current_page_item a:hover, #verticalnavList li.current_page_ancestor a:hover{
 	color:#FFFFFF;
 }
 #verticalnavList ul {
-	position:relative; 
+	position:relative;
 	z-index:6;
 	width: 175px;
 	font-family: "proxima-nova-condensed",sans-serif;
@@ -392,12 +392,12 @@ a:hover#logo {
 }
 
 #verticalnavList ul a {
-	color: #FFFFFF; 
+	color: #FFFFFF;
 }
 
 #verticalnavList li.current_page_ancestor ul li a{
-	color: #FFFFFF; 
-	
+	color: #FFFFFF;
+
 }
 #verticalnavList li.current_page_ancestor ul li a:hover{
 	color: #FFFFFF;
@@ -405,7 +405,7 @@ a:hover#logo {
 }
 
 #verticalnavList li ul li.current_page_item  a{
-	color: #FFFFFF; 
+	color: #FFFFFF;
 }
 
 #verticalnavList li ul {
@@ -420,9 +420,9 @@ a:hover#logo {
 }
 
 #verticalnavList li ul a {
-	color: #FFFFFF; 
-	background: none; 
-	 
+	color: #FFFFFF;
+	background: none;
+
 }
 #verticalnavList li ul a:hover {
 	color: #F4AF16;
@@ -439,7 +439,7 @@ a:hover#logo {
 	top:auto;
 }
 #verticalnavList li ul ul {
-	left:12em; 
+	left:12em;
 }
 #verticalnavList li:hover ul ul, #verticalnavList li:hover ul ul ul, #verticalnavList li:hover ul ul ul ul {
 	color: #F4AF16;
@@ -516,7 +516,7 @@ a:hover#topCartArrows {
 	text-transform: uppercase;
 	letter-spacing: 1px;
 
-}	
+}
 
 #registerWrapper{
 	position: relative;
@@ -543,7 +543,7 @@ a:hover#topCartArrows {
 	text-transform: uppercase;
 	letter-spacing: 1px;
 
-}	
+}
 
 a#buyTickets {
 	display: block;
@@ -608,6 +608,59 @@ a:hover#register {
 	position: relative;
 }
 
+.event-detail{
+	padding: 3px 0px;
+}
+
+.event-listing-container{
+	border-top: 4px double #f6b015;
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+.event-listing-container:last-child{
+	border-bottom: 4px double #f6b015;
+}
+
+.event-buttons{
+	margin-top: 18px;
+}
+
+a.event-button:link,
+a.event-button:visited{
+	font-family: "museo",serif;
+	display: inline-block;
+	background-color: #547a57;
+	height: 12px;
+	padding: 8px 12px;
+	font-size: 12px;
+	color: #fff;
+	text-transform: uppercase;
+
+  -webkit-transition: all 0.2s ease-out;  /* Chrome 1-25, Safari 3.2+ */
+     -moz-transition: all 0.2s ease-out;  /* Firefox 4-15 */
+       -o-transition: all 0.2s ease-out;  /* Opera 10.50–12.00 */
+          transition: all 0.2s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.50+ */
+}
+
+a.event-button:hover{
+	background-color: #ed7d45 !important;
+}
+
+a.event-button.event-button-competition{
+	background-color: #de4d39;
+}
+
+a.event-button.event-button-donation{
+	background-color: #136292;
+}
+
+a.event-button.ee_view_cart{
+	background-color: #86311f;
+}
+
+a.event-button.ee_view_cart.event-button-add-to-cart{
+	background-color: #f6b015;
+}
 
 
 /* links */
@@ -615,7 +668,7 @@ a:link, a:visited {
 	color: #006191;
 	text-decoration: none;
 	}
-	
+
 a:hover {
 	text-decoration: underline;
 	}
@@ -627,7 +680,7 @@ a:hover {
 	margin: 20px 0px 50px 0px;
 	padding: 0px 0px 10px 0px;
 	}
-	
+
 #navbar-left {
 	width: 850px;
 	height: 26px;
@@ -635,7 +688,7 @@ a:hover {
 	margin: 0px;
 	padding: 0px 0px 0px 0px;
 	}
-	
+
 #navbar-right {
 	width: 30px;
 	height: 26px;
@@ -644,7 +697,7 @@ a:hover {
 	padding: 0px 10px 0px 0px;
 	text-align: right;
 	}
-	
+
 #navbar-right a img {
 	border: none;
 	margin: 5px 0px 0px 0px;
@@ -656,7 +709,7 @@ a:hover {
 	padding: 0px;
 	list-style: none;
 	}
-	
+
 #nav ul {
 	margin: 0px;
 	padding: 0px;
@@ -669,7 +722,7 @@ a:hover {
         margin: 0px 20px 0px 0px;
 	padding: 6px 10px 5px 10px;
 	}
-	
+
 #nav a:hover {
 	display: block;
 	text-decoration: underline;

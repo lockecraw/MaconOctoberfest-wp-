@@ -1,9 +1,9 @@
-/* -------------------------------------------------------------- 
+/* --------------------------------------------------------------
 
    typography.css
    * Sets up some sensible default typography. */
 
-/* Default font settings. 
+/* Default font settings.
    The font-size percentage is of 16px. (0.75 * 16px = 12px) */
 html {
 	font-size:100.01%;
@@ -46,8 +46,12 @@ h1 {
 	line-height: 27px;
 	margin: 0px 0px 20px 0px;
 }
+h1 a:link,
+h1 a:visited{
+	color: #86311E;
+}
 
-h2.title {
+h2.title{
 	font-family: "futura-pt-condensed",sans-serif;
 	font-style: normal;
 	font-weight: 400;
@@ -267,4 +271,39 @@ caption {
 
 .meta {
       font-size: 10px;
+}
+
+.event-detail-label{
+
+	font-style: normal;
+	font-weight: normal;
+	font-size: 10px;
+	color: #CF7229;
+	text-transform: uppercase;
+
+}
+h3.section-heading{
+	font-style: normal;
+	font-weight: normal;
+	font-size: 10px;
+	color: #CF7229;
+	text-transform: uppercase;
+	margin-bottom: 0px;
+}
+
+
+.event-description{
+	padding: 12px 0px;
+	font-weight: 700;
+	max-width: 325px;
+}
+
+.single-event-registration-container .event-description p:first-child{
+	font-family: "museo",serif;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 25px;
+	color: #86311E;
+	line-height: 27px;
+	margin: 0px 0px 20px 0px;
 }
