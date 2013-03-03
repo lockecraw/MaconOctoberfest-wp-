@@ -78,7 +78,7 @@ $this_event_id = $event_id;
 					</span>
 				<?php } ?>
 			</div>
-			<? } ?>
+			<?php } ?>
 
 
 			<?php if($category != 'donation' && $category != 'merchandise'){ ?>
@@ -94,7 +94,7 @@ $this_event_id = $event_id;
 					?>
 				</span>
 			</div>
-			<? } ?>
+			<?php } ?>
 		</div>
 
 

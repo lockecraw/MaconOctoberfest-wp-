@@ -123,7 +123,7 @@ echo "Category: ".$event_category;
 										echo event_espresso_time_dropdown($event_id);
 									}//End time selected
 								?>
-							<? } ?>
+							<?php } ?>
 
 							<div class="event-detail event-detail-price" <?php if($event_category=='donation'){echo 'style="display:none;"';}?>>
 								<?php
