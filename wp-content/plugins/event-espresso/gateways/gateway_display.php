@@ -74,9 +74,9 @@ $data['registration_id'] = $registration_id;
 $data['phone'] = isset($phone) && !empty($phone) ? $phone : '';
 //This file builds the gateways that are available
 
-echo '<div id="payment-options-dv" class="event-display-boxes ui-widget">';
-echo '<h2 class="section-heading ui-widget-header ui-corner-top">' . __('Please choose a payment option', 'event_espresso') . '</h2>';
-echo '<div class="event-data-display ui-widget-content ui-corner-bottom">';
+echo '<div id="payment-options-dv">';
+echo '<h3>' . __('Please choose a payment option', 'event_espresso') . '</h3>';
+echo '<div>';
 
 do_action('action_hook_espresso_display_onsite_payment_header');
 do_action('action_hook_espresso_display_onsite_payment_gateway', $data);

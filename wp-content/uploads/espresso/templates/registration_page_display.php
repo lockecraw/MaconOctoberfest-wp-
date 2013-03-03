@@ -2,7 +2,7 @@
 //This is the registration form.
 //This is a template file for displaying a registration form for an event on a page.
 //There should be a copy of this file in your wp-content/uploads/espresso/ folder.
-echo "Category: ".$event_category;
+
 ?>
 
 <!-- Template: <?php echo __FILE__; ?> -->
@@ -248,7 +248,7 @@ echo "Category: ".$event_category;
 					//End use captcha
 					?>
 					<p class="event_form_submit" id="event_form_submit-<?php echo $event_id; ?>">
-						<input class="btn_event_form_submit ui-button ui-button-big ui-priority-primary ui-state-default ui-state-hover ui-state-focus ui-corner-all" id="event_form_field-<?php echo $event_id; ?>" type="submit" name="Submit" value="<?php _e('Submit', 'event_espresso'); ?>">
+						<input class="event-button" id="event_form_field-<?php echo $event_id; ?>" type="submit" name="Submit" value="<?php _e('Continue', 'event_espresso'); ?>">
 					</p>
 
 				<?php } ?>

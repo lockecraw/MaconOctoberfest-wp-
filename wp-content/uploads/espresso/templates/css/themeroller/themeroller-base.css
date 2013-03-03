@@ -1,7 +1,7 @@
 /**
 * Event Espresso ThemeRoller base stylesheet.
 * This stylesheet is used in conjunction with selected themeroller stylesheets.
-* These styles are to provide essential padding and margins all visual styling is 
+* These styles are to provide essential padding and margins all visual styling is
 * added by themeroller styles.
 */
 
@@ -36,22 +36,22 @@
 .payment-option-closed { display: inline-block; }
 
 .payment-option-lnk {
-	display: inline-block; position: relative; max-width:140px; padding:15px; margin:0 0 1em; 
-	border:1px solid #ddd; border-radius:3px; 
+	display: inline-block; position: relative; max-width:140px; padding:15px; margin:0 0 1em;
+	border:1px solid #ddd; border-radius:3px;
 	text-align: center; line-height:1em; vertical-align: middle; cursor:pointer;
 
 }
 .payment-option-lnk:hover {
 	top:-1px; border-color:#d5d5d5; text-decoration:none;
-	-webkit-box-shadow: 4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025); 
-	-moz-box-shadow:4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025); 
-	box-shadow:4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025);	
+	-webkit-box-shadow: 4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025);
+	-moz-box-shadow:4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025);
+	box-shadow:4px 10px 15px -3px rgba(0,0,0,.05), 1px 2px 4px -1px rgba(0,0,0,.1), -2px -1px 5px rgba(0,0,0,.025);
 }
 .payment-option-lnk img { max-width:140px !important; padding:0; margin:0; }
 .payment-option-lnk.algn-vrt { display: table !important; height:30px; }
 .payment-option-lnk.algn-vrt .vrt-cell { display: table-cell !important; vertical-align: middle; }
 
-#event_espresso_checkout_form { margin: 5px 0; padding: 5px; }
+#event_espresso_checkout_form { margin: 0; padding: 0px; }
 
 .choose-diff-pay-option-pg { margin:0 0 6em; font-size:.8em; }
 
@@ -65,7 +65,7 @@ h2.ui-widget-header, h3.ui-widget-header{
 	font-size:1.2em;
 }
 h2.ui-widget-header a, h3.ui-widget-header a{
-	
+
 }
 div.event-data-display{
 	font-size:14px;
@@ -348,13 +348,13 @@ ul#espresso_payment_buttons li form {
 }
 .event_espresso_form_wrapper label,
 .event_espresso_form_wrapper span.label {
-	display: inline-block; 
-	width:150px; 
-	padding:0 10px 0 0; 
-	text-align: left; 
-	font-size:.9em; 
-	line-height:1em; 
-	vertical-align: top; 
+	display: inline-block;
+	width:150px;
+	padding:0 10px 0 0;
+	text-align: left;
+	font-size:.9em;
+	line-height:1em;
+	vertical-align: top;
 }
 
 /* FEM Styles*/
@@ -420,7 +420,7 @@ input.price-name-input{
 .span_event_date_label,
 .span_event_time_label,
 .event_price_label{
-	display: inline-block; width:150px; padding:0 10px 0 0; 
+	display: inline-block; width:150px; padding:0 10px 0 0;
 	text-align: left; font-size:.9em; line-height:1em; vertical-align: middle;
 }
 .span_event_date_value,
@@ -428,11 +428,11 @@ input.price-name-input{
 
 .event_espresso_form_wrapper label,
 .event_espresso_form_wrapper span.label {
-	display: inline-block; width:150px; padding:0 10px 0 0; 
-	text-align: left; font-size:.9em; line-height:1em; vertical-align: top; 
+	display: inline-block; width:150px; padding:0 10px 0 0;
+	text-align: left; font-size:.9em; line-height:1em; vertical-align: top;
 }
 .event_form_field .event-quest-group-textarea label.ee-reg-page-questions{
-	vertical-align: top; 
+	vertical-align: top;
 }
 
 .submit {
@@ -652,7 +652,7 @@ p.register-link-footer { clear: left; padding-top: 10px; }
 }
 
 .page_navigation a, .alt_page_navigation a{
-	
+
 	margin:0 2px 0 2px;
 	/*color:white;*/
 	text-decoration:none;
@@ -665,7 +665,7 @@ p.register-link-footer { clear: left; padding-top: 10px; }
 	/*background-color:white !important;*/
 	color:black !important;
  }
- 
+
  .ajx_loading {
 	width:400px;
 	height:400px;

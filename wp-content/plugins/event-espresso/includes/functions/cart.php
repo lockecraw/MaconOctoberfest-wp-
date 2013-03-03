@@ -902,7 +902,7 @@ if (!function_exists('event_espresso_confirm_and_pay')) {
 					}
 				}
 			}
-			echo "<hr />";
+			//echo "<hr />";
 		}
 		//echo "<pre>" , print_r($_POST) , "</pre>";
 

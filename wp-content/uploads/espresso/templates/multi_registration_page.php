@@ -192,7 +192,7 @@ if (!function_exists('multi_register_attendees')) {
 				} else {
 					 //If enough spaces exists then serve up the registration form
 					//As of version 3.0.17 the registration details have been moved to registration_form.php
-					echo "<hr />";
+					//echo "<hr />";
 					include('multi_registration_page_display.php');
 					$event_counter++;
 					echo '<input type="hidden" name="regevent_action" value="post_multi_attendee" />';

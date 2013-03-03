@@ -132,7 +132,7 @@ function events_payment_page( $attendee_id = FALSE, $notifications = array() ) {
 		$format = array('%f', '%s', '%s');
 		$update_id = array('id' => $attendee_id);
 		//echo "DEBUG: UPdating attendee table with data";
-		print_a($data);
+		//print_a($data);
 		$wpdb->update(EVENTS_ATTENDEE_TABLE, $data, $update_id, $format, array('%d'));
 		//If this is a group registration, we need to make sure all attendees have the same payment status
 		if (espresso_count_attendees_for_registration($attendee_id) > 1) {

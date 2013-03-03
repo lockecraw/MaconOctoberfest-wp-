@@ -20,19 +20,22 @@ if(in_array('donation',$categories)){
 $attendee_quantity = ' x '.sprintf(_n('%d attendee', '%d attendees', $meta['attendee_quantity'], 'event_espresso'), $meta['attendee_quantity']);
 $display_description_on_multi_reg_page = isset( $org_options['display_description_on_multi_reg_page'] ) ? $org_options['display_description_on_multi_reg_page'] : 'N';
 ?>
-<div id="event_espresso_registration_form" class="event-display-boxes multi-reg-page ui-widget">
+<div id="event_espresso_registration_form" class="event-listing-container">
 
-	<h3 class="event_title ui-widget-header ui-corner-top" id="event_title-<?php echo $event_id; ?>">
+	<h2 class="title" id="event_title-<?php echo $event_id; ?>">
 		<?php echo stripslashes_deep($event_name) ?> <?php echo $is_active['status'] == 'EXPIRED' ? ' - <span class="expired_event">Event Expired</span>' : ''; ?>
-	</h3>
-	<div class="multi_regis_form_fields event-data-display ui-widget-content ui-corner-bottom" id="multi_regis_form_fields-<?php echo $event_id . '-' . $meta['price_id']; ?>">
-
+	</h2>
+	<div class="multi_regis_form_fields" id="multi_regis_form_fields-<?php echo $event_id . '-' . $meta['price_id']; ?>">
+		<?php //Featured image
+		if(!empty($event_meta['event_thumbnail_url'])){
+			echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');
+		}
+		?>
 		<?php
 		//Show the description ?
 		if ( $display_desc == "Y" && $display_description_on_multi_reg_page != 'N' ) {
 			?>
-			<?php //Featured image
-			echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');?>
+
 			<div class="event_description">
 			<?php
 				//Code to show the actual description. The Wordpress function "wpautop" adds formatting to your description.

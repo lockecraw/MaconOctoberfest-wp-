@@ -2,7 +2,6 @@
 do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 //Confirmation Page Template
 
-?><h1>Debug: <?php echo __FILE__;?></h1><?php
 
 if(isset($_REQUEST['is_donation']) && $_REQUEST['is_donation'] == 'true'){
 	//if this is a confirmation page for a single donation...
@@ -11,7 +10,7 @@ if(isset($_REQUEST['is_donation']) && $_REQUEST['is_donation'] == 'true'){
 	//$donation_amount = do_shortcode('[EE_ANSWER q="11" a="'.$attendee_id.'"]');
 	$donation_amount = $_REQUEST['donation_amount'];
 
-	echo "DEBUG: updating price in attendee table for attendee_id $attendee_id to ".number_format($donation_amount,2)."<br />";
+	//echo "DEBUG: updating price in attendee table for attendee_id $attendee_id to ".number_format($donation_amount,2)."<br />";
 
 	//update the attendee record with the donation amount given...
 	$wpdb->update(
@@ -27,14 +26,14 @@ if(isset($_REQUEST['is_donation']) && $_REQUEST['is_donation'] == 'true'){
 
 ?>
 
-	<div class="espresso_payment_overview event-display-boxes ui-widget" >
-	  <h3 class="section-heading ui-widget-header ui-corner-top">
+	<div class="espresso_payment_overview" >
+	  <h2 class="title">
 			<?php _e('Donation Overview', 'event_espresso'); ?>
-	  </h3>
-		<div class="event-data-display ui-widget-content ui-corner-bottom" >
+	  </h2>
+		<div>
 
 
-		<h2><?php echo $fname ?> <?php echo $lname ?>,</h2>
+		<h3><?php echo $fname ?> <?php echo $lname ?>,</h3>
 
 		<div class="event-messages ui-state-highlight">
 			<span class="ui-icon ui-icon-alert"></span>
@@ -43,14 +42,15 @@ if(isset($_REQUEST['is_donation']) && $_REQUEST['is_donation'] == 'true'){
 			</p>
 		</div>
 
-		<p>
-			<span class="event_espresso_name section-title"><?php _e('Amount due: ', 'event_espresso'); ?></span>
-			<span class="event_espresso_value"><?php echo isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : ''; ?><?php echo number_format($donation_amount,2); ?></span>
-		</p>
+		<div class="event-detail">
+			<span class="event-detail-label"><?php _e('Amount due: ', 'event_espresso'); ?></span>
+			<span class="event-detail-value"><?php echo isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : ''; ?><?php echo number_format($donation_amount,2); ?></span>
+		</div>
 
-		<p>
-			<span class="section-title"><?php _e('Your Donation ID: ', 'event_espresso'); ?></span><?php echo $registration_id ?>
-		</p>
+		<div class="event-detail">
+			<span class="event-detail-label"><?php _e('Your Donation ID: ', 'event_espresso'); ?></span>
+			<span class="event-detail-value"><?php echo $registration_id ?></span>
+		</div>
 
 		<p>
 			<?php echo $org_options['email_before_payment'] == 'Y' ? __('A confirmation email has been sent with additional details of your registration.', 'event_espresso') : ''; ?>
@@ -83,11 +83,11 @@ if(isset($_REQUEST['is_donation']) && $_REQUEST['is_donation'] == 'true'){
 }
 else{
 ?>
-<div class="espresso_payment_overview event-display-boxes ui-widget" >
-  <h3 class="section-heading ui-widget-header ui-corner-top">
+<div class="espresso_payment_overview" >
+	<h2 class="title">
 		<?php _e('Payment Overview', 'event_espresso'); ?>
-  </h3>
-	<div class="event-data-display ui-widget-content ui-corner-bottom" >
+	</h2>
+	<div>
 <?php
 	if ( $total_cost == 0 ) {
 		unset($_SESSION['espresso_session']['id']);
@@ -120,12 +120,13 @@ else{
 		</div>
 
 	  	<p>
-			<span class="event_espresso_name section-title"><?php _e('Amount due: ', 'event_espresso'); ?></span>
-			<span class="event_espresso_value"><?php echo isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : ''; ?><?php echo number_format($total_cost,2); ?></span>
+			<span class="event-detail-label"><?php _e('Amount due: ', 'event_espresso'); ?></span>
+			<span class="event-detail-value"><?php echo isset($org_options['currency_symbol']) ? $org_options['currency_symbol'] : ''; ?><?php echo number_format($total_cost,2); ?></span>
 		</p>
 
 		<p>
-			<span class="section-title"><?php _e('Your Registration ID: ', 'event_espresso'); ?></span><?php echo $registration_id ?>
+			<span class="event-detail-label"><?php _e('Your Registration ID: ', 'event_espresso'); ?></span>
+			<span class="event-detail-value"><?php echo $registration_id ?></span>
 		</p>
 
 	  	<p>

@@ -285,7 +285,7 @@ function event_espresso_add_question_groups($question_groups, $answer = '', $eve
 					$disabled = '';
 				}
 
-				$html .= '<div class="event-question-field">';
+				$html .= '<div class="event-question-field event_form_field">';
 				$html .= '<input type="text" ' . $required_title . ' class="' . $required_class . $class . $text_input_class .'" id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $field_name . $multi_name_adjust . '" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" ' . $disabled . ' placeholder="' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . $required_label . '" />';
 				$html .= '</div>';
 
@@ -1016,7 +1016,99 @@ function event_espresso_group_price_dropdown($event_id, $label = 1, $multi_reg =
 
 
 
+function event_espresso_additional_attendees( $event_id = 0, $additional_limit = 2, $available_spaces = 999, $label = '', $show_label = true, $event_meta = '', $qstn_class = '' ) {
+	global $espresso_premium;
+	$event_id = $event_id == 0 ? $_REQUEST['event_id'] : $event_id;
 
+	if ($event_meta == 'admin') {
+		$admin = true;
+		$event_meta = '';
+	}
+	if ($event_meta == '' && ($event_id != '' || $event_id != 0)) {
+		$event_meta = event_espresso_get_event_meta($event_id);
+	}
+
+	//If the additional attednee questions are empty, then default to the first question group
+	if (empty($event_meta['add_attendee_question_groups']))
+		$event_meta['add_attendee_question_groups'] = array(1 => 1);
+
+
+	$i = 0;
+	if ( (isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1) || $espresso_premium == FALSE ) {
+
+		$label = $label == '' ? __('Number of Tickets', 'event_espresso') : $label;
+		$html = '<p class="espresso_additional_limit highlight-bg">';
+		$html .= $show_label == true ? '<label for="num_people">' . $label . '</label>' : '';
+		$html .= '<select name="num_people" id="num_people-' . $event_id . '" style="width:70px;">';
+		while (($i < $additional_limit) && ($i < $available_spaces)) {
+			$i++;
+			$html .= '<option value="' . $i . '">' . $i . '</option>';
+		}
+		$html .= '</select>';
+		//$html .= '<br />';
+		$html .= '<input type="hidden" name="espresso_addtl_limit_dd" value="true">';
+		$html .= '</p>';
+		$buffer = '';
+
+	} else {
+
+//			while (($i < $additional_limit) && ($i < $available_spaces)) {
+//				$i++;
+//			}
+		$i = min( $additional_limit, $available_spaces ) - 1;
+
+		$html = '';
+		// fixed for translation string, previous string untranslatable - http://events.codebasehq.com/projects/event-espresso/tickets/11
+		$html .= '<a id="add-additional-attendee-0" rel="0" class="event-button event-button-add-additional-attendees add-additional-attendee-lnk additional-attendee-lnk">' . __('Add More Attendees? (click to toggle, limit ', 'event_espresso');
+		$html .= $i . ')</a>';
+
+
+		//ob_start();
+		$attendee_form = '<div id="additional_attendee_XXXXXX" class="espresso_add_attendee">';
+		$attendee_form .= '<h3 class="section-heading">' . __('Additional Attendee #', 'event_espresso') . 'XXXXXX</h4>';
+
+		if ($event_meta['additional_attendee_reg_info'] == 2) {
+			$attendee_form .= '<div class="event-question-field">';
+			$attendee_form .= '<input type="text" name="x_attendee_fname[XXXXXX]" class="input" placeholder="'.__('First Name:', 'event_espresso').'" />';
+			$attendee_form .= '</div>';
+			$attendee_form .= '<div class="event-question-field">';
+			$attendee_form .= '<input type="text" name="x_attendee_lname[XXXXXX]" class="input" placeholder="'.__('Last Name:', 'event_espresso').'" />';
+			$attendee_form .= '</div>';
+			$attendee_form .= '<div class="event-question-field">';
+			$attendee_form .= '<input type="text" name="x_attendee_email[XXXXXX]" class="input" placeholder="'.__('Email:', 'event_espresso').'" />';
+			$attendee_form .= '</div>';
+		} else {
+			$meta = array("x_attendee" => true);
+			if(!empty($admin)) {
+				$meta['admin_only'] = true;
+			}
+			$attendee_form .= event_espresso_add_question_groups( $event_meta['add_attendee_question_groups'], '', null, 0, $meta, $qstn_class );
+		}
+		$attendee_form .= '<div class="espresso_add_subtract_attendees">';
+
+		$attendee_form .= '
+		<a href="#" id="remove-additional-attendee-XXXXXX" rel="XXXXXX" class="event-button event-button-remove-attendee ee_view_cart remove-additional-attendee-lnk additional-attendee-lnk" title="' . __('Remove the above Attendee', 'event_espresso') . '">
+			<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" alt="' . __('Remove Attendee', 'event_espresso') . '" />
+			' . __('Remove the above Attendee:', 'event_espresso') . '
+		</a>';
+
+		$attendee_form .= '
+		<a href="#"  id="add-additional-attendee-XXXXXX" rel="XXXXXX" class="event-button event-button-add-attendee add-additional-attendee-lnk additional-attendee-lnk" title="' . __('Add an Additonal Attendee', 'event_espresso') . '">
+			<img src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/add.png" alt="' . __('Add an Additonal Attendee', 'event_espresso') . '" />
+			' . __('Add an Additonal Attendee:', 'event_espresso') . '
+		</a>';
+
+
+		$attendee_form .= '</div></div>';
+
+		wp_register_script( 'espresso_add_reg_attendees', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_add_reg_attendees.js', array('jquery'), '0.1', TRUE );
+		wp_enqueue_script( 'espresso_add_reg_attendees' );
+
+		$espresso_add_reg_attendees = array( 'additional_limit' => $additional_limit, 'attendee_form' => stripslashes( $attendee_form ));
+		wp_localize_script( 'espresso_add_reg_attendees', 'espresso_add_reg_attendees', $espresso_add_reg_attendees );
+	}
+	return $html;
+}
 
 
 /*
@@ -1330,11 +1422,11 @@ function event_espresso_add_attendees_to_db_multi() {
 ?>
 
 
-<div class="espresso_payment_overview event-display-boxes ui-widget" >
-  <h3 class="section-heading ui-widget-header ui-corner-top">
+<div class="espresso_payment_overview" >
+  <h2 class="title">
 	<?php _e('Payment Overview', 'event_espresso'); ?>
   </h3>
-<div class="event-data-display ui-widget-content ui-corner-bottom" >
+<div class="event-details" >
 
 	<div class="event-messages ui-state-highlight"> <span class="ui-icon ui-icon-alert"></span>
 		<p class="instruct">
@@ -1423,7 +1515,212 @@ function event_espresso_add_attendees_to_db_multi() {
 
 }
 
+function event_espresso_load_checkout_page() {
 
+	global $wpdb, $org_options;
+	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+	$events_in_session = isset( $_SESSION['espresso_session']['events_in_session'] ) ? $_SESSION['espresso_session']['events_in_session'] : event_espresso_clear_session( TRUE );
+//		printr( $events_in_session, '$events_in_session  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+	$event_count = count( $events_in_session );
+
+	if (event_espresso_invoke_cart_error($events_in_session))
+		return false;
+
+	//echo "<pre>", print_r( $_SESSION ), "</pre>";
+	if (file_exists(EVENT_ESPRESSO_TEMPLATE_DIR . "multi_registration_page.php")) {
+		require_once(EVENT_ESPRESSO_TEMPLATE_DIR . "multi_registration_page.php"); //This is the path to the template file if available
+	} else {
+		require_once(EVENT_ESPRESSO_PLUGINFULLPATH . "templates/multi_registration_page.php");
+	}
+
+	$response['html'] = '';
+	//if the counte of event in the session >0, ok to process
+	if ( $event_count > 0 ) {
+		//for each one of the events in session, grab the event ids, drop into temp array, impode to construct SQL IN clasue (IN(1,5,7))
+		foreach ($events_in_session as $event) {
+			// echo $event['id'];
+			if (is_numeric($event['id']))
+				$events_IN[] = $event['id'];
+		}
+
+		$events_IN = implode(',', $events_IN);
+
+
+		$sql = "SELECT e.* FROM " . EVENTS_DETAIL_TABLE . " e ";
+		$sql .= " WHERE e.id in ($events_IN) ";
+		$sql .= " ORDER BY e.start_date ";
+
+		$result = $wpdb->get_results($sql);
+
+		//will hold data to pass to the form builder function
+		$meta = array();
+		//echo "<pre>", print_r($_POST), "</pre>";
+		?>
+
+<div class = "event_espresso_form_wrapper">
+<form id="event_espresso_checkout_form" method="post" action="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=post_multi_attendee">
+	<?php
+				$err = '';
+				$edit_cart_link = '<a href="?page_id='.$org_options['event_page_id'].'&regevent_action=show_shopping_cart" rel="nofollow" class="btn_event_form_submit inline-link">'.__('Edit Cart', 'event_espresso').'</a>';
+
+				ob_start();
+				//will be used if sj is off or they somehow select more than allotted attendees
+				$show_checkout_button = true;
+				$counter = 1;
+				foreach ($result as $r) {
+
+					$event_id = $r->id;
+					$event_meta = unserialize($r->event_meta);
+
+					$event_meta['is_active'] = $r->is_active;
+					$event_meta['event_status'] = $r->event_status;
+					$event_meta['start_time'] = empty($r->start_time) ? '' : $r->start_time;
+					$event_meta['start_date'] = $r->start_date;
+
+					$event_meta['registration_startT'] = $r->registration_startT;
+					$event_meta['registration_start'] = $r->registration_start;
+
+					$event_meta['registration_endT'] = $r->registration_endT;
+					$event_meta['registration_end'] = $r->registration_end;
+
+					$r->event_meta = serialize( $event_meta );
+
+					//If the event is still active, then show it.
+					if (event_espresso_get_status($event_id) == 'ACTIVE') {
+
+						//DEPRECATED
+						//Pull the detail from the event detail row, find out which route to take for additional attendees
+						//Can be 1) no questios asked, just record qty 2) ask for only personal info 3) ask all attendees the full reg questions
+						//#1 is not in use as of ..P35
+						$meta['additional_attendee_reg_info'] = (is_array($event_meta) && array_key_exists('additional_attendee_reg_info', $event_meta) && $event_meta['additional_attendee_reg_info'] > 1) ? $event_meta['additional_attendee_reg_info'] : 2;
+
+						//In case the js is off, the attendee qty dropdowns will not
+						//function properly, allowing for registering more than allowed limit.
+						//The info from the following 5 lines will determine
+						//if they have surpassed the limit.
+						$available_spaces = get_number_of_attendees_reg_limit($event_id, 'number_available_spaces');
+
+						$attendee_limit = $r->additional_limit + 1;
+
+						if ($available_spaces != 'Unlimited')
+							$attendee_limit = ($attendee_limit <= $available_spaces) ? $attendee_limit : $available_spaces;
+
+						$total_attendees_per_event = 0;
+
+						$attendee_overflow = false;
+
+						//assign variable
+						$meta['additional_attendee'] = 0;
+						$meta['attendee_number'] = 1;
+
+						//used for "Copy From" dropdown on the reg form
+						$meta['copy_link'] = $counter;
+
+						//Grab the event price ids from the session.  All event must have at least one price id
+						$price_ids = $events_in_session[$event_id]['price_id'];
+
+
+
+
+						//Just to make sure, check if is array
+						if (is_array($price_ids)) {
+							//for each one of the price ids, load an attendee question section
+							foreach ($price_ids as $_price_id => $val) {
+
+								if (isset($val['attendee_quantity']) && $val['attendee_quantity'] > 0) { //only show reg form if attendee qty is set
+									$meta['price_id'] = $_price_id; //will be used to keep track of the attendee in the group
+									$meta['price_type'] = $val['price_type']; //will be used to keep track of the attendee in the group
+									$meta['attendee_quantity'] = $val['attendee_quantity'];
+									$total_attendees_per_event += $val['attendee_quantity'];
+									multi_register_attendees( null, $event_id, $meta, $r );
+									$meta['attendee_number'] += $val['attendee_quantity'];
+								}
+							}
+
+							//If they have selected more than allowed max group registration
+							//Dispaly an error instead of the continue button
+							if ($total_attendees_per_event > $attendee_limit || $total_attendees_per_event == 0) {
+								$attendee_overflow = true;
+								$show_checkout_button = false;
+							}
+						}
+
+
+						if ($attendee_overflow) {
+
+							$err .= "<div class='event_espresso_error'><p><em>Attention</em>";
+							$err .= sprintf(__("For %s, please make sure to select between 1 and %d attendees or delete it from your cart.", 'event_espresso'), stripslashes($r->event_name), $attendee_limit);
+							$err .= '<span class="remove-cart-item"><img class="ee_delete_item_from_cart" id="cart_link_' . $event_id . '" alt="Remove this item from your cart" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" /></span> ';
+							$err .= "</p></div>";
+						}
+
+
+						$counter++;
+					}
+				}
+
+				$output = ob_get_contents();
+				ob_end_clean();
+
+				if ($err != '')
+					echo $err;
+
+				if ($show_checkout_button) {
+
+					echo $output;
+
+					//Recaptcha portion
+					if ( $org_options['use_captcha'] == 'Y'  && ! is_user_logged_in()  ) { // && isset( $_REQUEST['edit_details'] ) && $_REQUEST['edit_details'] != 'true'
+						// this is probably superfluous because it's already being loaded elsewhere...trying to cover all my bases ~c  ?>
+						<script type="text/javascript">
+							var RecaptchaOptions = {
+								theme : '<?php echo $org_options['recaptcha_theme'] == '' ? 'red' : $org_options['recaptcha_theme']; ?>',
+								lang : '<?php echo $org_options['recaptcha_language'] == '' ? 'en' : $org_options['recaptcha_language']; ?>'
+							};
+						</script>
+					<?php
+						if ( ! function_exists( 'recaptcha_get_html' )) {
+							require_once( EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/recaptchalib.php' );
+						}//End require captcha library
+						# the response from reCAPTCHA
+						$resp = true;
+						# the error code from reCAPTCHA, if any
+						$error = null;
+						?>
+						<p class="event_form_field" id="captcha-<?php echo $event_id; ?>">
+							<?php _e('Anti-Spam Measure: Please enter the following phrase', 'event_espresso'); ?>
+							<?php echo recaptcha_get_html($org_options['recaptcha_publickey'], $error, is_ssl() ? true : false); ?>
+						</p>
+		<?php } //End use captcha	?>
+
+
+
+			<input type="submit" class="event-button" name="payment_page" value="<?php _e('Confirm and go to payment page', 'event_espresso'); ?>&nbsp;&raquo;" />
+			<span style="padding-left:20px"> - <?php _e('or', 'event_espresso'); ?> - </span>
+
+	<?php } ?>
+			<!--<p id="event_espresso_edit_cart">-->
+				<a href="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=show_shopping_cart" class="btn_event_form_submit inline-link">
+					<?php _e('Edit Cart', 'event_espresso'); ?>
+				</a>
+			<!--</p>-->
+
+</form>
+</div>
+
+<script>
+jQuery(function(){
+	//Registration form validation
+	jQuery('#event_espresso_checkout_form').validate();
+});
+</script>
+<?php
+		}
+
+
+		//echo json_encode( $response );
+	//die();
+}
 
 function event_espresso_add_attendees_to_db( $event_id = NULL, $session_vars = NULL, $skip_check = FALSE ) {
 	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');

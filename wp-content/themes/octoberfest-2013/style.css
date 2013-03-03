@@ -626,7 +626,12 @@ a:hover#register {
 }
 
 a.event-button:link,
-a.event-button:visited{
+a.event-button:visited,
+a.event-button-add-additional-attendees,
+input.event-button{
+	border: none;
+	background-repeat: no-repeat;
+	cursor: pointer;
 	font-family: "museo",serif;
 	display: inline-block;
 	background-color: #547a57;
@@ -635,6 +640,8 @@ a.event-button:visited{
 	font-size: 12px;
 	color: #fff;
 	text-transform: uppercase;
+	background-position: right 5px top 5px;
+	background-repeat: no-repeat;
 
   -webkit-transition: all 0.2s ease-out;  /* Chrome 1-25, Safari 3.2+ */
      -moz-transition: all 0.2s ease-out;  /* Firefox 4-15 */
@@ -642,8 +649,8 @@ a.event-button:visited{
           transition: all 0.2s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.50+ */
 }
 
-a.event-button:hover{
-	background-color: #ed7d45 !important;
+input.event-button{
+	height: 28px;
 }
 
 a.event-button.event-button-competition{
@@ -662,6 +669,37 @@ a.event-button.ee_view_cart.event-button-add-to-cart{
 	background-color: #f6b015;
 }
 
+a.event-button.event-button-add-additional-attendees{
+	background-color: #d17329;
+	text-decoration: none;
+	border: 1px solid #a66c3e;
+	background-image: url('images/single-yellow-arrow.png');
+	padding-right: 20px;
+}
+
+a.event-button.event-button-add-attendee img,
+a.event-button.event-button-remove-attendee img{
+	vertical-align: middle;
+	margin-top: -4px;
+}
+
+a.event-button:hover,
+input.event-button:hover{
+	background-color: #f6b015 !important;
+}
+
+input.event-button:hover,
+a.event-button-add-additional-attendees:hover{
+	background-color: #f6b015 !important;
+	padding-right: 40px;
+	background-image: url('images/arrow.png');
+}
+
+#event_espresso_total_wrapper{
+	border-top: 4px double #f6b015;
+	border-bottom: 4px double #f6b015;
+	padding-top: 4px;
+}
 
 /* links */
 a:link, a:visited {
