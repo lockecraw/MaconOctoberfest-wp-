@@ -247,9 +247,11 @@
 					}
 					//End use captcha
 					?>
-					<p class="event_form_submit" id="event_form_submit-<?php echo $event_id; ?>">
+					<div class="event_form_submit" id="event_form_submit-<?php echo $event_id; ?>">
+					<br />
+					<br />
 						<input class="event-button" id="event_form_field-<?php echo $event_id; ?>" type="submit" name="Submit" value="<?php _e('Continue', 'event_espresso'); ?>">
-					</p>
+					</div>
 
 				<?php } ?>
 

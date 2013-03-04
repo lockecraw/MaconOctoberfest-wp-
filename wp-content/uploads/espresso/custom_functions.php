@@ -1515,6 +1515,38 @@ function event_espresso_add_attendees_to_db_multi() {
 
 }
 
+function event_espresso_send_payment_notification($atts) {
+
+	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+
+	global $wpdb, $org_options;
+	//Extract the attendee_id and registration_id
+	extract($atts);
+
+	$registration_id = is_array( $registration_id ) ? $registration_id[0] : $registration_id;
+
+	if ( empty( $registration_id ) && isset( $attendee_id )) {
+		$registration_id = espresso_registration_id($attendee_id);
+	}
+
+	if ( empty( $registration_id )) {
+		return __('No Registration ID was supplied', 'event_espresso');
+	}
+
+	//Get the attendee  id or registration_id and create the sql statement
+	$SQL = "SELECT a.* FROM " . EVENTS_ATTENDEE_TABLE . " a ";
+	$SQL .= " WHERE a.registration_id = %s ";
+	$attendees = $wpdb->get_results( $wpdb->prepare( $SQL, $registration_id ));
+
+	if ($org_options['default_mail'] == 'Y') {
+		foreach ($attendees as $attendee) {
+			event_espresso_email_confirmations(array('attendee_id' => $attendee->id, 'send_admin_email' => 'false', 'send_attendee_email' => 'true', 'custom_data' => array('email_type' => 'payment', 'payment_subject' => $org_options['payment_subject'], 'payment_message' => $org_options['payment_message'])));
+		}
+	}
+
+	return;
+}
+
 function event_espresso_load_checkout_page() {
 
 	global $wpdb, $org_options;
