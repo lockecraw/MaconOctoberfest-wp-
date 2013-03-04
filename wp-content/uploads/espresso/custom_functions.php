@@ -2438,3 +2438,34 @@ function event_espresso_update_item_in_session( $update_section = FALSE ) {
 	die();
 
 }
+
+
+function event_espresso_email_confirmations($atts) {
+
+	extract($atts);
+	//print_r($atts);
+
+	$multi_reg = empty( $multi_reg ) ? FALSE :  $multi_reg;
+	$send_admin_email = empty( $send_admin_email ) ? FALSE :  $send_admin_email;
+	$send_attendee_email = empty( $send_attendee_email ) ? FALSE :  $send_attendee_email;
+	$custom_data = empty( $custom_data ) ? '' :  $custom_data;
+
+	if ( ! empty( $attendee_id ) && ! $multi_reg ) {
+
+		email_by_attendee_id($attendee_id, $send_attendee_email, $send_admin_email, $multi_reg, $custom_data);
+
+	} elseif ( ! empty( $registration_id ) && ! $multi_reg ) {
+
+		global $wpdb;
+        $sql = "SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE registration_id = %s";
+		$attendees = $wpdb->get_col( $wpdb->prepare( $sql, $registration_id ));
+		foreach ($attendees as $attendee_id) {
+			email_by_attendee_id($attendee_id, $send_attendee_email, $send_admin_email, $multi_reg, $custom_data);
+		}
+
+	} elseif ( ! empty( $session_id )) {
+
+		email_by_session_id($session_id, $send_attendee_email, $send_admin_email, $multi_reg);
+
+	}
+}
