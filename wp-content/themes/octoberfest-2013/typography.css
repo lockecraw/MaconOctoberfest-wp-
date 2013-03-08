@@ -294,7 +294,7 @@ h3.section-heading{
 
 .event-description{
 	padding: 12px 0px;
-	max-width: 325px;
+	/*max-width: 325px;*/
 }
 
 .single-event-registration-container .event-description p:first-child{

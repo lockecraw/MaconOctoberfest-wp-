@@ -7,26 +7,28 @@
 
 <!-- Template: <?php echo __FILE__; ?> -->
 <div class="event-registration-container single-event-registration-container single-<?php echo $event_category; ?>">
-	<?php if ($reg_form_only == false) { ?>
-		<h2 class="title" id="event_title-<?php echo $event_id; ?>">
-			<?php echo $event_name ?> <?php echo $is_active['status'] == 'EXPIRED' ? ' - <span class="expired_event">Event Expired</span>' : ''; ?> <?php echo $is_active['status'] == 'PENDING' ? ' - <span class="expired_event">Event is Pending</span>' : ''; ?> <?php echo $is_active['status'] == 'DRAFT' ? ' - <span class="expired_event">Event is a Draft</span>' : ''; ?>
-		</h2>
-	<?php } ?>
+
 	<div class="event-content">
 
-		<?php
-		if(!empty($event_meta['event_thumbnail_url'])){
-			echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ?
-			$event_meta['event_thumbnail_url'] : '');
-		}
-		?>
 
-		<?php if ($display_desc == "Y") { //Show the description or not ?>
-			<div class="event-description">
-				<?php echo espresso_format_content($event_desc);?>
-			</div>
+		<div class="event-description">
 			<?php
-		}//End display description
+			if(!empty($event_meta['event_thumbnail_url'])){
+				echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ?
+				$event_meta['event_thumbnail_url'] : '');
+			}
+			?>
+			<?php if ($reg_form_only == false) { ?>
+				<h2 class="title" id="event_title-<?php echo $event_id; ?>">
+					<?php echo $event_name ?> <?php echo $is_active['status'] == 'EXPIRED' ? ' - <span class="expired_event">Event Expired</span>' : ''; ?> <?php echo $is_active['status'] == 'PENDING' ? ' - <span class="expired_event">Event is Pending</span>' : ''; ?> <?php echo $is_active['status'] == 'DRAFT' ? ' - <span class="expired_event">Event is a Draft</span>' : ''; ?>
+				</h2>
+			<?php } ?>
+			<?php if ($display_desc == "Y") { //Show the description or not ?>
+			<?php echo espresso_format_content($event_desc);?>
+			<?php }//End display description ?>
+		</div>
+		<?php
+
 
 		switch ($is_active['status']) {
 

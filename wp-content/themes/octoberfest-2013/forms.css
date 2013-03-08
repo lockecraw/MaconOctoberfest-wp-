@@ -71,11 +71,12 @@ form.inline p {
 -------------------------------------------------------------- */
 
 .error, .notice, .success {
-	padding: .8em;
+	padding: .5em;
 	margin-bottom: 1em;
 	border: 2px solid #ddd;
 }
 .error {
+	display: block;
 	background: #FBE3E4;
 	color: #8a1f11;
 	border-color: #FBC2C4;
