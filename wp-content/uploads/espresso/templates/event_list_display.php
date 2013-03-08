@@ -82,19 +82,28 @@ $this_event_id = $event_id;
 
 
 			<?php if($category != 'donation' && $category != 'merchandise'){ ?>
-			<div class="event-detail event-detail-price" id="event_date-<?php echo $event_id ?>">
-				<span class="event-detail-label">
-					<?php _e('Date:', 'event_espresso'); ?>
-				</span>
-				<span class="event-detail-value">
-					<?php
-						echo event_date_display($start_date, get_option('date_format'));
-						//Add to calendar button
-						echo apply_filters('filter_hook_espresso_display_ical', $all_meta);
-					?>
-				</span>
-			</div>
+				<div class="event-detail event-detail-price" id="event_date-<?php echo $event_id ?>">
+					<span class="event-detail-label">
+						<?php _e('Date:', 'event_espresso'); ?>
+					</span>
+					<span class="event-detail-value">
+						<?php
+							echo event_date_display($start_date, get_option('date_format'));
+							//Add to calendar button
+							//echo " ".apply_filters('filter_hook_espresso_display_ical', $all_meta);
+						?>
+					</span>
+				</div>
+				<?php
+					//This block of code is used to display the times of an event in either a dropdown or text format.
+					if (isset($time_selected) && $time_selected == true) {//If the customer is coming from a page where the time was preselected.
+						echo event_espresso_display_selected_time($time_id); //Optional parameters start, end, default
+					} else {
+						echo event_espresso_time_dropdown($event_id);
+					}//End time selected
+				?>
 			<?php } ?>
+
 		</div>
 
 
@@ -116,7 +125,7 @@ $this_event_id = $event_id;
 		//Social media buttons
 		do_action('espresso_social_display_buttons', $event_id);
 
-
+		/* Don't show available spaces
 		if($category != 'donation' && $category != 'merchandise'){
 			$num_attendees = get_number_of_attendees_reg_limit($event_id, 'num_attendees'); //Get the number of attendees. Please visit http://eventespresso.com/forums/?p=247 for available parameters for the get_number_of_attendees_reg_limit() function.
 			if ($num_attendees >= $reg_limit) {
@@ -147,12 +156,13 @@ $this_event_id = $event_id;
 
 			}
 		}
+		*/
 
 		//Show short descriptions
 		if (!empty($event_desc) && isset($org_options['display_short_description_in_event_list']) && $org_options['display_short_description_in_event_list'] == 'Y') {
 			?>
 			<div class="event-description">
-				<?php echo espresso_format_content($event_desc); ?>
+				<?php echo myTruncate(strip_tags(espresso_format_content($event_desc)),200,' ','<a title="'.stripslashes_deep($event_name).'" class="read-more-link" href="'.$registration_url.'">... read more</a>'); ?>
 			</div>
 			<?php
 		}

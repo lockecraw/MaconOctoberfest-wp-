@@ -181,7 +181,7 @@ if (!function_exists('event_espresso_get_event_details')) {
 		}
 
 		$sql .= " GROUP BY e.id ";
-		$sql .= $order_by != 'NULL' ? " ORDER BY " . $order_by . " ".$sort." " : " ORDER BY date(start_date), id ASC ";
+		$sql .= $order_by != 'NULL' ? " ORDER BY " . $order_by . " ".$sort." " : " ORDER BY date(start_date), ese.start_time,  id ASC ";
 		$sql .= $limit > 0 ? ' LIMIT 0, '.$limit : '';
 
 		//echo $sql;

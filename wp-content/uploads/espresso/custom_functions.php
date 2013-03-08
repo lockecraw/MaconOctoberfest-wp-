@@ -533,7 +533,7 @@ function event_espresso_time_dropdown( $event_id = 'NULL', $label = 1, $multi_re
         $html .= $label == 1 ? '<span class="event-detail-label">' . __('Start Time:', 'event_espresso') . '</span>' : '';
         foreach ($event_times as $time) {
             $html .= '<span class="event-detail-value">' . event_date_display($time->start_time, get_option('time_format')) . '</span>';
-            $html .= $label == 1 ? '</div><div class="event-detail event-detail-date"><span class="event-detail-label">' . __('End Time: ', 'event_espresso') . '</span>' : __(' to ', 'event_espresso');
+            $html .= $label == 1 ? '&nbsp;&nbsp;&nbsp;<span class="event-detail-label">' . __('End Time: ', 'event_espresso') . '</span>' : __(' to ', 'event_espresso');
             $html .= '<span class="event-detail-value">' . event_date_display($time->end_time, get_option('time_format')) . '</span>';
             $html .= '<input type="hidden" name="start_time_id' . $multi_name_adjust . '" id="start_time_id_' . $time->id . '" value="' . $time->id . '" />';
         }
@@ -2500,4 +2500,19 @@ function event_espresso_email_confirmations($atts) {
 		email_by_session_id($session_id, $send_attendee_email, $send_admin_email, $multi_reg);
 
 	}
+}
+
+function myTruncate($string, $limit, $break=" ", $pad="...")
+{
+  // return with no change if string is shorter than $limit
+  if(strlen($string) <= $limit) return $string;
+
+  // is $break present between $limit and the end of the string?
+  if(false !== ($breakpoint = strpos($string, $break, $limit))) {
+    if($breakpoint < strlen($string) - 1) {
+      $string = substr($string, 0, $breakpoint) . $pad;
+    }
+  }
+
+  return $string;
 }
