@@ -152,6 +152,7 @@ $this_event_id = $event_id;
 		if (!empty($event_desc) && isset($org_options['display_short_description_in_event_list']) && $org_options['display_short_description_in_event_list'] == 'Y') {
 			?>
 			<div class="event-description">
+			<?php the_excerpt(); ?> 
 				<?php echo espresso_format_content($event_desc); ?>
 			</div>
 			<?php

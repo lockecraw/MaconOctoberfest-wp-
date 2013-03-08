@@ -41,3 +41,8 @@ wp-content/themes/*
 
 
 !wp-content/uploads/espresso/
+!wp-content/uploads/2013/
+!wp-content/uploads/2014/
+!wp-content/uploads/2015/
+!wp-content/uploads/2016/
+

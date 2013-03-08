@@ -718,3 +718,323 @@ mc_gross=150.00, protection_eligibility=Ineligible, item_number1=, payer_id=Q3QD
 IPN Response from gateway Server:
  VERIFIED
 
+[03/03/2013 1:29 PM] - Errors from IPN Validation:
+
+Using BUILT-IN PHP curl methods
+key = mc_gross
+value = 20.00
+key = protection_eligibility
+value = Ineligible
+key = item_number1
+value = 
+key = payer_id
+value = Q3QDE94Q37NSU
+key = tax
+value = 0.00
+key = payment_date
+value = 10:29:47 Mar 03, 2013 PST
+key = payment_status
+value = Completed
+key = charset
+value = windows-1252
+key = mc_shipping
+value = 0.00
+key = mc_handling
+value = 0.00
+key = first_name
+value = Attendee
+key = mc_fee
+value = 0.88
+key = notify_version
+value = 3.7
+key = custom
+value = 
+key = payer_status
+value = verified
+key = business
+value = macons_1361037758_biz@gmail.com
+key = num_cart_items
+value = 1
+key = mc_handling1
+value = 0.00
+key = verify_sign
+value = ATcVwB4wbUbds0xZDeDpM3O5cN3aAndr1lhGaG9VIEC2W9dRjO7UnZDC
+key = payer_email
+value = maconb_1361037915_per@gmail.com
+key = mc_shipping1
+value = 0.00
+key = tax1
+value = 0.00
+key = memo
+value = Where does this note end up, Gary?
+key = txn_id
+value = 1WC638822U4555444
+key = payment_type
+value = instant
+key = last_name
+value = Tester
+key = item_name1
+value = Breast Awareness for Specific Donation. Attendee: Gary Reckard
+key = receiver_email
+value = macons_1361037758_biz@gmail.com
+key = payment_fee
+value = 0.88
+key = quantity1
+value = 1
+key = receiver_id
+value = F8YBLS4MJL6XW
+key = txn_type
+value = cart
+key = mc_gross_1
+value = 20.00
+key = mc_currency
+value = USD
+key = residence_country
+value = US
+key = test_ipn
+value = 1
+key = transaction_subject
+value = Shopping CartBreast Awareness for Specific Donation. Attendee: Gary Reckard
+key = payment_gross
+value = 20.00
+key = ipn_track_id
+value = 5bde38a5c20da
+Success Setting host: https://www.sandbox.paypal.com/cgi-bin/webscr
+Success Setting request type to post
+Success Setting post fields: mc_gross=20.00&amp;protection_eligibility=Ineligible&amp;item_number1=&amp;payer_id=Q3QDE94Q37NSU&amp;tax=0.00&amp;payment_date=10%3A29%3A47+Mar+03%2C+2013+PST&amp;payment_status=Completed&amp;charset=windows-1252&amp;mc_shipping=0.00&amp;mc_handling=0.00&amp;first_name=Attendee&amp;mc_fee=0.88&amp;notify_version=3.7&amp;custom=&amp;payer_status=verified&amp;business=macons_1361037758_biz%40gmail.com&amp;num_cart_items=1&amp;mc_handling1=0.00&amp;verify_sign=ATcVwB4wbUbds0xZDeDpM3O5cN3aAndr1lhGaG9VIEC2W9dRjO7UnZDC&amp;payer_email=maconb_1361037915_per%40gmail.com&amp;mc_shipping1=0.00&amp;tax1=0.00&amp;memo=Where+does+this+note+end+up%2C+Gary%3F&amp;txn_id=1WC638822U4555444&amp;payment_type=instant&amp;last_name=Tester&amp;item_name1=Breast+Awareness+for+Specific+Donation.+Attendee%3A+Gary+Reckard&amp;receiver_email=macons_1361037758_biz%40gmail.com&amp;payment_fee=0.88&amp;quantity1=1&amp;receiver_id=F8YBLS4MJL6XW&amp;txn_type=cart&amp;mc_gross_1=20.00&amp;mc_currency=USD&amp;residence_country=US&amp;test_ipn=1&amp;transaction_subject=Shopping+CartBreast+Awareness+for+Specific+Donation.+Attendee%3A+Gary+Reckard&amp;payment_gross=20.00&amp;ipn_track_id=5bde38a5c20da&amp;cmd=_notify-validate
+Success Setting Fain On Error
+Success Setting return transfer
+Success Setting Timeout
+Success Setting verbose mode
+Errors resulting from the execution of curl transfer: [03/03/2013 1:29 PM] - SUCCESS!
+IPN POST Vars from gateway:
+mc_gross=20.00, protection_eligibility=Ineligible, item_number1=, payer_id=Q3QDE94Q37NSU, tax=0.00, payment_date=10:29:47 Mar 03, 2013 PST, payment_status=Completed, charset=windows-1252, mc_shipping=0.00, mc_handling=0.00, first_name=Attendee, mc_fee=0.88, notify_version=3.7, custom=, payer_status=verified, business=macons_1361037758_biz@gmail.com, num_cart_items=1, mc_handling1=0.00, verify_sign=ATcVwB4wbUbds0xZDeDpM3O5cN3aAndr1lhGaG9VIEC2W9dRjO7UnZDC, payer_email=maconb_1361037915_per@gmail.com, mc_shipping1=0.00, tax1=0.00, memo=Where does this note end up, Gary?, txn_id=1WC638822U4555444, payment_type=instant, last_name=Tester, item_name1=Breast Awareness for Specific Donation. Attendee: Gary Reckard, receiver_email=macons_1361037758_biz@gmail.com, payment_fee=0.88, quantity1=1, receiver_id=F8YBLS4MJL6XW, txn_type=cart, mc_gross_1=20.00, mc_currency=USD, residence_country=US, test_ipn=1, transaction_subject=Shopping CartBreast Awareness for Specific Donation. Attendee: Gary Reckard, payment_gross=20.00, ipn_track_id=5bde38a5c20da, 
+IPN Response from gateway Server:
+ VERIFIED
+
+[03/03/2013 1:42 PM] - Errors from IPN Validation:
+
+Using BUILT-IN PHP curl methods
+key = mc_gross
+value = 12.00
+key = protection_eligibility
+value = Ineligible
+key = item_number1
+value = 
+key = payer_id
+value = Q3QDE94Q37NSU
+key = tax
+value = 0.00
+key = payment_date
+value = 10:42:07 Mar 03, 2013 PST
+key = payment_status
+value = Completed
+key = charset
+value = windows-1252
+key = mc_shipping
+value = 0.00
+key = mc_handling
+value = 0.00
+key = first_name
+value = Attendee
+key = mc_fee
+value = 0.65
+key = notify_version
+value = 3.7
+key = custom
+value = 
+key = payer_status
+value = verified
+key = business
+value = macons_1361037758_biz@gmail.com
+key = num_cart_items
+value = 1
+key = mc_handling1
+value = 0.00
+key = verify_sign
+value = AQqAB06cOSa.XcZrAcUUpbj-0-TJAEd3ClO19Rnm.VioRnFzQwyhQII8
+key = payer_email
+value = maconb_1361037915_per@gmail.com
+key = mc_shipping1
+value = 0.00
+key = tax1
+value = 0.00
+key = txn_id
+value = 3X366477P9111522B
+key = payment_type
+value = instant
+key = last_name
+value = Tester
+key = item_name1
+value = General Admission for T-Shirt. Attendee: Gary Reckard
+key = receiver_email
+value = macons_1361037758_biz@gmail.com
+key = payment_fee
+value = 0.65
+key = quantity1
+value = 1
+key = receiver_id
+value = F8YBLS4MJL6XW
+key = txn_type
+value = cart
+key = mc_gross_1
+value = 12.00
+key = mc_currency
+value = USD
+key = residence_country
+value = US
+key = test_ipn
+value = 1
+key = transaction_subject
+value = Shopping CartGeneral Admission for T-Shirt. Attendee: Gary Reckard
+key = payment_gross
+value = 12.00
+key = ipn_track_id
+value = af2cf1cdac0be
+Success Setting host: https://www.sandbox.paypal.com/cgi-bin/webscr
+Success Setting request type to post
+Success Setting post fields: mc_gross=12.00&amp;protection_eligibility=Ineligible&amp;item_number1=&amp;payer_id=Q3QDE94Q37NSU&amp;tax=0.00&amp;payment_date=10%3A42%3A07+Mar+03%2C+2013+PST&amp;payment_status=Completed&amp;charset=windows-1252&amp;mc_shipping=0.00&amp;mc_handling=0.00&amp;first_name=Attendee&amp;mc_fee=0.65&amp;notify_version=3.7&amp;custom=&amp;payer_status=verified&amp;business=macons_1361037758_biz%40gmail.com&amp;num_cart_items=1&amp;mc_handling1=0.00&amp;verify_sign=AQqAB06cOSa.XcZrAcUUpbj-0-TJAEd3ClO19Rnm.VioRnFzQwyhQII8&amp;payer_email=maconb_1361037915_per%40gmail.com&amp;mc_shipping1=0.00&amp;tax1=0.00&amp;txn_id=3X366477P9111522B&amp;payment_type=instant&amp;last_name=Tester&amp;item_name1=General+Admission+for+T-Shirt.+Attendee%3A+Gary+Reckard&amp;receiver_email=macons_1361037758_biz%40gmail.com&amp;payment_fee=0.65&amp;quantity1=1&amp;receiver_id=F8YBLS4MJL6XW&amp;txn_type=cart&amp;mc_gross_1=12.00&amp;mc_currency=USD&amp;residence_country=US&amp;test_ipn=1&amp;transaction_subject=Shopping+CartGeneral+Admission+for+T-Shirt.+Attendee%3A+Gary+Reckard&amp;payment_gross=12.00&amp;ipn_track_id=af2cf1cdac0be&amp;cmd=_notify-validate
+Success Setting Fain On Error
+Success Setting return transfer
+Success Setting Timeout
+Success Setting verbose mode
+Errors resulting from the execution of curl transfer: [03/03/2013 1:42 PM] - SUCCESS!
+IPN POST Vars from gateway:
+mc_gross=12.00, protection_eligibility=Ineligible, item_number1=, payer_id=Q3QDE94Q37NSU, tax=0.00, payment_date=10:42:07 Mar 03, 2013 PST, payment_status=Completed, charset=windows-1252, mc_shipping=0.00, mc_handling=0.00, first_name=Attendee, mc_fee=0.65, notify_version=3.7, custom=, payer_status=verified, business=macons_1361037758_biz@gmail.com, num_cart_items=1, mc_handling1=0.00, verify_sign=AQqAB06cOSa.XcZrAcUUpbj-0-TJAEd3ClO19Rnm.VioRnFzQwyhQII8, payer_email=maconb_1361037915_per@gmail.com, mc_shipping1=0.00, tax1=0.00, txn_id=3X366477P9111522B, payment_type=instant, last_name=Tester, item_name1=General Admission for T-Shirt. Attendee: Gary Reckard, receiver_email=macons_1361037758_biz@gmail.com, payment_fee=0.65, quantity1=1, receiver_id=F8YBLS4MJL6XW, txn_type=cart, mc_gross_1=12.00, mc_currency=USD, residence_country=US, test_ipn=1, transaction_subject=Shopping CartGeneral Admission for T-Shirt. Attendee: Gary Reckard, payment_gross=12.00, ipn_track_id=af2cf1cdac0be, 
+IPN Response from gateway Server:
+ VERIFIED
+
+[03/03/2013 6:33 PM] - Errors from IPN Validation:
+
+Using BUILT-IN PHP curl methods
+key = mc_gross
+value = 96.00
+key = protection_eligibility
+value = Ineligible
+key = item_number1
+value = 
+key = tax
+value = 0.00
+key = item_number2
+value = 
+key = payer_id
+value = Q3QDE94Q37NSU
+key = item_number3
+value = 
+key = item_number4
+value = 
+key = payment_date
+value = 15:33:15 Mar 03, 2013 PST
+key = payment_status
+value = Completed
+key = charset
+value = windows-1252
+key = mc_shipping
+value = 0.00
+key = mc_handling
+value = 0.00
+key = first_name
+value = Attendee
+key = mc_fee
+value = 3.08
+key = notify_version
+value = 3.7
+key = custom
+value = 
+key = payer_status
+value = verified
+key = business
+value = macons_1361037758_biz@gmail.com
+key = num_cart_items
+value = 4
+key = mc_handling1
+value = 0.00
+key = mc_handling2
+value = 0.00
+key = mc_handling3
+value = 0.00
+key = mc_handling4
+value = 0.00
+key = verify_sign
+value = AGDQPdCyxOmK6RqOI4IN.8gZy7ffAgwgkBjFx4H2FaHyd.66MuxfQMYj
+key = payer_email
+value = maconb_1361037915_per@gmail.com
+key = mc_shipping1
+value = 0.00
+key = mc_shipping2
+value = 0.00
+key = mc_shipping3
+value = 0.00
+key = tax1
+value = 0.00
+key = mc_shipping4
+value = 0.00
+key = tax2
+value = 0.00
+key = tax3
+value = 0.00
+key = tax4
+value = 0.00
+key = txn_id
+value = 79L73846T8908374L
+key = payment_type
+value = instant
+key = last_name
+value = Tester
+key = item_name1
+value = Breast Awareness for Specific Donation. Attendee: Gary Reckard
+key = receiver_email
+value = macons_1361037758_biz@gmail.com
+key = item_name2
+value = General Admission for Founders Feast. Attendee: Gary Reckard
+key = payment_fee
+value = 3.08
+key = item_name3
+value = General Admission for VIP Octoberfest. Attendee: Gary Reckard
+key = item_name4
+value = 2 Day Pass for Octoberfest. Attendee: Gary Reckard
+key = quantity1
+value = 1
+key = quantity2
+value = 1
+key = receiver_id
+value = F8YBLS4MJL6XW
+key = quantity3
+value = 1
+key = txn_type
+value = cart
+key = quantity4
+value = 1
+key = mc_gross_1
+value = 20.00
+key = mc_currency
+value = USD
+key = mc_gross_2
+value = 75.00
+key = mc_gross_3
+value = 0.00
+key = residence_country
+value = US
+key = test_ipn
+value = 1
+key = mc_gross_4
+value = 1.00
+key = transaction_subject
+value = Shopping CartBreast Awareness for Specific Donation. Attendee: Gary ReckardGeneral Admission for Founders Feast. Attendee: Gary ReckardGeneral Admission for VIP Octoberfest. Attendee: Gary Reckard2 Day Pass for Octoberfest. Attendee: Gary Reckard
+key = payment_gross
+value = 96.00
+key = ipn_track_id
+value = f2f568cc6d8a2
+Success Setting host: https://www.sandbox.paypal.com/cgi-bin/webscr
+Success Setting request type to post
+Success Setting post fields: mc_gross=96.00&amp;protection_eligibility=Ineligible&amp;item_number1=&amp;tax=0.00&amp;item_number2=&amp;payer_id=Q3QDE94Q37NSU&amp;item_number3=&amp;item_number4=&amp;payment_date=15%3A33%3A15+Mar+03%2C+2013+PST&amp;payment_status=Completed&amp;charset=windows-1252&amp;mc_shipping=0.00&amp;mc_handling=0.00&amp;first_name=Attendee&amp;mc_fee=3.08&amp;notify_version=3.7&amp;custom=&amp;payer_status=verified&amp;business=macons_1361037758_biz%40gmail.com&amp;num_cart_items=4&amp;mc_handling1=0.00&amp;mc_handling2=0.00&amp;mc_handling3=0.00&amp;mc_handling4=0.00&amp;verify_sign=AGDQPdCyxOmK6RqOI4IN.8gZy7ffAgwgkBjFx4H2FaHyd.66MuxfQMYj&amp;payer_email=maconb_1361037915_per%40gmail.com&amp;mc_shipping1=0.00&amp;mc_shipping2=0.00&amp;mc_shipping3=0.00&amp;tax1=0.00&amp;mc_shipping4=0.00&amp;tax2=0.00&amp;tax3=0.00&amp;tax4=0.00&amp;txn_id=79L73846T8908374L&amp;payment_type=instant&amp;last_name=Tester&amp;item_name1=Breast+Awareness+for+Specific+Donation.+Attendee%3A+Gary+Reckard&amp;receiver_email=macons_1361037758_biz%40gmail.com&amp;item_name2=General+Admission+for+Founders+Feast.+Attendee%3A+Gary+Reckard&amp;payment_fee=3.08&amp;item_name3=General+Admission+for+VIP+Octoberfest.+Attendee%3A+Gary+Reckard&amp;item_name4=2+Day+Pass+for+Octoberfest.+Attendee%3A+Gary+Reckard&amp;quantity1=1&amp;quantity2=1&amp;receiver_id=F8YBLS4MJL6XW&amp;quantity3=1&amp;txn_type=cart&amp;quantity4=1&amp;mc_gross_1=20.00&amp;mc_currency=USD&amp;mc_gross_2=75.00&amp;mc_gross_3=0.00&amp;residence_country=US&amp;test_ipn=1&amp;mc_gross_4=1.00&amp;transaction_subject=Shopping+CartBreast+Awareness+for+Specific+Donation.+Attendee%3A+Gary+ReckardGeneral+Admission+for+Founders+Feast.+Attendee%3A+Gary+ReckardGeneral+Admission+for+VIP+Octoberfest.+Attendee%3A+Gary+Reckard2+Day+Pass+for+Octoberfest.+Attendee%3A+Gary+Reckard&amp;payment_gross=96.00&amp;ipn_track_id=f2f568cc6d8a2&amp;cmd=_notify-validate
+Success Setting Fain On Error
+Success Setting return transfer
+Success Setting Timeout
+Success Setting verbose mode
+Errors resulting from the execution of curl transfer: [03/03/2013 6:33 PM] - SUCCESS!
+IPN POST Vars from gateway:
+mc_gross=96.00, protection_eligibility=Ineligible, item_number1=, tax=0.00, item_number2=, payer_id=Q3QDE94Q37NSU, item_number3=, item_number4=, payment_date=15:33:15 Mar 03, 2013 PST, payment_status=Completed, charset=windows-1252, mc_shipping=0.00, mc_handling=0.00, first_name=Attendee, mc_fee=3.08, notify_version=3.7, custom=, payer_status=verified, business=macons_1361037758_biz@gmail.com, num_cart_items=4, mc_handling1=0.00, mc_handling2=0.00, mc_handling3=0.00, mc_handling4=0.00, verify_sign=AGDQPdCyxOmK6RqOI4IN.8gZy7ffAgwgkBjFx4H2FaHyd.66MuxfQMYj, payer_email=maconb_1361037915_per@gmail.com, mc_shipping1=0.00, mc_shipping2=0.00, mc_shipping3=0.00, tax1=0.00, mc_shipping4=0.00, tax2=0.00, tax3=0.00, tax4=0.00, txn_id=79L73846T8908374L, payment_type=instant, last_name=Tester, item_name1=Breast Awareness for Specific Donation. Attendee: Gary Reckard, receiver_email=macons_1361037758_biz@gmail.com, item_name2=General Admission for Founders Feast. Attendee: Gary Reckard, payment_fee=3.08, item_name3=General Admission for VIP Octoberfest. Attendee: Gary Reckard, item_name4=2 Day Pass for Octoberfest. Attendee: Gary Reckard, quantity1=1, quantity2=1, receiver_id=F8YBLS4MJL6XW, quantity3=1, txn_type=cart, quantity4=1, mc_gross_1=20.00, mc_currency=USD, mc_gross_2=75.00, mc_gross_3=0.00, residence_country=US, test_ipn=1, mc_gross_4=1.00, transaction_subject=Shopping CartBreast Awareness for Specific Donation. Attendee: Gary ReckardGeneral Admission for Founders Feast. Attendee: Gary ReckardGeneral Admission for VIP Octoberfest. Attendee: Gary Reckard2 Day Pass for Octoberfest. Attendee: Gary Reckard, payment_gross=96.00, ipn_track_id=f2f568cc6d8a2, 
+IPN Response from gateway Server:
+ VERIFIED
+
