@@ -23,7 +23,6 @@
 wp-content/*
 !wp-content/plugins/
 !wp-content/themes/
-!wp-content/uploads/
 
 # Ignore everything in the "plugins" directory, except the plugins you
 # specify (see the commented-out examples for hints on how to do this.)
@@ -40,9 +39,4 @@ wp-content/themes/*
 !wp-content/themes/octoberfest-2013/
 
 
-!wp-content/uploads/espresso/
-!wp-content/uploads/2013/
-!wp-content/uploads/2014/
-!wp-content/uploads/2015/
-!wp-content/uploads/2016/
 
