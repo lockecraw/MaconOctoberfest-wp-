@@ -65,7 +65,7 @@ function event_espresso_cart_link($atts) {
 		echo "<span id='moving_to_cart'>{$moving_to_cart}</span>";
 		echo "<script language='javascript'>window.location='" . $registration_cart_url . "';</script>";
 	} else {
-		echo $separator . ' <a class="event-button ee_view_cart ' . $registration_cart_class . '" id="cart_link_' . $event_id . '" href="' . $registration_cart_url . '" title="' . stripslashes_deep($event_name) . '" moving_to_cart="' . urlencode($moving_to_cart) . '" direct_to_cart="' . $direct_to_cart . '" >' . $registration_cart_anchor . '</a>';
+		echo $separator . '<a class="event-button ee_view_cart ' . $registration_cart_class . '" id="cart_link_' . $event_id . '" href="' . $registration_cart_url . '" title="' . stripslashes_deep($event_name) . '" moving_to_cart="' . urlencode($moving_to_cart) . '" direct_to_cart="' . $direct_to_cart . '" >' . $registration_cart_anchor . '</a>';
 	}
 
 	$buffer = ob_get_contents();
@@ -902,9 +902,14 @@ function event_espresso_group_price_dropdown($event_id, $label = 1, $multi_reg =
 	 */
 	 $is_donation = false;
 	 if(isset($_SESSION['espresso_session']['events_in_session'][$event_id]) &&
-	 	isset($_SESSION['espresso_session']['events_in_session'][$event_id]['categories']) &&
-	 	is_array($_SESSION['espresso_session']['events_in_session'][$event_id]['categories']) &&
-	 	in_array('donation',$_SESSION['espresso_session']['events_in_session'][$event_id]['categories'])){
+	 	(
+	 		isset($_SESSION['espresso_session']['events_in_session'][$event_id]['categories']) &&
+	 		is_array($_SESSION['espresso_session']['events_in_session'][$event_id]['categories']) &&
+	 		in_array('donation',$_SESSION['espresso_session']['events_in_session'][$event_id]['categories'])
+	 	) OR (
+			$_SESSION['espresso_session']['events_in_session'][$event_id]['is_donation'] == true
+		)
+	 	){
 
 			$is_donation = true;
 	 }

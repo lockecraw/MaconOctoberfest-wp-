@@ -24,7 +24,7 @@
 				</h2>
 			<?php } ?>
 			<?php if ($display_desc == "Y") { //Show the description or not ?>
-			<?php echo espresso_format_content($event_desc);?>
+				<?php echo espresso_format_content($event_desc);?>
 			<?php }//End display description ?>
 		</div>
 		<?php
@@ -262,6 +262,10 @@
 		    </form>
 		</div>
 
+
+		<div style="float: left;">
+			<a class="event-button back-to-events" href="/events/" title="Back to Events">Back to Events</a>&nbsp;
+		</div>
 		<div>
 				<?php
 				$params = array(
