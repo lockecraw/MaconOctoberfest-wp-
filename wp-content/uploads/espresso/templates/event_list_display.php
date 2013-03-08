@@ -200,7 +200,7 @@ $this_event_id = $event_id;
 					// $event_name = get_event_field('event_name', EVENTS_DETAIL_TABLE, ' WHERE id = ' . $event_id);
 					'event_name' => $event_name,
 					//OPTIONAL, will place this term before the link
-					'separator' => __(" or ", 'event_espresso')
+					//'separator' => __(" or ", 'event_espresso')
 				);
 
 				$cart_link = event_espresso_cart_link($params);
@@ -215,6 +215,12 @@ $this_event_id = $event_id;
 				}else{
 				?>
 					<div class="event-buttons" id="register_link-<?php echo $event_id ?>">
+						<?php if($event_category != 'donation'){ ?>
+						<a title="<?php echo stripslashes_deep($event_name) ?>" class="event-button event-button-register event-button-<?php echo $event_category; ?>" id="a_event_title-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>">
+							View Details
+						</a>
+						<?php } ?>
+						<?php /*
 						<a class="event-button event-button-register event-button-<?php echo $event_category; ?>" id="a_register_link-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>" title="<?php echo stripslashes_deep($event_name) ?>">
 							<?php
 								if($event_category == 'donation'){
@@ -231,7 +237,8 @@ $this_event_id = $event_id;
 								}
 							?>
 						</a>
-						<?php echo isset($cart_link) && $externalURL == '' ? $cart_link : ''; ?>
+						*/ ?>
+						<?php echo " -- ".isset($cart_link) && $externalURL == '' ? $cart_link : ''; ?>
 					</div>
 				<?php
 				}
