@@ -16,11 +16,11 @@
 			}
 			?>
 			<?php if ($reg_form_only == false) { ?>
-				<h2 class="eventTitle">Events</h2>
+				<h2> class="title">Events</h2>
 				<hr/>
-				<h1 class="eventTitle" id="event_title-<?php echo $event_id; ?>">
+				<h1 class="title" id="event_title-<?php echo $event_id; ?>">
 					<?php echo $event_name ?> <?php echo $is_active['status'] == 'EXPIRED' ? ' - <span class="expired_event">Event Expired</span>' : ''; ?> <?php echo $is_active['status'] == 'PENDING' ? ' - <span class="expired_event">Event is Pending</span>' : ''; ?> <?php echo $is_active['status'] == 'DRAFT' ? ' - <span class="expired_event">Event is a Draft</span>' : ''; ?>
-				</h1>
+				</h2>
 			<?php } ?>
 		<?php
 
@@ -136,7 +136,7 @@
 									?>
 									<div class="event-detail event-detail-address" id="event_address-<?php echo $event_id ?>">
 
-										<span class="event-detail-label"><?php echo __('Location:', 'event_espresso'); ?></span> <br />
+										<span class="event-detail-label"><?php echo __('Address:', 'event_espresso'); ?></span> <br />
 										<span class="event-detail-value">
 											<?php echo $venue_title; ?>, <?php echo stripslashes_deep($location); ?><br />
 											<span class="google-map-link"><?php echo $google_map_link; ?></span>

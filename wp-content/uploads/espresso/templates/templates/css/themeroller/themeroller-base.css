@@ -51,7 +51,7 @@
 .payment-option-lnk.algn-vrt { display: table !important; height:30px; }
 .payment-option-lnk.algn-vrt .vrt-cell { display: table-cell !important; vertical-align: middle; }
 
-#event_espresso_checkout_form { margin: 0; padding: 0; }
+#event_espresso_checkout_form { margin: 0; padding: 0px; }
 
 .choose-diff-pay-option-pg { margin:0 0 6em; font-size:.8em; }
 
@@ -161,6 +161,7 @@ div.event-entry-meta {
 span.google-map-link {
 	clear: left;
 	display: inline-block;
+	width: 100%;
 }
 #ee-event-list-thumb {
 	display: block;

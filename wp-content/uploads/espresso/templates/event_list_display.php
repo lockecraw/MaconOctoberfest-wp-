@@ -51,7 +51,7 @@ $this_event_id = $event_id;
 		echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');
 	}
 	?>
-	<h1 id="event_title-<?php echo $event_id ?>">
+	<h1 class="eventTitle" id="event_title-<?php echo $event_id ?>">
 		<a title="<?php echo stripslashes_deep($event_name) ?>" class="a_event_title" id="a_event_title-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>">
 			<?php echo stripslashes_deep($event_name) ?>
 		</a>

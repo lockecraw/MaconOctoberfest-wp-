@@ -53,7 +53,6 @@
 			<a href="#" id="buyTickets" title="Buy Tickets"></a>
 			<div id="buyTicktesList">
 				<ul>
-					<li>3 Day Pass</li>
 					<li>2 Day Pass</li>
 					<li>1 Day Pass</li>
 					<li>Founders Feast</li>
@@ -66,7 +65,7 @@
 				<ul>
 					<li>Homebrew Contest</li>
 					<li>Cyclo-Cross Bike Race</li>
-					<li>Teen Songwriting Competition</li>
+					<li>Singer-songwriter Competition</li>
 				</ul>
 			</div>
 		</div>

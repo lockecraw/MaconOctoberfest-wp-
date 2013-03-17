@@ -125,7 +125,7 @@ a:hover#scheduleHome {
 #navigationRibbonHome{
 	background: no-repeat url('images/horizontalRibbon.png');
 	width: 977px;
-	height: 160px;
+	height: 180px;
 	margin: -20px auto 0 auto;
 }
 a.arrow {
@@ -141,7 +141,7 @@ a:hover.arrow {
 .navColumn {
 	width: 800px;
 	margin: 0 auto;
-	padding: 8px 0 0 0;
+	padding: 5px 0 0 0;
 }
 
 #navList {
@@ -309,15 +309,15 @@ a:hover#logo {
 #verticalRibbon {
 	background: no-repeat url('images/verticalRibbon.png');
 	width: 249px;
-	height: 593px;
+	height: 690px;
 	position: relative;
 	z-index: 1;
 	left: 70px;
-	top: -100px;
+	top: -150px;
 }
 
 .verticalNavColumn {
-	padding: 95px 20px 0 35px;
+	padding: 155px 20px 0 35px;
 }
 
 #verticalnavList {
@@ -498,7 +498,7 @@ a:hover#topCartArrows {
 
 #buyTicktesList {
 	z-index: 0;
-	top: 20px;
+	top: 30px;
 	width: 200px;
 	left: 120px;
 	position: absolute;
@@ -815,10 +815,13 @@ a:hover {
 
 .alignleft {
 	float: left;
+	margin: 0px 20px 5px 0px;
+
 }
 
 .alignright {
 	float: right;
+	margin: 0px 0px 5px 20px;
 }
 /* post */
 .meta {

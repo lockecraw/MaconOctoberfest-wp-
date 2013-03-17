@@ -46,6 +46,17 @@ h1 {
 	line-height: 27px;
 	margin: 0px 0px 20px 0px;
 }
+
+h1.eventTitle {
+	font-family: "museo",serif;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 25px;
+	color: #86311E;
+	line-height: 27px;
+	margin: 0px 0px 10px 0px;
+}
+
 h1 a:link,
 h1 a:visited{
 	color: #86311E;
@@ -61,19 +72,35 @@ h2.title{
 	margin: 10px 0px;
 }
 
+h2.eventTitle {
+	font-family: "futura-pt-condensed",sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 25px;
+	color: #CF7229;
+	text-transform: uppercase;
+	margin: 10px 0px 0px 0px;
+}
+
 
 h2 {
-	font-size: 2em;
-	margin-bottom: 0.75em;
-        color: #777777;
-        letter-spacing: -1px;
-}
-h3 {
-	font-size: 1.5em;
-	line-height: 1;
-	margin-bottom: .5em;
+	font-family: "museo",serif;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 18px;
+	color: #86311E;
+	line-height: 21px;
+	margin: 0px 0px 10px 0px;
 
 }
+h3 {
+	font-size: 16px;
+	line-height: 19px;
+	margin: 5px 0px 5px 0px;
+	color: #CF7229;
+	font-weight:  normal;
+}
+
 h4 {
 	font-size: 1.2em;
 	line-height: 1.25;
@@ -96,9 +123,13 @@ h1 img, h2 img, h3 img, h4 img, h5 img, h6 img {
 	margin: 0px;
 }
 /* Text elements */
+hr {
+	border-top: 4px double #f6b015;
+	margin: 5px 0px 10px 0px;
+}
 
 p {
-	margin: 0 0 1.5em;
+	margin: 5px 0px 15px 0px;
 }
 p img.left {
 	float: left;
@@ -295,14 +326,4 @@ h3.section-heading{
 .event-description{
 	padding: 12px 0px;
 	/*max-width: 325px;*/
-}
-
-.single-event-registration-container .event-description p:first-child{
-	font-family: "museo",serif;
-	font-style: normal;
-	font-weight: 700;
-	font-size: 25px;
-	color: #86311E;
-	line-height: 27px;
-	margin: 0px 0px 20px 0px;
 }
