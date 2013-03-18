@@ -1979,7 +1979,7 @@ function event_espresso_add_attendees_to_db( $event_id = NULL, $session_vars = N
 					if(isset($att_data_source['stein_upgrade_cost'])){
 						$orig_price += ($att_data_source['stein_upgrade_cost'] * 1);
 						$final_price += ($att_data_source['stein_upgrade_cost'] * 1);
-						$price_type .= " + ".$att_data_source['SINGLE_13'];
+						$price_type .= " ( + ".$att_data_source['SINGLE_13'].")";
 					}
 				}
 			}
