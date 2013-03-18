@@ -3,6 +3,7 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 //Confirmation Page Template
 
 
+
 if(isset($_REQUEST['is_donation']) && $_REQUEST['is_donation'] == 'true'){
 	//if this is a confirmation page for a single donation...
 

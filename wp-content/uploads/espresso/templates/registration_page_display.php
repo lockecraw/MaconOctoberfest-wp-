@@ -122,12 +122,14 @@
 								?>
 							<?php } ?>
 
+							<?php /*  ?>
 							<div class="event-detail event-detail-price" <?php if($event_category=='donation'){echo 'style="display:none;"';}?>>
 								<?php
 								$price_label = '<span class="event-detail-label">'.__('Choose an Option: ', 'event_espresso').'</span>';
 								do_action( 'espresso_price_select', $event_id, array('show_label'=>TRUE, 'label'=>$price_label) );
 								?>
 							</div>
+							<?php */ ?>
 
 							<?php if($event_category != 'donation' && $event_category != 'merchandise'){ ?>
 								<?php

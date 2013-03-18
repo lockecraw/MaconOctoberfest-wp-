@@ -58,6 +58,8 @@ jQuery(document).ready(function() {
         delete_item : function(params){
 
 		//alert( 'params = ' + params.toSource() );
+		//console.log('in delete_item');
+		//console.log('params = ' + params);
 
             var _eecart = this;
             _eecart.progress(params.loader_container);
@@ -76,12 +78,15 @@ jQuery(document).ready(function() {
                 }).delay(1500).queue(function() {
 
                     });
+				//console.log('before calculate_total');
                 _eecart.calculate_total();
+				//console.log('after calculate_total');
             }) ;
 
         },
 
         calculate_total: function(grand_total){
+			//console.log('in calculate_total');
             var _eecart = this;
             _eecart.progress(jQuery('#event_total_price'));
 
@@ -93,12 +98,14 @@ jQuery(document).ready(function() {
             var data = "action=event_espresso_calculate_total&" + jQuery("#event_espresso_shopping_cart").serialize();
 
             event_espresso_do_ajax(data,function(r){
+				//console.log('in event_espresso_do_ajax');
 				jQuery('#event_total_price').html(r.grand_total);
 				if ( r.msg != undefined && r.msg != '' ) {
 					jQuery('#event_espresso_notifications').hide().html(r.msg).fadeIn();
 				} else {
 					jQuery('#event_espresso_notifications').fadeOut();
 				}
+				//console.log('bout to leave event_espresso_do_ajax');
 
             });
 
@@ -132,6 +139,8 @@ jQuery(document).ready(function() {
 
     jQuery('.ee_delete_item_from_cart').live('click',function(){
 
+		//console.log('in ee_delete_item_from_cart');
+
        var data = {
             item_type: 'event',
             id : jQuery(this).attr('id'),
@@ -140,7 +149,10 @@ jQuery(document).ready(function() {
 
         }
 
+		//console.log('data: '+data);
+
          EECART.delete_item(data);
+
 
         return false;
 

@@ -72,9 +72,29 @@ if (!function_exists('multi_register_attendees')) {
 
 		//Build the registration page
 		if ( $event ) {
-
 			//These are the variables that can be used throughout the regsitration page
 			$event_id = $event->id;
+			$event_cost = ! empty($event->event_cost) ? $event->event_cost : 0;
+
+			//is it a donation?
+			$categories = array();
+			if(isset($_SESSION['espresso_session']['events_in_session'][$event_id]['categories'])){
+				$categories = $_SESSION['espresso_session']['events_in_session'][$event_id]['categories'];
+			}
+
+			$is_donation = false;
+			if(in_array('donation',$categories)){
+				$is_donation = true;
+
+			}
+
+			if($is_donation && isset($_POST['donation_amount'][$event_id]) && ($_POST['donation_amount'][$event_id] <= 0 || !is_numeric($_POST['donation_amount'][$event_id]))){
+				//remove this from the session, they didn't chose to donate...
+				unset($_SESSION['espresso_session']['events_in_session'][$event_id]);
+				return;
+			}
+
+
 			$event_name = stripslashes_deep($event->event_name);
 			$event_desc = stripslashes_deep($event->event_desc);
 			$display_desc = $event->display_desc;
@@ -87,7 +107,6 @@ if (!function_exists('multi_register_attendees')) {
 			$event_country = $event->country;
 			$event_description = stripslashes_deep($event->event_desc);
 			$event_identifier = $event->event_identifier;
-			$event_cost = ! empty($event->event_cost) ? $event->event_cost : 0;
 			//echo '<h4>$event_cost : ' . $event_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
 			$member_only = $event->member_only;

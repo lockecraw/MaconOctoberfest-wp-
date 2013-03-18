@@ -932,6 +932,7 @@ function event_espresso_group_price_dropdown($event_id, $label = 1, $multi_reg =
 			$price_id = $results[0]->id;
 			?>
 			<div class="event_form_field">
+				<?php //print_a($_SESSION['espresso_session']['events_in_session'][$event_id]); ?>
 				<label for="donation_amount[<?php echo $event_id; ?>]" class="ee-reg-page-questions">Donation Amount<em>*</em></label>
 				<input
 					type="text"
@@ -1301,13 +1302,11 @@ function event_espresso_add_attendees_to_db_multi() {
 			reset($events_in_session);
 			foreach ($events_in_session as $event_id => $event) {
 
+				//is this event a donation?
 				 $is_donation = false;
-				 if(isset($event['categories']) &&
-				 	is_array($event['categories']) &&
-				 	in_array('donation',$event['categories'])){
-
-						$is_donation = true;
-						$donations[$event_id] = $event['cost'];
+				 if(isset($event['categories']) && is_array($event['categories']) && in_array('donation',$event['categories'])){
+					$is_donation = true;
+					$donations[$event_id] = $event['cost'];
 				 }
 
 				$event_meta = event_espresso_get_event_meta($event_id);
@@ -1320,12 +1319,38 @@ function event_espresso_add_attendees_to_db_multi() {
 
 						$session_vars['data'] = $event;
 
-						foreach ( $event_attendees as $attendee) {
+						foreach ( $event_attendees as $attendee_index => $attendee) {
 
+
+							//echo "Attendee $attendee_index: ";
 							$attendee['price_id'] = $price_id;
 							//this has all the attendee information, name, questions....
 							$session_vars['event_attendees'] = $attendee;
 							$session_vars['data']['price_type'] = stripslashes_deep($event['price_id'][$price_id]['price_type']);
+
+
+							//print_a($attendee);
+							//$stein_upgrade = do_shortcode('[EE_ANSWER q="13" a="'.$attendee_id.'"]');
+							//echo "Stein Upgrade: ".$stein_upgrade."<br />";
+							$attendee['stein_upgrade_cost'] = 0;
+							if(isset($attendee['SINGLE_13'])){
+								//echo "Gotta add ".$attendee['SINGLE_13']." to cost<br />";
+								preg_match('/\$([0-9]+[\.]*[0-9]*)/', $attendee['SINGLE_13'], $match);
+								if(isset($match[1]) && is_numeric($match[1])){
+									$attendee['stein_upgrade_cost'] = $match[1];
+								}
+								else{
+									$attendee['stein_upgrade_cost'] = 0;
+								}
+								//$session_vars['data']['price_type'] .= " - ".$attendee['SINGLE_13'];
+								$events_in_session[$event_id]['event_attendees'][$price_id][$attendee_index]['stein_upgrade_cost'] = $attendee['stein_upgrade_cost'];
+								$_SESSION['espresso_session']['events_in_session'][$event_id]['event_attendees'][$price_id][$attendee_index]['stein_upgrade_cost'] = $attendee['stein_upgrade_cost'];
+								$session_vars['data']['event_attendees'][$price_id][$attendee_index]['stein_upgrade_cost'] = $attendee['stein_upgrade_cost'];
+								$session_vars['event_attendees']['stein_upgrade_cost'] = $attendee['stein_upgrade_cost'];
+								//echo "That's $".$stein_upgrade_cost."!!!<br />";
+							}
+							//print_a($session_vars);
+
 							if ( isset($event_meta['additional_attendee_reg_info']) && $event_meta['additional_attendee_reg_info'] == 1 ) {
 
 								$num_people = (int)$event['price_id'][$price_id]['attendee_quantity'];
@@ -1333,6 +1358,9 @@ function event_espresso_add_attendees_to_db_multi() {
 
 							}
 
+//							echo "<hr />Session Vars:";
+//							print_a($session_vars);
+//							echo "<hr />";
 							// ADD ATTENDEE TO DB
 							$return_data = event_espresso_add_attendees_to_db( $event_id, $session_vars, TRUE );
 
@@ -1357,6 +1385,7 @@ function event_espresso_add_attendees_to_db_multi() {
 					}
 				}
 			}
+
 
 
 			$SQL = "SELECT a.*, ed.id AS event_id, ed.event_name, dc.coupon_code_price, dc.use_percentage ";
@@ -1402,6 +1431,7 @@ function event_espresso_add_attendees_to_db_multi() {
 			$discount_amount	= $sub_total - $discounted_total;
 			$total_cost			= $discounted_total;
 			$total_cost			= $total_cost < 0 ? 0.00 : (float)$total_cost;
+
 
 			if ( function_exists( 'espresso_update_attendee_coupon_info' ) && $primary_attendee_id && ! empty( $attendee->coupon_code )) {
 				espresso_update_attendee_coupon_info( $primary_attendee_id, $attendee->coupon_code  );
@@ -1789,8 +1819,6 @@ function event_espresso_add_attendees_to_db( $event_id = NULL, $session_vars = N
 		$event_id = absint( $data_source['event_id'] );
 	}
 
-
-
 	$is_donation = false;
 	if(isset($data_source['categories']) &&
 		is_array($data_source['categories']) &&
@@ -1820,6 +1848,8 @@ function event_espresso_add_attendees_to_db( $event_id = NULL, $session_vars = N
 	$check_sql = $wpdb->get_results($wpdb->prepare( $SQL, $prev_session_id, $event_id ));
 	$nmbr_of_regs = $wpdb->num_rows;
 	static $loop_number = 1;
+
+
 	// delete previous entries from this session in case user is jumping back n forth between pages during the reg process
 	if ( $nmbr_of_regs > 0 && $loop_number == 1 ) {
 		if ( !isset( $data_source['admin'] )) {
@@ -1887,7 +1917,13 @@ function event_espresso_add_attendees_to_db( $event_id = NULL, $session_vars = N
 			$event_change = 0;
 		}
 
+//		echo "<h1>Data Source $loop_number</h1>";
+//		print_a($data_source);
+//		echo "<h1>ATT Data Source $loop_number</h1>";
+//		print_a($att_data_source);
+
 		$event_cost = isset($data_source['cost']) && $data_source['cost'] != '' ? $data_source['cost'] : 0.00;
+
 		$final_price = $event_cost;
 
 
@@ -1939,6 +1975,12 @@ function event_espresso_add_attendees_to_db( $event_id = NULL, $session_vars = N
 					$price_type		= isset( $att_data_source['price_id'] ) ? espresso_ticket_information( array( 'type' => 'ticket', 'price_option' => absint($att_data_source['price_id']) )) : '';
 					$surcharge		= event_espresso_calculate_surcharge( (float)$orig_price->event_cost , (float)$orig_price->surcharge, $orig_price->surcharge_type );
 					$orig_price		= (float)number_format( $orig_price->event_cost + $surcharge, 2, '.', '' );
+
+					if(isset($att_data_source['stein_upgrade_cost'])){
+						$orig_price += ($att_data_source['stein_upgrade_cost'] * 1);
+						$final_price += ($att_data_source['stein_upgrade_cost'] * 1);
+						$price_type .= " - ".$att_data_source['SINGLE_13'];
+					}
 				}
 			}
 
@@ -2521,4 +2563,43 @@ function myTruncate($string, $limit, $break=" ", $pad="...")
   }
 
   return $string;
+}
+
+
+
+function event_espresso_get_final_price( $price_id = FALSE, $event_id = FALSE, $orig_price = FALSE ) {
+
+	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+
+	if ( ! $price_id || ! $event_id ) {
+		return FALSE;
+	}
+
+	global $wpdb;
+
+	$result = $orig_price !== FALSE ? $orig_price : event_espresso_get_orig_price_and_surcharge( $price_id );
+
+	if ( isset( $result->event_cost )) {
+		$result->event_cost = (float)$result->event_cost;
+	} else {
+		$result = new stdClass();
+		$result->event_cost = (float)$orig_price;
+	}
+
+
+	// if price is anything other than zero
+	if ( $result->event_cost > 0.00 ) {
+		// Addition for Early Registration discount
+		if ( $early_price_data = early_discount_amount( $event_id, $result->event_cost )) {
+			$result->event_cost = $early_price_data['event_price'];
+		}
+	}
+
+	$surcharge = event_espresso_calculate_surcharge( $result->event_cost , $result->surcharge, $result->surcharge_type );
+	$surcharge = ! empty($surcharge) ? (float)$surcharge : 0;
+	$event_cost = $result->event_cost + $surcharge;
+
+//		echo '<h4>$event_cost : ' . $event_cost . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
+
+	return (float)number_format( $event_cost, 2, '.', '' );
 }

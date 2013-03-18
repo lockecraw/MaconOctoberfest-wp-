@@ -17,6 +17,12 @@ if(in_array('donation',$categories)){
 	$is_donation = true;
 }
 
+if($is_donation && ($events_in_session[$event_id]['cost'] <= 0)){
+	//skip this, they didn't choose to donate...
+	//remove this from session?
+}
+else{
+
 $attendee_quantity = ' x '.sprintf(_n('%d attendee', '%d attendees', $meta['attendee_quantity'], 'event_espresso'), $meta['attendee_quantity']);
 $display_description_on_multi_reg_page = isset( $org_options['display_description_on_multi_reg_page'] ) ? $org_options['display_description_on_multi_reg_page'] : 'N';
 ?>
@@ -188,3 +194,7 @@ $display_description_on_multi_reg_page = isset( $org_options['display_descriptio
 		?>
 	</div>
 </div>
+
+<?php
+}
+?>

@@ -6,6 +6,7 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 //This page gets all of the varaibles from includes/process-registration/payment_page.php
 //Payment confirmation block
 
+
 if(isset($_REQUEST['is_donation']) && $_REQUEST['is_donation'] == 'true'){
 	//if this is a confirmation page for a donation...
 
