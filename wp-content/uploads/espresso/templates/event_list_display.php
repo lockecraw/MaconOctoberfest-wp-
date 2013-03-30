@@ -58,6 +58,40 @@ $this_event_id = $event_id;
 	</h1>
 	<div class="event-content">
 		<?php
+		if($event_id == 11){
+			//it's the Octoberfest Beer Garden
+			?>
+			<div class="event-details">
+				<div class="event-detail event-detail-price" id="p_event_price-3">
+					<span class="event-detail-label">Price:</span>
+					<span class="event-detail-value">$25.00 - $75.00</span>
+				</div>
+				<div class="event-detail event-detail-price" id="event_date-3">
+					<span class="event-detail-label">Day 1:</span>
+					<span class="event-detail-value">Saturday, October 19th, 2013</span>
+				</div>
+				<div class="event-detail event-detail-time">
+					<span class="event-detail-label">Start Time:</span>
+					<span class="event-detail-value">11:00 am</span>&nbsp;&nbsp;&nbsp;
+					<span class="event-detail-label">End Time: </span>
+					<span class="event-detail-value">8:00 pm</span>
+				</div>
+				<br />
+				<div class="event-detail event-detail-price" id="event_date-3">
+					<span class="event-detail-label">Day 2:</span>
+					<span class="event-detail-value">Sunday, October 20th, 2013</span>
+				</div>
+				<div class="event-detail event-detail-time">
+					<span class="event-detail-label">Start Time:</span>
+					<span class="event-detail-value">12:00 pm</span>&nbsp;&nbsp;&nbsp;
+					<span class="event-detail-label">End Time: </span>
+					<span class="event-detail-value">7:00 pm</span>
+				</div>
+			</div>
+			<?php
+		}
+		else{
+
 		$event->event_cost = empty($event->event_cost) ? '' : $event->event_cost;
 		?>
 
@@ -106,6 +140,9 @@ $this_event_id = $event_id;
 
 		</div>
 
+		<?php
+		}
+		?>
 
 		<?php if($category != 'donation' && $category != 'merchandise'){ ?>
 			<?php if ( (isset($location) && $location != '' ) && (isset($org_options['display_address_in_event_list']) && $org_options['display_address_in_event_list'] == 'Y') ) { ?>

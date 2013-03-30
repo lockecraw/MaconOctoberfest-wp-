@@ -7,6 +7,7 @@ function event_espresso_shopping_cart() {
 		//session_destroy();
 	//print_a( $_SESSION );
 	event_espresso_add_event_process(5,"Donation");
+	event_espresso_add_event_process(17,"Donation");
 	$events_in_session = isset( $_SESSION['espresso_session']['events_in_session'] ) ? $_SESSION['espresso_session']['events_in_session'] : event_espresso_clear_session( TRUE );
 
 	if ( event_espresso_invoke_cart_error( $events_in_session ) )
@@ -121,7 +122,7 @@ function event_espresso_shopping_cart() {
 				$number_available_spaces = get_number_of_attendees_reg_limit( $r->id, 'number_available_spaces' ); //Gets the number of available spaces
 				//echo "<pre>$r->id, $num_attendees,$available_spaces,$number_available_spaces</pre>";
 		?>
-				<div class=" event-listing-container"  id ="multi_reg_cart_block-<?php echo $r->id ?>">
+				<div class="multi_reg_cart_block event-listing-container"  id ="multi_reg_cart_block-<?php echo $r->id ?>">
 
 					<h2 class="title"><?php echo stripslashes_deep( $r->event_name ) ?> <span class="remove-cart-item"> <img class="ee_delete_item_from_cart" id="cart_link_<?php echo $r->id ?>" alt="Remove this item from your cart" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>images/icons/remove.gif" /> </span> </h2>
 						<div class="event-details">
