@@ -61,7 +61,7 @@ a:hover#homeLogo {
 	background: no-repeat url('images/horizontalBlue.png') 0px 12px;
 	height: 120px;
 	position: relative;
-	top: -20px;
+	top: -10px;
 }
 
 #homeButtons{
@@ -126,7 +126,7 @@ a:hover#scheduleHome {
 	background: no-repeat url('images/horizontalRibbon.png');
 	width: 977px;
 	height: 180px;
-	margin: -20px auto 0 auto;
+	margin: -5px auto 0 auto;
 }
 a.arrow {
 	background: right no-repeat url('images/orangeArrow.png');
@@ -283,6 +283,7 @@ a:hover.arrow {
 #leftContentWrapper{
 	position: relative;
 	float: left;
+	height: 1000px;
 }
 
 #logo {
@@ -503,6 +504,15 @@ a:hover#topCartArrows {
 	left: 120px;
 	position: absolute;
 }
+#buyTicktesList a {
+	color: #547A57;
+}
+
+#buyTicktesList a:hover {
+	color: #006191;
+	text-decoration: none;
+}
+
 
 #buyTicktesList ul{
 	list-style-type: none;
@@ -512,7 +522,6 @@ a:hover#topCartArrows {
 	font-style: normal;
 	font-weight: 700;
 	font-size: 14px;
-	color: #547A57;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 
@@ -531,6 +540,15 @@ a:hover#topCartArrows {
 	position: absolute;
 }
 
+#registerList a {
+	color: #DD4C38;
+}
+
+#registerList a:hover {
+	color: #006191;
+	text-decoration: none;
+}
+
 #registerList ul{
 	list-style-type: none;
 	margin: 0;
@@ -539,7 +557,6 @@ a:hover#topCartArrows {
 	font-style: normal;
 	font-weight: 700;
 	font-size: 14px;
-	color: #DD4C38;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 
@@ -578,8 +595,51 @@ a:hover#register {
 	position: relative;
 	top: -30px;
 }
+/* Sponsors ======================================== */
 
+#thanksSponsors {
+	background: no-repeat top url('images/thanksSponsors.png');
+	height: 60px;
+	width: 800px;
+	margin: 0 auto;
 
+}
+
+#sponsorsBar {
+	background: no-repeat url('images/sponsorsBackground.png');
+	padding: 0px 0px 0px 0px;
+	width: 972px;
+	height: 185px;
+	margin: 0 auto 100px auto;
+	position: relative;
+
+}
+
+#makeMeScrollable {
+	left: 79px;
+	top: 17px;
+	width: 813px;
+	height: 150px;
+	padding: 5px 0px;
+	position: relative;
+	background: #FFFFFF;
+}
+
+#makeMeScrollable div.scrollableArea a
+		{
+			position: relative;
+			float: left;
+			margin: 0 10px 0 10px;
+			padding: 0;
+			/* If you don't want the images in the scroller to be selectable, try the following
+			   block of code. It's just a nice feature that prevent the images from
+			   accidentally becoming selected/inverted when the user interacts with the scroller. */
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-o-user-select: none;
+			user-select: none;
+		}
 
 
 /* Sub Page Content ======================================== */
@@ -600,6 +660,32 @@ a:hover#register {
 	bottom: 100px;
 }
 
+#contentFooter {
+	background: no-repeat url('images/footerImage.png');
+	width: 570px;
+	height: 100px;
+	padding: 76px 50px 0px 25px;
+	font-family: "proxima-nova-condensed",sans-serif;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 13px;
+	top: -40px;
+	position: relative;
+	text-transform: uppercase;
+	z-index: 1;
+}
+
+#contentFooter a {
+	color: #86311E;
+	float: left;
+	margin-right: 25px;
+}
+
+#contentFooter a:hover {
+	color: #006191;
+	text-decoration: none;
+}
+	
 /* Events Content ======================================== */
 #eventContent {
 	left: -35px;
@@ -780,7 +866,6 @@ a:hover {
 #footer {
         margin: 30px 0px 30px 0px;
         padding: 30px 0px 30px 0px;
-        border-top: solid 3px #ccc;
 }
 /* Misc */
 .wp-caption {
@@ -857,6 +942,6 @@ a:hover {
 }
 
 #post-entries {
-        padding: 0px 0px 20px 0px;
-        margin: 0px 0px 20px 0px;
+	position: relative;
+	z-index: 2;  
 }

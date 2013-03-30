@@ -41,4 +41,4 @@ if (file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "tickets/templates/css/base.css")) {
 		<input class="print_button noPrint" type="submit" value=" Download PDF " />
 	</form>
 </div>
-  <div class="instructions">Print and bring this ticket with you to the event, brotherman.</div>
+  <div class="instructions">Print and bring this ticket with you to the event.</div>

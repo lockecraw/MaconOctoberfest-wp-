@@ -1038,3 +1038,1005 @@ mc_gross=96.00, protection_eligibility=Ineligible, item_number1=, tax=0.00, item
 IPN Response from gateway Server:
  VERIFIED
 
+[03/17/2013 8:54 PM] - Errors from IPN Validation:
+
+Using BUILT-IN PHP curl methods
+key = first_name
+value = Attendee
+key = mc_shipping
+value = 0.00
+key = mc_currency
+value = USD
+key = payer_status
+value = verified
+key = payment_fee
+value = 22.81
+key = payment_gross
+value = 776.23
+key = mc_handling
+value = 0.00
+key = num_cart_items
+value = 7
+key = txn_type
+value = cart
+key = verify_sign
+value = AFcWxV21C7fd0v3bYYYRCpSSRl31A1YeaNe-0kPNmnvDJpwc-8-xoApT
+key = payer_id
+value = Q3QDE94Q37NSU
+key = charset
+value = windows-1252
+key = tax1
+value = 0.00
+key = receiver_id
+value = F8YBLS4MJL6XW
+key = tax2
+value = 0.00
+key = tax3
+value = 0.00
+key = tax4
+value = 0.00
+key = tax5
+value = 0.00
+key = tax6
+value = 0.00
+key = mc_handling1
+value = 0.00
+key = tax7
+value = 0.00
+key = mc_handling2
+value = 0.00
+key = mc_handling3
+value = 0.00
+key = mc_handling4
+value = 0.00
+key = mc_handling5
+value = 0.00
+key = tax
+value = 0.00
+key = item_name1
+value = Founders Feast for Founders Feast. Attendee: Gary Founder1
+key = mc_handling6
+value = 0.00
+key = mc_handling7
+value = 0.00
+key = item_name2
+value = Founders Feast for Founders Feast. Attendee: Gary Founder2
+key = item_name3
+value = Donor for Donate. Attendee: Gary Donor1
+key = item_name4
+value = 2 Day Pass ( + VIP Stein - $10) for Octoberfest Beer Garden. Attendee: Gary FreeCup
+key = payment_type
+value = instant
+key = item_name5
+value = 2 Day Pass - VIP ( + VIP Stein - $10) for Octoberfest Beer Garden. Attendee: Gary VIPStein
+key = item_name6
+value = 2 Day Pass - VIP ( + Official Stein - $5) for Octoberfest Beer Garden. Attendee: Gary OfficialStein
+key = item_name7
+value = Saturday - 1 Day Pass ( + VIP Stein - $10) for Octoberfest Beer Garden. Attendee: Gary 1DayVIPStein
+key = mc_shipping1
+value = 0.00
+key = mc_shipping2
+value = 0.00
+key = mc_shipping3
+value = 0.00
+key = txn_id
+value = 09G25175UD4380239
+key = mc_shipping4
+value = 0.00
+key = mc_shipping5
+value = 0.00
+key = mc_shipping6
+value = 0.00
+key = mc_shipping7
+value = 0.00
+key = mc_gross_1
+value = 50.00
+key = quantity1
+value = 1
+key = mc_gross_2
+value = 50.00
+key = quantity2
+value = 1
+key = item_number1
+value = 
+key = protection_eligibility
+value = Ineligible
+key = mc_gross_3
+value = 421.23
+key = quantity3
+value = 1
+key = item_number2
+value = 
+key = mc_gross_4
+value = 55.00
+key = quantity4
+value = 1
+key = item_number3
+value = 
+key = custom
+value = 
+key = mc_gross_5
+value = 85.00
+key = quantity5
+value = 1
+key = item_number4
+value = 
+key = mc_gross_6
+value = 80.00
+key = quantity6
+value = 1
+key = item_number5
+value = 
+key = mc_gross_7
+value = 35.00
+key = quantity7
+value = 1
+key = item_number6
+value = 
+key = item_number7
+value = 
+key = business
+value = macons_1361037758_biz@gmail.com
+key = residence_country
+value = US
+key = last_name
+value = Tester
+key = payer_email
+value = maconb_1361037915_per@gmail.com
+key = payment_status
+value = Completed
+key = payment_date
+value = 17:54:43 Mar 17, 2013 PDT
+key = transaction_subject
+value = Shopping CartFounders Feast for Founders Feast. Attendee: Gary Founder1Founders Feast for Founders Feast. Attendee: Gary Founder2Donor for Donate. Attendee: Gary Donor12 Day Pass ( + VIP Stein - $10) for Octoberfest Beer Garden. Attendee: Gary FreeCup2 Da
+key = receiver_email
+value = macons_1361037758_biz@gmail.com
+key = mc_fee
+value = 22.81
+key = notify_version
+value = 3.7
+key = mc_gross
+value = 776.23
+key = test_ipn
+value = 1
+key = ipn_track_id
+value = e16065399fc7e
+Success Setting host: https://www.sandbox.paypal.com/cgi-bin/webscr
+Success Setting request type to post
+Success Setting post fields: first_name=Attendee&amp;mc_shipping=0.00&amp;mc_currency=USD&amp;payer_status=verified&amp;payment_fee=22.81&amp;payment_gross=776.23&amp;mc_handling=0.00&amp;num_cart_items=7&amp;txn_type=cart&amp;verify_sign=AFcWxV21C7fd0v3bYYYRCpSSRl31A1YeaNe-0kPNmnvDJpwc-8-xoApT&amp;payer_id=Q3QDE94Q37NSU&amp;charset=windows-1252&amp;tax1=0.00&amp;receiver_id=F8YBLS4MJL6XW&amp;tax2=0.00&amp;tax3=0.00&amp;tax4=0.00&amp;tax5=0.00&amp;tax6=0.00&amp;mc_handling1=0.00&amp;tax7=0.00&amp;mc_handling2=0.00&amp;mc_handling3=0.00&amp;mc_handling4=0.00&amp;mc_handling5=0.00&amp;tax=0.00&amp;item_name1=Founders+Feast+for+Founders+Feast.+Attendee%3A+Gary+Founder1&amp;mc_handling6=0.00&amp;mc_handling7=0.00&amp;item_name2=Founders+Feast+for+Founders+Feast.+Attendee%3A+Gary+Founder2&amp;item_name3=Donor+for+Donate.+Attendee%3A+Gary+Donor1&amp;item_name4=2+Day+Pass+%28+%2B+VIP+Stein+-+%2410%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Gary+FreeCup&amp;payment_type=instant&amp;item_name5=2+Day+Pass+-+VIP+%28+%2B+VIP+Stein+-+%2410%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Gary+VIPStein&amp;item_name6=2+Day+Pass+-+VIP+%28+%2B+Official+Stein+-+%245%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Gary+OfficialStein&amp;item_name7=Saturday+-+1+Day+Pass+%28+%2B+VIP+Stein+-+%2410%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Gary+1DayVIPStein&amp;mc_shipping1=0.00&amp;mc_shipping2=0.00&amp;mc_shipping3=0.00&amp;txn_id=09G25175UD4380239&amp;mc_shipping4=0.00&amp;mc_shipping5=0.00&amp;mc_shipping6=0.00&amp;mc_shipping7=0.00&amp;mc_gross_1=50.00&amp;quantity1=1&amp;mc_gross_2=50.00&amp;quantity2=1&amp;item_number1=&amp;protection_eligibility=Ineligible&amp;mc_gross_3=421.23&amp;quantity3=1&amp;item_number2=&amp;mc_gross_4=55.00&amp;quantity4=1&amp;item_number3=&amp;custom=&amp;mc_gross_5=85.00&amp;quantity5=1&amp;item_number4=&amp;mc_gross_6=80.00&amp;quantity6=1&amp;item_number5=&amp;mc_gross_7=35.00&amp;quantity7=1&amp;item_number6=&amp;item_number7=&amp;business=macons_1361037758_biz%40gmail.com&amp;residence_country=US&amp;last_name=Tester&amp;payer_email=maconb_1361037915_per%40gmail.com&amp;payment_status=Completed&amp;payment_date=17%3A54%3A43+Mar+17%2C+2013+PDT&amp;transaction_subject=Shopping+CartFounders+Feast+for+Founders+Feast.+Attendee%3A+Gary+Founder1Founders+Feast+for+Founders+Feast.+Attendee%3A+Gary+Founder2Donor+for+Donate.+Attendee%3A+Gary+Donor12+Day+Pass+%28+%2B+VIP+Stein+-+%2410%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Gary+FreeCup2+Da&amp;receiver_email=macons_1361037758_biz%40gmail.com&amp;mc_fee=22.81&amp;notify_version=3.7&amp;mc_gross=776.23&amp;test_ipn=1&amp;ipn_track_id=e16065399fc7e&amp;cmd=_notify-validate
+Success Setting Fain On Error
+Success Setting return transfer
+Success Setting Timeout
+Success Setting verbose mode
+Errors resulting from the execution of curl transfer: [03/17/2013 8:54 PM] - SUCCESS!
+IPN POST Vars from gateway:
+first_name=Attendee, mc_shipping=0.00, mc_currency=USD, payer_status=verified, payment_fee=22.81, payment_gross=776.23, mc_handling=0.00, num_cart_items=7, txn_type=cart, verify_sign=AFcWxV21C7fd0v3bYYYRCpSSRl31A1YeaNe-0kPNmnvDJpwc-8-xoApT, payer_id=Q3QDE94Q37NSU, charset=windows-1252, tax1=0.00, receiver_id=F8YBLS4MJL6XW, tax2=0.00, tax3=0.00, tax4=0.00, tax5=0.00, tax6=0.00, mc_handling1=0.00, tax7=0.00, mc_handling2=0.00, mc_handling3=0.00, mc_handling4=0.00, mc_handling5=0.00, tax=0.00, item_name1=Founders Feast for Founders Feast. Attendee: Gary Founder1, mc_handling6=0.00, mc_handling7=0.00, item_name2=Founders Feast for Founders Feast. Attendee: Gary Founder2, item_name3=Donor for Donate. Attendee: Gary Donor1, item_name4=2 Day Pass ( + VIP Stein - $10) for Octoberfest Beer Garden. Attendee: Gary FreeCup, payment_type=instant, item_name5=2 Day Pass - VIP ( + VIP Stein - $10) for Octoberfest Beer Garden. Attendee: Gary VIPStein, item_name6=2 Day Pass - VIP ( + Official Stein - $5) for Octoberfest Beer Garden. Attendee: Gary OfficialStein, item_name7=Saturday - 1 Day Pass ( + VIP Stein - $10) for Octoberfest Beer Garden. Attendee: Gary 1DayVIPStein, mc_shipping1=0.00, mc_shipping2=0.00, mc_shipping3=0.00, txn_id=09G25175UD4380239, mc_shipping4=0.00, mc_shipping5=0.00, mc_shipping6=0.00, mc_shipping7=0.00, mc_gross_1=50.00, quantity1=1, mc_gross_2=50.00, quantity2=1, item_number1=, protection_eligibility=Ineligible, mc_gross_3=421.23, quantity3=1, item_number2=, mc_gross_4=55.00, quantity4=1, item_number3=, custom=, mc_gross_5=85.00, quantity5=1, item_number4=, mc_gross_6=80.00, quantity6=1, item_number5=, mc_gross_7=35.00, quantity7=1, item_number6=, item_number7=, business=macons_1361037758_biz@gmail.com, residence_country=US, last_name=Tester, payer_email=maconb_1361037915_per@gmail.com, payment_status=Completed, payment_date=17:54:43 Mar 17, 2013 PDT, transaction_subject=Shopping CartFounders Feast for Founders Feast. Attendee: Gary Founder1Founders Feast for Founders Feast. Attendee: Gary Founder2Donor for Donate. Attendee: Gary Donor12 Day Pass ( + VIP Stein - $10) for Octoberfest Beer Garden. Attendee: Gary FreeCup2 Da, receiver_email=macons_1361037758_biz@gmail.com, mc_fee=22.81, notify_version=3.7, mc_gross=776.23, test_ipn=1, ipn_track_id=e16065399fc7e, 
+IPN Response from gateway Server:
+ VERIFIED
+
+[03/26/2013 1:25 PM] - Errors from IPN Validation:
+
+Using BUILT-IN PHP curl methods
+key = mc_gross
+value = 100.00
+key = protection_eligibility
+value = Ineligible
+key = item_number1
+value = 
+key = tax
+value = 0.00
+key = item_number2
+value = 
+key = payer_id
+value = TZ6KYAJSGQPVQ
+key = payment_date
+value = 10:25:33 Mar 26, 2013 PDT
+key = payment_status
+value = Completed
+key = charset
+value = windows-1252
+key = mc_shipping
+value = 0.00
+key = mc_handling
+value = 0.00
+key = first_name
+value = Matthew
+key = mc_fee
+value = 3.20
+key = notify_version
+value = 3.7
+key = custom
+value = 
+key = payer_status
+value = verified
+key = business
+value = macons_1361037758_biz@gmail.com
+key = num_cart_items
+value = 2
+key = mc_handling1
+value = 0.00
+key = mc_handling2
+value = 0.00
+key = verify_sign
+value = AFcWxV21C7fd0v3bYYYRCpSSRl31AuW0u0jb0dP1O6ntB62E8iVgYvfQ
+key = payer_email
+value = Locke-facilitator@LokkDesign.com
+key = mc_shipping1
+value = 0.00
+key = mc_shipping2
+value = 0.00
+key = tax1
+value = 0.00
+key = tax2
+value = 0.00
+key = txn_id
+value = 69T62241KW084711S
+key = payment_type
+value = instant
+key = payer_business_name
+value = Matthew Crawford\'s Test Store
+key = last_name
+value = Crawford
+key = item_name1
+value = 2 Day Pass - VIP ( + 25oz beer stein in 4 color - $15) for Octoberfest Beer Garden. Attendee: Locke Crawford
+key = receiver_email
+value = macons_1361037758_biz@gmail.com
+key = item_name2
+value = Donor for Donate to Central Georgia Breast Care Center. Attendee: Locke Crawford
+key = payment_fee
+value = 3.20
+key = quantity1
+value = 1
+key = quantity2
+value = 1
+key = receiver_id
+value = F8YBLS4MJL6XW
+key = txn_type
+value = cart
+key = mc_gross_1
+value = 90.00
+key = mc_currency
+value = USD
+key = mc_gross_2
+value = 10.00
+key = residence_country
+value = US
+key = test_ipn
+value = 1
+key = transaction_subject
+value = Shopping Cart2 Day Pass - VIP ( + 25oz beer stein in 4 color - $15) for Octoberfest Beer Garden. Attendee: Locke CrawfordDonor for Donate to Central Georgia Breast Care Center. Attendee: Locke Crawford
+key = payment_gross
+value = 100.00
+key = ipn_track_id
+value = 1bd0579cb4cef
+Success Setting host: https://www.sandbox.paypal.com/cgi-bin/webscr
+Success Setting request type to post
+Success Setting post fields: mc_gross=100.00&amp;protection_eligibility=Ineligible&amp;item_number1=&amp;tax=0.00&amp;item_number2=&amp;payer_id=TZ6KYAJSGQPVQ&amp;payment_date=10%3A25%3A33+Mar+26%2C+2013+PDT&amp;payment_status=Completed&amp;charset=windows-1252&amp;mc_shipping=0.00&amp;mc_handling=0.00&amp;first_name=Matthew&amp;mc_fee=3.20&amp;notify_version=3.7&amp;custom=&amp;payer_status=verified&amp;business=macons_1361037758_biz%40gmail.com&amp;num_cart_items=2&amp;mc_handling1=0.00&amp;mc_handling2=0.00&amp;verify_sign=AFcWxV21C7fd0v3bYYYRCpSSRl31AuW0u0jb0dP1O6ntB62E8iVgYvfQ&amp;payer_email=Locke-facilitator%40LokkDesign.com&amp;mc_shipping1=0.00&amp;mc_shipping2=0.00&amp;tax1=0.00&amp;tax2=0.00&amp;txn_id=69T62241KW084711S&amp;payment_type=instant&amp;payer_business_name=Matthew+Crawford%27s+Test+Store&amp;last_name=Crawford&amp;item_name1=2+Day+Pass+-+VIP+%28+%2B+25oz+beer+stein+in+4+color+-+%2415%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Locke+Crawford&amp;receiver_email=macons_1361037758_biz%40gmail.com&amp;item_name2=Donor+for+Donate+to+Central+Georgia+Breast+Care+Center.+Attendee%3A+Locke+Crawford&amp;payment_fee=3.20&amp;quantity1=1&amp;quantity2=1&amp;receiver_id=F8YBLS4MJL6XW&amp;txn_type=cart&amp;mc_gross_1=90.00&amp;mc_currency=USD&amp;mc_gross_2=10.00&amp;residence_country=US&amp;test_ipn=1&amp;transaction_subject=Shopping+Cart2+Day+Pass+-+VIP+%28+%2B+25oz+beer+stein+in+4+color+-+%2415%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Locke+CrawfordDonor+for+Donate+to+Central+Georgia+Breast+Care+Center.+Attendee%3A+Locke+Crawford&amp;payment_gross=100.00&amp;ipn_track_id=1bd0579cb4cef&amp;cmd=_notify-validate
+Success Setting Fain On Error
+Success Setting return transfer
+Success Setting Timeout
+Success Setting verbose mode
+Errors resulting from the execution of curl transfer: [03/26/2013 1:25 PM] - SUCCESS!
+IPN POST Vars from gateway:
+mc_gross=100.00, protection_eligibility=Ineligible, item_number1=, tax=0.00, item_number2=, payer_id=TZ6KYAJSGQPVQ, payment_date=10:25:33 Mar 26, 2013 PDT, payment_status=Completed, charset=windows-1252, mc_shipping=0.00, mc_handling=0.00, first_name=Matthew, mc_fee=3.20, notify_version=3.7, custom=, payer_status=verified, business=macons_1361037758_biz@gmail.com, num_cart_items=2, mc_handling1=0.00, mc_handling2=0.00, verify_sign=AFcWxV21C7fd0v3bYYYRCpSSRl31AuW0u0jb0dP1O6ntB62E8iVgYvfQ, payer_email=Locke-facilitator@LokkDesign.com, mc_shipping1=0.00, mc_shipping2=0.00, tax1=0.00, tax2=0.00, txn_id=69T62241KW084711S, payment_type=instant, payer_business_name=Matthew Crawford\'s Test Store, last_name=Crawford, item_name1=2 Day Pass - VIP ( + 25oz beer stein in 4 color - $15) for Octoberfest Beer Garden. Attendee: Locke Crawford, receiver_email=macons_1361037758_biz@gmail.com, item_name2=Donor for Donate to Central Georgia Breast Care Center. Attendee: Locke Crawford, payment_fee=3.20, quantity1=1, quantity2=1, receiver_id=F8YBLS4MJL6XW, txn_type=cart, mc_gross_1=90.00, mc_currency=USD, mc_gross_2=10.00, residence_country=US, test_ipn=1, transaction_subject=Shopping Cart2 Day Pass - VIP ( + 25oz beer stein in 4 color - $15) for Octoberfest Beer Garden. Attendee: Locke CrawfordDonor for Donate to Central Georgia Breast Care Center. Attendee: Locke Crawford, payment_gross=100.00, ipn_track_id=1bd0579cb4cef, 
+IPN Response from gateway Server:
+ VERIFIED
+
+[03/26/2013 1:41 PM] - Errors from IPN Validation:
+
+Using BUILT-IN PHP curl methods
+key = mc_gross
+value = 50.00
+key = protection_eligibility
+value = Ineligible
+key = item_number1
+value = 
+key = payer_id
+value = TZ6KYAJSGQPVQ
+key = tax
+value = 0.00
+key = payment_date
+value = 10:41:47 Mar 26, 2013 PDT
+key = payment_status
+value = Completed
+key = charset
+value = windows-1252
+key = mc_shipping
+value = 0.00
+key = mc_handling
+value = 0.00
+key = first_name
+value = Matthew
+key = mc_fee
+value = 1.75
+key = notify_version
+value = 3.7
+key = custom
+value = 
+key = payer_status
+value = verified
+key = business
+value = macons_1361037758_biz@gmail.com
+key = num_cart_items
+value = 1
+key = mc_handling1
+value = 0.00
+key = verify_sign
+value = AFcWxV21C7fd0v3bYYYRCpSSRl31AQADB-85FXHvhWDCeovJJ5dzH-WY
+key = payer_email
+value = Locke-facilitator@LokkDesign.com
+key = mc_shipping1
+value = 0.00
+key = tax1
+value = 0.00
+key = txn_id
+value = 0FU92201DK4003030
+key = payment_type
+value = instant
+key = payer_business_name
+value = Matthew Crawford\'s Test Store
+key = last_name
+value = Crawford
+key = item_name1
+value = Founders Feast for Founders Feast. Attendee: Locke Crawford
+key = receiver_email
+value = macons_1361037758_biz@gmail.com
+key = payment_fee
+value = 1.75
+key = quantity1
+value = 1
+key = receiver_id
+value = F8YBLS4MJL6XW
+key = txn_type
+value = cart
+key = mc_gross_1
+value = 50.00
+key = mc_currency
+value = USD
+key = residence_country
+value = US
+key = test_ipn
+value = 1
+key = transaction_subject
+value = Shopping CartFounders Feast for Founders Feast. Attendee: Locke Crawford
+key = payment_gross
+value = 50.00
+key = ipn_track_id
+value = c47a2d11bbe5d
+Success Setting host: https://www.sandbox.paypal.com/cgi-bin/webscr
+Success Setting request type to post
+Success Setting post fields: mc_gross=50.00&amp;protection_eligibility=Ineligible&amp;item_number1=&amp;payer_id=TZ6KYAJSGQPVQ&amp;tax=0.00&amp;payment_date=10%3A41%3A47+Mar+26%2C+2013+PDT&amp;payment_status=Completed&amp;charset=windows-1252&amp;mc_shipping=0.00&amp;mc_handling=0.00&amp;first_name=Matthew&amp;mc_fee=1.75&amp;notify_version=3.7&amp;custom=&amp;payer_status=verified&amp;business=macons_1361037758_biz%40gmail.com&amp;num_cart_items=1&amp;mc_handling1=0.00&amp;verify_sign=AFcWxV21C7fd0v3bYYYRCpSSRl31AQADB-85FXHvhWDCeovJJ5dzH-WY&amp;payer_email=Locke-facilitator%40LokkDesign.com&amp;mc_shipping1=0.00&amp;tax1=0.00&amp;txn_id=0FU92201DK4003030&amp;payment_type=instant&amp;payer_business_name=Matthew+Crawford%27s+Test+Store&amp;last_name=Crawford&amp;item_name1=Founders+Feast+for+Founders+Feast.+Attendee%3A+Locke+Crawford&amp;receiver_email=macons_1361037758_biz%40gmail.com&amp;payment_fee=1.75&amp;quantity1=1&amp;receiver_id=F8YBLS4MJL6XW&amp;txn_type=cart&amp;mc_gross_1=50.00&amp;mc_currency=USD&amp;residence_country=US&amp;test_ipn=1&amp;transaction_subject=Shopping+CartFounders+Feast+for+Founders+Feast.+Attendee%3A+Locke+Crawford&amp;payment_gross=50.00&amp;ipn_track_id=c47a2d11bbe5d&amp;cmd=_notify-validate
+Success Setting Fain On Error
+Success Setting return transfer
+Success Setting Timeout
+Success Setting verbose mode
+Errors resulting from the execution of curl transfer: [03/26/2013 1:41 PM] - SUCCESS!
+IPN POST Vars from gateway:
+mc_gross=50.00, protection_eligibility=Ineligible, item_number1=, payer_id=TZ6KYAJSGQPVQ, tax=0.00, payment_date=10:41:47 Mar 26, 2013 PDT, payment_status=Completed, charset=windows-1252, mc_shipping=0.00, mc_handling=0.00, first_name=Matthew, mc_fee=1.75, notify_version=3.7, custom=, payer_status=verified, business=macons_1361037758_biz@gmail.com, num_cart_items=1, mc_handling1=0.00, verify_sign=AFcWxV21C7fd0v3bYYYRCpSSRl31AQADB-85FXHvhWDCeovJJ5dzH-WY, payer_email=Locke-facilitator@LokkDesign.com, mc_shipping1=0.00, tax1=0.00, txn_id=0FU92201DK4003030, payment_type=instant, payer_business_name=Matthew Crawford\'s Test Store, last_name=Crawford, item_name1=Founders Feast for Founders Feast. Attendee: Locke Crawford, receiver_email=macons_1361037758_biz@gmail.com, payment_fee=1.75, quantity1=1, receiver_id=F8YBLS4MJL6XW, txn_type=cart, mc_gross_1=50.00, mc_currency=USD, residence_country=US, test_ipn=1, transaction_subject=Shopping CartFounders Feast for Founders Feast. Attendee: Locke Crawford, payment_gross=50.00, ipn_track_id=c47a2d11bbe5d, 
+IPN Response from gateway Server:
+ VERIFIED
+
+[03/26/2013 2:22 PM] - Errors from IPN Validation:
+
+Using BUILT-IN PHP curl methods
+key = first_name
+value = Matthew
+key = mc_shipping
+value = 0.00
+key = mc_currency
+value = USD
+key = payer_status
+value = verified
+key = payment_fee
+value = 5.81
+key = payment_gross
+value = 190.00
+key = mc_handling
+value = 0.00
+key = num_cart_items
+value = 8
+key = txn_type
+value = cart
+key = verify_sign
+value = AhjZYHrJE2uaSnNhd5hen-PGLTMuAcNSJIcsXCzgIInW90txJ.fg3zYb
+key = payer_id
+value = TZ6KYAJSGQPVQ
+key = charset
+value = windows-1252
+key = tax1
+value = 0.00
+key = receiver_id
+value = F8YBLS4MJL6XW
+key = tax2
+value = 0.00
+key = tax3
+value = 0.00
+key = tax4
+value = 0.00
+key = tax5
+value = 0.00
+key = tax6
+value = 0.00
+key = mc_handling1
+value = 0.00
+key = tax7
+value = 0.00
+key = mc_handling2
+value = 0.00
+key = tax8
+value = 0.00
+key = mc_handling3
+value = 0.00
+key = mc_handling4
+value = 0.00
+key = mc_handling5
+value = 0.00
+key = tax
+value = 0.00
+key = mc_handling6
+value = 0.00
+key = item_name1
+value = Founders Feast for Founders Feast. Attendee: Locke Crawford
+key = mc_handling7
+value = 0.00
+key = item_name2
+value = Saturday - 1 Day Pass ( + 16oz beer stein in blue - $10) for Octoberfest Beer Garden. Attendee: Locke Crawford
+key = mc_handling8
+value = 0.00
+key = item_name3
+value = Brunch Ticket for Brewers Brunch. Attendee: Locke Crawford
+key = item_name4
+value = Homebrew Recipe Entry Fee for Homebrew Competition. Attendee: Locke Crawford
+key = payment_type
+value = instant
+key = item_name5
+value = Women CX4, Junior 15-18/10-14 for Cyclo-Cross Bike Race. Attendee: Locke Crawford
+key = item_name6
+value = Entry Fee Per Song for Macon Harmony Singer-Songwriter Competition. Attendee: Locke Crawford
+key = item_name7
+value = Donor for Donate to Central Georgia Breast Care Center. Attendee: Locke Crawford
+key = item_name8
+value = Donor for Donate to L.H. Harris Ecology Center. Attendee: Locke Crawford
+key = mc_shipping1
+value = 0.00
+key = mc_shipping2
+value = 0.00
+key = mc_shipping3
+value = 0.00
+key = txn_id
+value = 80A15567TL620915H
+key = mc_shipping4
+value = 0.00
+key = mc_shipping5
+value = 0.00
+key = mc_shipping6
+value = 0.00
+key = mc_shipping7
+value = 0.00
+key = mc_shipping8
+value = 0.00
+key = mc_gross_1
+value = 50.00
+key = quantity1
+value = 1
+key = mc_gross_2
+value = 35.00
+key = quantity2
+value = 1
+key = item_number1
+value = 
+key = protection_eligibility
+value = Ineligible
+key = mc_gross_3
+value = 30.00
+key = quantity3
+value = 1
+key = item_number2
+value = 
+key = mc_gross_4
+value = 15.00
+key = quantity4
+value = 1
+key = item_number3
+value = 
+key = custom
+value = 
+key = mc_gross_5
+value = 30.00
+key = quantity5
+value = 1
+key = item_number4
+value = 
+key = mc_gross_6
+value = 10.00
+key = quantity6
+value = 1
+key = item_number5
+value = 
+key = mc_gross_7
+value = 10.00
+key = quantity7
+value = 1
+key = item_number6
+value = 
+key = mc_gross_8
+value = 10.00
+key = quantity8
+value = 1
+key = item_number7
+value = 
+key = business
+value = macons_1361037758_biz@gmail.com
+key = item_number8
+value = 
+key = residence_country
+value = US
+key = last_name
+value = Crawford
+key = payer_business_name
+value = Matthew Crawford\'s Test Store
+key = payer_email
+value = Locke-facilitator@LokkDesign.com
+key = payment_status
+value = Completed
+key = payment_date
+value = 11:22:45 Mar 26, 2013 PDT
+key = transaction_subject
+value = Shopping CartFounders Feast for Founders Feast. Attendee: Locke CrawfordSaturday - 1 Day Pass ( + 16oz beer stein in blue - $10) for Octoberfest Beer Garden. Attendee: Locke CrawfordBrunch Ticket for Brewers Brunch. Attendee: Locke CrawfordHomebrew Recipe
+key = receiver_email
+value = macons_1361037758_biz@gmail.com
+key = mc_fee
+value = 5.81
+key = notify_version
+value = 3.7
+key = mc_gross
+value = 190.00
+key = test_ipn
+value = 1
+key = ipn_track_id
+value = d11337e62c117
+Success Setting host: https://www.sandbox.paypal.com/cgi-bin/webscr
+Success Setting request type to post
+Success Setting post fields: first_name=Matthew&amp;mc_shipping=0.00&amp;mc_currency=USD&amp;payer_status=verified&amp;payment_fee=5.81&amp;payment_gross=190.00&amp;mc_handling=0.00&amp;num_cart_items=8&amp;txn_type=cart&amp;verify_sign=AhjZYHrJE2uaSnNhd5hen-PGLTMuAcNSJIcsXCzgIInW90txJ.fg3zYb&amp;payer_id=TZ6KYAJSGQPVQ&amp;charset=windows-1252&amp;tax1=0.00&amp;receiver_id=F8YBLS4MJL6XW&amp;tax2=0.00&amp;tax3=0.00&amp;tax4=0.00&amp;tax5=0.00&amp;tax6=0.00&amp;mc_handling1=0.00&amp;tax7=0.00&amp;mc_handling2=0.00&amp;tax8=0.00&amp;mc_handling3=0.00&amp;mc_handling4=0.00&amp;mc_handling5=0.00&amp;tax=0.00&amp;mc_handling6=0.00&amp;item_name1=Founders+Feast+for+Founders+Feast.+Attendee%3A+Locke+Crawford&amp;mc_handling7=0.00&amp;item_name2=Saturday+-+1+Day+Pass+%28+%2B+16oz+beer+stein+in+blue+-+%2410%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Locke+Crawford&amp;mc_handling8=0.00&amp;item_name3=Brunch+Ticket+for+Brewers+Brunch.+Attendee%3A+Locke+Crawford&amp;item_name4=Homebrew+Recipe+Entry+Fee+for+Homebrew+Competition.+Attendee%3A+Locke+Crawford&amp;payment_type=instant&amp;item_name5=Women+CX4%2C+Junior+15-18%2F10-14+for+Cyclo-Cross+Bike+Race.+Attendee%3A+Locke+Crawford&amp;item_name6=Entry+Fee+Per+Song+for+Macon+Harmony+Singer-Songwriter+Competition.+Attendee%3A+Locke+Crawford&amp;item_name7=Donor+for+Donate+to+Central+Georgia+Breast+Care+Center.+Attendee%3A+Locke+Crawford&amp;item_name8=Donor+for+Donate+to+L.H.+Harris+Ecology+Center.+Attendee%3A+Locke+Crawford&amp;mc_shipping1=0.00&amp;mc_shipping2=0.00&amp;mc_shipping3=0.00&amp;txn_id=80A15567TL620915H&amp;mc_shipping4=0.00&amp;mc_shipping5=0.00&amp;mc_shipping6=0.00&amp;mc_shipping7=0.00&amp;mc_shipping8=0.00&amp;mc_gross_1=50.00&amp;quantity1=1&amp;mc_gross_2=35.00&amp;quantity2=1&amp;item_number1=&amp;protection_eligibility=Ineligible&amp;mc_gross_3=30.00&amp;quantity3=1&amp;item_number2=&amp;mc_gross_4=15.00&amp;quantity4=1&amp;item_number3=&amp;custom=&amp;mc_gross_5=30.00&amp;quantity5=1&amp;item_number4=&amp;mc_gross_6=10.00&amp;quantity6=1&amp;item_number5=&amp;mc_gross_7=10.00&amp;quantity7=1&amp;item_number6=&amp;mc_gross_8=10.00&amp;quantity8=1&amp;item_number7=&amp;business=macons_1361037758_biz%40gmail.com&amp;item_number8=&amp;residence_country=US&amp;last_name=Crawford&amp;payer_business_name=Matthew+Crawford%27s+Test+Store&amp;payer_email=Locke-facilitator%40LokkDesign.com&amp;payment_status=Completed&amp;payment_date=11%3A22%3A45+Mar+26%2C+2013+PDT&amp;transaction_subject=Shopping+CartFounders+Feast+for+Founders+Feast.+Attendee%3A+Locke+CrawfordSaturday+-+1+Day+Pass+%28+%2B+16oz+beer+stein+in+blue+-+%2410%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Locke+CrawfordBrunch+Ticket+for+Brewers+Brunch.+Attendee%3A+Locke+CrawfordHomebrew+Recipe&amp;receiver_email=macons_1361037758_biz%40gmail.com&amp;mc_fee=5.81&amp;notify_version=3.7&amp;mc_gross=190.00&amp;test_ipn=1&amp;ipn_track_id=d11337e62c117&amp;cmd=_notify-validate
+Success Setting Fain On Error
+Success Setting return transfer
+Success Setting Timeout
+Success Setting verbose mode
+Errors resulting from the execution of curl transfer: [03/26/2013 2:22 PM] - SUCCESS!
+IPN POST Vars from gateway:
+first_name=Matthew, mc_shipping=0.00, mc_currency=USD, payer_status=verified, payment_fee=5.81, payment_gross=190.00, mc_handling=0.00, num_cart_items=8, txn_type=cart, verify_sign=AhjZYHrJE2uaSnNhd5hen-PGLTMuAcNSJIcsXCzgIInW90txJ.fg3zYb, payer_id=TZ6KYAJSGQPVQ, charset=windows-1252, tax1=0.00, receiver_id=F8YBLS4MJL6XW, tax2=0.00, tax3=0.00, tax4=0.00, tax5=0.00, tax6=0.00, mc_handling1=0.00, tax7=0.00, mc_handling2=0.00, tax8=0.00, mc_handling3=0.00, mc_handling4=0.00, mc_handling5=0.00, tax=0.00, mc_handling6=0.00, item_name1=Founders Feast for Founders Feast. Attendee: Locke Crawford, mc_handling7=0.00, item_name2=Saturday - 1 Day Pass ( + 16oz beer stein in blue - $10) for Octoberfest Beer Garden. Attendee: Locke Crawford, mc_handling8=0.00, item_name3=Brunch Ticket for Brewers Brunch. Attendee: Locke Crawford, item_name4=Homebrew Recipe Entry Fee for Homebrew Competition. Attendee: Locke Crawford, payment_type=instant, item_name5=Women CX4, Junior 15-18/10-14 for Cyclo-Cross Bike Race. Attendee: Locke Crawford, item_name6=Entry Fee Per Song for Macon Harmony Singer-Songwriter Competition. Attendee: Locke Crawford, item_name7=Donor for Donate to Central Georgia Breast Care Center. Attendee: Locke Crawford, item_name8=Donor for Donate to L.H. Harris Ecology Center. Attendee: Locke Crawford, mc_shipping1=0.00, mc_shipping2=0.00, mc_shipping3=0.00, txn_id=80A15567TL620915H, mc_shipping4=0.00, mc_shipping5=0.00, mc_shipping6=0.00, mc_shipping7=0.00, mc_shipping8=0.00, mc_gross_1=50.00, quantity1=1, mc_gross_2=35.00, quantity2=1, item_number1=, protection_eligibility=Ineligible, mc_gross_3=30.00, quantity3=1, item_number2=, mc_gross_4=15.00, quantity4=1, item_number3=, custom=, mc_gross_5=30.00, quantity5=1, item_number4=, mc_gross_6=10.00, quantity6=1, item_number5=, mc_gross_7=10.00, quantity7=1, item_number6=, mc_gross_8=10.00, quantity8=1, item_number7=, business=macons_1361037758_biz@gmail.com, item_number8=, residence_country=US, last_name=Crawford, payer_business_name=Matthew Crawford\'s Test Store, payer_email=Locke-facilitator@LokkDesign.com, payment_status=Completed, payment_date=11:22:45 Mar 26, 2013 PDT, transaction_subject=Shopping CartFounders Feast for Founders Feast. Attendee: Locke CrawfordSaturday - 1 Day Pass ( + 16oz beer stein in blue - $10) for Octoberfest Beer Garden. Attendee: Locke CrawfordBrunch Ticket for Brewers Brunch. Attendee: Locke CrawfordHomebrew Recipe, receiver_email=macons_1361037758_biz@gmail.com, mc_fee=5.81, notify_version=3.7, mc_gross=190.00, test_ipn=1, ipn_track_id=d11337e62c117, 
+IPN Response from gateway Server:
+ VERIFIED
+
+[03/26/2013 2:53 PM] - Errors from IPN Validation:
+
+Using BUILT-IN PHP curl methods
+key = mc_gross
+value = 60.00
+key = protection_eligibility
+value = Ineligible
+key = item_number1
+value = 
+key = tax
+value = 0.00
+key = item_number2
+value = 
+key = payer_id
+value = TZ6KYAJSGQPVQ
+key = payment_date
+value = 11:53:34 Mar 26, 2013 PDT
+key = payment_status
+value = Completed
+key = charset
+value = windows-1252
+key = mc_shipping
+value = 0.00
+key = mc_handling
+value = 0.00
+key = first_name
+value = Matthew
+key = mc_fee
+value = 2.04
+key = notify_version
+value = 3.7
+key = custom
+value = 
+key = payer_status
+value = verified
+key = business
+value = macons_1361037758_biz@gmail.com
+key = num_cart_items
+value = 2
+key = mc_handling1
+value = 0.00
+key = mc_handling2
+value = 0.00
+key = verify_sign
+value = AkTQgOeZZ0L3zkWPj-N42rBOWF7bAHvMF3LeMy-YiIoV1NwNi8z2yT0-
+key = payer_email
+value = Locke-facilitator@LokkDesign.com
+key = mc_shipping1
+value = 0.00
+key = mc_shipping2
+value = 0.00
+key = tax1
+value = 0.00
+key = tax2
+value = 0.00
+key = txn_id
+value = 1GX21270ES516140X
+key = payment_type
+value = instant
+key = payer_business_name
+value = Matthew Crawford\'s Test Store
+key = last_name
+value = Crawford
+key = item_name1
+value = Elite Masters 35+/45+ (1,2,3) for Cyclo-Cross Bike Race. Attendee: Matthew Crawford
+key = receiver_email
+value = macons_1361037758_biz@gmail.com
+key = item_name2
+value = Men CX4, Masters CX4 for Cyclo-Cross Bike Race. Attendee: Matthew Crawford
+key = payment_fee
+value = 2.04
+key = quantity1
+value = 1
+key = quantity2
+value = 1
+key = receiver_id
+value = F8YBLS4MJL6XW
+key = txn_type
+value = cart
+key = mc_gross_1
+value = 30.00
+key = mc_currency
+value = USD
+key = mc_gross_2
+value = 30.00
+key = residence_country
+value = US
+key = test_ipn
+value = 1
+key = transaction_subject
+value = Shopping CartElite Masters 35+/45+ (1,2,3) for Cyclo-Cross Bike Race. Attendee: Matthew CrawfordMen CX4, Masters CX4 for Cyclo-Cross Bike Race. Attendee: Matthew Crawford
+key = payment_gross
+value = 60.00
+key = ipn_track_id
+value = bac9f9e0444e8
+Success Setting host: https://www.sandbox.paypal.com/cgi-bin/webscr
+Success Setting request type to post
+Success Setting post fields: mc_gross=60.00&amp;protection_eligibility=Ineligible&amp;item_number1=&amp;tax=0.00&amp;item_number2=&amp;payer_id=TZ6KYAJSGQPVQ&amp;payment_date=11%3A53%3A34+Mar+26%2C+2013+PDT&amp;payment_status=Completed&amp;charset=windows-1252&amp;mc_shipping=0.00&amp;mc_handling=0.00&amp;first_name=Matthew&amp;mc_fee=2.04&amp;notify_version=3.7&amp;custom=&amp;payer_status=verified&amp;business=macons_1361037758_biz%40gmail.com&amp;num_cart_items=2&amp;mc_handling1=0.00&amp;mc_handling2=0.00&amp;verify_sign=AkTQgOeZZ0L3zkWPj-N42rBOWF7bAHvMF3LeMy-YiIoV1NwNi8z2yT0-&amp;payer_email=Locke-facilitator%40LokkDesign.com&amp;mc_shipping1=0.00&amp;mc_shipping2=0.00&amp;tax1=0.00&amp;tax2=0.00&amp;txn_id=1GX21270ES516140X&amp;payment_type=instant&amp;payer_business_name=Matthew+Crawford%27s+Test+Store&amp;last_name=Crawford&amp;item_name1=Elite+Masters+35%2B%2F45%2B+%281%2C2%2C3%29+for+Cyclo-Cross+Bike+Race.+Attendee%3A+Matthew+Crawford&amp;receiver_email=macons_1361037758_biz%40gmail.com&amp;item_name2=Men+CX4%2C+Masters+CX4+for+Cyclo-Cross+Bike+Race.+Attendee%3A+Matthew+Crawford&amp;payment_fee=2.04&amp;quantity1=1&amp;quantity2=1&amp;receiver_id=F8YBLS4MJL6XW&amp;txn_type=cart&amp;mc_gross_1=30.00&amp;mc_currency=USD&amp;mc_gross_2=30.00&amp;residence_country=US&amp;test_ipn=1&amp;transaction_subject=Shopping+CartElite+Masters+35%2B%2F45%2B+%281%2C2%2C3%29+for+Cyclo-Cross+Bike+Race.+Attendee%3A+Matthew+CrawfordMen+CX4%2C+Masters+CX4+for+Cyclo-Cross+Bike+Race.+Attendee%3A+Matthew+Crawford&amp;payment_gross=60.00&amp;ipn_track_id=bac9f9e0444e8&amp;cmd=_notify-validate
+Success Setting Fain On Error
+Success Setting return transfer
+Success Setting Timeout
+Success Setting verbose mode
+Errors resulting from the execution of curl transfer: [03/26/2013 2:53 PM] - SUCCESS!
+IPN POST Vars from gateway:
+mc_gross=60.00, protection_eligibility=Ineligible, item_number1=, tax=0.00, item_number2=, payer_id=TZ6KYAJSGQPVQ, payment_date=11:53:34 Mar 26, 2013 PDT, payment_status=Completed, charset=windows-1252, mc_shipping=0.00, mc_handling=0.00, first_name=Matthew, mc_fee=2.04, notify_version=3.7, custom=, payer_status=verified, business=macons_1361037758_biz@gmail.com, num_cart_items=2, mc_handling1=0.00, mc_handling2=0.00, verify_sign=AkTQgOeZZ0L3zkWPj-N42rBOWF7bAHvMF3LeMy-YiIoV1NwNi8z2yT0-, payer_email=Locke-facilitator@LokkDesign.com, mc_shipping1=0.00, mc_shipping2=0.00, tax1=0.00, tax2=0.00, txn_id=1GX21270ES516140X, payment_type=instant, payer_business_name=Matthew Crawford\'s Test Store, last_name=Crawford, item_name1=Elite Masters 35+/45+ (1,2,3) for Cyclo-Cross Bike Race. Attendee: Matthew Crawford, receiver_email=macons_1361037758_biz@gmail.com, item_name2=Men CX4, Masters CX4 for Cyclo-Cross Bike Race. Attendee: Matthew Crawford, payment_fee=2.04, quantity1=1, quantity2=1, receiver_id=F8YBLS4MJL6XW, txn_type=cart, mc_gross_1=30.00, mc_currency=USD, mc_gross_2=30.00, residence_country=US, test_ipn=1, transaction_subject=Shopping CartElite Masters 35+/45+ (1,2,3) for Cyclo-Cross Bike Race. Attendee: Matthew CrawfordMen CX4, Masters CX4 for Cyclo-Cross Bike Race. Attendee: Matthew Crawford, payment_gross=60.00, ipn_track_id=bac9f9e0444e8, 
+IPN Response from gateway Server:
+ VERIFIED
+
+[03/26/2013 3:14 PM] - Errors from IPN Validation:
+
+Using BUILT-IN PHP curl methods
+key = mc_gross
+value = 10.00
+key = protection_eligibility
+value = Ineligible
+key = item_number1
+value = 
+key = payer_id
+value = TZ6KYAJSGQPVQ
+key = tax
+value = 0.00
+key = payment_date
+value = 12:14:00 Mar 26, 2013 PDT
+key = payment_status
+value = Completed
+key = charset
+value = windows-1252
+key = mc_shipping
+value = 0.00
+key = mc_handling
+value = 0.00
+key = first_name
+value = Matthew
+key = mc_fee
+value = 0.59
+key = notify_version
+value = 3.7
+key = custom
+value = 
+key = payer_status
+value = verified
+key = business
+value = macons_1361037758_biz@gmail.com
+key = num_cart_items
+value = 1
+key = mc_handling1
+value = 0.00
+key = verify_sign
+value = Ag7LrKr.J3Gx1x1LCNOLAydhJ-IjADDzeYvVSrVfaRAdARyJOZH32re.
+key = payer_email
+value = Locke-facilitator@LokkDesign.com
+key = mc_shipping1
+value = 0.00
+key = tax1
+value = 0.00
+key = txn_id
+value = 7S898815CX895662C
+key = payment_type
+value = instant
+key = payer_business_name
+value = Matthew Crawford\'s Test Store
+key = last_name
+value = Crawford
+key = item_name1
+value = Entry Fee Per Song for Macon Harmony Singer-Songwriter Competition. Attendee: Testing Testerson
+key = receiver_email
+value = macons_1361037758_biz@gmail.com
+key = payment_fee
+value = 0.59
+key = quantity1
+value = 1
+key = receiver_id
+value = F8YBLS4MJL6XW
+key = txn_type
+value = cart
+key = mc_gross_1
+value = 10.00
+key = mc_currency
+value = USD
+key = residence_country
+value = US
+key = test_ipn
+value = 1
+key = transaction_subject
+value = Shopping CartEntry Fee Per Song for Macon Harmony Singer-Songwriter Competition. Attendee: Testing Testerson
+key = payment_gross
+value = 10.00
+key = ipn_track_id
+value = bada3acba03a6
+Success Setting host: https://www.sandbox.paypal.com/cgi-bin/webscr
+Success Setting request type to post
+Success Setting post fields: mc_gross=10.00&amp;protection_eligibility=Ineligible&amp;item_number1=&amp;payer_id=TZ6KYAJSGQPVQ&amp;tax=0.00&amp;payment_date=12%3A14%3A00+Mar+26%2C+2013+PDT&amp;payment_status=Completed&amp;charset=windows-1252&amp;mc_shipping=0.00&amp;mc_handling=0.00&amp;first_name=Matthew&amp;mc_fee=0.59&amp;notify_version=3.7&amp;custom=&amp;payer_status=verified&amp;business=macons_1361037758_biz%40gmail.com&amp;num_cart_items=1&amp;mc_handling1=0.00&amp;verify_sign=Ag7LrKr.J3Gx1x1LCNOLAydhJ-IjADDzeYvVSrVfaRAdARyJOZH32re.&amp;payer_email=Locke-facilitator%40LokkDesign.com&amp;mc_shipping1=0.00&amp;tax1=0.00&amp;txn_id=7S898815CX895662C&amp;payment_type=instant&amp;payer_business_name=Matthew+Crawford%27s+Test+Store&amp;last_name=Crawford&amp;item_name1=Entry+Fee+Per+Song+for+Macon+Harmony+Singer-Songwriter+Competition.+Attendee%3A+Testing+Testerson&amp;receiver_email=macons_1361037758_biz%40gmail.com&amp;payment_fee=0.59&amp;quantity1=1&amp;receiver_id=F8YBLS4MJL6XW&amp;txn_type=cart&amp;mc_gross_1=10.00&amp;mc_currency=USD&amp;residence_country=US&amp;test_ipn=1&amp;transaction_subject=Shopping+CartEntry+Fee+Per+Song+for+Macon+Harmony+Singer-Songwriter+Competition.+Attendee%3A+Testing+Testerson&amp;payment_gross=10.00&amp;ipn_track_id=bada3acba03a6&amp;cmd=_notify-validate
+Success Setting Fain On Error
+Success Setting return transfer
+Success Setting Timeout
+Success Setting verbose mode
+Errors resulting from the execution of curl transfer: [03/26/2013 3:14 PM] - SUCCESS!
+IPN POST Vars from gateway:
+mc_gross=10.00, protection_eligibility=Ineligible, item_number1=, payer_id=TZ6KYAJSGQPVQ, tax=0.00, payment_date=12:14:00 Mar 26, 2013 PDT, payment_status=Completed, charset=windows-1252, mc_shipping=0.00, mc_handling=0.00, first_name=Matthew, mc_fee=0.59, notify_version=3.7, custom=, payer_status=verified, business=macons_1361037758_biz@gmail.com, num_cart_items=1, mc_handling1=0.00, verify_sign=Ag7LrKr.J3Gx1x1LCNOLAydhJ-IjADDzeYvVSrVfaRAdARyJOZH32re., payer_email=Locke-facilitator@LokkDesign.com, mc_shipping1=0.00, tax1=0.00, txn_id=7S898815CX895662C, payment_type=instant, payer_business_name=Matthew Crawford\'s Test Store, last_name=Crawford, item_name1=Entry Fee Per Song for Macon Harmony Singer-Songwriter Competition. Attendee: Testing Testerson, receiver_email=macons_1361037758_biz@gmail.com, payment_fee=0.59, quantity1=1, receiver_id=F8YBLS4MJL6XW, txn_type=cart, mc_gross_1=10.00, mc_currency=USD, residence_country=US, test_ipn=1, transaction_subject=Shopping CartEntry Fee Per Song for Macon Harmony Singer-Songwriter Competition. Attendee: Testing Testerson, payment_gross=10.00, ipn_track_id=bada3acba03a6, 
+IPN Response from gateway Server:
+ VERIFIED
+
+[03/26/2013 3:20 PM] - Errors from IPN Validation:
+
+Using BUILT-IN PHP curl methods
+key = mc_gross
+value = 65.00
+key = protection_eligibility
+value = Ineligible
+key = item_number1
+value = 
+key = tax
+value = 0.00
+key = item_number2
+value = 
+key = payer_id
+value = TZ6KYAJSGQPVQ
+key = payment_date
+value = 12:20:00 Mar 26, 2013 PDT
+key = payment_status
+value = Completed
+key = charset
+value = windows-1252
+key = mc_shipping
+value = 0.00
+key = mc_handling
+value = 0.00
+key = first_name
+value = Matthew
+key = mc_fee
+value = 2.19
+key = notify_version
+value = 3.7
+key = custom
+value = 
+key = payer_status
+value = verified
+key = business
+value = macons_1361037758_biz@gmail.com
+key = num_cart_items
+value = 2
+key = mc_handling1
+value = 0.00
+key = mc_handling2
+value = 0.00
+key = verify_sign
+value = An5ns1Kso7MWUdW4ErQKJJJ4qi4-AyDi9G3lUHWezVYWAB7jT1kgxZgv
+key = payer_email
+value = Locke-facilitator@LokkDesign.com
+key = mc_shipping1
+value = 0.00
+key = mc_shipping2
+value = 0.00
+key = tax1
+value = 0.00
+key = tax2
+value = 0.00
+key = txn_id
+value = 4CL09598TT880912S
+key = payment_type
+value = instant
+key = payer_business_name
+value = Matthew Crawford\'s Test Store
+key = last_name
+value = Crawford
+key = item_name1
+value = 2 Day Pass ( + 16oz beer stein in pink - $10) for Octoberfest Beer Garden. Attendee: John Doe
+key = receiver_email
+value = macons_1361037758_biz@gmail.com
+key = item_name2
+value = Entry Fee Per Song for Macon Harmony Singer-Songwriter Competition. Attendee: John Doe
+key = payment_fee
+value = 2.19
+key = quantity1
+value = 1
+key = quantity2
+value = 1
+key = receiver_id
+value = F8YBLS4MJL6XW
+key = txn_type
+value = cart
+key = mc_gross_1
+value = 55.00
+key = mc_currency
+value = USD
+key = mc_gross_2
+value = 10.00
+key = residence_country
+value = US
+key = test_ipn
+value = 1
+key = transaction_subject
+value = Shopping Cart2 Day Pass ( + 16oz beer stein in pink - $10) for Octoberfest Beer Garden. Attendee: John DoeEntry Fee Per Song for Macon Harmony Singer-Songwriter Competition. Attendee: John Doe
+key = payment_gross
+value = 65.00
+key = ipn_track_id
+value = 6d31bd3f869ed
+Success Setting host: https://www.sandbox.paypal.com/cgi-bin/webscr
+Success Setting request type to post
+Success Setting post fields: mc_gross=65.00&amp;protection_eligibility=Ineligible&amp;item_number1=&amp;tax=0.00&amp;item_number2=&amp;payer_id=TZ6KYAJSGQPVQ&amp;payment_date=12%3A20%3A00+Mar+26%2C+2013+PDT&amp;payment_status=Completed&amp;charset=windows-1252&amp;mc_shipping=0.00&amp;mc_handling=0.00&amp;first_name=Matthew&amp;mc_fee=2.19&amp;notify_version=3.7&amp;custom=&amp;payer_status=verified&amp;business=macons_1361037758_biz%40gmail.com&amp;num_cart_items=2&amp;mc_handling1=0.00&amp;mc_handling2=0.00&amp;verify_sign=An5ns1Kso7MWUdW4ErQKJJJ4qi4-AyDi9G3lUHWezVYWAB7jT1kgxZgv&amp;payer_email=Locke-facilitator%40LokkDesign.com&amp;mc_shipping1=0.00&amp;mc_shipping2=0.00&amp;tax1=0.00&amp;tax2=0.00&amp;txn_id=4CL09598TT880912S&amp;payment_type=instant&amp;payer_business_name=Matthew+Crawford%27s+Test+Store&amp;last_name=Crawford&amp;item_name1=2+Day+Pass+%28+%2B+16oz+beer+stein+in+pink+-+%2410%29+for+Octoberfest+Beer+Garden.+Attendee%3A+John+Doe&amp;receiver_email=macons_1361037758_biz%40gmail.com&amp;item_name2=Entry+Fee+Per+Song+for+Macon+Harmony+Singer-Songwriter+Competition.+Attendee%3A+John+Doe&amp;payment_fee=2.19&amp;quantity1=1&amp;quantity2=1&amp;receiver_id=F8YBLS4MJL6XW&amp;txn_type=cart&amp;mc_gross_1=55.00&amp;mc_currency=USD&amp;mc_gross_2=10.00&amp;residence_country=US&amp;test_ipn=1&amp;transaction_subject=Shopping+Cart2+Day+Pass+%28+%2B+16oz+beer+stein+in+pink+-+%2410%29+for+Octoberfest+Beer+Garden.+Attendee%3A+John+DoeEntry+Fee+Per+Song+for+Macon+Harmony+Singer-Songwriter+Competition.+Attendee%3A+John+Doe&amp;payment_gross=65.00&amp;ipn_track_id=6d31bd3f869ed&amp;cmd=_notify-validate
+Success Setting Fain On Error
+Success Setting return transfer
+Success Setting Timeout
+Success Setting verbose mode
+Errors resulting from the execution of curl transfer: [03/26/2013 3:20 PM] - SUCCESS!
+IPN POST Vars from gateway:
+mc_gross=65.00, protection_eligibility=Ineligible, item_number1=, tax=0.00, item_number2=, payer_id=TZ6KYAJSGQPVQ, payment_date=12:20:00 Mar 26, 2013 PDT, payment_status=Completed, charset=windows-1252, mc_shipping=0.00, mc_handling=0.00, first_name=Matthew, mc_fee=2.19, notify_version=3.7, custom=, payer_status=verified, business=macons_1361037758_biz@gmail.com, num_cart_items=2, mc_handling1=0.00, mc_handling2=0.00, verify_sign=An5ns1Kso7MWUdW4ErQKJJJ4qi4-AyDi9G3lUHWezVYWAB7jT1kgxZgv, payer_email=Locke-facilitator@LokkDesign.com, mc_shipping1=0.00, mc_shipping2=0.00, tax1=0.00, tax2=0.00, txn_id=4CL09598TT880912S, payment_type=instant, payer_business_name=Matthew Crawford\'s Test Store, last_name=Crawford, item_name1=2 Day Pass ( + 16oz beer stein in pink - $10) for Octoberfest Beer Garden. Attendee: John Doe, receiver_email=macons_1361037758_biz@gmail.com, item_name2=Entry Fee Per Song for Macon Harmony Singer-Songwriter Competition. Attendee: John Doe, payment_fee=2.19, quantity1=1, quantity2=1, receiver_id=F8YBLS4MJL6XW, txn_type=cart, mc_gross_1=55.00, mc_currency=USD, mc_gross_2=10.00, residence_country=US, test_ipn=1, transaction_subject=Shopping Cart2 Day Pass ( + 16oz beer stein in pink - $10) for Octoberfest Beer Garden. Attendee: John DoeEntry Fee Per Song for Macon Harmony Singer-Songwriter Competition. Attendee: John Doe, payment_gross=65.00, ipn_track_id=6d31bd3f869ed, 
+IPN Response from gateway Server:
+ VERIFIED
+
+[03/26/2013 3:26 PM] - Errors from IPN Validation:
+
+Using BUILT-IN PHP curl methods
+key = mc_gross
+value = 55.00
+key = protection_eligibility
+value = Ineligible
+key = item_number1
+value = 
+key = tax
+value = 0.00
+key = item_number2
+value = 
+key = payer_id
+value = TZ6KYAJSGQPVQ
+key = item_number3
+value = 
+key = payment_date
+value = 12:26:40 Mar 26, 2013 PDT
+key = payment_status
+value = Completed
+key = charset
+value = windows-1252
+key = mc_shipping
+value = 0.00
+key = mc_handling
+value = 0.00
+key = first_name
+value = Matthew
+key = mc_fee
+value = 1.90
+key = notify_version
+value = 3.7
+key = custom
+value = 
+key = payer_status
+value = verified
+key = business
+value = macons_1361037758_biz@gmail.com
+key = num_cart_items
+value = 3
+key = mc_handling1
+value = 0.00
+key = mc_handling2
+value = 0.00
+key = mc_handling3
+value = 0.00
+key = verify_sign
+value = AyivQ16DCHR3k3f5VQR2fREx5cmUATB4XQ9HNe0eGqMQNe4kRhXk0AKt
+key = payer_email
+value = Locke-facilitator@LokkDesign.com
+key = mc_shipping1
+value = 0.00
+key = mc_shipping2
+value = 0.00
+key = mc_shipping3
+value = 0.00
+key = tax1
+value = 0.00
+key = tax2
+value = 0.00
+key = tax3
+value = 0.00
+key = txn_id
+value = 2PK93757EW586300N
+key = payment_type
+value = instant
+key = payer_business_name
+value = Matthew Crawford\'s Test Store
+key = last_name
+value = Crawford
+key = item_name1
+value = Saturday - 1 Day Pass ( + 16oz beer stein in pink - $10) for Octoberfest Beer Garden. Attendee: Jane Doe
+key = receiver_email
+value = macons_1361037758_biz@gmail.com
+key = item_name2
+value = Entry Fee Per Song for Macon Harmony Singer-Songwriter Competition. Attendee: Jane Doe
+key = payment_fee
+value = 1.90
+key = item_name3
+value = Entry Fee Per Song for Macon Harmony Singer-Songwriter Competition. Attendee: Jane Doe
+key = quantity1
+value = 1
+key = quantity2
+value = 1
+key = receiver_id
+value = F8YBLS4MJL6XW
+key = quantity3
+value = 1
+key = txn_type
+value = cart
+key = mc_gross_1
+value = 35.00
+key = mc_currency
+value = USD
+key = mc_gross_2
+value = 10.00
+key = mc_gross_3
+value = 10.00
+key = residence_country
+value = US
+key = test_ipn
+value = 1
+key = transaction_subject
+value = Shopping CartSaturday - 1 Day Pass ( + 16oz beer stein in pink - $10) for Octoberfest Beer Garden. Attendee: Jane DoeEntry Fee Per Song for Macon Harmony Singer-Songwriter Competition. Attendee: Jane DoeEntry Fee Per Song for Macon Harmony Singer-Songwrit
+key = payment_gross
+value = 55.00
+key = ipn_track_id
+value = ce4ca4a4bc144
+Success Setting host: https://www.sandbox.paypal.com/cgi-bin/webscr
+Success Setting request type to post
+Success Setting post fields: mc_gross=55.00&amp;protection_eligibility=Ineligible&amp;item_number1=&amp;tax=0.00&amp;item_number2=&amp;payer_id=TZ6KYAJSGQPVQ&amp;item_number3=&amp;payment_date=12%3A26%3A40+Mar+26%2C+2013+PDT&amp;payment_status=Completed&amp;charset=windows-1252&amp;mc_shipping=0.00&amp;mc_handling=0.00&amp;first_name=Matthew&amp;mc_fee=1.90&amp;notify_version=3.7&amp;custom=&amp;payer_status=verified&amp;business=macons_1361037758_biz%40gmail.com&amp;num_cart_items=3&amp;mc_handling1=0.00&amp;mc_handling2=0.00&amp;mc_handling3=0.00&amp;verify_sign=AyivQ16DCHR3k3f5VQR2fREx5cmUATB4XQ9HNe0eGqMQNe4kRhXk0AKt&amp;payer_email=Locke-facilitator%40LokkDesign.com&amp;mc_shipping1=0.00&amp;mc_shipping2=0.00&amp;mc_shipping3=0.00&amp;tax1=0.00&amp;tax2=0.00&amp;tax3=0.00&amp;txn_id=2PK93757EW586300N&amp;payment_type=instant&amp;payer_business_name=Matthew+Crawford%27s+Test+Store&amp;last_name=Crawford&amp;item_name1=Saturday+-+1+Day+Pass+%28+%2B+16oz+beer+stein+in+pink+-+%2410%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Jane+Doe&amp;receiver_email=macons_1361037758_biz%40gmail.com&amp;item_name2=Entry+Fee+Per+Song+for+Macon+Harmony+Singer-Songwriter+Competition.+Attendee%3A+Jane+Doe&amp;payment_fee=1.90&amp;item_name3=Entry+Fee+Per+Song+for+Macon+Harmony+Singer-Songwriter+Competition.+Attendee%3A+Jane+Doe&amp;quantity1=1&amp;quantity2=1&amp;receiver_id=F8YBLS4MJL6XW&amp;quantity3=1&amp;txn_type=cart&amp;mc_gross_1=35.00&amp;mc_currency=USD&amp;mc_gross_2=10.00&amp;mc_gross_3=10.00&amp;residence_country=US&amp;test_ipn=1&amp;transaction_subject=Shopping+CartSaturday+-+1+Day+Pass+%28+%2B+16oz+beer+stein+in+pink+-+%2410%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Jane+DoeEntry+Fee+Per+Song+for+Macon+Harmony+Singer-Songwriter+Competition.+Attendee%3A+Jane+DoeEntry+Fee+Per+Song+for+Macon+Harmony+Singer-Songwrit&amp;payment_gross=55.00&amp;ipn_track_id=ce4ca4a4bc144&amp;cmd=_notify-validate
+Success Setting Fain On Error
+Success Setting return transfer
+Success Setting Timeout
+Success Setting verbose mode
+Errors resulting from the execution of curl transfer: [03/26/2013 3:26 PM] - SUCCESS!
+IPN POST Vars from gateway:
+mc_gross=55.00, protection_eligibility=Ineligible, item_number1=, tax=0.00, item_number2=, payer_id=TZ6KYAJSGQPVQ, item_number3=, payment_date=12:26:40 Mar 26, 2013 PDT, payment_status=Completed, charset=windows-1252, mc_shipping=0.00, mc_handling=0.00, first_name=Matthew, mc_fee=1.90, notify_version=3.7, custom=, payer_status=verified, business=macons_1361037758_biz@gmail.com, num_cart_items=3, mc_handling1=0.00, mc_handling2=0.00, mc_handling3=0.00, verify_sign=AyivQ16DCHR3k3f5VQR2fREx5cmUATB4XQ9HNe0eGqMQNe4kRhXk0AKt, payer_email=Locke-facilitator@LokkDesign.com, mc_shipping1=0.00, mc_shipping2=0.00, mc_shipping3=0.00, tax1=0.00, tax2=0.00, tax3=0.00, txn_id=2PK93757EW586300N, payment_type=instant, payer_business_name=Matthew Crawford\'s Test Store, last_name=Crawford, item_name1=Saturday - 1 Day Pass ( + 16oz beer stein in pink - $10) for Octoberfest Beer Garden. Attendee: Jane Doe, receiver_email=macons_1361037758_biz@gmail.com, item_name2=Entry Fee Per Song for Macon Harmony Singer-Songwriter Competition. Attendee: Jane Doe, payment_fee=1.90, item_name3=Entry Fee Per Song for Macon Harmony Singer-Songwriter Competition. Attendee: Jane Doe, quantity1=1, quantity2=1, receiver_id=F8YBLS4MJL6XW, quantity3=1, txn_type=cart, mc_gross_1=35.00, mc_currency=USD, mc_gross_2=10.00, mc_gross_3=10.00, residence_country=US, test_ipn=1, transaction_subject=Shopping CartSaturday - 1 Day Pass ( + 16oz beer stein in pink - $10) for Octoberfest Beer Garden. Attendee: Jane DoeEntry Fee Per Song for Macon Harmony Singer-Songwriter Competition. Attendee: Jane DoeEntry Fee Per Song for Macon Harmony Singer-Songwrit, payment_gross=55.00, ipn_track_id=ce4ca4a4bc144, 
+IPN Response from gateway Server:
+ VERIFIED
+

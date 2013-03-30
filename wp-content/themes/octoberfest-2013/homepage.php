@@ -33,11 +33,15 @@
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <script type="text/javascript" src="//use.typekit.net/aqp8yiy.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<link rel="Stylesheet" type="text/css" href="<?php bloginfo('template_url'); ?>/css/smoothDivScroll.css" />
 <?php wp_head(); ?>
 </head>
 <body>
 <!-- header START -->
 <div id="contentWrapper">
+		<div id="topCartButtons">
+		<a id="topCartArrows" href="<?php echo site_url(); ?>/about/home/">About Octoberfest</a>
+	</div>
 		<a id="homeLogo" href="<?php echo get_permalink( 56 ); ?>" title="Come Celebrate!"></a>
 	<div id="hiddenHomeLogo">
 		<img src="<?php bloginfo('template_url'); ?>/images/MaconOctoberfest-Logo2013.png" alt="<?php bloginfo('name'); ?>" />
@@ -51,11 +55,11 @@
   <?php endif; ?>
   <div id="homeButtonsWrapper">
   	<div id="homeButtons">
-  		<a href="#" id="buyTicketsHome" title="Buy Tickets">
+  		<a href="<?php echo site_url(); ?>/buy-tickets/" id="buyTicketsHome" title="Buy Tickets">
   		</a>
-  		<a href="#" id="registerHome" title="Register for Competitions">
+  		<a href="<?php echo site_url(); ?>/register/" id="registerHome" title="Register for Competitions">
   		</a>
-  		<a href="#" id="scheduleHome" title="Look at Schedule">
+  		<a href="<?php echo site_url(); ?>/events/schedule/" id="scheduleHome" title="Look at Schedule">
   		</a>
   	</div>
   </div>
@@ -66,4 +70,5 @@
   		</ul>
   	</div>
   </div>
+  <?php include 'sponsors.php'; ?>
 <?php get_footer(); ?>

@@ -337,7 +337,7 @@ ul#espresso_payment_buttons li form {
 .event_espresso_form_wrapper form fieldset {
 	border: none;
 	margin: 10px 0;
-	padding: 10px 0;
+	padding: 0px;
 }
 .event_espresso_form_wrapper form legend {
 	font-weight: bold;
@@ -427,7 +427,7 @@ input.price-name-input{
 
 .event_espresso_form_wrapper label,
 .event_espresso_form_wrapper span.label {
-	display: inline-block; width:150px; padding:0 10px 0 0;
+	display: inline-block; width:100%; padding:0 10px 0 0;
 	text-align: left; font-size:.9em; line-height:1em; vertical-align: top;
 }
 .event_form_field .event-quest-group-textarea label.ee-reg-page-questions{

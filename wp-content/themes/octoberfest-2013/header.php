@@ -24,6 +24,7 @@
 <link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); ?>" media="screen" />
 <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
+<link rel="Stylesheet" type="text/css" href="<?php bloginfo('template_url'); ?>/css/smoothDivScroll.css" />
 <script type="text/javascript" src="//use.typekit.net/aqp8yiy.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 <?php wp_head(); ?>
@@ -44,28 +45,28 @@
 		</div>
 	</div>
 	<div id="topCartButtons">
-		<a id="topCartArrows" href="<?php echo site_url(); ?>/event-registration/?regevent_action=show_shopping_cart">Veiw Cart</a>
-		<a id="topCartArrows" href="#">Check Out</a>
+		<a id="topCartArrows" href="<?php echo site_url(); ?>/about/home/">Home Page</a>
+		<a id="topCartArrows" href="<?php echo site_url(); ?>/event-registration/?regevent_action=show_shopping_cart">View Cart</a>
 	</div>
 	<div id="buttonHeader">
 		<div id="buttonWrapper">
 		<div id="buyTicketsWrapper">
-			<a href="#" id="buyTickets" title="Buy Tickets"></a>
+			<a href="<?php echo site_url(); ?>/buy-tickets/" id="buyTickets" title="Buy Tickets"></a>
 			<div id="buyTicktesList">
 				<ul>
-					<li>2 Day Pass</li>
-					<li>1 Day Pass</li>
-					<li>Founders Feast</li>
+					<li><a href="<?php echo site_url(); ?>/event-registration/?ee=11">Beer Garden</a></li>
+					<li><a href="<?php echo site_url(); ?>/event-registration/?ee=3">Founders Feast</a></li>
+					<li><a href="<?php echo site_url(); ?>/event-registration/?ee=15">Brewers Brunch</a></li>
 				</ul>
 			</div>
 		</div>
 		<div id="registerWrapper">
-			<a href="#" id="register" title="Register for Competitions"></a>
+			<a href="<?php echo site_url(); ?>/register/" id="register" title="Register for Competitions"></a>
 			<div id="registerList">
 				<ul>
-					<li>Homebrew Contest</li>
-					<li>Cyclo-Cross Bike Race</li>
-					<li>Singer-songwriter Competition</li>
+					<li><a href="<?php echo site_url(); ?>/event-registration/?ee=8">Homebrew Contest</a></li>
+					<li><a href="<?php echo site_url(); ?>/event-registration/?ee=9">Cyclo-Cross Bike Race</a></li>
+					<li><a href="<?php echo site_url(); ?>/event-registration/?ee=10">Singer-songwriter Competition</a></li>
 				</ul>
 			</div>
 		</div>

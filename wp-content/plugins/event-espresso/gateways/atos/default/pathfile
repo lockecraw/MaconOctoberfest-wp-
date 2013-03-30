@@ -19,7 +19,7 @@ DEBUG!NO!
 # indiquer:
 # ------------------------------------------------------------------------
 #
-D_LOGO!http://local.maconoctoberfest.com/wp-content/plugins/event-espresso/gateways/atos/logos/!
+D_LOGO!http://maconoctoberfest.com/wp/wp-content/plugins/event-espresso/gateways/atos/logos/!
 #
 # --------------------------------------------------------------------------
 #  Fichiers param�tres li�s a l'api sips paiement	
@@ -27,15 +27,15 @@ D_LOGO!http://local.maconoctoberfest.com/wp-content/plugins/event-espresso/gatew
 #
 # fichier des  param�tres sips
 #
-F_DEFAULT!C:\workspace\MaconOctoberfest\wp-content\plugins\event-espresso\gateways\atos/default/parmcom.default!
+F_DEFAULT!/home/maconoctoberfest/public_html/wp/wp-content/plugins/event-espresso/gateways/atos/default/parmcom.default!
 #
 # fichier param�tre commercant
 #
-F_PARAM!C:\workspace\MaconOctoberfest\wp-content\plugins\event-espresso\gateways\atos/default/parmcom!
+F_PARAM!/home/maconoctoberfest/public_html/wp/wp-content/plugins/event-espresso/gateways/atos/default/parmcom!
 #
 # certificat du commercant
 #
-F_CERTIFICATE!C:\workspace\MaconOctoberfest\wp-content\plugins\event-espresso\gateways\atos/default/certif!
+F_CERTIFICATE!/home/maconoctoberfest/public_html/wp/wp-content/plugins/event-espresso/gateways/atos/default/certif!
 #
 # type du certificat
 #
