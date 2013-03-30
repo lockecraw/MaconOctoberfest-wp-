@@ -1624,7 +1624,14 @@ function event_espresso_load_checkout_page() {
 		$meta = array();
 		//echo "<pre>", print_r($_POST), "</pre>";
 		?>
-
+<br />
+<h2>Get Registered!</h2>
+<p>
+Please fill in the fields below. If you are purchasing tickets for multiple events
+or contests, for your convenience, simply click "yes" below to automatically input
+your information into all required registration forms. Please review this page
+carefully before proceeding to checkout, as some events may require additional information.
+</p>
 <div class = "event_espresso_form_wrapper">
 <form id="event_espresso_checkout_form" method="post" action="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=post_multi_attendee">
 	<?php
@@ -1716,7 +1723,7 @@ function event_espresso_load_checkout_page() {
 
 						if ($attendee_overflow) {
 
-							$err .= "<div class='event_espresso_error'><p><em>Attention</em>";
+							$err .= "<div class='multi_reg_cart_block event_espresso_error'><p><em>Attention</em>";
 							$err .= sprintf(__("For %s, please make sure to select between 1 and %d attendees or delete it from your cart.", 'event_espresso'), stripslashes($r->event_name), $attendee_limit);
 							$err .= '<span class="remove-cart-item"><img class="ee_delete_item_from_cart" id="cart_link_' . $event_id . '" alt="Remove this item from your cart" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" /></span> ';
 							$err .= "</p></div>";
