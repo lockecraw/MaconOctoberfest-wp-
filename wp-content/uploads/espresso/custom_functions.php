@@ -1462,6 +1462,9 @@ function event_espresso_add_attendees_to_db_multi() {
 	<?php _e('Payment Overview', 'event_espresso'); ?>
   </h3>
 <div class="event-details" >
+	<p>
+	Please review your order before making your purchase. You will receive an e-mail confirmation and printable electronic tickets. Your QR-coded tickets will be scanned upon entrance.
+	</p>
 
 	<div class="event-messages ui-state-highlight"> <span class="ui-icon ui-icon-alert"></span>
 		<p class="instruct">
