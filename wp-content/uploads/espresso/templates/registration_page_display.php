@@ -8,6 +8,7 @@
 <!-- Template: <?php echo __FILE__; ?> -->
 <div class="event-registration-container single-event-registration-container single-<?php echo $event_category; ?>">
 
+
 	<div class="event-content">
 		<?php
 			if(!empty($event_meta['event_thumbnail_url'])){
@@ -265,6 +266,7 @@
 		    </form>
 		</div>
 
+	<?php event_espresso_show_price_types($event_id); ?>
 
 		<div style="float: left;">
 			<a class="event-button back-to-events" href="/events/" title="Back to Events">Back to Events</a>&nbsp;

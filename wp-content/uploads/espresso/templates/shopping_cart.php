@@ -27,7 +27,7 @@ function event_espresso_shopping_cart() {
 	$sql = apply_filters( 'filter_hook_espresso_shopping_cart_SQL_select', $sql );
 	$sql .= " WHERE e.id in ($events_IN) ";
 	$sql .= " AND e.event_status != 'D' ";
-	$sql .= " ORDER BY (e.id=5) ASC, e.start_date ";
+	$sql .= " ORDER BY (e.id IN (5,17)) ASC, e.start_date ";
 //echo '<h4>$sql : ' . $sql . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
 	$result = $wpdb->get_results( $sql );

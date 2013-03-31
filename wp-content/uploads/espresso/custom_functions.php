@@ -286,7 +286,25 @@ function event_espresso_add_question_groups($question_groups, $answer = '', $eve
 				}
 
 				$html .= '<div class="event-question-field event_form_field">';
-				$html .= '<input type="text" ' . $required_title . ' class="' . $required_class . $class . $text_input_class .'" id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $field_name . $multi_name_adjust . '" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" ' . $disabled . ' placeholder="' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . $required_label . '" />';
+				if($question->id == 37){
+					//this is a songwriter competition upload field
+					/*
+					$html .= '
+					<label>Upload MP3:</label>
+					<div id="upload__'.$field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number.'" class="songwriter-upload">
+						<form enctype="multipart/form-data">
+						<input name="file" type="file" />
+						<input type="button" value="Upload" />
+						</form>
+						<progress></progress>
+					</div>
+					';
+					*/
+					$html .= '<input type="text" ' . $required_title . ' class="' . $required_class . $class . $text_input_class .'" id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $field_name . $multi_name_adjust . '" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" ' . $disabled . ' placeholder="' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . $required_label . '" />';
+				}
+				else{
+					$html .= '<input type="text" ' . $required_title . ' class="' . $required_class . $class . $text_input_class .'" id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $field_name . $multi_name_adjust . '" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" ' . $disabled . ' placeholder="' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . $required_label . '" />';
+				}
 				$html .= '</div>';
 
 				break;
@@ -886,6 +904,72 @@ function event_espresso_calculate_total( $update_section = FALSE, $mer = TRUE ) 
 }
 
 
+
+
+function event_espresso_show_price_types($event_id) {
+
+	global $wpdb, $org_options;
+	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
+
+	 $is_donation = false;
+	 if(isset($_SESSION['espresso_session']['events_in_session'][$event_id]) &&
+	 	(
+	 		isset($_SESSION['espresso_session']['events_in_session'][$event_id]['categories']) &&
+	 		is_array($_SESSION['espresso_session']['events_in_session'][$event_id]['categories']) &&
+	 		in_array('donation',$_SESSION['espresso_session']['events_in_session'][$event_id]['categories'])
+	 	) OR (
+			$_SESSION['espresso_session']['events_in_session'][$event_id]['is_donation'] == true
+		)
+	 	){
+
+			$is_donation = true;
+	 }
+
+
+	$SQL = "SELECT ept.id, ept.event_cost, ept.surcharge, ept.surcharge_type, ept.price_type, edt.allow_multiple, edt.additional_limit ";
+	$SQL .= "FROM " . EVENTS_PRICES_TABLE . " ept ";
+	$SQL .= "JOIN " . EVENTS_DETAIL_TABLE . "  edt ON ept.event_id =  edt.id ";
+	$SQL .= "WHERE event_id=%d ORDER BY ept.id ASC";
+	// filter SQL statement
+	$SQL = apply_filters( 'filter_hook_espresso_group_price_dropdown_sql', $SQL );
+	// get results
+	$results = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ));
+
+	if ($wpdb->num_rows > 0) {?>
+		<table class="price_list">
+		<?php
+		foreach ($results as $result) {
+
+			$surcharge = '';
+
+			if ($result->surcharge > 0 && $result->event_cost > 0.00) {
+				$surcharge = " + {$org_options['currency_symbol']}{$result->surcharge} " . __('Surcharge', 'event_espresso');
+				if ($result->surcharge_type == 'pct') {
+					$surcharge = " + {$result->surcharge}% " . __('Surcharge', 'event_espresso');
+				}
+			}
+
+			?>
+			<tr>
+				<td class="price_type"><?php echo $result->price_type; ?></td>
+				<td class="price">
+					<?php
+						if (!isset($message))
+							$message = '';
+						echo $org_options['currency_symbol'] . number_format($result->event_cost, 2) . $message . ' ' . $surcharge;
+					?>
+				</td>
+			</tr>
+			<?php
+		}
+		?>
+	</table>
+
+
+	<?php
+	}
+
+}
 
 
 
