@@ -66,6 +66,7 @@ $this_event_id = $event_id;
 					<span class="event-detail-label">Price:</span>
 					<span class="event-detail-value">$25.00 - $75.00</span>
 				</div>
+				<hr class="event-details" />
 				<div class="event-detail event-detail-price" id="event_date-3">
 					<span class="event-detail-label">Day 1:</span>
 					<span class="event-detail-value">Saturday, October 19th, 2013</span>
@@ -76,7 +77,7 @@ $this_event_id = $event_id;
 					<span class="event-detail-label">End Time: </span>
 					<span class="event-detail-value">8:00 pm</span>
 				</div>
-				<br />
+				<hr class="event-details" />
 				<div class="event-detail event-detail-price" id="event_date-3">
 					<span class="event-detail-label">Day 2:</span>
 					<span class="event-detail-value">Sunday, October 20th, 2013</span>
@@ -87,6 +88,7 @@ $this_event_id = $event_id;
 					<span class="event-detail-label">End Time: </span>
 					<span class="event-detail-value">7:00 pm</span>
 				</div>
+				<hr class="event-details" />
 			</div>
 			<?php
 		}

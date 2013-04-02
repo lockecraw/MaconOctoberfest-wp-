@@ -2040,3 +2040,233 @@ mc_gross=55.00, protection_eligibility=Ineligible, item_number1=, tax=0.00, item
 IPN Response from gateway Server:
  VERIFIED
 
+[04/02/2013 12:44 PM] - Errors from IPN Validation:
+
+Using BUILT-IN PHP curl methods
+key = mc_gross
+value = 190.00
+key = protection_eligibility
+value = Ineligible
+key = item_number1
+value = 
+key = tax
+value = 0.00
+key = item_number2
+value = 
+key = payer_id
+value = TZ6KYAJSGQPVQ
+key = item_number3
+value = 
+key = item_number4
+value = 
+key = payment_date
+value = 09:44:57 Apr 02, 2013 PDT
+key = payment_status
+value = Completed
+key = charset
+value = windows-1252
+key = mc_shipping
+value = 0.00
+key = mc_handling
+value = 0.00
+key = first_name
+value = Matthew
+key = mc_fee
+value = 5.81
+key = notify_version
+value = 3.7
+key = custom
+value = 
+key = payer_status
+value = verified
+key = business
+value = macons_1361037758_biz@gmail.com
+key = num_cart_items
+value = 4
+key = mc_handling1
+value = 0.00
+key = mc_handling2
+value = 0.00
+key = mc_handling3
+value = 0.00
+key = mc_handling4
+value = 0.00
+key = verify_sign
+value = AFeSZaYhMMIkTu3dipraracPltdAAh0jqZYI7fLKtELpDC1QNFKMKLzi
+key = payer_email
+value = Locke-facilitator@LokkDesign.com
+key = mc_shipping1
+value = 0.00
+key = mc_shipping2
+value = 0.00
+key = mc_shipping3
+value = 0.00
+key = tax1
+value = 0.00
+key = mc_shipping4
+value = 0.00
+key = tax2
+value = 0.00
+key = tax3
+value = 0.00
+key = tax4
+value = 0.00
+key = txn_id
+value = 77F965226X411533B
+key = payment_type
+value = instant
+key = payer_business_name
+value = Matthew Crawford\'s Test Store
+key = last_name
+value = Crawford
+key = item_name1
+value = 2 Day Pass ( + 25oz Beer Stein in Blue - $15) for Octoberfest Beer Garden. Attendee: Locke1 Crawford
+key = receiver_email
+value = macons_1361037758_biz@gmail.com
+key = item_name2
+value = 2 Day Pass ( + 12oz Beer/Wine Glass in blue - $5) for Octoberfest Beer Garden. Attendee: Locke2 Crawford
+key = payment_fee
+value = 5.81
+key = item_name3
+value = 2 Day Pass ( + 16oz Beer Stein in Pink - $10) for Octoberfest Beer Garden. Attendee: Locke3 Crawford
+key = item_name4
+value = Saturday - 1 Day Pass ( + Free 16oz plastic cup) for Octoberfest Beer Garden. Attendee: Locke4Sat Crawford
+key = quantity1
+value = 1
+key = quantity2
+value = 1
+key = receiver_id
+value = F8YBLS4MJL6XW
+key = quantity3
+value = 1
+key = txn_type
+value = cart
+key = quantity4
+value = 1
+key = mc_gross_1
+value = 60.00
+key = mc_currency
+value = USD
+key = mc_gross_2
+value = 50.00
+key = mc_gross_3
+value = 55.00
+key = residence_country
+value = US
+key = test_ipn
+value = 1
+key = mc_gross_4
+value = 25.00
+key = transaction_subject
+value = Shopping Cart2 Day Pass ( + 25oz Beer Stein in Blue - $15) for Octoberfest Beer Garden. Attendee: Locke1 Crawford2 Day Pass ( + 12oz Beer/Wine Glass in blue - $5) for Octoberfest Beer Garden. Attendee: Locke2 Crawford2 Day Pass ( + 16oz Beer Stein in Pink
+key = payment_gross
+value = 190.00
+key = ipn_track_id
+value = eb3f28d86f37
+Success Setting host: https://www.sandbox.paypal.com/cgi-bin/webscr
+Success Setting request type to post
+Success Setting post fields: mc_gross=190.00&amp;protection_eligibility=Ineligible&amp;item_number1=&amp;tax=0.00&amp;item_number2=&amp;payer_id=TZ6KYAJSGQPVQ&amp;item_number3=&amp;item_number4=&amp;payment_date=09%3A44%3A57+Apr+02%2C+2013+PDT&amp;payment_status=Completed&amp;charset=windows-1252&amp;mc_shipping=0.00&amp;mc_handling=0.00&amp;first_name=Matthew&amp;mc_fee=5.81&amp;notify_version=3.7&amp;custom=&amp;payer_status=verified&amp;business=macons_1361037758_biz%40gmail.com&amp;num_cart_items=4&amp;mc_handling1=0.00&amp;mc_handling2=0.00&amp;mc_handling3=0.00&amp;mc_handling4=0.00&amp;verify_sign=AFeSZaYhMMIkTu3dipraracPltdAAh0jqZYI7fLKtELpDC1QNFKMKLzi&amp;payer_email=Locke-facilitator%40LokkDesign.com&amp;mc_shipping1=0.00&amp;mc_shipping2=0.00&amp;mc_shipping3=0.00&amp;tax1=0.00&amp;mc_shipping4=0.00&amp;tax2=0.00&amp;tax3=0.00&amp;tax4=0.00&amp;txn_id=77F965226X411533B&amp;payment_type=instant&amp;payer_business_name=Matthew+Crawford%27s+Test+Store&amp;last_name=Crawford&amp;item_name1=2+Day+Pass+%28+%2B+25oz+Beer+Stein+in+Blue+-+%2415%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Locke1+Crawford&amp;receiver_email=macons_1361037758_biz%40gmail.com&amp;item_name2=2+Day+Pass+%28+%2B+12oz+Beer%2FWine+Glass+in+blue+-+%245%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Locke2+Crawford&amp;payment_fee=5.81&amp;item_name3=2+Day+Pass+%28+%2B+16oz+Beer+Stein+in+Pink+-+%2410%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Locke3+Crawford&amp;item_name4=Saturday+-+1+Day+Pass+%28+%2B+Free+16oz+plastic+cup%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Locke4Sat+Crawford&amp;quantity1=1&amp;quantity2=1&amp;receiver_id=F8YBLS4MJL6XW&amp;quantity3=1&amp;txn_type=cart&amp;quantity4=1&amp;mc_gross_1=60.00&amp;mc_currency=USD&amp;mc_gross_2=50.00&amp;mc_gross_3=55.00&amp;residence_country=US&amp;test_ipn=1&amp;mc_gross_4=25.00&amp;transaction_subject=Shopping+Cart2+Day+Pass+%28+%2B+25oz+Beer+Stein+in+Blue+-+%2415%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Locke1+Crawford2+Day+Pass+%28+%2B+12oz+Beer%2FWine+Glass+in+blue+-+%245%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Locke2+Crawford2+Day+Pass+%28+%2B+16oz+Beer+Stein+in+Pink&amp;payment_gross=190.00&amp;ipn_track_id=eb3f28d86f37&amp;cmd=_notify-validate
+Success Setting Fain On Error
+Success Setting return transfer
+Success Setting Timeout
+Success Setting verbose mode
+Errors resulting from the execution of curl transfer: [04/02/2013 12:44 PM] - SUCCESS!
+IPN POST Vars from gateway:
+mc_gross=190.00, protection_eligibility=Ineligible, item_number1=, tax=0.00, item_number2=, payer_id=TZ6KYAJSGQPVQ, item_number3=, item_number4=, payment_date=09:44:57 Apr 02, 2013 PDT, payment_status=Completed, charset=windows-1252, mc_shipping=0.00, mc_handling=0.00, first_name=Matthew, mc_fee=5.81, notify_version=3.7, custom=, payer_status=verified, business=macons_1361037758_biz@gmail.com, num_cart_items=4, mc_handling1=0.00, mc_handling2=0.00, mc_handling3=0.00, mc_handling4=0.00, verify_sign=AFeSZaYhMMIkTu3dipraracPltdAAh0jqZYI7fLKtELpDC1QNFKMKLzi, payer_email=Locke-facilitator@LokkDesign.com, mc_shipping1=0.00, mc_shipping2=0.00, mc_shipping3=0.00, tax1=0.00, mc_shipping4=0.00, tax2=0.00, tax3=0.00, tax4=0.00, txn_id=77F965226X411533B, payment_type=instant, payer_business_name=Matthew Crawford\'s Test Store, last_name=Crawford, item_name1=2 Day Pass ( + 25oz Beer Stein in Blue - $15) for Octoberfest Beer Garden. Attendee: Locke1 Crawford, receiver_email=macons_1361037758_biz@gmail.com, item_name2=2 Day Pass ( + 12oz Beer/Wine Glass in blue - $5) for Octoberfest Beer Garden. Attendee: Locke2 Crawford, payment_fee=5.81, item_name3=2 Day Pass ( + 16oz Beer Stein in Pink - $10) for Octoberfest Beer Garden. Attendee: Locke3 Crawford, item_name4=Saturday - 1 Day Pass ( + Free 16oz plastic cup) for Octoberfest Beer Garden. Attendee: Locke4Sat Crawford, quantity1=1, quantity2=1, receiver_id=F8YBLS4MJL6XW, quantity3=1, txn_type=cart, quantity4=1, mc_gross_1=60.00, mc_currency=USD, mc_gross_2=50.00, mc_gross_3=55.00, residence_country=US, test_ipn=1, mc_gross_4=25.00, transaction_subject=Shopping Cart2 Day Pass ( + 25oz Beer Stein in Blue - $15) for Octoberfest Beer Garden. Attendee: Locke1 Crawford2 Day Pass ( + 12oz Beer/Wine Glass in blue - $5) for Octoberfest Beer Garden. Attendee: Locke2 Crawford2 Day Pass ( + 16oz Beer Stein in Pink, payment_gross=190.00, ipn_track_id=eb3f28d86f37, 
+IPN Response from gateway Server:
+ VERIFIED
+
+[04/02/2013 5:08 PM] - Errors from IPN Validation:
+
+Using BUILT-IN PHP curl methods
+key = mc_gross
+value = 55.00
+key = protection_eligibility
+value = Ineligible
+key = item_number1
+value = 
+key = payer_id
+value = TZ6KYAJSGQPVQ
+key = tax
+value = 0.00
+key = payment_date
+value = 14:08:51 Apr 02, 2013 PDT
+key = payment_status
+value = Completed
+key = charset
+value = windows-1252
+key = mc_shipping
+value = 0.00
+key = mc_handling
+value = 0.00
+key = first_name
+value = Matthew
+key = mc_fee
+value = 1.90
+key = notify_version
+value = 3.7
+key = custom
+value = 
+key = payer_status
+value = verified
+key = business
+value = macons_1361037758_biz@gmail.com
+key = num_cart_items
+value = 1
+key = mc_handling1
+value = 0.00
+key = verify_sign
+value = AtceKBcC9e35f-GdgiKE9b89hlLBAYpr0QkjtYyK6rygIE5LN04iOhR0
+key = payer_email
+value = Locke-facilitator@LokkDesign.com
+key = mc_shipping1
+value = 0.00
+key = tax1
+value = 0.00
+key = txn_id
+value = 7CB55652CS7285423
+key = payment_type
+value = instant
+key = payer_business_name
+value = Matthew Crawford\'s Test Store
+key = last_name
+value = Crawford
+key = item_name1
+value = 2 Day Pass ( + 16oz Beer Stein in Pink - $10) for Octoberfest Beer Garden. Attendee: Locke Crawford
+key = receiver_email
+value = macons_1361037758_biz@gmail.com
+key = payment_fee
+value = 1.90
+key = quantity1
+value = 1
+key = receiver_id
+value = F8YBLS4MJL6XW
+key = txn_type
+value = cart
+key = mc_gross_1
+value = 55.00
+key = mc_currency
+value = USD
+key = residence_country
+value = US
+key = test_ipn
+value = 1
+key = transaction_subject
+value = Shopping Cart2 Day Pass ( + 16oz Beer Stein in Pink - $10) for Octoberfest Beer Garden. Attendee: Locke Crawford
+key = payment_gross
+value = 55.00
+key = ipn_track_id
+value = fb96bc9a5c8d
+Success Setting host: https://www.sandbox.paypal.com/cgi-bin/webscr
+Success Setting request type to post
+Success Setting post fields: mc_gross=55.00&amp;protection_eligibility=Ineligible&amp;item_number1=&amp;payer_id=TZ6KYAJSGQPVQ&amp;tax=0.00&amp;payment_date=14%3A08%3A51+Apr+02%2C+2013+PDT&amp;payment_status=Completed&amp;charset=windows-1252&amp;mc_shipping=0.00&amp;mc_handling=0.00&amp;first_name=Matthew&amp;mc_fee=1.90&amp;notify_version=3.7&amp;custom=&amp;payer_status=verified&amp;business=macons_1361037758_biz%40gmail.com&amp;num_cart_items=1&amp;mc_handling1=0.00&amp;verify_sign=AtceKBcC9e35f-GdgiKE9b89hlLBAYpr0QkjtYyK6rygIE5LN04iOhR0&amp;payer_email=Locke-facilitator%40LokkDesign.com&amp;mc_shipping1=0.00&amp;tax1=0.00&amp;txn_id=7CB55652CS7285423&amp;payment_type=instant&amp;payer_business_name=Matthew+Crawford%27s+Test+Store&amp;last_name=Crawford&amp;item_name1=2+Day+Pass+%28+%2B+16oz+Beer+Stein+in+Pink+-+%2410%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Locke+Crawford&amp;receiver_email=macons_1361037758_biz%40gmail.com&amp;payment_fee=1.90&amp;quantity1=1&amp;receiver_id=F8YBLS4MJL6XW&amp;txn_type=cart&amp;mc_gross_1=55.00&amp;mc_currency=USD&amp;residence_country=US&amp;test_ipn=1&amp;transaction_subject=Shopping+Cart2+Day+Pass+%28+%2B+16oz+Beer+Stein+in+Pink+-+%2410%29+for+Octoberfest+Beer+Garden.+Attendee%3A+Locke+Crawford&amp;payment_gross=55.00&amp;ipn_track_id=fb96bc9a5c8d&amp;cmd=_notify-validate
+Success Setting Fain On Error
+Success Setting return transfer
+Success Setting Timeout
+Success Setting verbose mode
+Errors resulting from the execution of curl transfer: [04/02/2013 5:08 PM] - SUCCESS!
+IPN POST Vars from gateway:
+mc_gross=55.00, protection_eligibility=Ineligible, item_number1=, payer_id=TZ6KYAJSGQPVQ, tax=0.00, payment_date=14:08:51 Apr 02, 2013 PDT, payment_status=Completed, charset=windows-1252, mc_shipping=0.00, mc_handling=0.00, first_name=Matthew, mc_fee=1.90, notify_version=3.7, custom=, payer_status=verified, business=macons_1361037758_biz@gmail.com, num_cart_items=1, mc_handling1=0.00, verify_sign=AtceKBcC9e35f-GdgiKE9b89hlLBAYpr0QkjtYyK6rygIE5LN04iOhR0, payer_email=Locke-facilitator@LokkDesign.com, mc_shipping1=0.00, tax1=0.00, txn_id=7CB55652CS7285423, payment_type=instant, payer_business_name=Matthew Crawford\'s Test Store, last_name=Crawford, item_name1=2 Day Pass ( + 16oz Beer Stein in Pink - $10) for Octoberfest Beer Garden. Attendee: Locke Crawford, receiver_email=macons_1361037758_biz@gmail.com, payment_fee=1.90, quantity1=1, receiver_id=F8YBLS4MJL6XW, txn_type=cart, mc_gross_1=55.00, mc_currency=USD, residence_country=US, test_ipn=1, transaction_subject=Shopping Cart2 Day Pass ( + 16oz Beer Stein in Pink - $10) for Octoberfest Beer Garden. Attendee: Locke Crawford, payment_gross=55.00, ipn_track_id=fb96bc9a5c8d, 
+IPN Response from gateway Server:
+ VERIFIED
+

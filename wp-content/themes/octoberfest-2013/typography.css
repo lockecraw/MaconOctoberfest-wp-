@@ -115,9 +115,13 @@ h3 a:hover {
 
 
 h4 {
-	font-size: 1.2em;
-	line-height: 1.25;
-	margin-bottom: 1.25em;
+	font-family: "museo",serif;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 18px;
+	color: #86311E;
+	line-height: 21px;
+	margin: 0px 0px 10px 0px;
 }
 h5 {
 	font-size: 1em;
@@ -141,6 +145,11 @@ hr {
 	margin: 5px 0px 10px 0px;
 }
 
+hr.event-details {
+	border-top: 1px dashed #f6b015;
+	margin: 2px 0px 2px 0px;
+	width: 175px;
+}
 p {
 	margin: 5px 0px 15px 0px;
 }
@@ -346,6 +355,10 @@ h3.section-heading{
 
 .event-details {
 	margin: 0px 0px 10px 0px;
+}
+
+.price_list_wrapper {
+	margin: -10px 0px 10px 0px;
 }
 
 .ee-featured-image {

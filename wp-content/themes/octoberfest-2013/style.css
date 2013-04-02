@@ -787,6 +787,15 @@ a.event-button-add-additional-attendees:hover{
 	padding-top: 4px;
 }
 
+#steinImages {
+	position: absolute;
+	width: 300px;
+	right: 0px;
+	height: 155px;
+}
+.hidden {
+    display: none;
+}
 /* links */
 a:link, a:visited {
 	color: #006191;

@@ -936,6 +936,8 @@ function event_espresso_show_price_types($event_id) {
 	$results = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ));
 
 	if ($wpdb->num_rows > 0) {?>
+	 <div class="price_list_wrapper">
+		<span class="event-detail-label">Price:</span>
 		<table class="price_list">
 		<?php
 		foreach ($results as $result) {
@@ -964,7 +966,10 @@ function event_espresso_show_price_types($event_id) {
 		}
 		?>
 	</table>
-
+	<div class="addToCartInstructions">
+		<em>To purchase tickets or register for this event, please add this event to your cart.</em>
+	</div> 
+	</div>	
 
 	<?php
 	}
@@ -1714,10 +1719,11 @@ function event_espresso_load_checkout_page() {
 <br />
 <h2>Get Registered!</h2>
 <p>
-Please fill in the fields below. If you are purchasing tickets for multiple events
+<h3>Please fill in the fields below.</h3>
+If you are purchasing tickets for multiple events
 or contests, for your convenience, simply click "yes" below to automatically input
-your information into all required registration forms. Please review this page
-carefully before proceeding to checkout, as some events may require additional information.
+your information into all required registration forms. <br/> <br/>
+<em>Please review this page carefully before proceeding to checkout, as some events may require additional information.</em>
 </p>
 <div class = "event_espresso_form_wrapper">
 <form id="event_espresso_checkout_form" method="post" action="?page_id=<?php echo $org_options['event_page_id']; ?>&regevent_action=post_multi_attendee">
