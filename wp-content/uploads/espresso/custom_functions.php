@@ -918,6 +918,8 @@ function event_espresso_show_price_types($event_id) {
 	 		is_array($_SESSION['espresso_session']['events_in_session'][$event_id]['categories']) &&
 	 		in_array('donation',$_SESSION['espresso_session']['events_in_session'][$event_id]['categories'])
 	 	) OR (
+	 		is_array($_SESSION['espresso_session']['events_in_session'][$event_id]) &&
+	 		isset($_SESSION['espresso_session']['events_in_session'][$event_id]['is_donation']) &&
 			$_SESSION['espresso_session']['events_in_session'][$event_id]['is_donation'] == true
 		)
 	 	){
