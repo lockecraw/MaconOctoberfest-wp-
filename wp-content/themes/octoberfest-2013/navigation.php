@@ -6,7 +6,7 @@
   		<li><a href="<?php echo site_url(); ?>/event-registration/?ee=11">Octoberfest Beer Garden</a></li>
   		<li><a href="<?php echo site_url(); ?>/event-registration/?ee=15">Brewers Brunch</a></li>
   		<li><a href="<?php echo site_url(); ?>/event-registration/?ee=8">HomeBrew Contest</a></li>
-  		<li><a href="<?php echo site_url(); ?>/event-registration/?ee=9">Cyclo-Cross Bike Race</a></li>
+  		<li><a href="<?php echo site_url(); ?>/event-registration/?ee=9">Cyclocross Bike Race</a></li>
   		<li><a href="<?php echo site_url(); ?>/event-registration/?ee=10">Singer-songwriter Competition</a></li>
   	</ul>
 </li>

@@ -82,6 +82,25 @@ h2.eventTitle {
 	margin: 10px 0px 0px 0px;
 }
 
+h2.performersTitle {
+	font-family: "museo",serif;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 18px;
+	color: #86311E;
+	line-height: 21px;
+	margin: 25px 0px 0px 0px;
+}
+h2.firstPerformersTitle {
+	font-family: "museo",serif;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 18px;
+	color: #86311E;
+	line-height: 21px;
+	margin: 0px 0px 0px 0px;
+}
+
 
 h2 {
 	font-family: "museo",serif;
@@ -94,6 +113,13 @@ h2 {
 
 }
 
+h3.performersTitle {
+	font-size: 16px;
+	line-height: 19px;
+	margin: 0px 0px 5px 0px;
+	color: #CF7229;
+	font-weight:  normal;
+}
 
 h3 {
 	font-size: 16px;
@@ -169,6 +195,12 @@ a {
 	color: #009;
 	text-decoration: underline;
 }
+
+a img {
+	text-decoration: none;
+	border: 0 none;
+	}
+
 blockquote {
 	margin: 1.5em;
 	color: #666;

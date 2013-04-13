@@ -268,6 +268,20 @@
 
 	<?php event_espresso_show_price_types($event_id); ?>
 
+	<?php if ($event_id == 8){
+				?>
+				<div style="float: left;">
+			<a class="event-button back-to-events" href="/events/" title="Back to Events">Back to Events</a>&nbsp;
+		</div>
+				<a class="event-button ee_view_cart " target="_blank" id="a_register_link-<?php echo $event_id ?>" href="http://maconoctoberfest.com/beer-competition/" title="Register For Competition">
+						Register
+					</a>
+			<?php
+			}
+			else {
+			?>
+
+
 		<div style="float: left;">
 			<a class="event-button back-to-events" href="/events/" title="Back to Events">Back to Events</a>&nbsp;
 		</div>
@@ -291,6 +305,7 @@
 		</div>
 
 		<?php
+		}
 			break;
 
 		}

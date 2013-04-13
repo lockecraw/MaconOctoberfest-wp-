@@ -281,7 +281,21 @@ $this_event_id = $event_id;
 					</div>
 				<?php
 				}
-			} else {
+			} 
+			else if ($event_id == 8){
+				?>
+				<div id="register_link-<?php echo $event_id ?>">
+					<a class="event-button event-button-register" id="a_register_link-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>" title="<?php echo stripslashes_deep($event_name) ?>">
+						<?php _e('View Details', 'event_espresso'); ?>
+					</a>
+					<a class="event-button ee_view_cart " target="_blank" id="a_register_link-<?php echo $event_id ?>" href="http://maconoctoberfest.com/beer-competition/" title="Register For Competition">
+						Register
+					</a>
+
+				</div>
+			<?php
+			}
+			else {
 			?>
 				<div id="register_link-<?php echo $event_id ?>">
 					<a class="event-button event-button-register" id="a_register_link-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>" title="<?php echo stripslashes_deep($event_name) ?>">

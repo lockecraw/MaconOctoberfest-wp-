@@ -5,3 +5,11 @@ $jaer = jQuery.noConflict();
 		jQuery('#registration_form').validate();
 	});
 });
+$("#personal-information").validate({
+  rules: {
+    email: "required",
+    TEXT_38: {
+      equalTo: "#email"
+    }
+  }
+});

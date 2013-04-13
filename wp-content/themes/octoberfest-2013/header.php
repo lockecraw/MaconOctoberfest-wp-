@@ -38,26 +38,27 @@
     
     $.fancybox.open([
         {
-            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/upgrade.png'
-        },
-        {
-            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/12oz-pink.jpg',                
+            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/12oz-pink.png',                
             title : '12oz Beer/Wine Glass in Pink'
         },
         {
-            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/16oz-pink.jpg',                
+            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/12oz-blue.png',                
+            title : '12oz Beer/Wine Glass in Blue'
+        },
+        {
+            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/16oz-pink.png',                
             title : '16oz Beer Stein in Pink '
         },
         {
-            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/16oz-blue.jpg',                
+            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/16oz-blue.png',                
             title : '16oz Beer Stein in Blue '
         },
         {
-            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/25oz-pink.jpg',                
+            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/25oz-pink.png',                
             title : '25oz Beer Stein in Pink'
         },
 				{
-            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/25oz-blue.jpg',                
+            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/25oz-blue.png',                
             title : '25oz Beer Stein in Blue '
         }
     ], {
@@ -108,7 +109,7 @@
 			<div id="registerList">
 				<ul>
 					<li><a href="<?php echo site_url(); ?>/event-registration/?ee=8">Homebrew Contest</a></li>
-					<li><a href="<?php echo site_url(); ?>/event-registration/?ee=9">Cyclo-Cross Bike Race</a></li>
+					<li><a href="<?php echo site_url(); ?>/event-registration/?ee=9">Cyclocross Bike Race</a></li>
 					<li><a href="<?php echo site_url(); ?>/event-registration/?ee=10">Singer-songwriter Competition</a></li>
 				</ul>
 			</div>
