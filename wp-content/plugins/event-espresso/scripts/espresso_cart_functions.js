@@ -79,6 +79,7 @@ jQuery(document).ready(function() {
         },
 
         calculate_total: function(grand_total){
+
             var _eecart = this;
             _eecart.progress(jQuery('#event_total_price'));
 
@@ -88,6 +89,7 @@ jQuery(document).ready(function() {
             }
 
             var data = "action=event_espresso_calculate_total&" + jQuery("#event_espresso_shopping_cart").serialize();
+
 
             event_espresso_do_ajax(data,function(r){
 				jQuery('#event_total_price').html(r.grand_total);

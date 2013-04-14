@@ -176,6 +176,12 @@ function event_espresso_add_question_groups($question_groups, $answer = '', $eve
 			$field_name = ($question->system_name != '') ? $question->system_name : $question->question_type . '_' . $question->id;
 			$email_validate = $question->system_name == 'email' ? 'email' : '';
 		}
+		$email_validate .= " question_".$field_name;
+
+		//adding email required for 'verify email' question
+		if($question->id == 38){
+			$email_validate .= " email equal-to ignore";
+		}
 
 		$question->question = stripslashes( $question->question );
 
@@ -300,10 +306,10 @@ function event_espresso_add_question_groups($question_groups, $answer = '', $eve
 					</div>
 					';
 					*/
-					$html .= '<input type="text" ' . $required_title . ' class="' . $required_class . $class . $text_input_class .'" id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $field_name . $multi_name_adjust . '" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" ' . $disabled . ' placeholder="' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . $required_label . '" />';
+					$html .= '<input type="text" ' . $required_title . ' class="' . $required_class . $class . $text_input_class .'" id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $field_name . $multi_name_adjust . '" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" ' . $disabled . ' placeholder="' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . $required_label . '" '.($question->id==38?"data-equal-to='email$multi_name_adjust'":'').' />';
 				}
 				else{
-					$html .= '<input type="text" ' . $required_title . ' class="' . $required_class . $class . $text_input_class .'" id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $field_name . $multi_name_adjust . '" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" ' . $disabled . ' placeholder="' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . $required_label . '" />';
+					$html .= '<input type="text" ' . $required_title . ' class="' . $required_class . $class . $text_input_class .'" id="' . $field_name . '-' . $event_id . '-' . $price_id . '-' . $attendee_number . '" name="' . $field_name . $multi_name_adjust . '" value="' . htmlspecialchars( stripslashes( $answer ), ENT_QUOTES, 'UTF-8' ) . '" ' . $disabled . ' placeholder="' . trim( stripslashes( str_replace( '&#039;', "'", $question->question ))) . $required_label . '" '.($question->id==38?"data-equal-to='email$multi_name_adjust'":'').' />';
 				}
 				$html .= '</div>';
 
@@ -938,7 +944,7 @@ function event_espresso_show_price_types($event_id) {
 	$results = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ));
 
 	if ($wpdb->num_rows > 0) {?>
-	 <div class="price_list_wrapper">
+	 <div class="price_list_wrapper" <?php if($is_donation){?>style="display:none;"<?}?>>
 		<span class="event-detail-label">Price:</span>
 		<table class="price_list">
 		<?php
@@ -970,8 +976,8 @@ function event_espresso_show_price_types($event_id) {
 	</table>
 	<div class="addToCartInstructions">
 		<em>To purchase tickets or register for this event, please add this event to your cart.</em>
-	</div> 
-	</div>	
+	</div>
+	</div>
 
 	<?php
 	}
@@ -1024,7 +1030,7 @@ function event_espresso_group_price_dropdown($event_id, $label = 1, $multi_reg =
 			?>
 			<div class="event_form_field">
 				<?php //print_a($_SESSION['espresso_session']['events_in_session'][$event_id]); ?>
-				<label for="donation_amount[<?php echo $event_id; ?>]" class="ee-reg-page-questions">Donation Amount<em>*</em></label>
+				<label for="donation_amount[<?php echo $event_id; ?>]" class="ee-reg-page-questions">Donation Amount</label>
 				<input
 					type="text"
 					name="donation_amount[<?php echo $event_id; ?>]"
@@ -1881,7 +1887,39 @@ your information into all required registration forms. <br/> <br/>
 <script>
 jQuery(function(){
 	//Registration form validation
-	jQuery('#event_espresso_checkout_form').validate();
+	//jQuery('#event_espresso_checkout_form').validate();
+
+		jQuery("#event_espresso_checkout_form").validate({
+		  rules: {
+		    email: "required",
+		    TEXT_38: {
+		      equalTo: "#email"
+		    }
+		  },
+		  ignore: ".equal-to"
+		});
+		/*
+		jQuery(".equal-to").each(function(){
+			var equal_to_name = jQuery(this).attr('data-equal-to');
+			jQuery(this).change(function(){
+				console.log('Comparing '+jQuery(this).val() +' and '+jQuery('[name="'+equal_to_name+'"]').val()+'.');
+				if(jQuery(this).val() != jQuery('[name="'+equal_to_name+'"]').val()){
+					console.log('error!');
+					console.log(jQuery(this).attr('class'));
+					jQuery(this).removeClass('valid');
+					jQuery(this).addClass('error');
+					console.log(jQuery(this).attr('class'));
+				}
+				else{
+					console.log('all good!');
+					console.log(jQuery(this).attr('class'));
+					//jQuery(this).removeClass('error');
+					//jQuery(this).addClass('valid');
+					console.log(jQuery(this).attr('class'));
+				}
+			});
+		});
+		*/
 });
 </script>
 <?php

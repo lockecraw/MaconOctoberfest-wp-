@@ -167,7 +167,7 @@
 							<?php if($event_category == 'donation'){ ?>
 								<fieldset>
 									<div class="event_form_field">
-										<label for="donation_amount" class="event-detail-label">Donation Amount<em>*</em></label>
+										<label for="donation_amount" class="event-detail-label">Donation Amount</label>
 										<br />
 										<input
 											type="text"
@@ -266,7 +266,8 @@
 		    </form>
 		</div>
 
-	<?php event_espresso_show_price_types($event_id); ?>
+		<?php event_espresso_show_price_types($event_id); ?>
+
 
 	<?php if ($event_id == 8){
 				?>

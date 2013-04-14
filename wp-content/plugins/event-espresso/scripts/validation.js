@@ -5,7 +5,7 @@ $jaer = jQuery.noConflict();
 		jQuery('#registration_form').validate();
 	});
 });
-$("#personal-information").validate({
+jQuery("#personal-information").validate({
   rules: {
     email: "required",
     TEXT_38: {
