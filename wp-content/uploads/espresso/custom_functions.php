@@ -944,7 +944,7 @@ function event_espresso_show_price_types($event_id) {
 	$results = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ));
 
 	if ($wpdb->num_rows > 0) {?>
-	 <div class="price_list_wrapper" <?php if($is_donation){?>style="display:none;"<?}?>>
+	 <div class="price_list_wrapper" <?php if($is_donation){?>style="display:none;"<?php}?>>
 		<span class="event-detail-label">Price:</span>
 		<table class="price_list">
 		<?php
