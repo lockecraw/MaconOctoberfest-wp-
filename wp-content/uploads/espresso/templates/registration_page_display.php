@@ -266,7 +266,7 @@
 		    </form>
 		</div>
 
-		<?php event_espresso_show_price_types($event_id); ?>
+		<?php event_espresso_show_price_types($event_id, ($event_category == 'donation'?true:false)); ?>
 
 
 	<?php if ($event_id == 8){
