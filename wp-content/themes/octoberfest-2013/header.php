@@ -31,42 +31,44 @@
 <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/js/jquery.fancybox.css?v=2.1.4" type="text/css" media="screen" />
 <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jquery.fancybox.pack.js?v=2.1.4"></script>
 <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/js/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
+<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jquery.placeholder.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(".fancybox").fancybox();
+		$('input, textarea').placeholder();
 	$(".open_fancybox").click(function() {
-    
+
     $.fancybox.open([
         {
-            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/12oz-pink.png',                
+            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/12oz-pink.png',
             title : '12oz Beer/Wine Glass in Pink'
         },
         {
-            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/12oz-blue.png',                
+            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/12oz-blue.png',
             title : '12oz Beer/Wine Glass in Blue'
         },
         {
-            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/16oz-pink.png',                
+            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/16oz-pink.png',
             title : '16oz Beer Stein in Pink '
         },
         {
-            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/16oz-blue.png',                
+            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/16oz-blue.png',
             title : '16oz Beer Stein in Blue '
         },
         {
-            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/25oz-pink.png',                
+            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/25oz-pink.png',
             title : '25oz Beer Stein in Pink'
         },
 				{
-            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/25oz-blue.png',                
+            href : 'http://maconoctoberfest.com/wp/wp-content/uploads/2013/04/25oz-blue.png',
             title : '25oz Beer Stein in Blue '
         }
     ], {
         padding : 0
     });
-    
+
     return false;
-    
+
 });
 
 	});
