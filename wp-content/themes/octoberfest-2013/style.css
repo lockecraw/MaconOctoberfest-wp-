@@ -987,15 +987,16 @@ a:hover {
 	float: right;
 	width: 350px;
 	text-align: center;
-}	
+}
 
 table#prizes td {
 	padding: 0px;
-}	
+}
 
 table#prizes {
 	width: 300px;
-}	
+}
 .addToCartInstructions {
 	margin-bottom: 8px;
 }
+.placeholder { color: #aaa; }
