@@ -13,7 +13,7 @@
   </p>
   <?php endif; ?>
 	<div id="contentFooter"> 
-	<a href="<?php echo site_url(); ?>/about/home/">Home</a>
+	<a href="<?php echo home_url(); ?>/about/home/">Home</a>
 	<a href="<?php echo site_url(); ?>/events/">Events</a> 
 	<a href="<?php echo site_url(); ?>/go-local-ga/music-line-up/">Music</a>
 	<a href="<?php echo site_url(); ?>/go-local-ga/breweries/">Breweries</a> 

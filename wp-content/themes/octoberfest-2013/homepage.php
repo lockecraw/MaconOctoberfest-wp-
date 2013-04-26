@@ -40,7 +40,7 @@
 <!-- header START -->
 <div id="contentWrapper">
 		<div id="topCartButtons">
-		<a id="topCartArrows" href="<?php echo site_url(); ?>/about/home/">About Octoberfest</a>
+		<a id="topCartArrows" href="<?php echo home_url(); ?>/about/home/">About Octoberfest</a>
 	</div>
 		<a id="homeLogo" href="<?php echo get_permalink( 56 ); ?>" title="Come Celebrate!"></a>
 	<div id="hiddenHomeLogo">
@@ -55,11 +55,11 @@
   <?php endif; ?>
   <div id="homeButtonsWrapper">
   	<div id="homeButtons">
-  		<a href="<?php echo site_url(); ?>/buy-tickets/" id="buyTicketsHome" title="Buy Tickets">
+  		<a href="<?php echo home_url(); ?>/buy-tickets/" id="buyTicketsHome" title="Buy Tickets">
   		</a>
-  		<a href="<?php echo site_url(); ?>/register/" id="registerHome" title="Register for Competitions">
+  		<a href="<?php echo home_url(); ?>/register/" id="registerHome" title="Register for Competitions">
   		</a>
-  		<a href="<?php echo site_url(); ?>/events/schedule/" id="scheduleHome" title="Look at Schedule">
+  		<a href="<?php echo home_url(); ?>/events/schedule/" id="scheduleHome" title="Look at Schedule">
   		</a>
   	</div>
   </div>

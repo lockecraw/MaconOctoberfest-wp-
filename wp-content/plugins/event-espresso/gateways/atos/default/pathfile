@@ -19,7 +19,7 @@ DEBUG!NO!
 # indiquer:
 # ------------------------------------------------------------------------
 #
-D_LOGO!http://maconoctoberfest.com/wp/wp-content/plugins/event-espresso/gateways/atos/logos/!
+D_LOGO!https://maconoctoberfest.com/wp/wp-content/plugins/event-espresso/gateways/atos/logos/!
 #
 # --------------------------------------------------------------------------
 #  Fichiers param�tres li�s a l'api sips paiement	

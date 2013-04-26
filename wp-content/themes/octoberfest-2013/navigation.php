@@ -2,12 +2,12 @@
 	<a class="arrow" href="<?php echo get_permalink( 33 ); ?>">Events</a>
   	<ul>
   		<li><a href="<?php echo get_permalink( 43 ); ?>">Schedule</a></li>
-  		<li><a href="<?php echo site_url(); ?>/event-registration/?ee=3">Founders Feast</a></li>
-  		<li><a href="<?php echo site_url(); ?>/event-registration/?ee=11">Octoberfest Beer Garden</a></li>
-  		<li><a href="<?php echo site_url(); ?>/event-registration/?ee=15">Brewers Brunch</a></li>
-  		<li><a href="<?php echo site_url(); ?>/event-registration/?ee=8">HomeBrew Contest</a></li>
-  		<li><a href="<?php echo site_url(); ?>/event-registration/?ee=9">Cyclocross Bike Race</a></li>
-  		<li><a href="<?php echo site_url(); ?>/event-registration/?ee=10">Singer-songwriter Competition</a></li>
+  		<li><a href="<?php echo home_url(); ?>/event-registration/?ee=3">Founders Feast</a></li>
+  		<li><a href="<?php echo home_url(); ?>/event-registration/?ee=11">Octoberfest Beer Garden</a></li>
+  		<li><a href="<?php echo home_url(); ?>/event-registration/?ee=15">Brewers Brunch</a></li>
+  		<li><a href="<?php echo home_url(); ?>/event-registration/?ee=8">HomeBrew Contest</a></li>
+  		<li><a href="<?php echo home_url(); ?>/event-registration/?ee=9">Cyclocross Bike Race</a></li>
+  		<li><a href="<?php echo home_url(); ?>/event-registration/?ee=10">Singer-songwriter Competition</a></li>
   	</ul>
 </li>
 <li>

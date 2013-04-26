@@ -979,3 +979,23 @@ a:hover {
 .event_espresso_form_wrapper span.label em,
 .event_espresso_form_wrapper legend em { font-style: normal; color: #C00; padding-left: 3px;}
 .event_espresso_form_wrapper input.error { border-color: #C00; background-color: #FEF; }
+
+.single-radio {
+	width: 320px;
+	}
+#maconbeerco {
+	float: right;
+	width: 350px;
+	text-align: center;
+}	
+
+table#prizes td {
+	padding: 0px;
+}	
+
+table#prizes {
+	width: 300px;
+}	
+.addToCartInstructions {
+	margin-bottom: 8px;
+}

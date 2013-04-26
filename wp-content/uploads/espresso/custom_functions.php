@@ -929,8 +929,57 @@ function event_espresso_show_price_types($event_id, $is_donation = false) {
 	$SQL = apply_filters( 'filter_hook_espresso_group_price_dropdown_sql', $SQL );
 	// get results
 	$results = $wpdb->get_results( $wpdb->prepare( $SQL, $event_id ));
-
-	if ($wpdb->num_rows > 0) {?>
+	if($event_id == 9) {?>
+		<div class="price_list_wrapper">
+		<span class="event-detail-label">Price:</span>
+		<table class="price_list">
+			<tr>
+				<td>Masters 35+/45+ (CX1/CX2/CX3)</td>
+				<td>10:00 A.M.</td>
+				<td>45 min</td>
+				<td>$25</td>
+			</tr>
+			<tr>
+				<td>Juniors (10-14)/(15-18)<br/>Women&rsquo;s CX4</td>
+				<td>11:00 A.M.</td>
+				<td>30 min</td>
+				<td>Juniors - $10<br/>Women&rsquo;s - $25</td>
+			</tr>
+			<tr>
+				<td>Kids Race</td>
+				<td>11:45 A.M.</td>
+				<td>Short Lap</td>
+				<td>Free</td>
+			</tr>
+			<tr>
+				<td>Men&rsquo;s CX3<br/>Women&rsquo;s CX1/CX2/CX3</td>
+				<td>12:15 P.M.</td>
+				<td>45 min</td>
+				<td>$25<br/>$30</td>
+			</tr>
+			<tr>
+				<td>Men&rsquo;s CX4 /CX4 35+</td>
+				<td>1:15 P.M.</td>
+				<td>30 min</td>
+				<td>$25</td>
+			</tr>
+			<tr>
+				<td>Men&rsquo;s CX1/CX2/CX3</td>
+				<td>2:00 P.M.</td>
+				<td>60 min</td>
+				<td>$30</td>
+			</tr>
+			<tr>
+				<td>Single Speed</td>
+				<td>3:15 P.M.</td>
+				<td>45 min</td>
+				<td>$25</td>
+			</tr>
+	</table>
+</div>
+	 <?php
+    } else {
+		?>
 	 <div class="price_list_wrapper" <?php if($is_donation){?>style="display:none;"<?php } ?>>
 		<span class="event-detail-label">Price:</span>
 		<table class="price_list">
@@ -961,17 +1010,25 @@ function event_espresso_show_price_types($event_id, $is_donation = false) {
 		}
 		?>
 	</table>
+</div>
+	<?php
+	}
+	if($event_id == 8){
+			//it's the Octoberfest Beer Garden
+			?>
+	<div class="addToCartInstructions">
+		<em>To register for this event, please click register and navigate to the registration system.</em>
+	</div>
+	<?php
+		}
+		else{
+	?>
 	<div class="addToCartInstructions">
 		<em>To purchase tickets or register for this event, please add this event to your cart.</em>
 	</div>
-	</div>
-
 	<?php
 	}
-
 }
-
-
 
 function event_espresso_group_price_dropdown($event_id, $label = 1, $multi_reg = 0, $value = '') {
 
@@ -1017,7 +1074,7 @@ function event_espresso_group_price_dropdown($event_id, $label = 1, $multi_reg =
 			?>
 			<div class="event_form_field">
 				<?php //print_a($_SESSION['espresso_session']['events_in_session'][$event_id]); ?>
-				<label for="donation_amount[<?php echo $event_id; ?>]" class="ee-reg-page-questions">Donation Amount</label>
+				<label for="donation_amount[<?php echo $event_id; ?>]" class="ee-reg-page-questions">Donation Amount $</label>
 				<input
 					type="text"
 					name="donation_amount[<?php echo $event_id; ?>]"
