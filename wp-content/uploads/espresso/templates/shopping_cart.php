@@ -8,6 +8,7 @@ function event_espresso_shopping_cart() {
 	//print_a( $_SESSION );
 	event_espresso_add_event_process(5,"Donation");
 	event_espresso_add_event_process(17,"Donation");
+	event_espresso_add_event_process(18,"Donation");
 	$events_in_session = isset( $_SESSION['espresso_session']['events_in_session'] ) ? $_SESSION['espresso_session']['events_in_session'] : event_espresso_clear_session( TRUE );
 
 	if ( event_espresso_invoke_cart_error( $events_in_session ) )
@@ -27,7 +28,7 @@ function event_espresso_shopping_cart() {
 	$sql = apply_filters( 'filter_hook_espresso_shopping_cart_SQL_select', $sql );
 	$sql .= " WHERE e.id in ($events_IN) ";
 	$sql .= " AND e.event_status != 'D' ";
-	$sql .= " ORDER BY (e.id IN (5,17)) ASC, e.start_date ";
+	$sql .= " ORDER BY (e.id IN (5,17,18)) ASC, e.start_date ";
 //echo '<h4>$sql : ' . $sql . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
 
 	$result = $wpdb->get_results( $sql );
