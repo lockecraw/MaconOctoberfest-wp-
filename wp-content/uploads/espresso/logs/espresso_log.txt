@@ -80,3 +80,7 @@
 	Payment for: Harris, Thad|| attendee_session id: mn05tutdlt7bpk8mejv8e88t80-517acdc586f403.69854304|| registration id: 3-517ad14a719c6|| transaction details: a:3:{s:6:"status";i:1;s:3:"msg";s:74:"Transaction was completed successfully [Transaction ID# ch_1iimXR47nXYTDs]";s:4:"txid";s:17:"ch_1iimXR47nXYTDs";}
 [ 2013-04-26 15:16:25 ]  payment_page.php  -> event_espresso_pay
 	Payment for: Soon, Launching|| attendee_session id: 3t5uu0uvh6lbbh2ovfmav06sc3-517acddf3c8e94.12451135|| registration id: 3-517ad254e3dcb|| transaction details: a:3:{s:6:"status";i:1;s:3:"msg";s:74:"Transaction was completed successfully [Transaction ID# ch_1iimx9AnuMDKRS]";s:4:"txid";s:17:"ch_1iimx9AnuMDKRS";}
+[ 2013-04-26 17:51:30 ]  payment_page.php  -> event_espresso_pay
+	Payment for: Shannon and Lisa Harris, Guest of|| attendee_session id: tb8o9km5097vffjv77iskdj4t3-517af5d33bc8a7.64688214|| registration id: 3-517af65cf2043|| transaction details: a:3:{s:6:"status";i:1;s:3:"msg";s:74:"Transaction was completed successfully [Transaction ID# ch_1ilH7kUOi7QMC9]";s:4:"txid";s:17:"ch_1ilH7kUOi7QMC9";}
+[ 2013-04-26 18:52:16 ]  payment_page.php  -> event_espresso_pay
+	Payment for: Harris, Travis|| attendee_session id: svaai917lv87qqhbcop2g0lbi6-517b02137e9105.92200159|| registration id: 3-517b044a6e393|| transaction details: a:3:{s:6:"status";i:1;s:3:"msg";s:74:"Transaction was completed successfully [Transaction ID# ch_1imF0QvS9Hg5nc]";s:4:"txid";s:17:"ch_1imF0QvS9Hg5nc";}
