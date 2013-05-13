@@ -33,7 +33,6 @@
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <script type="text/javascript" src="//use.typekit.net/aqp8yiy.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-<link rel="Stylesheet" type="text/css" href="<?php bloginfo('template_url'); ?>/css/smoothDivScroll.css" />
 <?php wp_head(); ?>
 </head>
 <body>

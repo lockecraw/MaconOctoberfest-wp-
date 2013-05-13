@@ -9,6 +9,7 @@
   		<a href="http://www.q106.fm/main.html" target="_blank"><img src="<?php bloginfo('template_url'); ?>/images/1063-140px.jpg"/></a>
 	</div>
 </div>
+<link rel="Stylesheet" type="text/css" href="<?php bloginfo('template_url'); ?>/css/smoothDivScroll.css" />
 <script src="<?php bloginfo('template_url'); ?>/js/jquery-ui-1.8.23.custom.min.js" type="text/javascript"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/jquery.mousewheel.min.js" type="text/javascript"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/jquery.kinetic.js" type="text/javascript"></script>
