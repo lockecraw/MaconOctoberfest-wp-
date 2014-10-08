@@ -33,13 +33,13 @@ function add_new_event_ticket(){
 								</tr>
 								<tr>
 									<th>
-										<label for="base-css-select" <?php echo $styled ?>> 
+										<label for="base-css-select"> 
 											<?php _e('Select Stylesheet', 'event_espresso');  ?>
 										</label>
 									</th>
 									<td>
-										<select id="base-css-select" class="wide" <?php echo $disabled ?> name="css_file">
-										<option <?php espresso_file_is_selected($fname) ?> value="simple.css">
+										<select id="base-css-select" class="wide"  name="css_file">
+										<option <?php espresso_file_is_selected('simple.css') ?> value="simple.css">
 										<?php _e('Default CSS - Simple', 'event_espresso'); ?>
 										</option>
 										<?php foreach( $css_files as $fname ) { ?>
@@ -50,12 +50,12 @@ function add_new_event_ticket(){
 								</tr>
 								<tr>
 									<th>
-										<label for="base-template-select" <?php echo $styled ?>> 
+										<label for="base-template-select"> 
 											<?php _e('Select a Template', 'event_espresso');  ?>
 										</label>
 									</th>
 									<td>
-										<select id="base-template-select" class="wide" <?php echo $disabled ?> name="template_file">
+										<select id="base-template-select" class="wide"  name="template_file">
 										<option <?php espresso_file_is_selected($fname) ?> value="index.php">
 										<?php _e('Default Template', 'event_espresso'); ?>
 										</option>
@@ -126,7 +126,7 @@ function add_new_event_ticket(){
 								</div>
 							</div>
 						<p>
-							<input class="button-primary" type="submit" name="Submit" value="<?php _e('Add Ticket'); ?>" id="add_new_ticket" />
+							<input class="button-primary" type="submit" name="Submit" value="<?php _e('Save Ticket'); ?>" id="add_new_ticket" />
 						</p>
 						 <?php wp_nonce_field( 'espresso_form_check', 'add_new_ticket' ); ?>
 					</form>

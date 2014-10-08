@@ -3,17 +3,17 @@
 	width:800px;
 }
 .instructions {
-	background-color: #f30003;
+	background-color: #63abaf;
 	text-align:center;
 	color:#FFF;
 	font-weight:bold;
 	margin-bottom:0.5em;
 	width: 700px;
 	padding: 10px;
-	border: 1px solid #f30003;
+	border: 1px solid #63abaf;
 }
 .ticket {
-	border: 1px solid #f30003;
+	border: 1px solid #63abaf;
 	width: 700px;
 	padding:20px 10px;
 	text-align: justify;
@@ -59,11 +59,11 @@
 #deluxe-ticket .extra_info,
 .qr_code img,
 #deluxe-ticket .ticket {
-	border-color: #f30003;
+	border-color: #63abaf;
 }
 .title {
-	color: #f30003;
+	color: #63abaf;
 }
 #deluxe-ticket .instructions {
-	background:url(../img/printreminder_red.png) no-repeat transparent;
+	background:url(../img/printreminder_teal.png) no-repeat transparent;
 }

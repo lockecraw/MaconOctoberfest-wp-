@@ -40,13 +40,13 @@ function edit_event_ticket(){
 								</tr>
 								<tr>
 									<th>
-									<label for="base-ticket-select" <?php echo $styled ?>>
+									<label for="base-ticket-select">
 										<?php _e('Select Stylesheet', 'event_espresso');  ?>
 									</label>
 									</th>
 									<td>
-										<select id="base-ticket-select" class="wide" <?php echo $disabled ?> name="css_file">
-										 <option <?php espresso_file_is_selected($fname,$css_file) ?> value="simple.css">
+										<select id="base-ticket-select" class="wide"  name="css_file">
+										 <option <?php espresso_file_is_selected('simple.css',$css_file) ?> value="simple.css">
 											<?php _e('Default CSS - Simple', 'event_espresso'); ?>
 										</option>
 								<?php foreach( $css_files as $fname ) { ?>
@@ -55,15 +55,14 @@ function edit_event_ticket(){
 										</select>
 									</td>
 								</tr>
-								<?php if (file_exists(EVENT_ESPRESSO_UPLOAD_DIR . "tickets/templates/index.php")) { ?>
 								<tr>
 									<th>
-									<label for="base-template-select" <?php echo $styled ?>>
+									<label for="base-template-select">
 										<?php _e('Select a Template', 'event_espresso');  ?>
 									</label>
 									</th>
 									<td>
-										<select id="base-template-select" class="wide" <?php echo $disabled ?> name="template_file">
+										<select id="base-template-select" class="wide" name="template_file">
 										 <option <?php espresso_file_is_selected($fname,$template_file) ?> value="index.php">
 											<?php _e('Default Template', 'event_espresso'); ?>
 										</option>
@@ -73,7 +72,7 @@ function edit_event_ticket(){
 										</select>
 									</td>
 								</tr>
-								<?php } ?>
+
 						  <?php
 							if(!empty($ticket_logo_url)){ 
 								$ticket_logo = $ticket_logo_url;
@@ -132,7 +131,7 @@ function edit_event_ticket(){
 				</div>
 
 				<p>
-					<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update Ticket'); ?>" id="update_ticket" />
+					<input class="button-primary" type="submit" name="Submit" value="<?php _e('Save Ticket'); ?>" id="update_ticket" />
 				</p>
 
 					<?php wp_nonce_field( 'espresso_form_check', 'update_ticket' ); ?>

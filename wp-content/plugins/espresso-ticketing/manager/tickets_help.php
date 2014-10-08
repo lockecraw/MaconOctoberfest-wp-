@@ -138,9 +138,7 @@
 				[venue_image]<br />
 				[google_map_image]<br />
 				[google_map_link]</p> 
-			<p>
-				<?php _e('', 'event_espresso'); ?>
-			</p>
+			
 		</div>
 	</div>
 	<?php
@@ -148,7 +146,7 @@
     	 * Ticket Guide
     	 */
     ?>
-	<div id="ticket-guide" class="pop-help" >
+	<?php /*?><div id="ticket-guide" class="pop-help" >
 		<div class="TB-ee-frame">
 			<h2>
 				<?php _e('Ticket Guide', 'event_espresso'); ?>
@@ -165,6 +163,6 @@
 				<?php _e('', 'event_espresso'); ?>
 				</em> </p>
 		</div>
-	</div>
+	</div><?php */?>
 </div>
 <!-- close parent display --> 

@@ -31,6 +31,8 @@ function espresso_ticket_config_mnu() {
 			</div>
 		<?php
 		}
+		
+		$button_style = 'button-primary';
 		if (isset($_REQUEST['action'])) {
 			switch ($_REQUEST['action']) {
 				case 'update_ticket':
@@ -44,10 +46,12 @@ function espresso_ticket_config_mnu() {
 				case 'add_new_ticket':
 					require_once("add_new.php");
 					add_new_event_ticket();
+					$button_style = 'button-secondary';
 					break;
 				case 'edit_ticket':
 					require_once("edit_ticket.php");
 					edit_event_ticket();
+					$button_style = 'button-secondary';
 					break;
 			}
 		}
@@ -58,8 +62,8 @@ function espresso_ticket_config_mnu() {
 		?>
 		<p>
 			<?php
-			_e('Create customized ticket template for use in multiple events. ', 'event_espresso');
-			echo apply_filters('filter_hook_espresso_help', 'customized_ticket_info');
+			_e('Create customized ticket template for use in multiple events.', 'event_espresso');
+			//echo apply_filters('filter_hook_espresso_help', 'customized_ticket_info');
 			?>
 		</p>
 		<form id="form1" name="form1" method="post" action="<?php echo $_SERVER["REQUEST_URI"] ?>">
@@ -127,7 +131,10 @@ function espresso_ticket_config_mnu() {
 				<strong>
 		<?php _e('Check All', 'event_espresso'); ?>
 				</strong>
-				<input name="delete_ticket" type="submit" class="button-secondary" id="delete_ticket" value="<?php _e('Delete Selected', 'event_espresso'); ?>" style="margin-left:100px;" onclick="return confirmDelete();"> <?php echo '<a href="admin.php?page=event_tickets&amp;action=add_new_ticket" style="margin-left:5px"class="button-primary">' . __('Add New', 'event_espresso') . '</a>'; ?>
+				<input name="delete_ticket" type="submit" class="button-secondary" id="delete_ticket" value="<?php _e('Delete Selected', 'event_espresso'); ?>" style="margin-left:100px;" onclick="return confirmDelete();"> 
+				<a  style="margin-left:5px"class="<?php echo $button_style; ?>" href="admin.php?page=event_tickets&amp;action=add_new_ticket">
+							<?php _e('Add New Ticket','event_espresso'); ?>
+							</a>
 			</p>
 		</form>
 		<?php

@@ -1,0 +1,151 @@
+/* for pdfs */
+body{
+	background-color:#333;
+}
+#deluxe-ticket .outside{
+	margin:0 auto;
+    padding: 0;
+
+}
+.print_button_div input {
+	float: left;
+}
+#deluxe-ticket .instructions{
+	display: none;
+}
+
+#deluxe-ticket .ticket{
+	padding: 0;
+	background: url('../img/deluxe-bg.jpg') no-repeat #FFF;
+    width: 725px;
+    height: 450px;
+    text-align: left;
+    border-spacing: 0;
+    margin: 10px;
+    border: none;
+    border-top: 10px solid #000000;
+}
+#deluxe-ticket .ticket td {
+	background: transparent;
+}
+.top_event_title{
+    font-size: 2em;
+    font-weight:bold;
+    margin:0;
+    padding:0;
+}
+.logo img {
+    margin:0 0 0 15px;
+}
+.infotext.reg-id {
+	font-size: 0.7em;
+}
+.qr_code img{
+	width:135px;
+	height:135px;
+	border:1px solid #000000;
+}
+.price{
+    font-size:30px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#666;
+}
+#deluxe-ticket .extra_info{
+	border-top: 10px solid #000000;
+    width: 725px;
+    padding: 10px;
+    text-align: justify;
+	background-color:#FFF;
+	margin: 0 10px;
+}
+.divider{
+    border-bottom:dashed #333 1px;
+    width:700px;
+    height:1px;
+    margin:10px 0;
+}
+
+.topinfo{
+	padding:0 15px;
+	height: 150px;
+
+}
+.name{
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-size:47px;
+	color:#47433b;
+	padding-bottom:5px;
+}
+
+.title{
+	color:#000000;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	font-weight:bold;
+}
+.title2{
+	color:#666666;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	font-weight:bold;
+}
+
+.infotext{
+	color:#666666;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+}
+
+.gravatar{
+	width:200px;
+	padding-bottom: 20px;
+}
+.attendee {
+	margin-top: 10px;
+}
+.map img{
+	height:168px;
+}
+.footer {
+	font-size:11px;
+	font-family: Helvetica, Arial, sans-serif;
+	margin-bottom: 50px;
+	margin-left: 10px;
+}
+.footer, .footer a {
+	color: #f2f0eb;
+}
+
+/* for screens */
+@media screen and ( min-width: 800px ) {
+
+	 #deluxe-ticket .ticket {
+		width: 800px;
+	}
+	#deluxe-ticket .extra_info {
+		width: 800px;
+		margin: 0 0 5px;
+	}
+	.footer { margin: 0;}
+	#deluxe-ticket .ticket {
+		margin: 0;
+		border-top: none;
+	}
+	.topinfo {
+		border-top: 10px solid #000000;
+	}
+	#deluxe-ticket .instructions {
+		background: transparent;
+	    color:#FFF;
+	    margin-bottom:0.5em;
+	    width: 700px;
+	    padding: 10px;
+		font-family:Arial, Helvetica, sans-serif;
+		text-align: left;
+		font-weight: normal;
+		border: none;
+		clear: both;
+		display: block;
+	}
+}

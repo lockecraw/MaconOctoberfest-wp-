@@ -1,0 +1,111 @@
+body {
+	background: #efefef;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 14px;
+}
+.print_button_div form{
+	float: left;
+}
+.instructions {
+	width: 700px;
+	margin: auto;
+	background: #d9edf7;
+	color: #3a87ad;
+	font-family: Helvetica, Arial, sans-serif;
+	border: 1px solid #bce8f1;
+	border-radius: 5px;
+	padding: 10px;
+	font-size: 12px;
+	margin-bottom: 20px;
+}
+.badge {
+	margin: 20px auto;
+	background: #fff;
+	border: 1px solid #ddd;
+	padding: 10px;
+	width: 305px;
+	height: 430px;
+}
+.logo img {
+	width: 300px!important;
+	height: auto!important;
+}
+.event-details,
+.gravatar,
+.attendee-details,
+.event-details,
+.credit {
+	padding: 5px 0;
+}
+.attendee-details {
+	padding-left: -35px;
+}
+.event-name {
+	font-size: 20px;
+}
+.attendee-name {
+	font-size: 22px;
+}
+.reg-id {
+	font-size: 10px;
+}
+.qr,
+.credit {
+	text-align: center;
+}
+.credit img {
+	position: relative;
+	top: 3px;
+}
+.gravatar, .attendee-details, .qr {
+	padding-top: 20px;
+}
+.qr img {
+	width: 150px;
+}
+.gravatar img {
+	width: 100px;
+}
+.credit, .credit a {
+	color: #c0c0c0;
+	font-size: 8px;
+}
+.extra_info {
+	background: #fff;
+	width: 100%;
+	margin: auto;
+}
+.extra_info td {
+	padding: 10px 10px 0;
+}
+.attendee {
+	width: 255px;
+}
+.divider {
+	margin: auto;
+	width: 700px;
+	border-bottom: 1px solid #ddd;
+}
+.info-title {
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	font-size: 16px;
+	padding: 5px 0;
+}
+.price {
+	font-weight: bold;
+	font-size: 18px;
+}
+
+@media screen and ( min-width: 800px ) {
+	.extra_info {
+		width: 700px;
+	}
+	.attendee {
+		display: block;
+	}
+	.attendee-details {
+		padding-left: 15px;
+	}
+}
