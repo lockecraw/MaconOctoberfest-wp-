@@ -41,8 +41,12 @@ function espresso_display_eway_rapid3($data) {
 				'CurrencyCode'=>$eway_rapid3_settings['currency_format']
 		);
 		$eway_rapid3RequestData = array('Payment'=>$payment);
-		$redirectUrl=site_url().'?page_id='.$org_options['return_url'].'&r_id=' . $payment_data['registration_id'].'&eway_rapid3=true&id='.$payment_data['attendee_id']; 
+		$redirectUrl = espresso_build_gateway_url('return_url', $payment_data, 'eway_rapid3', array('eway_rapid3'=>'true')); 
 		$rapid3Response= $rapid3Client->createAccessCode($eway_rapid3RequestData,$redirectUrl,'ProcessPayment');
+		if( empty($rapid3Response)){
+			echo '<div id="message" class="clear"><p class="error">**' . __( 'An error occcurred communicating with EWay Rapid 3 Gateway\'s Server. You probably have the wrong API Key', 'event_espresso' ) . '</p></div>';
+			return;
+		}
 		$error=empty($rapid3Response->FormActionURL) || empty($rapid3Response->AccessCode);
 		$_SESSION['eway_rapid3_url']=$rapid3Response->FormActionURL;
 		$ewayRapid3AccessCode=$rapid3Response->AccessCode;
@@ -52,7 +56,7 @@ function espresso_display_eway_rapid3($data) {
 		$ewayRapid3AccessCode=$_GET['AccessCode'];
 	}*/
 	
-	wp_register_script( 'eway_rapid3', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/eway_rapid3/eway_rapid3.js', array( 'jquery', 'jquery.validate.js' ), '1.0', TRUE );
+	wp_register_script( 'eway_rapid3', EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/eway_rapid3/eway_rapid3.js', array( 'jquery.validate.js' ), '1.0', TRUE );
 	wp_enqueue_script( 'eway_rapid3' );		
 	?>
 <div id="eway_rapid3-payment-option-dv" class="payment-option-dv">
@@ -68,7 +72,7 @@ function espresso_display_eway_rapid3($data) {
 				<h3 class="payment_header"><?php echo $eway_rapid3_settings['header']; ?></h3>
 			<?php } ?>
 			<?php if($error){?>
-				<p class='error'><?php _e("An error has occured in the using of the Eway Rapid 3.0 payment gateway. Please try a different gateway","event_espresso");?></>
+				<p class='error'><?php _e("An error has occured in the using of the Eway Rapid 3.0 payment gateway. Please try a different gateway","event_espresso");?></p>
 			<?php }else{?>
 				<div class = "event_espresso_form_wrapper">
 					<form id="eway_rapid3_payment_form" name="eway_rapid3_payment_form" method="post" action="<?php echo $_SESSION['eway_rapid3_url'] ?>">
@@ -81,11 +85,11 @@ function espresso_display_eway_rapid3($data) {
 							</p>
 							<p>
 								<label for="card_num"><?php _e('Card Number', 'event_espresso'); ?></label>
-								<input type="text" name="EWAY_CARDNUMBER" class="required" id="ppp_card_num" />
+								<input type="text" name="EWAY_CARDNUMBER" class="required" id="ppp_card_num" autocomplete="off" />
 							</p>
 							<p>
 								<label for="card-exp"><?php _e('Expiration Month', 'event_espresso'); ?></label>
-								<select id="ppp_card-exp" name ="EWAY_CARDEXPIRYMONTH" class="required">
+								<select id="ppp_card-exp" name ="EWAY_CARDEXPIRYMONTH" class="med required">
 											<?php
 											for ($i = 1; $i < 13; $i++){
 												$paddedMonth=str_pad($i,2,'0',STR_PAD_LEFT);
@@ -96,7 +100,7 @@ function espresso_display_eway_rapid3($data) {
 							</p>
 							<p>
 								<label for="exp-year"><?php _e('Expiration Year', 'event_espresso'); ?></label>
-								<select id="ppp_exp-year" name ="EWAY_CARDEXPIRYYEAR" class="required">
+								<select id="ppp_exp-year" name ="EWAY_CARDEXPIRYYEAR" class="med required">
 											<?php
 											$curr_year = date("Y");
 											for ($i = 0; $i < 10; $i++) {
@@ -108,13 +112,14 @@ function espresso_display_eway_rapid3($data) {
 							</p>
 							<p>
 								<label for="cvv"><?php _e('CVN Code', 'event_espresso'); ?></label>
-								<input type="text" name="EWAY_CARDCVN" id="ppp_exp_date" />
+								<input type="text" name="EWAY_CARDCVN" id="ppp_exp_date" autocomplete="off" class="small required" />
 							</p>
 						</fieldset>
 
 						<input name="EWAY_ACCESSCODE" type='hidden' value='<?php echo $ewayRapid3AccessCode?>'/>
 						<p class="event_form_submit">
-							<input name="eway_rapid3_submit" id="eway_rapid3_submit" class="submit-payment-btn" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
+							<input name="eway_rapid3_submit" id="eway_rapid3_submit" class="submit-payment-btn allow-leave-page" type="submit" value="<?php _e('Complete Purchase', 'event_espresso'); ?>" />
+							<div class="clear"></div>
 						</p>
 						<span id="processing"></span>
 					</form>

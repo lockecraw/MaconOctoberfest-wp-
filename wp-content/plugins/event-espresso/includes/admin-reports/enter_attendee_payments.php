@@ -2,6 +2,8 @@
 function enter_attendee_payments() {
 
 	global $wpdb, $org_options;
+	require_once(EVENT_ESPRESSO_PLUGINFULLPATH."includes/functions/attendee_functions.php");
+
  
 	$notifications['success'] = array(); 
 	$notifications['error']	 = array(); 
@@ -55,13 +57,14 @@ function enter_attendee_payments() {
 					$notifications['error'][] = __('An error occured. The primary attendee details could not be retrieved from the database.', 'event_espresso'); 
 				} else {
 
-					$txn_type = isset($_POST[ 'txn_type' ]) ? $_POST[ 'txn_type' ] : FALSE;
-					$txn_id = isset($_POST[ 'txn_id' ]) ? $_POST[ 'txn_id' ] : FALSE;
+					$txn_type = isset($_POST[ 'txn_type' ]) ? $_POST[ 'txn_type' ] : apply_filters('filter_hook_event_espresso_enter_attendee_payments_remove_require_txn_type', FALSE);
+					$txn_id = isset($_POST[ 'txn_id' ]) ? $_POST[ 'txn_id' ] : apply_filters('filter_hook_event_espresso_enter_attendee_payments_remove_require_txn_id', FALSE);
 					$payment_date = isset($_POST[ 'payment_date' ]) ? date_i18n( get_option('date_format'), strtotime( $_POST[ 'payment_date' ] )) : FALSE;
 					$coupon_code = isset($_POST[ 'coupon_code' ]) ? $_POST[ 'coupon_code' ] : '';
-					$total_owing = isset($_POST[ 'total_owing' ]) ? (float)number_format( (float)abs( (float)sanitize_text_field( $_POST[ 'total_owing' ] )), 2, '.', '' ) : 0.00;
-					$amount_pd = isset($_POST[ 'amount_pd' ]) ? (float)number_format( (float)abs( (float)sanitize_text_field( $_POST[ 'amount_pd' ] )), 2, '.', '' ) : 0.00;
-					$new_payment = isset($_POST[ 'new_payment' ]) && $_POST[ 'new_payment' ] != '' ? (float)number_format( (float)sanitize_text_field( $_POST[ 'new_payment' ] ), 2, '.', '' ) : 0.00;
+					$total_owing = isset($_POST[ 'total_owing' ]) ? (float)number_format( sanitize_text_field( $_POST[ 'total_owing' ] ), 2, '.', '' ) : 0.00;
+					$amount_pd = isset($_POST[ 'amount_pd' ]) ? (float)number_format( sanitize_text_field( $_POST[ 'amount_pd' ] ), 2, '.', '' ) : 0.00;
+					$new_payment = isset($_POST[ 'new_payment' ]) && $_POST[ 'new_payment' ] != '' ? (float)number_format( sanitize_text_field( $_POST[ 'new_payment' ] ), 2, '.', '' ) : 0.00;
+					$upd_payment_status = isset($_POST[ 'payment_status' ]) ? $_POST[ 'payment_status' ] : 'Pending';
 					
 					// if making a payment, we are going to require the txn type and txn id
 					if ( $new_payment != 0.00  ) {						
@@ -80,18 +83,19 @@ function enter_attendee_payments() {
 					
 						$upd_total = $amount_pd + $new_payment;  
 
-						// compare new total_cost with amount_pd
-						if ( $upd_total == $total_owing ) {
-							$upd_payment_status = __('Completed','event_espresso');
-						} elseif ( $upd_total < $total_owing ) {
-							$upd_payment_status = __('Pending','event_espresso');
-						} elseif ( $upd_total > $total_owing ) {
-							$upd_payment_status = __('Refund','event_espresso');
-						}					
-
 					} else {
-						$upd_payment_status = isset($_POST[ 'payment_status' ]) ? $_POST[ 'payment_status' ] : __('Pending','event_espresso');
 						$upd_total = $amount_pd;
+					}
+
+					// compare new total_cost with amount_pd
+					if ( $new_payment != 'Cancelled' ) {
+						if ( $new_payment == $total_owing ) {
+							$upd_payment_status = 'Completed';
+						} elseif ( $new_payment < $total_owing ) {
+							$upd_payment_status = isset($_POST[ 'payment_status' ]) && $_POST[ 'payment_status' ] == 'Incomplete' ? 'Incomplete' : 'Pending';
+						} elseif ( $new_payment > $total_owing ) {
+							$upd_payment_status = 'Refund';
+						}
 					}
 					
 					//Update payment status information for primary attendee
@@ -112,7 +116,11 @@ function enter_attendee_payments() {
 					if ( $upd_success === FALSE ) {
 						$notifications['error'][] = __('An error occured. The attendee payment details could not be updated.', 'event_espresso'); 
 					} else {
-
+						
+						$attendee_data = array('attendee_id'=> $primary_att->id, 'payment_status'=>$upd_payment_status, 'registration_id'=> $registration_id, 'total_cost'=>$upd_total, 'txn_type'=>__('Manual Website Payment', 'event_espresso'), 'txn_id'=>$txn_id);
+				
+						do_action('action_hook_espresso_update_attendee_payment_status', $attendee_data);
+				
 						if ( count($registration_ids) > 0 ) {
 						
 							foreach($registration_ids as $reg_id) {
@@ -424,6 +432,7 @@ function enter_attendee_payments() {
 													array('id'=>'Completed','text'=> __('Completed','event_espresso')),
 													array('id'=>'Pending','text'=> __('Pending','event_espresso')),
 													array('id'=>'Payment Declined','text'=> __('Payment Declined','event_espresso')),
+													array('id'=>'Cancelled','text'=> __('Cancelled','event_espresso')),
 													array('id'=>'Incomplete','text'=> __('Incomplete','event_espresso')),
 													array('id'=>'Refund','text'=> __('Overpaid','event_espresso'))
 												);
@@ -437,9 +446,10 @@ function enter_attendee_payments() {
 										</label>
 										<?php 
 											$amount_owing = number_format( $total_cost - $amount_pd, 2, '.', '' );
+
 											if ( $amount_owing == 0.00 ) {
 												$amnt_class = ' full-payment';
-											} elseif ( $amount_owing < $total_cost ) {
+											} elseif ( $amount_owing < $total_cost || $amount_owing > $total_cost ) {
 												$amnt_class = ' part-payment';
 											} elseif ( $amount_owing == $total_cost ) {
 												$amnt_class = ' no-payment';
@@ -484,7 +494,7 @@ function enter_attendee_payments() {
 //												);
 //												echo select_input('txn_type', $txn_values, $txn_type);
 										?>
-											<input type="text" class="medium-text" name="txn_type" size="45" value ="<?php echo $txn_type; ?>" />
+											<input type="text" class="medium-text" name="txn_type" size="45" value ="<?php echo stripslashes_deep(htmlentities($txn_type)); ?>" />
 										</li>
 									<li>
 										<label>

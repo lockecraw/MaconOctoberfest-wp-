@@ -29,26 +29,11 @@ function espresso_display_offline_payment_footer() {
 //	echo '</div><!-- / #off_line_payment_container -->';
 }
 
-function espresso_display_finalize_payment_header($data) {
-	global $org_options;
-	?>
-	<div class="event_espresso_attention event-messages ui-state-highlight">
-		<span class="ui-icon ui-icon-alert"></span>
-		<p><strong><?php _e('Attention!', 'event_espresso'); ?></strong><br />
-	<?php _e('If using one of the offline payment options, please make note of the information below, then', 'event_espresso'); ?>
-			<a href="<?php echo home_url() . '/?page_id=' . $org_options['return_url']; ?>&amp;payment_type=cash_check&amp;id=<?php echo $data['attendee_id'] . '&r_id=' . $data['registration_id'] ?>" class="inline-link" title="<?php _e('Finalize your registration', 'event_espresso'); ?>"><?php _e('click here to finalize your registration', 'event_espresso'); ?></a>
-		</p>
-	</div>
-	<?php
-}
+
 
 global $gateway_formal_names;
 $gateway_formal_names = array();
 
-$active_gateways = get_option('event_espresso_active_gateways', array());
-foreach ($active_gateways as $gateway => $path) {
-	event_espresso_require_gateway($gateway . "/init.php");
-}
 $gateway_formal_names = apply_filters( 'action_hook_espresso_gateway_formal_name', $gateway_formal_names );
 
 $data['fname'] = $fname;
@@ -59,8 +44,11 @@ if (empty($attendee_email)) {
 	$data['attendee_email'] = $attendee_email;
 }
 $data['address'] = isset($address) && !empty($address) ? $address : '';
+$data['address2'] = isset($address2) && !empty($address2) ? $address2 : '';
 $data['city'] = isset($city) && !empty($city) ? $city : '';
 $data['state'] = isset($state) && !empty($state) ? $state : '';
+$data['country'] = isset($country) && !empty($country) ? $country : '';
+$data['country'] = isset($country_id) && !empty($country_id)  && $data['country'] == '' ? $country_id : '';
 $data['zip'] = isset($zip) && !empty($zip) ? $zip : '';
 if (empty($event_cost)) {
 	$data['event_cost'] = $total_cost;
@@ -72,11 +60,12 @@ $data['event_id'] = $event_id;
 $data['event_name'] = isset($event_name) && !empty($event_name) ? $event_name : '';
 $data['registration_id'] = $registration_id;
 $data['phone'] = isset($phone) && !empty($phone) ? $phone : '';
-//This file builds the gateways that are available
+$data['event_meta'] = event_espresso_get_event_meta($event_id);
 
-echo '<div id="payment-options-dv">';
-echo '<h3>' . __('Please choose a payment option', 'event_espresso') . '</h3>';
-echo '<div>';
+//This file builds the gateways that are available
+echo '<div id="payment-options-dv" class="event-display-boxes ui-widget">';
+echo '<h2 class="section-heading ui-widget-header ui-corner-top">' . __('Please choose a payment option', 'event_espresso') . '</h2>';
+echo '<div class="event-data-display ui-widget-content ui-corner-bottom">';
 
 do_action('action_hook_espresso_display_onsite_payment_header');
 do_action('action_hook_espresso_display_onsite_payment_gateway', $data);
@@ -88,7 +77,6 @@ do_action('action_hook_espresso_display_offsite_payment_footer');
 
 do_action('action_hook_espresso_display_offline_payment_header');
 do_action('action_hook_espresso_display_offline_payment_gateway', $data);
-do_action('action_hook_espresso_display_finalize_payment_header', $data);
 do_action('action_hook_espresso_display_offline_payment_gateway_2', $data);
 do_action('action_hook_espresso_display_offline_payment_footer');
 
@@ -99,3 +87,4 @@ echo '<p id="external-link-msg-pg"><img width="16" height="16" src="' . EVENT_ES
 
 wp_register_script( 'espresso_payment_page', EVENT_ESPRESSO_PLUGINFULLURL . 'scripts/espresso_payment_page.js', array( 'jquery' ), '1.0', TRUE );
 wp_enqueue_script( 'espresso_payment_page' );
+

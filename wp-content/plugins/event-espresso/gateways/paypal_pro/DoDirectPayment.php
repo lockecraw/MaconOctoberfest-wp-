@@ -82,7 +82,7 @@ function espresso_process_paypal_pro($payment_data) {
 			'taxamt' => '', // Required if you specify itemized cart tax details. Sum of tax for all items on the order.  Total sales tax.
 			'desc' => stripslashes_deep($event_name), // Description of the order the customer is purchasing.  127 char max.
 			'custom' => '', // Free-form field for your own use.  256 char max.
-			'invnum' => '', // Your own invoice or tracking number
+			'invnum' => $_POST['invoice'],//'', // Your own invoice or tracking number
 			'notifyurl' => '' // URL for receiving Instant Payment Notifications.  This overrides what your profile is set to use.
 	);
 
@@ -124,7 +124,8 @@ function espresso_process_paypal_pro($payment_data) {
 		unset($PayPalResult['REQUESTDATA']['EXPDATE']);
 		unset($PayPalResult['REQUESTDATA']['CVV2']);
 		unset($PayPalResult['RAWREQUEST']);
-		$payment_data['txn_id'] = $PayPalResult['TRANSACTIONID'];
+		
+		$payment_data['txn_id'] = isset( $PayPalResult['TRANSACTIONID'] ) ? $PayPalResult['TRANSACTIONID'] : '';
 		$payment_data['txn_details'] = serialize($PayPalResult);
 		if (!APICallSuccessful($PayPalResult['ACK'])) {
 			DisplayErrors($Errors);
@@ -136,7 +137,7 @@ function espresso_process_paypal_pro($payment_data) {
 		<p><?php _e('There was no response from PayPal.', 'event_espresso'); ?></p>
 		<?php
 	}
-	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }
 

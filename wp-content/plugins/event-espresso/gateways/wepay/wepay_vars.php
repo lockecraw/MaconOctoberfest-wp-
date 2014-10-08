@@ -3,6 +3,7 @@
 function espresso_display_wepay($payment_data) {
 	extract($payment_data);
 // Setup class
+	if (empty($event_name)) $event_name = "Event number #" . $event_id;
 	include_once ('Wepay.php');
 	echo '<!-- Event Espresso WePay Gateway Version ' . Espresso_Wepay::$version . '-->';
 	$wepay_settings = get_option('event_espresso_wepay_settings');
@@ -19,17 +20,24 @@ function espresso_display_wepay($payment_data) {
 	$fields['type'] = 'SERVICE';
 	$fields['reference_id'] = $attendee_id;
 	$fields['amount'] = number_format($event_cost, 2, '.', '');
-	if ($wepay_settings['force_ssl_return']) {
-		$home = str_replace("http://", "https://", home_url());
-	} else {
-		$home = home_url();
-	}
-	$fields['redirect_uri'] = $home . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=wepay';
-	$fields['callback_uri'] = $home . '/?page_id=' . $org_options['notify_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=wepay';
+	
+	$fields['redirect_uri'] = add_query_arg(array('id'=>$attendee_id,'r_id'=>$registration_id,'event_id'=>$event_id,'attendee_action'=>'post_payment','form_action'=>'payment','type'=>'wepay'),  get_permalink($org_options['return_url']));
+	$fields['callback_uri'] = add_query_arg(array('id'=>$attendee_id,'r_id'=>$registration_id,'event_id'=>$event_id,'attendee_action'=>'post_payment','form_action'=>'payment','type'=>'wepay'),  get_permalink($org_options['notify_url']));
+//	$fields['redirect_uri'] = $home . '/?page_id=' . $org_options['return_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=wepay';
+//	$fields['callback_uri'] = $home . '/?page_id=' . $org_options['notify_url'] . '&id=' . $attendee_id . '&r_id=' . $registration_id . '&event_id=' . $event_id . '&attendee_action=post_payment&form_action=payment&type=wepay';
 
+	if ($wepay_settings['force_ssl_return']) {
+		$fields['redirect_uri'] = str_replace("http://", "https://", $fields['redirect_uri']);
+		$fields['callback_uri'] = str_replace("http://", "https://", $fields['callback_uri']);
+	}
 	if (empty($wepay_settings['access_token'])) return;
+	try{
 	$wepay = new Espresso_Wepay($wepay_settings['access_token']);
 	$raw = $wepay->request('checkout/create', $fields);
+	}catch(Exception $e){
+		printf(__("WePay seems to be misconfigured. Error: %s", "event_espresso"),$e->getMessage());
+		return;
+	}
 	if (empty($raw->checkout_uri)) return;
 	$uri = $raw->checkout_uri;
 	if ($wepay_settings['bypass_payment_page'] == 'Y') {

@@ -48,8 +48,11 @@ function organization_config_mnu() {
 		$org_options['surcharge_text'] = isset($_POST['surcharge_text']) && !empty($_POST['surcharge_text']) ? $_POST['surcharge_text'] : '';
 		$org_options['show_reg_footer'] = isset($_POST['show_reg_footer']) && !empty($_POST['show_reg_footer']) ? $_POST['show_reg_footer'] : '';
 		$org_options['affiliate_id'] = isset($_POST['affiliate_id']) && !empty($_POST['affiliate_id']) ? $_POST['affiliate_id'] : '';
-		$org_options['site_license_key'] = isset($_POST['site_license_key']) && !empty($_POST['site_license_key']) ? $_POST['site_license_key'] : '';
+		$org_options['site_license_key'] = isset($_POST['site_license_key']) && !empty($_POST['site_license_key']) ? trim($_POST['site_license_key']) : '';
 		$org_options['default_payment_status'] = isset($_POST['default_payment_status']) && !empty($_POST['default_payment_status']) ? $_POST['default_payment_status'] : '';
+		$org_options['default_promocode_usage'] = isset($_POST['default_promocode_usage']) && !empty($_POST['default_promocode_usage']) ? $_POST['default_promocode_usage'] : 'N';
+		$org_options['ticket_reservation_time'] = isset($_POST['ticket_reservation_time']) && !empty($_POST['ticket_reservation_time']) ? $_POST['ticket_reservation_time'] : '30';
+		$ueip_optin = isset($_POST['ueip_optin']) && !empty($_POST['ueip_optin']) ? $_POST['ueip_optin'] : 'yes';
 		
 		$org_options['default_logo_url'] = isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) ? $_REQUEST['upload_image'] : '';
 			 
@@ -105,7 +108,11 @@ function organization_config_mnu() {
 				break;
 			case 'THA' : $org_options['currency_symbol'] = 'THB'; // Thai Baht (hex code: &#xe3f;)
 				break;
-			case 'AUT' || 'BEL' || 'CYP' || 'EST' || 'FIN' || 'FRA' || 'DEU' || 'GRC' || 'IRL' || 'ITA' || 'LUX' || 'MLT' || 'NLD' || 'PRT' || 'SVK' || 'SVN' || 'ESP' || 'AND' || 'MCO' || 'SMR' || 'VAT' | 'MYT' || 'MNE' || 'XKV' || 'SPM' : $org_options['currency_symbol'] = 'EUR'; // use the Euro for all eurozone countries
+			case 'VEN' : $org_options['currency_symbol'] = 'BsF'; //venezuelan bolivar, although technically its symbol should be VEF
+				break;
+			case 'LVA' : $org_options['currency_symbol'] = 'LVL'; //Latvian
+				break;
+			case 'AUT' : case 'BEL' : case 'CYP' : case 'EST' : case 'FIN' : case 'FRA' : case 'DEU' : case 'GRC' : case 'IRL' : case 'ITA' : case 'LUX' : case 'MLT' : case 'NLD' : case 'PRT' : case 'SVK' : case 'SVN' : case 'ESP' : case 'AND' : case 'MCO' : case 'SMR' : case 'VAT' | 'MYT' : case 'MNE' : case 'XKV' : case 'SPM' : $org_options['currency_symbol'] = 'EUR'; // use the Euro for all eurozone countries
 				break;
 			default: $org_options['currency_symbol'] = '$';
 				break;
@@ -114,10 +121,17 @@ function organization_config_mnu() {
 		  $org_options['currency_symbol'] = 'Euro: '; //Creates the symbol for the Euro
 		  } */
 		update_option('events_organization_settings', $org_options);
+		update_option('ee_ueip_optin', $ueip_optin);
+		update_option( 'ee_ueip_has_notified', TRUE );
+		remove_action( 'admin_notices', 'espresso_data_collection_optin_notice', 10 );
 		echo '<div id="message" class="updated fade"><p><strong>' . __('Organization details saved.', 'event_espresso') . '</strong></p></div>';
 	}
 
 	$org_options = get_option('events_organization_settings');
+	$ueip_optin = get_option('ee_ueip_optin');
+	$plugin_basename = plugin_basename(EVENT_ESPRESSO_PLUGINPATH);
+	/*$verify_fail = get_option( 'pue_verification_error_' . $plugin_basename );
+	$site_license_key_verified = !empty( $verify_fail ) ? '<span class"pue-sl-not-verified"></span>' : '<span class="pue-sl-verified"></span>';/**/ //to be added for 3.1.37
 	$values = array(
 			array('id' => 'Y', 'text' => __('Yes', 'event_espresso')),
 			array('id' => 'N', 'text' => __('No', 'event_espresso')));
@@ -329,7 +343,7 @@ function organization_config_mnu() {
 											<p><em class="important"><b>
 														<?php _e('ATTENTION:', 'event_espresso'); ?>
 													</b><br />
-													<?php _e('This page should be hidden from from your navigation menu. Exclude pages by using the "Exclude Pages" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the "exclude" parameter in your "wp_list_pages" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.', 'event_espresso'); ?>
+													<?php _e('This page should be hidden from from your navigation menu. Exclude pages by using the "Exclude Pages" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the "exclude" parameter in your "wp_list_pages" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more information about excluding pages.', 'event_espresso'); ?>
 												</em> </p>
 										</div>
 										<?php ##### close popup help #####    ?>
@@ -361,7 +375,7 @@ function organization_config_mnu() {
 											<p><em class="important"><b>
 														<?php _e('ATTENTION:', 'event_espresso'); ?>
 													</b><br />
-													<?php _e('This page should be hidden from from your navigation menu. Exclude pages by using the "Exclude Pages" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the "exclude" parameter in your "wp_list_pages" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.', 'event_espresso'); ?>
+													<?php _e('This page should be hidden from from your navigation menu. Exclude pages by using the "Exclude Pages" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the "exclude" parameter in your "wp_list_pages" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more information about excluding pages.', 'event_espresso'); ?>
 												</em></p>
 										</div>
 										<?php ##### close popup help box #####    ?>
@@ -389,7 +403,7 @@ function organization_config_mnu() {
 											<p><em class="important"><b>
 														<?php _e('ATTENTION:', 'event_espresso'); ?>
 													</b><br />
-													<?php _e('This page should be hidden from from your navigation menu. Exclude pages by using the "Exclude Pages" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the "exclude" parameter in your "wp_list_pages" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more inforamation about excluding pages.', 'event_espresso'); ?>
+													<?php _e('This page should be hidden from from your navigation menu. Exclude pages by using the "Exclude Pages" plugin from http://wordpress.org/extend/plugins/exclude-pages/ or using the "exclude" parameter in your "wp_list_pages" template tag. Please refer to http://codex.wordpress.org/Template_Tags/wp_list_pages for more information about excluding pages.', 'event_espresso'); ?>
 												</em> </p>
 										</div>
 										<p>
@@ -608,11 +622,54 @@ function organization_config_mnu() {
 		<?php _e('Site License Key:', 'event_espresso'); ?>
 													</label>
 													<input type="text" name="site_license_key" size="45" value="<?php echo isset( $org_options['site_license_key'] ) ? stripslashes_deep($org_options['site_license_key']) : ''; ?>" />
+													<?php //echo $site_license_key_verified; ?>
+												</li>
+
+											</ul>
+											<p class="description">
+												<?php _e('Adding a valid Support License Key will enable automatic update notifications and backend updates for Event Espresso Core and any installed addons.'); ?>
+											</p>
+											<p>
+												<?php _e('If this is a development or test site, please <strong>DO NOT</strong> enter your Support License Key. Save it for the live production site, otherwise you will unnecessarily run into issues with needing to have your Key reset.', 'event_espresso'); ?>
+											</p>
+											<p>
+												<input class="button-primary" type="submit" name="Submit" value="<?php _e('Save Options', 'event_espresso'); ?>" id="save_organization_saetting_5" />
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li><a name="ueip_optin" id="ueip_optin"></a>
+							<div class="metabox-holder">
+								<div class="postbox">
+									<div title="Click to toggle" class="handlediv"><br />
+									</div>
+									<h3 class="hndle">
+		<?php _e('UXIP Settings', 'event_espresso'); ?>
+									</h3>
+									<div class="inside">
+										<div class="padding">
+											<p>
+												<?php echo espresso_data_collection_optin_text(); ?>	
+											</p>
+											<ul>
+												<li>
+													<label for="ueip_optin">
+		<?php _e('Yes! I\'m In:', 'event_espresso'); ?>
+													</label>
+													<?php 
+													$values=array(					
+													array('id'=>'yes','text'=> __('Yes','event_espresso')),
+													array('id'=>'no','text'=> __('No','event_espresso'))
+												);
+													echo select_input('ueip_optin', $values, !empty($ueip_optin) ? $ueip_optin : 'yes');
+													?>
 												</li>
 
 											</ul>
 											<p>
-												<input class="button-primary" type="submit" name="Submit" value="<?php _e('Save Options', 'event_espresso'); ?>" id="save_organization_saetting_5" />
+												<input class="button-primary" type="submit" name="Submit" value="<?php _e('Save Options', 'event_espresso'); ?>" id="save_organization_saetting_6" />
 											</p>
 										</div>
 									</div>

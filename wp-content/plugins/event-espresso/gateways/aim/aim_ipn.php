@@ -34,7 +34,7 @@ function espresso_process_aim($payment_data) {
 	echo '<!--Event Espresso Authorize.net AIM Gateway Version ' . $transaction->gateway_version . '-->';
 	$transaction->amount = $_POST['amount'];
 	$transaction->card_num = $_POST['card_num'];
-	$transaction->exp_date = $_POST['exp_date'];
+	$transaction->exp_date = $_POST['exp_month'].$_POST['exp_year'];
 	$transaction->card_code = $_POST['ccv_code'];
 	$transaction->first_name = $_POST['first_name'];
 	$transaction->last_name = $_POST['last_name'];
@@ -48,6 +48,11 @@ function espresso_process_aim($payment_data) {
 	if ($authnet_aim_settings['test_transactions']) {
 		$transaction->test_request = "true";
 	}
+	
+	//Prevent duplicate transactions within a certain amount of time:
+	$transaction->duplicate_window = apply_filters('filter_hook_espresso_aim_duplicate_window', 300);//300 seconds = 5 minutes
+	//The largest value Authorize.net will accept for x_duplicate_window is 28800, which equals eight hours. If a value greater than 28800 sent, the payment gateway will default to 28800. If x_duplicate_window is set to 0 or to a negative number, no duplicate transaction window will be enforced for your software's transactions. If no value is sent, the default value of 120 (two minutes) would be used.
+	
 
 	$sql = "SELECT attendee_session FROM " . EVENTS_ATTENDEE_TABLE . " WHERE id='" . $attendee_id . "'";
 	$session_id = $wpdb->get_var($sql);
@@ -86,7 +91,6 @@ function espresso_process_aim($payment_data) {
 		if ($response->approved) {
 			$payment_data['payment_status'] = 'Completed';
 			?>
-			<h2><?php _e('Thank You!', 'event_espresso'); ?></h2>
 			<p><?php _e('Your transaction has been processed.', 'event_espresso'); ?></p>
 			<p><?php __('Transaction ID:', 'event_espresso') . $response->transaction_id; ?></p>
 			<?php
@@ -99,6 +103,6 @@ function espresso_process_aim($payment_data) {
 		<p><?php _e('There was no response from Authorize.net.', 'event_espresso'); ?></p>
 		<?php
 	}
-	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }

@@ -1,5 +1,5 @@
 event-espresso-legacy
 =====================
 
-This is the 9993.1 branch of Event Espresso
+This is the 3.1 branch of Event Espresso
 http://eventespresso.com

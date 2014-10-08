@@ -18,12 +18,11 @@ function espresso_usaepay_onsite_payment_settings() {
 	$settings = get_option('espresso_usaepay_onsite_settings');
 	if (empty($settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/usaepay_onsite/usaepay-logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/usaepay_onsite/usaepay-logo.png";
+			$settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/usaepay_onsite/usaepay-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/usaepay_onsite/usaepay-logo.png";
+			$settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/usaepay_onsite/usaepay-logo.png";
 		}
 		$settings['key'] = '';
-		$settings['button_url'] = $button_url;
 		$settings['use_sandbox'] = false;
 		$settings['testmode'] = false;
 		$settings['header'] = 'Payment Transactions by USAePay';
@@ -34,9 +33,11 @@ function espresso_usaepay_onsite_payment_settings() {
 		}
 	}
 
-	if (empty($_REQUEST['deactivate_usaepay_onsite'])
-					&& (!empty($_REQUEST['activate_usaepay_onsite'])
-					|| array_key_exists('usaepay_onsite', $active_gateways))) {
+	if ( ! isset( $settings['button_url'] ) || ! file_exists( $settings['button_url'] )) {
+		$settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
+	}
+
+	if ( empty( $_REQUEST['deactivate_usaepay_onsite'] ) && ( ! empty( $_REQUEST['activate_usaepay_onsite'] ) || array_key_exists( 'usaepay_onsite', $active_gateways ))) {
 		$postbox_style = '';
 	} else {
 		$postbox_style = 'closed';
@@ -103,12 +104,14 @@ function espresso_display_usaepay_onsite_settings() {
 							</label>
 							<input name="testmode" type="checkbox" value="1" <?php echo $settings['testmode'] ? 'checked="checked"' : '' ?> />
 						</li>
+						<?php if (espresso_check_ssl() == TRUE || ( isset($settings['force_ssl_return']) && $settings['force_ssl_return'] == 1 )) {?>
 						<li>
 							<label for="force_ssl_return">
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
+							<?php }?>
 						<li>
 							<label for="display_header">
 								<?php _e('Display a Form Header', 'event_espresso'); ?>
@@ -125,6 +128,11 @@ function espresso_display_usaepay_onsite_settings() {
 				</td>
 			</tr>
 		</table>
+		<?php 
+		if (espresso_check_ssl() == FALSE){
+			espresso_ssl_required_gateway_message();
+		}
+		?>
 		<p>
 			<input type="hidden" name="update_usaepay_onsite" value="update_usaepay_onsite">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update USAePay Onsite Settings', 'event_espresso') ?>" id="save_usaepay_onsite_settings" />

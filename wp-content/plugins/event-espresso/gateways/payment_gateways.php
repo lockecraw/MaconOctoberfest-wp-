@@ -6,6 +6,10 @@ function espresso_help_popup($name) {
 
 add_filter('espresso_help', 'espresso_help_popup');
 
+function espresso_ssl_required_gateway_message() {
+	echo '<p class="red_alert"><strong>'. __('Attention: A valid SSL Certificate is required on your website in order to process payments using this gateway!', 'event_espresso').'</strong></p>';
+}
+
 //This is the payment gateway settings page.
 function event_espresso_gateways_options() {
 	global $active_gateways;
@@ -48,7 +52,7 @@ function event_espresso_gateways_options() {
 			global $espresso_premium;
 			if ($espresso_premium != true) {
 				?>
-				<h2><?php _e('Need more payment options?', 'event_espresso'); ?><a href="http://eventespresso.com/download/" target="_blank"><?php _e('Upgrade Now!', 'event_espresso'); ?></a></h2>
+				<h2><?php _e('Need more payment options?', 'event_espresso'); ?><a href="http://eventespresso.com/features/payment-options/" target="_blank"><?php _e('Upgrade Now!', 'event_espresso'); ?></a></h2>
 			<?php } ?>
 		</div><!-- / .meta-box-sortables -->
 		<?php
@@ -78,6 +82,38 @@ function event_espresso_gateways_options() {
 			postboxes.add_postbox_toggles("payment_gateways");
 		});
 		//]]>
+	</script>
+	<script type='text/javascript'>
+		// Uploading files
+		var file_frame;
+
+		jQuery('.upload_image_button').live('click', function( event ){
+
+			var button = this;
+			event.preventDefault();
+
+			// Create the media frame.
+			file_frame = wp.media.frames.file_frame = wp.media({
+				title: jQuery( this ).data( 'uploader_title' ),
+				button: {
+					text: jQuery( this ).data( 'uploader_button_text' ),
+				},
+				multiple: false  // Set to true to allow multiple files to be selected
+			});
+
+			// When an image is selected, run a callback.
+			file_frame.on( 'select', function() {
+				// We set multiple to false so only get one image from the uploader
+				attachment = file_frame.state().get('selection').first().toJSON();
+
+				// Do something with attachment.id and/or attachment.url here
+				jQuery( button ).siblings( '.upload_url_input').val(attachment.url);
+				jQuery( button ).parent().next().children('img').prop('src', attachment.url);
+			});
+
+			// Finally, open the modal
+			file_frame.open();
+		});
 	</script>
 	<?php
 }
@@ -214,6 +250,9 @@ function espresso_update_active_gateways() {
 		if (array_key_exists('check', $active_gateways)) {
 			$active_gateways['check'] = "/gateways/check";
 		}
+		if (array_key_exists('purchase_order', $active_gateways)) {
+			$active_gateways['purchase_order'] = "/gateways/purchase_order";
+		}
 		if (array_key_exists('eway', $active_gateways)) {
 			$active_gateways['eway'] = "/gateways/eway";
 		}
@@ -228,6 +267,9 @@ function espresso_update_active_gateways() {
 		}
 		if (array_key_exists('ideal', $active_gateways)) {
 			$active_gateways['ideal'] = "/gateways/ideal";
+		}
+		if (array_key_exists('infusionsoft_payment', $active_gateways)) {
+			$active_gateways['infusionsoft_payment'] = "/gateways/infusionsoft";
 		}
 		if (array_key_exists('invoice', $active_gateways)) {
 			$active_gateways['invoice'] = "/gateways/invoice";
@@ -280,6 +322,9 @@ function espresso_update_active_gateways() {
 		}
 		if (get_option('events_check_payment_active') == true) {
 			$active_gateways['check'] = "/gateways/check";
+		}
+		if (get_option('events_purchase_order_payment_active') == true) {
+			$active_gateways['purchase_order'] = "/gateways/purchase_order";
 		}
 		if (get_option('events_eway_active') == true) {
 			$active_gateways['eway'] = "/gateways/eway";
@@ -338,6 +383,7 @@ function espresso_update_active_gateways() {
 	delete_option('events_authnet_active');
 	delete_option('events_bank_payment_active');
 	delete_option('events_check_payment_active');
+	delete_option('events_purchase_order_payment_active');
 	delete_option('events_eway_active');
 	delete_option('events_exact_active');
 	delete_option('events_firstdata_active');

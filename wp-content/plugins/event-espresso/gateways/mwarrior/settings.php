@@ -20,9 +20,9 @@ function event_espresso_mwarrior_payment_settings() {
 	$mwarrior_settings = get_option('event_espresso_mwarrior_settings');
 	if (empty($mwarrior_settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/mwarrior/mwarrior-logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/mwarrior/mwarrior-logo.png";
+			$mwarrior_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/mwarrior/mwarrior-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/mwarrior/mwarrior-logo.png";
+			$mwarrior_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/mwarrior/mwarrior-logo.png";
 		}
 		$mwarrior_settings['mwarrior_id'] = '';
 		$mwarrior_settings['mwarrior_apikey'] = '';
@@ -32,10 +32,13 @@ function event_espresso_mwarrior_payment_settings() {
 		$mwarrior_settings['use_sandbox'] = false;
 		$mwarrior_settings['force_ssl_return'] = false;
 		$mwarrior_settings['bypass_payment_page'] = '';
-		$mwarrior_settings['button_url'] = $button_url;
 		if (add_option('event_espresso_mwarrior_settings', $mwarrior_settings, '', 'no') == false) {
 			update_option('event_espresso_mwarrior_settings', $mwarrior_settings);
 		}
+	}
+
+	if ( ! isset( $mwarrior_settings['button_url'] ) || ! file_exists( $mwarrior_settings['button_url'] )) {
+		$mwarrior_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}
 
 	//Open or close the postbox div
@@ -143,8 +146,8 @@ function event_espresso_display_mwarrior_settings() {
 							<label for="image_url">
 								<?php _e('Image URL (logo for payment page)', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=image_url_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input type="text" name="image_url" size="35" value="<?php echo $mwarrior_settings['image_url']; ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=image_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a> <br />
+							<input class="upload_url_input" type="text" name="image_url" size="35" value="<?php echo $mwarrior_settings['image_url']; ?>" />
+							<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a> <br />
 							<?php _e('(used for your business/personal logo on the Merchant Warrior page)', 'event_espresso'); ?>
 						</li>
 					</ul></td>
@@ -166,18 +169,20 @@ function event_espresso_display_mwarrior_settings() {
 							</label>
 							<input name="use_sandbox" type="checkbox" value="1" <?php echo $mwarrior_settings['use_sandbox'] ? 'checked="checked"' : '' ?> />
 						</li>
+						<?php if (espresso_check_ssl() == TRUE || ( isset($mwarrior_settings['force_ssl_return']) && $mwarrior_settings['force_ssl_return'] == 1 )) {?>
 						<li>
 							<label for="force_ssl_return">
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $mwarrior_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
+							<?php }?>
 						<li>
 							<label for="button_url">
 								<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input type="text" name="button_url" size="34" value="<?php echo (($mwarrior_settings['button_url'] == '') ? $button_url : $mwarrior_settings['button_url'] ); ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=button_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>  </li>
+							<input class="upload_url_input" type="text" name="button_url" size="34" value="<?php echo (isset($mwarrior_settings['button_url']) ? $mwarrior_settings['button_url'] : '' ); ?>" />
+							<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>  </li>
 						<li>
 							<label><?php _e('Current Button Image', 'event_espresso'); ?></label>
 							<?php echo '<img src="' . $mwarrior_settings['button_url'] . '" />'; ?></li>

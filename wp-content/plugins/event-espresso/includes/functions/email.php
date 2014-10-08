@@ -27,6 +27,7 @@ function replace_shortcodes($message, $data) {
 			"[txn_id]",
 			"[cost]",
 			"[event_price]",
+			"[ticket_qty]",
 			"[ticket_type]",
 			"[ticket_link]",
 			"[certificate_link]",
@@ -78,6 +79,7 @@ function replace_shortcodes($message, $data) {
 			$data->attendee->txn_id,
 			$org_options['currency_symbol'] . $event_cost,
 			$org_options['currency_symbol'] . $event_cost,
+			$data->attendee->quantity,
 			$data->attendee->price_option,
 			$data->ticket_link,
 			empty($data->certificate_link) ? '' : $data->certificate_link,
@@ -99,15 +101,16 @@ function replace_shortcodes($message, $data) {
 			$data->event->venue_phone,
 			$data->google_map_link,
 			$data->table_open . $data->table_heading . $data->event_table . $data->table_close,
-			$data->email_questions,
+			isset($data->email_questions) && !empty($data->email_questions) ? $data->email_questions : '',
 			$data->qr_code,
 			$data->seatingchart_tag,
 			$data->edit_attendee,
-			apply_filters('filter_hook_espresso_display_ical', array(//Add to calendar link
+			//Add to calendar link
+			apply_filters('filter_hook_espresso_display_ical', array(
 					'event_id' => $data->attendee->event_id,
 					'registration_id' => $data->attendee->registration_id,
 					'event_name' => $data->event->event_name,
-					'event_desc' => wp_kses($data->event->event_desc, ''),
+					'event_desc' => wp_kses($data->event->event_desc,array()),
 					'contact_email' => empty($data->event->alt_email) ? $org_options['contact_email'] : $data->event->alt_email,
 					'start_time' => empty($event->start_time) ? '' : $event->start_time,
 					'start_date' => event_date_display($data->attendee->start_date, get_option('date_format')),
@@ -267,15 +270,6 @@ function espresso_prepare_email_data($attendee_id, $multi_reg, $custom_data='') 
 		$data->event->venue_name = '';
 
 	//Table of events registered for
-/*	$data->event_table .= "
-		<tr>
-			<td>" . stripslashes_deep($data->event->event_name) . " | " . $data->attendee->price_option . "</td>
-			<td>" . event_date_display($data->attendee->start_date) . ' - ' . event_date_display($data->attendee->end_date) . "</td>
-			<td>" . event_date_display($data->attendee->event_time, get_option('time_format')) . " - " . event_date_display($data->attendee->end_time, get_option('time_format')) . "</td>
-			<td>" . $data->event->venue_name . "<br />$data->location <br />$data->google_map_link</td>" .
-					($data->attendee->quantity > 0 ? '<td>' . $data->attendee->quantity . __(' attendees', 'event_espresso') . '</td>' : '') .
-					"</tr>";*/
-					
 	$data->event_table .= espresso_generate_attendee_event_list( $data );
 
 	//Output custom questions
@@ -288,7 +282,7 @@ function espresso_prepare_email_data($attendee_id, $multi_reg, $custom_data='') 
 	}
 
 	//Payment URL
-	$payment_url = get_option('siteurl') . "/?page_id=" . $org_options['return_url'] . "&amp;r_id=" . $data->attendee->registration_id;
+	$payment_url = add_query_arg('r_id', $data->attendee->registration_id, get_permalink($org_options['return_url']));
 	$data->payment_link = '<a href="' . $payment_url . '">' . __('View Your Payment Details','event_espresso') . '</a>';
 
 	// download link
@@ -314,7 +308,8 @@ function espresso_prepare_email_data($attendee_id, $multi_reg, $custom_data='') 
 		$data->event->conf_mail = $custom_data_payment_message;
 		$data->event->send_mail = 'Y'; 
         $data->event->email_id = 0;
-	}  
+	} 
+	
 	//Build reminder email
 	if ($custom_data_email_type == 'reminder') {
 		$data->email_subject = $custom_data_email_subject;
@@ -475,7 +470,6 @@ function espresso_prepare_admin_email($data) {
 }
 
 //End espresso_prepare_admin_email()
-
 function email_by_attendee_id($attendee_id, $send_attendee_email = TRUE, $send_admin_email = TRUE, $multi_reg = FALSE, $custom_data='') {
     
 	$data = espresso_prepare_email_data($attendee_id, $multi_reg, $custom_data);
@@ -492,7 +486,6 @@ function email_by_attendee_id($attendee_id, $send_attendee_email = TRUE, $send_a
 }
 
 //End email_by_attendee_id()
-
 function email_by_session_id($session_id, $send_attendee_email = TRUE, $send_admin_email = TRUE, $multi_reg = FALSE) {
 	global $wpdb;
 	$sql = "SELECT id FROM " . EVENTS_ATTENDEE_TABLE . " WHERE attendee_session = %s";
@@ -518,9 +511,7 @@ function email_by_session_id($session_id, $send_attendee_email = TRUE, $send_adm
 	if ($send_admin_email == 'true') {
 		event_espresso_send_email($admin_email_params);
 	}
-}
-
-//End email_by_session_id()
+}//End email_by_session_id()
 
 if ( ! function_exists('event_espresso_email_confirmations')) {
 
@@ -555,6 +546,8 @@ if ( ! function_exists('event_espresso_email_confirmations')) {
 	}
 
 }//End event_espresso_email_confirmations()
+
+
 //Email sender
 if (!function_exists('event_espresso_send_email')) {
 
@@ -563,7 +556,7 @@ if (!function_exists('event_espresso_send_email')) {
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		extract($params);
 		//Define email headers
-		$headers = "MIME-Version: 1.0\r\n";
+		$headers = "";
 		if ($org_options['email_fancy_headers']=='Y') {
 			$headers .= "From: " . $org_options['organization'] . " <" . $org_options['contact_email'] . ">\r\n";
 			$headers .= "Reply-To: " . $org_options['organization'] . "  <" . $org_options['contact_email'] . ">\r\n";
@@ -585,6 +578,8 @@ if (!function_exists('event_espresso_send_email')) {
 	}
 
 }//End event_espresso_send_email()
+
+
 //Send Invoice
 if (!function_exists('event_espresso_send_invoice')) {
 
@@ -604,6 +599,8 @@ if (!function_exists('event_espresso_send_invoice')) {
 	}
 
 }//End event_espresso_send_invoice()
+
+
 //Payment Confirmations
 if (!function_exists('event_espresso_send_payment_notification')) {
 
@@ -686,7 +683,7 @@ if (!function_exists('event_espresso_send_cancellation_notice')) {
 		global $wpdb, $org_options;
 		do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, '');
 		//Define email headers
-		$headers = "MIME-Version: 1.0\r\n";
+		$headers = "";
 		if ($org_options['email_fancy_headers']=='Y') {
 			$headers .= "From: " . $org_options['organization'] . " <" . $org_options['contact_email'] . ">\r\n";
 			$headers .= "Reply-To: " . $org_options['organization'] . "  <" . $org_options['contact_email'] . ">\r\n";

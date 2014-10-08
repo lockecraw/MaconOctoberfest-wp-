@@ -99,6 +99,7 @@ function edit_event($event_id = 0) {
 
 		$question_groups		= unserialize($event->question_groups);
 
+		global $event_meta;
 		$event_meta				= unserialize($event->event_meta);
 
 		$recurrence_id			= $event->recurrence_id;
@@ -203,9 +204,11 @@ function edit_event($event_id = 0) {
 	<!-- /submitdiv -->
 
 	<?php
+	if ( $espresso_premium == true ){do_action('action_hook_espresso_edit_event_right_column_top', $event_id);}
 	$advanced_options = '';
 	if (file_exists(EVENT_ESPRESSO_PLUGINFULLPATH . 'includes/admin-files/event-management/advanced_settings.php')) {
 		require_once(EVENT_ESPRESSO_PLUGINFULLPATH . "includes/admin-files/event-management/advanced_settings.php");
+		
 	} else {
 		//Display Lite version options
 		$status = array(array('id' => 'A', 'text' => __('Active', 'event_espresso')), array('id' => 'D', 'text' => __('Deleted', 'event_espresso')));
@@ -214,7 +217,7 @@ function edit_event($event_id = 0) {
 						. '<p><label>' . __('Display  description? ', 'event_espresso') . '</label>' . select_input('display_desc', $values, $display_desc) . '</p>'
 						. '<p><label>' . __('Display  registration form? ', 'event_espresso') . '</label>' . select_input('display_reg_form', $values, $display_reg_form) . '</p>';
 	}//Display Lite version options - End
-	postbox('event-status', 'Event Options', '<p><label for"reg-limit">' . __('Attendee Limit', 'event_espresso') . ': </label><input name="reg_limit" id="reg-limit" size="10" type="text" value="' . $reg_limit . '" /><br />' .
+	espresso_postbox('event-status', 'Event Options', '<p><label for"reg-limit">' . __('Attendee Limit', 'event_espresso') . ': </label><input name="reg_limit" id="reg-limit" size="10" type="text" value="' . $reg_limit . '" /><br />' .
 					'<span>(' . __('leave blank for unlimited', 'event_espresso') . ')</span></p>' .
 					'<p><label>' . __('Allow group registrations?', 'event_espresso') . '</label> ' . select_input('allow_multiple', $values, $allow_multiple) . '</p>' .
 					'<p><label for="addit-limit">' . __('Max Group Registrants', 'event_espresso') . ':</label> <input type="text" id="addit-limit" name="additional_limit" value="' . $additional_limit . '" size="4" />' . '</p>' .
@@ -255,10 +258,10 @@ function edit_event($event_id = 0) {
 					<?php _e('Add Featured Image', 'event_espresso'); ?>
 				</label>
 				<input id="upload_image" type="hidden" size="36" name="upload_image" value="<?php echo $event_thumb ?>" />
-				<input id="upload_image_button" type="button" value="Upload Image" />
+				<input id="upload_image_button" type="button" value="<?php _e('Upload Image', 'event_espresso'); ?>" />
 				<?php if ($event_thumb) { ?>
-					<p class="event-featured-thumb"><img  src="<?php echo $event_thumb ?>" alt="" /></p>
-					<a id='remove-image' href='#' title='Remove this image' onclick='return false;'><?php _e('Remove Image', 'event_espresso'); ?></a>
+					<p class="event-featured-thumb"><img style="width: 100%;"  src="<?php echo $event_thumb ?>" alt="" /></p>
+					<a id='remove-image' href='#' title='<?php _e('Remove Image', 'event_espresso'); ?>' onclick='return false;'><?php _e('Remove Image', 'event_espresso'); ?></a>
 				<?php } ?>
 			</div>
 			
@@ -315,7 +318,7 @@ function edit_event($event_id = 0) {
 
 
 	###### Modification by wp-developers to introduce attendee pre-approval requirement ##########
-	if ($org_options['use_attendee_pre_approval'] == 'Y' && $espresso_premium == true) {
+	if (isset($org_options['use_attendee_pre_approval']) && $org_options['use_attendee_pre_approval'] == 'Y' && $espresso_premium == true) {
 		?>
 		<div id="attendee-pre-approval-options" class="postbox">
 			<div class="handlediv" title="Click to toggle"><br />
@@ -378,18 +381,7 @@ function edit_event($event_id = 0) {
 	<!-- /event-questions -->
 
 	<?php
-	if (function_exists('espresso_personnel_cb') && $org_options['use_personnel_manager'] == 'Y' && $espresso_premium == true) {
-		?>
-		<div id="event-staff" class="postbox">
-			<div class="handlediv" title="Click to toggle"><br>
-			</div>
-			<h3 class="hndle"> <span>
-		<?php _e('Event Staff / Speakers', 'event_espresso'); ?>
-				</span> </h3>
-			<div class="inside"> <?php echo espresso_personnel_cb($event_id); ?> </div>
-		</div>
-		<?php
-	}
+	do_action('action_hook_espresso_staff_cb', $event_id, $recurrence_id);
 
 	if (defined('EVENTS_GROUPON_CODES_TABLE') && $espresso_premium == true) {
 		?>
@@ -405,10 +397,11 @@ function edit_event($event_id = 0) {
 		</div>
 		<!-- /groupon-options -->
 			<?php
-			}
-			$sidebar_content = ob_get_clean();
-			ob_start();
-			?>
+	}
+	if ( $espresso_premium == true ){do_action('action_hook_espresso_edit_event_right_column_bottom', $event_id);}
+	$sidebar_content = ob_get_clean();
+	ob_start();
+	?>
 	<div id="titlediv"> <strong>
 	<?php _e('Event Title', 'event_espresso'); ?>
 		</strong>
@@ -542,8 +535,9 @@ function edit_event($event_id = 0) {
 		if (defined('EVENT_ESPRESSO_RECURRENCE_TABLE') && $espresso_premium == true) {
 			require_once(EVENT_ESPRESSO_RECURRENCE_FULL_PATH . "functions/re_view_functions.php");
 			//For now, only the recurring events will show the form
-			if ($recurrence_id > 0)
+			if ($recurrence_id > 0){
 				event_espresso_re_form($recurrence_id);
+			}
 		}
 		?>
 		<div id="event-pricing" class="postbox">
@@ -570,6 +564,7 @@ function edit_event($event_id = 0) {
 		<h2>
 	<?php _e('Advanced Options', 'event_espresso'); ?>
 		</h2>
+		<?php if ( $espresso_premium == true ){do_action('action_hook_espresso_edit_event_left_column_advanced_options_top', $event_id);}?>
 		<div id="event-location" class="postbox">
 			<div class="handlediv" title="Click to toggle"><br />
 			</div>
@@ -829,7 +824,7 @@ function edit_event($event_id = 0) {
 		
 			// process the remove link in the metabox
 			jQuery('#remove-image').click(function(){
-				var answer = confirm('<?php _e('Do you really want to delete this image? Please remember to update your event to complete the removal.', 'event_espresso'); ?>');
+				var answer = confirm("<?php _e("Do you really want to delete this image? Please remember to update your event to complete the removal.", 'event_espresso'); ?>");
 				if (answer){
 					jQuery("#upload_image").val('');
 					jQuery("p.event-featured-thumb").remove();

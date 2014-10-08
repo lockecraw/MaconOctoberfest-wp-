@@ -29,6 +29,10 @@ function event_espresso_firstdata_payment_settings() {
 		}
 	}
 
+	if ( ! isset( $firstdata_settings['button_url'] ) || ! file_exists( $firstdata_settings['button_url'] )) {
+		$firstdata_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
+	}
+
 	//Open or close the postbox div
 	if (empty($_REQUEST['deactivate_firstdata'])
 					&& (!empty($_REQUEST['activate_firstdata'])
@@ -111,12 +115,14 @@ function event_espresso_display_firstdata_settings() {
 							</label>
 							<input name="use_sandbox" type="checkbox" value="1" <?php echo $firstdata_settings['use_sandbox'] ? 'checked="checked"' : '' ?> />
 						</li>
+						<?php if (espresso_check_ssl() == TRUE || ( isset($firstdata_settings['force_ssl_return']) && $firstdata_settings['force_ssl_return'] == 1 )) {?>
 						<li>
 							<label for="force_ssl_return">
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $firstdata_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
+							<?php }?>
 					</ul></td>
 				<td  valign="top"><ul>
 					<li>
@@ -135,6 +141,11 @@ function event_espresso_display_firstdata_settings() {
 					</td>
 			</tr>
 		</table>
+		<?php 
+		if (espresso_check_ssl() == FALSE){
+			espresso_ssl_required_gateway_message();
+		}
+		?>
 		<p><span style="color:red"><strong><?php _e('Attention!', 'event_espresso'); ?></strong></span> <?php echo __("Place the .pem file in the following folder.  Make sure the .pem file has the same name as your store number:", 'event_espresso') . "<br /> " . dirname(__FILE__); ?></p>
 		<p>
 			<input type="hidden" name="update_firstdata" value="update_firstdata">

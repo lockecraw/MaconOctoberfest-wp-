@@ -44,11 +44,11 @@ function espresso_process_authnet($payment_data) {
 		$payment_data['txn_id'] = 0;
 	}
 	$payment_data['txn_details'] = serialize($_REQUEST);
-	$curl_session_id = uniqid('', true);
-	global $wpdb;
-	$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET attendee_session = '" . $curl_session_id . "' WHERE attendee_session ='" . $payment_data['attendee_session'] . "' ";
-	$wpdb->query($sql);
-	$payment_data['attendee_session'] = $curl_session_id;
+//	$curl_session_id = uniqid('', true);
+//	global $wpdb;
+//	$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET attendee_session = '" . $curl_session_id . "' WHERE attendee_session ='" . $payment_data['attendee_session'] . "' ";
+//	$wpdb->query($sql);
+//	$payment_data['attendee_session'] = $curl_session_id;
 // Check validity and write down it
 	if ($myAuthorize->validateIpn()) {
 		$payment_data['txn_id'] = $myAuthorize->ipnData['x_trans_id'];
@@ -60,7 +60,6 @@ function espresso_process_authnet($payment_data) {
 		if ($myAuthorize->ipnData['x_response_code'] == 1) {
 			$myAuthorize->logResults(true);
 			?>
-			<h2><?php _e('Thank You!', 'event_espresso'); ?></h2>
 			<p><?php _e('Your transaction has been processed.', 'event_espresso'); ?></p>
 			<?php
 			$payment_data['payment_status'] = 'Completed';
@@ -106,6 +105,6 @@ function espresso_process_authnet($payment_data) {
 		}
 		wp_mail($payment_data['contact'], $subject, $body);
 	}
-	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }

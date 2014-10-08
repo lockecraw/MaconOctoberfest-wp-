@@ -19,11 +19,10 @@ function event_espresso_quickpay_payment_settings() {
 	$quickpay_settings = get_option('event_espresso_quickpay_settings');
 	if (empty($quickpay_settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/quickpay/quickpay-logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/quickpay/quickpay-logo.png";
+			$quickpay_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/quickpay/quickpay-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/quickpay/quickpay-logo.png";
+			$quickpay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/quickpay/quickpay-logo.png";
 		}
-		$quickpay_settings['button_url'] = $button_url;
 		$quickpay_settings['quickpay_merchantid'] = '';
 		$quickpay_settings['quickpay_md5secret'] = '';
 		$quickpay_settings['quickpay_language'] = 'en';
@@ -34,6 +33,10 @@ function event_espresso_quickpay_payment_settings() {
 		if (add_option('event_espresso_quickpay_settings', $quickpay_settings, '', 'no') == false) {
 			update_option('event_espresso_quickpay_settings', $quickpay_settings);
 		}
+	}
+
+	if ( ! isset( $quickpay_settings['button_url'] ) || ! file_exists( $quickpay_settings['button_url'] )) {
+		$quickpay_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}
 
 	//Open or close the postbox div
@@ -82,8 +85,23 @@ function event_espresso_quickpay_payment_settings() {
 //QuickPay Settings Form
 function event_espresso_display_quickpay_settings() {
 	$quickpay_settings = get_option('event_espresso_quickpay_settings');
+	$qp_settings = array( 
+		'quickpay_merchantid',
+		'quickpay_md5secret',
+		'quickpay_language',
+		'quickpay_autocapture',
+		'quickpay_currency',
+		'use_sandbox',
+		'force_ssl_return',
+		'button_url'
+	);
+	
+	foreach ( $qp_settings as $qp_setting ){
+		$quickpay_settings[ $qp_setting ] = isset( $quickpay_settings[ $qp_setting ] ) ? $quickpay_settings[ $qp_setting ] : '';
+	}
+	
 	?>
-	<form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
+	<form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>" class="espresso_form">
 		<table width="99%" border="0" cellspacing="5" cellpadding="5">
 			<tr>
 				<td valign="top">
@@ -118,25 +136,45 @@ function event_espresso_display_quickpay_settings() {
 						</li>
 						<li>
 							<label for="quickpay_autocapture">Automatic capture</label>
-							<?php if ($quickpay_settings['quickpay_autocapture'] == '0') { ?>
-								<input name="quickpay_autocapture" value="0" checked="checked" type="RADIO">Off<br>
-							<?php } else { ?>
-								<input name="quickpay_autocapture" value="0" type="RADIO">Off<br>
-								<?php
-							}
-							if ($quickpay_settings['quickpay_autocapture'] == '1') {
-								?>
-								<input name="quickpay_autocapture" value="1" checked="checked" type="RADIO">On<br>
-							<?php } else { ?>
-								<input name="quickpay_autocapture" value="1" type="RADIO">On<br>
-							<?php } ?>
+							<ul>
+								<li>
+									<label class="radio-btn-lbl">										
+										<input name="quickpay_autocapture" value="0"<?php if( $quickpay_settings['quickpay_autocapture'] == '0' ){ ?> checked="checked"<?php } ?> type="RADIO">
+										<span><?php _e('Off', 'event_espresso'); ?></span>										
+									</label>
+								</li>
+								<li>
+									<label class="radio-btn-lbl">
+										<input name="quickpay_autocapture" value="1"<?php if( $quickpay_settings['quickpay_autocapture'] == '1' ){ ?> checked="checked"<?php } ?> type="RADIO">
+										<span><?php _e('On', 'event_espresso'); ?></span>										
+									</label>
+								</li>
+							</ul>
+
 							<?php _e('(Automatic Capture means you will automatically deduct the amount from the customer.)', 'event_espresso'); ?>
 						</li>
 						<li>
 							<label for="quickpay_currency"><?php _e('Currency', 'event_espresso'); ?></label>
-							<input name="quickpay_currency" value="EUR" <?php if ($quickpay_settings['quickpay_currency'] == 'EUR') { ?>checked="checked"<?php } ?> type="RADIO">EUR<br>
-							<input name="quickpay_currency" value="DKK" <?php if ($quickpay_settings['quickpay_currency'] == 'DKK') { ?>checked="checked"<?php } ?> type="RADIO">DKK<br>
-							<input name="quickpay_currency" value="USD" <?php if ($quickpay_settings['quickpay_currency'] == 'USD') { ?>checked="checked"<?php } ?> type="RADIO">USD<br>
+							<ul>
+								<li>
+									<label class="radio-btn-lbl">
+										<input name="quickpay_currency" value="EUR" <?php if ($quickpay_settings['quickpay_currency'] == 'EUR') { ?>checked="checked"<?php } ?> type="RADIO">
+										<span>EUR</span>										
+									</label>
+								</li>
+								<li>
+									<label class="radio-btn-lbl">
+										<input name="quickpay_currency" value="DKK" <?php if ($quickpay_settings['quickpay_currency'] == 'DKK') { ?>checked="checked"<?php } ?> type="RADIO">
+										<span>DKK</span>										
+									</label>
+								</li>
+								<li>
+									<label class="radio-btn-lbl">
+										<input name="quickpay_currency" value="USD" <?php if ($quickpay_settings['quickpay_currency'] == 'USD') { ?>checked="checked"<?php } ?> type="RADIO">
+										<span>USD</span>										
+									</label>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</td>
@@ -148,22 +186,26 @@ function event_espresso_display_quickpay_settings() {
 							</label>
 							<input name="use_sandbox" type="checkbox" value="1" <?php echo $quickpay_settings['use_sandbox'] ? 'checked="checked"' : '' ?> />
 						</li>
+						<?php if (espresso_check_ssl() == TRUE || ( isset($quickpay_settings['force_ssl_return']) && $quickpay_settings['force_ssl_return'] == 1 )) {?>
 						<li>
 							<label for="force_ssl_return">
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
-								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
+								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $quickpay_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
+							<?php }?>
 						<li>
 							<label for="button_url">
 								<?php _e('Button Image URL', 'event_espresso'); ?> 
 							</label>
-							<input type="text" name="button_url" size="34" value="<?php echo $quickpay_settings['button_url']; ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=button_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a></li>
+							<?php $quickpay_settings['button_url'] = $quickpay_settings['button_url'] == '' ? EVENT_ESPRESSO_PLUGINFULLURL . 'gateways/pay-by-credit-card.png' : $quickpay_settings['button_url']; ?>
+							<input class="upload_url_input" type="text" name="button_url" size="34" value="<?php echo $quickpay_settings['button_url']; ?>" />
+							<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a></li>
 						<li>
 							<?php _e('Current Button Image', 'event_espresso'); ?>
 							<br />
-							<?php echo '<img src="' . $quickpay_settings['button_url'] . '" />'; ?></li>
+							<img src="<?php echo $quickpay_settings['button_url']; ?>" />
+						</li>
 					</ul>
 				</td>
 			</tr>

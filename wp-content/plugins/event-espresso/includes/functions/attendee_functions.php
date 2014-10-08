@@ -59,10 +59,11 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 						case "TEXTAREA" :
 						case "DROPDOWN" :
 						case "SINGLE" :
-
+							
 							if ($question->admin_only != 'Y') {
-								$post_val = ($question->system_name != '') ? $response_source[$question->system_name] : $question_type;
-							} else {
+								$post_val = ( $question->system_name != '' ) ? $response_source[$question->system_name] : $question_type;
+								$post_val = apply_filters( 'filter_hook_espresso_form_question_response', trim( $post_val ), $question, $attendee_id );
+						} else {
 								$post_val = '';
 							}
 							
@@ -70,9 +71,11 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 						case "MULTIPLE" :
 						
 							$post_val = '';
-							if (!empty($response_source[$question->question_type . '_' . $question->qstn_id]) && $question->admin_only != 'Y') {
-								for ($i = 0; $i < count($response_source[$question->question_type . '_' . $question->qstn_id]); $i++) {
-									$post_val .= trim($response_source[$question->question_type . '_' . $question->qstn_id][$i]) . ",";
+							if ( ! empty( $response_source[$question->question_type . '_' . $question->qstn_id] ) && $question->admin_only != 'Y' ) {
+								for ( $i = 0; $i < count( $response_source[$question->question_type . '_' . $question->qstn_id] ); $i++ ) {
+									$val = trim( $response_source[$question->question_type . '_' . $question->qstn_id][$i] );
+									$val =  apply_filters( 'filter_hook_espresso_form_question_response', $val, $question, $attendee_id );
+									$post_val .= $val . ",";
 								}
 							}
 							
@@ -83,7 +86,7 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 						'registration_id' => $registration_id, 
 						'attendee_id' => $attendee_id, 
 						'question_id' => $question->qstn_id,
-						'answer' => html_entity_decode( trim( $post_val ), ENT_QUOTES, 'UTF-8' )
+						'answer' => ee_sanitize_value($post_val)
 					);
 					$data_formats = array( '%s', '%d',  '%d', '%s' );
 				
@@ -98,11 +101,6 @@ function add_attendee_questions($questions, $registration_id, $attendee_id = 0, 
 		}
 	}
 }
-
-
-
-
-
 
 function is_attendee_approved($event_id, $attendee_id) {
 	global $wpdb, $org_options;
@@ -127,4 +125,24 @@ function is_attendee_approved($event_id, $attendee_id) {
 		}
 	}
 	return $result;
+}
+
+
+
+
+
+function espresso_update_primary_attendee_total_cost( $attendee_id, $total_cost, $source ) {
+	
+	do_action('action_hook_espresso_log', __FILE__, __FUNCTION__, array( '$total_cost' => $total_cost ));		
+	global $wpdb;
+	
+	$set_cols_and_values = array( 'total_cost'=>number_format( (float)$total_cost, 2, '.', '' ));
+	$set_format = array( '%f' );
+	$where_cols_and_values = array( 'id'=> $attendee_id );
+	$where_format = array( '%d' );		
+	
+	if ( $wpdb->update( EVENTS_ATTENDEE_TABLE, $set_cols_and_values, $where_cols_and_values, $set_format, $where_format  ) === FALSE ) {
+		wp_die( __('An error occured. The primary attende\'s data could not be updated.' . "\n( " . basename( $source ) . ' )', 'event_espresso'));
+	}				
+				
 }

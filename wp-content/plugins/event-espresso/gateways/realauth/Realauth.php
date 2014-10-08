@@ -95,7 +95,7 @@ class Espresso_Realauth {
 	<img class="off-site-payment-gateway-img" width="16" height="16" src="' . EVENT_ESPRESSO_PLUGINFULLURL . '/images/icons/external-link.png" alt="click to visit this payment gateway">';
 		$out .= '<form  method="post" name="payment_form" action="' . $this->gateway_Url . '">';
 		$out .= $this->submitForm();
-		$out .= '<input id="realauth-payment-option-lnk" class="payment-option-lnk" type="image" ';
+		$out .= '<input id="realauth-payment-option-lnk" class="payment-option-lnk allow-leave-page" type="image" ';
 		$out .= 'alt="Pay using RealAuth" src="' . $button_url . '" />';
     	$out .= '</form></div>';
 		return $out;
@@ -109,6 +109,7 @@ class Espresso_Realauth {
 	    $out .= " will be redirected to the payment website.</h2></p>\n";
 	    $out .= '<form method="post" name="gateway_form" action="' . $this->gateway_Url . '">\n';
 	    $out .= $this->submitForm();
+		$out .= "<input type=\"hidden\" id=\"bypass_payment_page\" name=\"bypass_payment_page\" value=\"true\"/>\n";
 		$out .= "<p style=\"text-align:center;\"><br/><br/>If you are not automatically redirected to ";
 	    $out .= "the payment website within 5 seconds...<br/><br/>\n";
 	    $out .= "<input type=\"submit\" value=\"Click Here\"></p>\n";

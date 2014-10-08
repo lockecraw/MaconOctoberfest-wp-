@@ -14,15 +14,19 @@ function espresso_usaepay_offsite_payment_settings() {
 	$settings = get_option('espresso_usaepay_offsite_settings');
 	if (empty($settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/usaepay_offsite/usaepay-logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_DIR . "/usaepay_offsite/usaepay-logo.png";
+			$settings['button_url'] = EVENT_ESPRESSO_GATEWAY_DIR . "/usaepay_offsite/usaepay-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/usaepay_offsite/usaepay-logo.png";
+			$settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/usaepay_offsite/usaepay-logo.png";
 		}
 		$settings['key'] = '';
-		$settings['button_url'] = $button_url;
+
 		if (add_option('espresso_usaepay_offsite_settings', $settings, '', 'no') == false) {
 			update_option('espresso_usaepay_offsite_settings', $settings);
 		}
+	}
+
+	if ( ! isset( $settings['button_url'] ) || ! file_exists( $settings['button_url'] )) {
+		$settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}
 
 	if (empty($_REQUEST['deactivate_usaepay_offsite'])
@@ -84,8 +88,8 @@ function espresso_display_usaepay_offsite_settings() {
 							<label for="button_url">
 								<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input type="text" name="button_url" size="34" value="<?php echo $settings['button_url']; ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=button_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>  
+							<input class="upload_url_input" type="text" name="button_url" size="34" value="<?php echo $settings['button_url']; ?>" />
+							<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>  
 						</li>
 						<li>
 							<label><?php _e('Current Button Image', 'event_espresso'); ?></label>
@@ -95,6 +99,7 @@ function espresso_display_usaepay_offsite_settings() {
 				</td>
 			</tr>
 		</table>
+		
 		<p>
 			<input type="hidden" name="update_usaepay_offsite" value="update_usaepay_offsite">
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update USAePay Offsite Settings', 'event_espresso') ?>" id="save_usaepay_offsite_settings" />

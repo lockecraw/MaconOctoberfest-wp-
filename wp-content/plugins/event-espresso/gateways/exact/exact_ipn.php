@@ -4,6 +4,11 @@ function espresso_transactions_exact_get_attendee_id($attendee_id) {
 	if (!empty($_REQUEST['x_cust_id'])) {
 		$attendee_id = $_REQUEST['x_cust_id'];
 	}
+	if (!empty($_REQUEST['x_reference_3'])) {
+		$temp_array = explode('|', $_REQUEST['x_reference_3']);
+		$_REQUEST['registration_id'] = $temp_array[0];
+		$_REQUEST['type'] = $temp_array[1];
+	}
 	return $attendee_id;
 }
 
@@ -36,11 +41,11 @@ function espresso_process_exact($payment_data) {
 		$payment_data['txn_id'] = 0;
 	}
 	$payment_data['txn_details'] = serialize($_REQUEST);
-	$curl_session_id = uniqid('', true);
-	global $wpdb;
-	$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET attendee_session = '" . $curl_session_id . "' WHERE attendee_session ='" . $payment_data['attendee_session'] . "' ";
-	$wpdb->query($sql);
-	$payment_data['attendee_session'] = $curl_session_id;
+//	$curl_session_id = uniqid('', true);
+//	global $wpdb;
+//	$sql = "UPDATE " . EVENTS_ATTENDEE_TABLE . " SET attendee_session = '" . $curl_session_id . "' WHERE attendee_session ='" . $payment_data['attendee_session'] . "' ";
+//	$wpdb->query($sql);
+//	$payment_data['attendee_session'] = $curl_session_id;
 
 // Specify your authorize login and secret
 	$myExact->setUserInfo($exact_login_id, $exact_transaction_key);
@@ -56,7 +61,6 @@ function espresso_process_exact($payment_data) {
 //store the results in reusable variables
 		if ($myExact->ipnData['x_response_code'] == 1) {
 			?>
-			<h2><?php _e('Thank You!', 'event_espresso'); ?></h2>
 			<p><?php _e('Your transaction has been processed.', 'event_espresso'); ?></p>
 			<?php
 			$payment_data['payment_status'] = 'Completed';
@@ -97,6 +101,6 @@ function espresso_process_exact($payment_data) {
 		}
 		wp_mail($payment_data['contact'], $subject, $body);
 	}
-	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }

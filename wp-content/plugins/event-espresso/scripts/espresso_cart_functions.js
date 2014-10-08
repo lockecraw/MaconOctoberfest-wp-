@@ -1,12 +1,12 @@
 jQuery(document).ready(function() {
 
     // clear firefox and safari cache
-    jQuery(window).unload( function() {});
-
+    jQuery(window).unload( function() {}); 
+	
 	if ( ! jQuery('#event_espresso_notifications').hasClass('no-hide') ) {
 		jQuery('#event_espresso_notifications').hide();
 	}
-
+	
 
     jQuery.ajaxSetup({
         cache: false,
@@ -30,8 +30,7 @@ jQuery(document).ready(function() {
 
         progress: function(container){
 
-            jQuery(container).html('<img src="' + EEGlobals.plugin_url + 'images/ajax-loader.gif">');
-
+            jQuery(container).html('<img class="ee-ajax-loader-img" src="' + EEGlobals.plugin_url + 'images/ajax-loader.gif">');
         },
         add_item : function(params){
             var _eecart = this;
@@ -57,6 +56,8 @@ jQuery(document).ready(function() {
 
         delete_item : function(params){
 
+		//alert( 'params = ' + params.toSource() );
+
             var _eecart = this;
             _eecart.progress(params.loader_container);
             var data = {
@@ -70,6 +71,7 @@ jQuery(document).ready(function() {
 
                 params.main_container.slideUp('fast', function(){
                     params.main_container.remove();
+
                 }).delay(1500).queue(function() {
 
                     });
@@ -79,7 +81,6 @@ jQuery(document).ready(function() {
         },
 
         calculate_total: function(grand_total){
-
             var _eecart = this;
             _eecart.progress(jQuery('#event_total_price'));
 
@@ -90,7 +91,6 @@ jQuery(document).ready(function() {
 
             var data = "action=event_espresso_calculate_total&" + jQuery("#event_espresso_shopping_cart").serialize();
 
-
             event_espresso_do_ajax(data,function(r){
 				jQuery('#event_total_price').html(r.grand_total);
 				if ( r.msg != undefined && r.msg != '' ) {
@@ -98,7 +98,7 @@ jQuery(document).ready(function() {
 				} else {
 					jQuery('#event_espresso_notifications').fadeOut();
 				}
-
+				
             });
 
 
@@ -108,7 +108,7 @@ jQuery(document).ready(function() {
 
     };
 
-    jQuery('.ee_add_item_to_cart').live('click',function(){
+    jQuery('body').on('click', '.ee_add_item_to_cart',function(){
 
         var data = {
             item_type: 'event',
@@ -125,11 +125,12 @@ jQuery(document).ready(function() {
         return false;
 
     });
+ 
 
 
 
-
-    jQuery('.ee_delete_item_from_cart').live('click',function(){
+    jQuery('.ee_delete_item_from_cart').on('click',function(){
+ 
        var data = {
             item_type: 'event',
             id : jQuery(this).attr('id'),
@@ -139,12 +140,11 @@ jQuery(document).ready(function() {
         }
 
          EECART.delete_item(data);
-
-
+	 
         return false;
 
     });
-
+ 
 
 
 
@@ -224,10 +224,10 @@ jQuery(document).ready(function() {
 
 	//Couppon codes
     jQuery('#event_espresso_shopping_cart :input[id^="price_option-"], .price_id, #event_espresso_coupon_code, #event_espresso_groupon_code').on( 'change', function(){
-
+	
         var me = jQuery(this);
 		//alert( 'me id = ' + me.attr("id") + "\n" +  'me type = ' + me.prop("type") );
-
+			
         if (me.prop('type') == "select-one"){ //only run the code if a select is modified
 
             //all selects have an id
@@ -286,7 +286,7 @@ jQuery(document).ready(function() {
 
 
 
-    jQuery('.event_espresso_copy_info').live('change', function(){
+    jQuery('.event_espresso_copy_info').on('change', function(){
         /*
          * Copies info from one section of the form to another.  Will help the user so
          * they don't have to enter info again.
@@ -322,6 +322,7 @@ jQuery(document).ready(function() {
         var from_attendee_no = val[5];
 
         jQuery('#multi_regis_form_fields-' + to_event_id + "-" + to_price_id + " :input[name*='[" + to_event_id + "][" + to_price_id + "][" + to_attendee_no + "]']").each(function(){
+            //console.log(jQuery(this).attr('name') + ' > ' + jQuery(this).val());
             var val = jQuery(this).val();
             var name = jQuery(this).attr('name');
             var input_type = jQuery(this).attr('type');
@@ -329,8 +330,11 @@ jQuery(document).ready(function() {
 
             var copy_field_name = name.replace(/(\[\d+\])(\[\d+\])(\[\d+\])/,"[" + from_event_id + "][" + from_price_id + "][" + from_attendee_no + "]");
 
+            // alert(copy_field_name);
+
             var copy_from = jQuery(":input[name='" + copy_field_name + "']");
 
+            // console.log(jQuery(this).attr('name') + ' > ' + copy_field_name + ' > ' + copy_from.val());
             switch (input_type)
             {
                 case 'text':
@@ -360,7 +364,7 @@ jQuery(document).ready(function() {
 
 
     });
-
+		
 
 
    /*
@@ -368,16 +372,15 @@ jQuery(document).ready(function() {
      * they don't have to enter info again.
      */
 	jQuery('.copy-all-button').on( 'click', function() {
-
+	
 		var btn_clkd = jQuery(this);
 		var val = btn_clkd.val().split('|');
 		var from_event_id = val[0];
 		var from_price_id = val[1];
 		var from_attendee_no = '1';
-
-
+		
 		jQuery('.multi_regis_wrapper_attendee-additional .event_form_field :input').each(function(){
-
+	        // console.log(jQuery(this).attr('id') + ' > ' + jQuery(this).val());
 	        var val = jQuery(this).val();
 	        var name = jQuery(this).attr('name');
 	        var input_type = jQuery(this).attr('type');
@@ -387,28 +390,28 @@ jQuery(document).ready(function() {
 
 	        var copy_from = jQuery(":input[name='" + copy_field_name + "']");
 	        //console.log(jQuery(this).attr('name') + ' > ' + copy_field_name + ' > ' + copy_from.val());
-
+		 
 	        switch (input_type) {
-
+		 
 	            case 'text':
 	            case 'textarea':
 	                jQuery(this).val(copy_from.val());
 	                break;
-
+				 
 	            case 'radio':
 	            case 'checkbox':
 	                if (copy_from.attr('checked') && val == copy_from.val())
 	                    jQuery(this).attr("checked", "checked");
 	                break;
-
+				 
 	            default:
 	                jQuery(this).val(copy_from.val());
-
+				 
 			}
         		//console.log(jQuery('#multi_regis_form_fields-' + to + " input[name='" + new_name + "']").val());
 
         });
-
+	 	
 		btn_hght = btn_clkd.parent('.copy-all-button-wrapper').innerHeight();
 		btn_wdth = btn_clkd.parent('.copy-all-button-wrapper').innerWidth();
 		btn_clkd.parent().next('.copy-all-button-success').css({ 'height' : btn_hght, 'width' : btn_wdth }).fadeIn(100).fadeOut(2000);
@@ -416,26 +419,23 @@ jQuery(document).ready(function() {
     });
 
 
+   //Updated in Event Espresso 3.1.31 to suport Jquery 1.9
+   function event_espresso_do_ajax(data, callback){
+		jQuery.ajax({
+			data: data,
+			dataType: 'json'
+		})
+		.done(function(response, textStatus){
+			process_response(response, callback);
+		})
+		.fail(function(resp) {
+			//alert('Error.');
+		})
+		.complete(function(resp){
+			//alert('Complete.');
+		});
 
-
-
-
-    function event_espresso_do_ajax(data, callback){
-
-        jQuery.ajax({
-            data: data,
-            dataType: "json",
-            success: function(response, textStatus){
-
-                process_response(response, callback);
-
-            },
-            error: function(resp) {
-                //alert("Error.");
-            }
-        });
-
-    }
+   }
 
     function process_response(from_server, callback)
     {

@@ -1,4 +1,5 @@
-<?php
+<?php if ( ! defined('EVENT_ESPRESSO_VERSION')) { exit('No direct script access allowed'); }
+//echo '<h3>'. basename( __FILE__ ) . ' LOADED <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h3>';
 
 /**
  *
@@ -104,7 +105,7 @@ if (!class_exists('Espresso_PaymentGateway')) {
             foreach ($this->fields as $name => $value) {
                 echo "<input type=\"hidden\" name=\"$name\" value=\"$value\"/>\n";
             }
-            echo '<input id="' . $gateway . '-payment-option-lnk" class="payment-option-lnk" type="image" alt="Pay using ' . $gateway_name . '" src="' . $button_url . '" />';
+            echo '<input id="' . $gateway . '-payment-option-lnk" class="payment-option-lnk allow-leave-page" type="image" alt="Pay using ' . $gateway_name . '" src="' . $button_url . '" />';
             echo '
 		 	</form>
 		</div>';
@@ -120,27 +121,28 @@ if (!class_exists('Espresso_PaymentGateway')) {
          * @param string value of buttn text
          * @return void
          */
-        public function submitPayment( $fields = FASLE ) {
+        public function submitPayment( $fields = FALSE ) {
             $this->prepareSubmit();
-            echo "<html>\n";
-            echo "<head><title>Processing Payment...</title></head>\n";
-            echo "<body onLoad=\"document.forms['gateway_form'].submit();\">\n";
-            echo "<p style=\"text-align:center;\"><h2>Please wait, your order is being processed and you";
-            echo " will be redirected to the payment website.</h2></p>\n";
-            echo "<form method=\"POST\" name=\"gateway_form\" ";
+//            echo "<html>\n";
+//            echo "<head><title>Processing Payment...</title></head>\n";
+//            echo "<body>\n"; // onLoad=\"document.forms['gateway_form'].submit();\"
+            echo "<div id=\"bypass_payment_page-dv\">\n"; // onLoad=\"document.forms['gateway_form'].submit();\"
+            echo "<p style=\"text-align:center;\"><h2>Please wait, your order is being processed and you will be redirected to the payment website.</h2></p>\n";
+            echo "<form id=\"bypass_payment_page_gateway_form\" method=\"POST\" name=\"gateway_form\" ";
             echo "action=\"" . $this->gatewayUrl . "\">\n";
             foreach ($this->fields as $name => $value) {
                 echo "<input type=\"hidden\" name=\"$name\" value=\"$value\"/>\n";
                 //echo 'Field name: ' . $name . ' Field value : ' . $value . '<br>';
             }
-            echo "<p style=\"text-align:center;\"><br/><br/>If you are not automatically redirected to ";
-            echo "the payment website within 5 seconds...<br/><br/>\n";
+             echo "<input type=\"hidden\" id=\"bypass_payment_page\" name=\"bypass_payment_page\" value=\"true\"/>\n";
+            echo "<p style=\"text-align:center;\"><br/><br/>If you are not automatically redirected to  the payment website within 5 seconds...<br/><br/>\n";
             echo "<input type=\"submit\" value=\"Click Here\"></p>\n";
             echo "</form>\n";
             echo "</body></html>\n";
+//            echo "</body></html>\n";
         }
 
-        /**
+        /** 
          * Perform any pre-posting actions
          *
          * @param none
@@ -199,31 +201,30 @@ if (!class_exists('Espresso_PaymentGateway')) {
 						}
         }
 
-        public function dump_fields( $fields = FALSE ) {
+        public function dump_fields( $gateway_name = '' ) {
             // Used for debugging, this function will output all the field/value pairs
             // that are currently defined in the instance of the class using the
             // add_field() function.
-							global $gateway_name;
-            // echo  '<h3>PaymentGateway->dump_fields() Output:</h3>';
-            echo '<table style="background: #000;" width="70%" class="debug-table" border="1" cellpadding="2" cellspacing="0">';
-							echo '<caption style="background: #000; color: #fff; font-weight: bold;">' . $gateway_name . ' debug output</caption>';
-							echo '<thead>';
-							echo '<tr>';
-							echo '<th style="color: #fff;">' . __('Field Name', 'event_espresso') . '</th>';
-							echo '<th style="color: #fff;">' . __('Value', 'event_espresso') . '</th>';
-							echo '</tr>';
-							echo '</thead>';
-							echo '<tbody>';
+           	echo  '<h5>' . $gateway_name . ' Debug output</h5>';
+			echo '<div class="espresso-gateway-debug-dump" style="padding:5px; margin:0 0 3em; border:1px solid #D7482A; border-radius:3px;">';
+            echo '<table width="70%" class="debug-table" border="1" cellpadding="2" cellspacing="0" style="margin:0;background:#e8e8e8; border:1px solid #ddd; color:#444;">';
+			echo '<thead>';
+			echo '<tr>';
+			echo '<th>' . __('Field Name', 'event_espresso') . '</th>';
+			echo '<th>' . __('Value', 'event_espresso') . '</th>';
+			echo '</tr>';
+			echo '</thead>';
+			echo '<tbody>';
             ksort($this->fields);
             foreach ($this->fields as $key => $value) {
-
-							echo '<tr>';
-							echo '<td style="color: #fff; border-right: 1px solid #ccc;">' . $key . '</td>';
-							echo '<td style="color: #fff; max-width: 500px; overflow: auto; font-family: monospace; white-space: pre-wrap; word-wrap: break-word; ">' . htmlspecialchars($value) .'&nbsp;</td>';
-							echo '</tr>';
+				echo '<tr>';
+				echo '<td style="border-right: 1px solid #ccc;">' . $key . '</td>';
+				echo '<td style="max-width: 500px; overflow: auto; font-family: monospace; white-space: pre-wrap; word-wrap: break-word; ">' . htmlspecialchars($value) .'&nbsp;</td>';
+				echo '</tr>';
             }
-							echo '</tbody>';
+			echo '</tbody>';
             echo '</table>';
+            echo '</div>';
         }
 
     }

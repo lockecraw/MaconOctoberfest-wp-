@@ -24,7 +24,6 @@ if ( !function_exists( 'espresso_user_has_venue_permission' ) ) {
                      ( isset( $espresso_manager[ 'event_manager_venue' ] ) && "y" == strtolower( $espresso_manager[ 'event_manager_venue' ] ) ) 
                 ) {
                 $group = get_user_meta( espresso_member_data( 'id' ), "espresso_group", true );
-				$group = unserialize( $group );
                 if (is_array( $group ) && count( $group ) > 0 ) {
                     $sql = " SELECT * FROM " . EVENTS_VENUE_TABLE . " v LEFT JOIN " . EVENTS_LOCALE_REL_TABLE . " lr ON v.id = lr.venue_id WHERE v.id = '" . $venue_id . "' AND lr.locale_id IN (" . implode( ',', $group ) . ") ";
                     $rs = $wpdb->get_results( $sql );
@@ -51,7 +50,6 @@ if ( !function_exists( 'espresso_venue_dd' ) ){
 			if(	$espresso_manager['event_manager_venue'] == "Y" ){
 				//show only venues inside their assigned locales.
 				$group = get_user_meta(espresso_member_data('id'), "espresso_group", true);
-				$group = unserialize($group);
 				$sql .= " $WHERE lr.locale_id IN (" . implode(",", $group) . ")";
 				$sql .= " OR ev.wp_user = ".$current_user->ID ;
 				$WHERE = " AND ";
@@ -145,20 +143,11 @@ if ( !function_exists( 'espresso_venue_dd' ) ){
 }
 
 if ( !function_exists( 'espresso_personnel_cb' ) ){
-	function espresso_personnel_cb($event_id = 0){
+	function espresso_personnel_cb($event_id = 0, $recurrence_id = 0){
 		global $espresso_premium; if ($espresso_premium != true) return;
 		global $wpdb;
-		$sql = "SELECT id, name, role, meta FROM " . EVENTS_PERSONNEL_TABLE;
-		if (function_exists('espresso_member_data') ) {
-			$wpdb->get_results("SELECT wp_user FROM " . EVENTS_DETAIL_TABLE . " WHERE id = '" . $event_id . "'");
-			$wp_user = $wpdb->last_result[0]->wp_user !='' ? $wpdb->last_result[0]->wp_user:espresso_member_data('id');
-			$sql .= " WHERE ";
-			if ($wp_user == 0 || $wp_user == 1){
-				$sql .= " (wp_user = '0' OR wp_user = '1') ";
-			}else{
-				$sql .= " wp_user = '" . $wp_user ."' ";
-			}
-		}
+		$where = apply_filters('filter_hook_espresso_personal_cb_where', '', $event_id);
+		$sql = "SELECT id, name, role, meta FROM " . EVENTS_PERSONNEL_TABLE . $where;
 		$event_personnel = $wpdb->get_results($sql);
 		$num_rows = $wpdb->num_rows;
 		if ($num_rows > 0){
@@ -182,7 +171,7 @@ if ( !function_exists( 'espresso_personnel_cb' ) ){
 				$html .= '<p id="event-person-' . $person_id . '" class="event-staff-list"><label for="in-event-person-' . $person_id . '" class="selectit"><input value="' . $person_id . '" type="checkbox" name="event_person[]" id="in-event-person-' . $person_id . '"' . ($in_event_person == $person_id ? ' checked="checked"' : "" ) . '/> <a href="admin.php?page=event_staff&amp;action=edit&amp;id='.$person_id.'"  target="_blank" title="'.$person_organization.'">' . $person_name .'</a> '. $person_info.'</label></p>';
 
 			}
-
+			
 			$top_div ='';
 			$bottom_div ='';
 
@@ -190,27 +179,36 @@ if ( !function_exists( 'espresso_personnel_cb' ) ){
 				$top_div = '<div style="height:250px;overflow:auto;">';
 				$bottom_div = '</div>';
 			}
-
-			$manage = '<p><a href="admin.php?page=event_staff" target="_blank">'.__('Manage Staff Members', 'event_espresso').'</a> | <a class="thickbox link" href="#TB_inline?height=300&width=400&inlineId=staff_info">Shortcode</a> </p>';
-
-			echo '<div id="staff_info" style="display:none">';
-			echo '<h2>'.__('Staff Shortcode', 'event_espresso').'</h2>';
-			echo '<p>'.__('Add the following shortcode into the description to show the staff for this event.', 'event_espresso').'</p>';
-			echo '<p>[ESPRESSO_STAFF]</p>';
-			echo '<p>Example with Optional Parameters:<br />
-			[ESPRESSO_STAFF outside_wrapper="div" outside_wrapper_class="event_staff" inside_wrapper="p" inside_wrapper_class="event_person"]</p>';
-
-			echo '<p><strong><a href="http://eventespresso.com/forums/2010/10/post-type-variables-and-shortcodes/#staff_shortcode" target="_blank">More Examples</a></strong></p>';
-			echo '</div>';
-
-			$html = $top_div.$html.$bottom_div.$manage;
-			return $html;
-
+			
+			?>
+			<div id="event-staff" class="postbox">
+			<div class="handlediv" title="Click to toggle"><br></div>
+			<h3 class="hndle"> <span><?php _e('Event Staff / Speakers', 'event_espresso'); ?></span> </h3>
+				<div class="inside">  
+				<?php 
+				echo $top_div.$html.$bottom_div; 
+				if (defined('EVENT_ESPRESSO_RECURRENCE_TABLE') && $recurrence_id > 0) {
+					echo '<hr /><input name="rem_apply_to_all_staff" type="checkbox" value="1" /> '.__('Apply to all events in this series', 'event_espresso');
+				}
+				?>
+			<p><a href="admin.php?page=event_staff" target="_blank"><?php _e('Manage Staff Members', 'event_espresso')?></a> | <a class="thickbox link" href="#TB_inline?height=300&width=400&inlineId=staff_info">Shortcode</a> </p>
+			<div id="staff_info" style="display:none">
+				<h2><?php _e('Staff Shortcode', 'event_espresso');?></h2>
+				<p><?php _e('Add the following shortcode into the description to show the staff for this event.', 'event_espresso')?></p>
+				<p>[ESPRESSO_STAFF]</p>
+				<p><?php _e('Example with Optional Parameters:', 'event_espresso'); ?><br />
+					[ESPRESSO_STAFF outside_wrapper="div" outside_wrapper_class="event_staff" inside_wrapper="p" inside_wrapper_class="event_person"]</p>
+				<p><strong><a href="http://eventespresso.com/wiki/shortcodes-template-variables/#staff_shortcode" target="_blank"><?php _e('More Examples', 'event_espresso'); ?></a></strong></p>
+			</div>
+		</div>
+	</div>
+<?php
 		}else{
 			return '<a href="admin.php?page=event_staff&amp;action=add_new_person">'.__('Please add at least one person.', 'event_espresso').'</a>';
 		}
 	}
 }
+add_action('action_hook_espresso_staff_cb', 'espresso_personnel_cb', 10, 2);
 
 if ( !function_exists( 'espresso_personnel_dd' ) ){
 	function espresso_personnel_dd(){
@@ -246,25 +244,25 @@ if (!function_exists('espresso_chart_display')){
 			case 'total_reg':
 				//Total Registrations/Transactions
 				$title = __('Total Registrations/Transactions', 'event_espresso');
-				$sql = "SELECT SUM(a.amount_pd) amount, SUM(a.quantity) quantity, DATE_FORMAT(a.date,'%b %d') date FROM ".EVENTS_ATTENDEE_TABLE." a WHERE event_id =".$event_id." GROUP BY DATE_FORMAT(a.date,'%m-%d-%Y')";
+				$sql = "SELECT SUM(a.total_cost) amount, SUM(a.quantity) quantity, DATE_FORMAT(a.date,'%b %d') date FROM ".EVENTS_ATTENDEE_TABLE." a WHERE event_id =".$event_id." GROUP BY DATE_FORMAT(a.date,'%m-%d-%Y')";
 			break;
 
 			case 'total_completed':
 				//Completed Registrations/Transactions
 				$title = __('Completed Registrations/Transactions', 'event_espresso');
-				$sql = "SELECT SUM(a.amount_pd) amount, SUM(a.quantity) quantity, DATE_FORMAT(a.date,'%b %d') date FROM ".EVENTS_ATTENDEE_TABLE." a WHERE event_id =".$event_id." AND payment_status='Completed' GROUP BY DATE_FORMAT(a.date,'%m-%d-%Y')";
+				$sql = "SELECT SUM(a.total_cost) amount, SUM(a.quantity) quantity, DATE_FORMAT(a.date,'%b %d') date FROM ".EVENTS_ATTENDEE_TABLE." a WHERE event_id =".$event_id." AND (payment_status='Completed' OR payment_status='Refund') GROUP BY DATE_FORMAT(a.date,'%m-%d-%Y')";
 			break;
 
 			case 'total_pending':
 				//Pending Registrations/Transactions
 				$title = __('Pending Registrations/Transactions', 'event_espresso');
-				$sql = "SELECT SUM(a.amount_pd) amount, SUM(a.quantity) quantity, DATE_FORMAT(a.date,'%b %d') date FROM ".EVENTS_ATTENDEE_TABLE." a WHERE event_id =".$event_id." AND payment_status='Pending' GROUP BY DATE_FORMAT(a.date,'%m-%d-%Y')";
+				$sql = "SELECT SUM(a.total_cost) amount, SUM(a.quantity) quantity, DATE_FORMAT(a.date,'%b %d') date FROM ".EVENTS_ATTENDEE_TABLE." a WHERE event_id =".$event_id." AND payment_status='Pending' GROUP BY DATE_FORMAT(a.date,'%m-%d-%Y')";
 			break;
 
 			case 'total_incomplete':
 				//Incomplete Registrations/Transactions
 				$title = __('Incomplete Registrations/Transactions', 'event_espresso');
-				$sql = "SELECT SUM(a.amount_pd) amount, SUM(a.quantity) quantity, DATE_FORMAT(a.date,'%b %d') date FROM ".EVENTS_ATTENDEE_TABLE." a WHERE event_id =".$event_id." AND (payment_status='Incomplete' OR payment_status='Payment Declined') GROUP BY DATE_FORMAT(a.date,'%m-%d-%Y')";
+				$sql = "SELECT SUM(a.total_cost) amount, SUM(a.quantity) quantity, DATE_FORMAT(a.date,'%b %d') date FROM ".EVENTS_ATTENDEE_TABLE." a WHERE event_id =".$event_id." AND (payment_status='Incomplete' OR payment_status='Payment Declined') GROUP BY DATE_FORMAT(a.date,'%m-%d-%Y')";
 			break;
 		}
 
@@ -337,60 +335,64 @@ if (!function_exists('ee_default_event_meta')){
 
 if (!function_exists('event_espresso_meta_edit')){
 	function event_espresso_meta_edit($event_meta='') {
-		global $wpdb, $org_options;
-		global $espresso_premium;
-		if ($espresso_premium != true)
+		
+		global $wpdb, $org_options, $espresso_premium;
+		if ( $espresso_premium != TRUE ) {
 			return;
+		}
+			
 		$good_meta = array();
 		$hiddenmeta = array("", "venue_id", "additional_attendee_reg_info", "add_attendee_question_groups", "date_submitted", "event_host_terms", "default_payment_status","event_thumbnail_url");
+		$hiddenmeta = apply_filters('filter_hook_espresso_hidden_meta',$hiddenmeta);
+		
 		$meta_counter = 1;
 
-		$default_meta = $event_meta==''?ee_default_event_meta():array();
-		$event_meta = $event_meta==''?array():$event_meta;
-		$event_meta = array_merge($event_meta, $default_meta);
-		//print_r( $event_meta );
+		$event_meta = ! empty( $event_meta ) ? $event_meta : ee_default_event_meta();
 		$good_meta = $event_meta;
-		//print_r( $good_meta );
-		?>
-		<p><?php _e('Using Event Meta boxes', 'event_espresso'); ?>
-   <a class="thickbox"  href="#TB_inline?height=400&width=500&inlineId=event-meta-boxes" target="_blank"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>images/question-frame.png" width="16" height="16" /></a>
+//		printr( $event_meta, '$event_meta  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span>', 'auto' );
+?>
+		<p>
+			<?php _e('Using Event Meta boxes', 'event_espresso'); ?>
+   			<a class="thickbox"  href="#TB_inline?height=400&width=500&inlineId=event-meta-boxes" target="_blank">
+				<img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>images/question-frame.png" width="16" height="16" />
+			</a>
 		</p>
+		
 		<ul id="dynamicMetaInput">
-			<?php
-			if ($event_meta != '') {
-				foreach ($event_meta as $k => $v) {
-					?>
-					<?php
-					if (in_array($k, $hiddenmeta)) {
-						//				echo "<input type='hidden' name='emeta[]' value='{$v}' />";
-						unset($good_meta[$k]);
-					} else {
-						?>
-						<li>
-							<label><?php _e('Key: ', 'event_espresso'); ?></label> <select id="emeta[]" name="emeta[]">
-					<?php foreach ($good_meta as $k2 => $v2) { ?>
-									<option value="<?php echo $k2; ?>" <?php echo ($k2 == $k ? "SELECTED" : null); ?>><?php echo $k2; ?></option>
-								<?php } ?>
-							</select>
-							<label for="meta-value"><?php _e('Value: ', 'event_espresso'); ?></label> <input  size="20" type="text" value="<?php echo $v; ?>" name="emetad[]" id="emetad[]" />
-						<?php
-						echo '<img class="remove-item" title="' . __('Remove this meta box', 'event_espresso') . '" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" alt="' . __('Remove Meta', 'event_espresso') . '" />';
-						?>
-						</li>
-						<?php
-						$meta_counter++;
-					}
-					?>
-				<?php }
-				echo '<li><label for="emeta-box">' . __('Key: ', 'event_espresso'); ?></label><input id="emeta-box" size="20" type="text" value="" name="emeta[]" id="emeta[]"> <label for="emetaad[]"><?php _e('Value: ', 'event_espresso'); ?> </label><input size="20" type="text" value="" name="emetad[]" id="emetad[]"><?php
-			echo ' <img class="remove-item" title="' . __('Remove this meta box', 'event_espresso') . '" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" alt="' . __('Remove Meta', 'event_espresso') . '" />' . '</li>';
-		} else {
-			echo '<li for="emeta-box"><label for="emeta[]">' . __('Key: ', 'event_espresso');
-			?></label> <input size="20" type="text" value="" name="emeta[]" id="emeta[]"> <?php _e('Value: ', 'event_espresso'); ?><input size="20" type="text" value="" name="emetad[]" id="emetad[]"><?php
-			echo ' &nbsp;<img class="remove-item" title="' . __('Remove this meta box', 'event_espresso') . '" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" src="' . EVENT_ESPRESSO_PLUGINFULLURL . 'images/icons/remove.gif" alt="' . __('Remove Meta', 'event_espresso') . '" />' . '</li>';
-			// $meta_counter++;
-		}
+<?php
+	if ( ! empty( $event_meta )) {
+		foreach ( $event_meta as $k => $v ) {
+
+			if ( in_array( $k, $hiddenmeta )) {
+				//				echo "<input type='hidden' name='emeta[]' value='{$v}' />";
+				unset($good_meta[$k]);
+			} else {
 		?>
+			<li>
+				<label><?php _e('Key: ', 'event_espresso'); ?></label> 
+				<select id="emeta[]" name="emeta[]">
+					<?php foreach ($good_meta as $k2 => $v2) { ?>
+					<option value="<?php echo htmlentities( stripslashes( $k2 ), ENT_QUOTES, 'UTF-8' ); ?>" <?php echo ( $k2 == $k ? ' selected="selected"' : '' ); ?>>
+						<?php echo htmlentities( stripslashes( $k2 ), ENT_QUOTES, 'UTF-8' ); ?>						
+					</option>
+					<?php } ?>
+				</select>
+				<label for="meta-value"><?php _e('Value: ', 'event_espresso'); ?></label> 
+				<input  size="20" type="text" value="<?php echo htmlentities( stripslashes( $v ), ENT_QUOTES, 'UTF-8' ); ?>" name="emetad[]" id="emetad[]" />
+				<img class="remove-item" title="<?php _e('Remove this meta box', 'event_espresso');?>" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL;?>images/icons/remove.gif" alt="<?php _e('Remove Meta', 'event_espresso');?>" />
+			</li>
+		<?php
+			}
+		 } 
+	} 
+?>
+			<li>
+				<label for="emeta[]"><?php _e('Key: ', 'event_espresso');?></label> 
+				<input size="20" type="text" value="" name="emeta[]" id="emeta[]"> 
+				<label for="emetad[]"><?php _e('Value: ', 'event_espresso'); ?> </label>
+				<input size="20" type="text" value="" name="emetad[]" id="emetad[]">
+				<img class="remove-item" title="<?php _e('Remove this meta box', 'event_espresso');?>" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL;?>images/icons/remove.gif" alt="<?php _e('Remove Meta', 'event_espresso');?>" />
+			</li>
 		</ul>
 
 		<p><input type="button" class="button" value="<?php _e('Add A Meta Box', 'event_espresso'); ?>" onClick="addMetaInput('dynamicMetaInput');"></p>

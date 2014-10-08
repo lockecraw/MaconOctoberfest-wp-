@@ -7,11 +7,13 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');
 function update_event($recurrence_arr = array()) {
     //print_r($_REQUEST);
     global $wpdb, $org_options, $current_user, $espresso_premium;
-	
+
 	//Security check using nonce
 	if ( empty($_POST['nonce_verify_update_event']) || !wp_verify_nonce($_POST['nonce_verify_update_event'],'espresso_verify_update_event_nonce') ){
-		print '<h3 class="error">'.__('Sorry, there was a security error and your event was not saved.', 'event_espresso').'</h3>';
-		return;
+		if ($recurrence_arr['bypass_nonce'] == FALSE){
+			print '<h3 class="error">'.__('Sorry, there was a security error and your event was not updated.', 'event_espresso').'</h3>';
+			return;
+		}
 	}
 	
     $wpdb->show_errors();
@@ -57,21 +59,16 @@ function update_event($recurrence_arr = array()) {
 
                 if ($_POST['recurrence_apply_changes_to'] == 2) {
                     //Update all events in the series based on recurrence id
-
                     $recurrence_dates = ($_POST['recurrence_type'] == 'm') ? find_recurrence_manual_dates($re_params) : find_recurrence_dates($re_params);
 
-                    //$DEL_SQL = 'UPDATE ' . EVENTS_DETAIL_TABLE . " SET event_status = 'D' WHERE start_date NOT IN (" . $delete_in . ") AND recurrence_id = " . $wpdb->escape($_POST['recurrence_id']);
-
-
-                    $UPDATE_SQL = "SELECT id,start_date,event_identifier FROM " . EVENTS_DETAIL_TABLE . " WHERE recurrence_id = %d AND NOT event_status = 'D'";
+                     $UPDATE_SQL = "SELECT id,start_date,event_identifier FROM " . EVENTS_DETAIL_TABLE . " WHERE recurrence_id = %d AND NOT event_status = 'D'";
                 } else {
                     //Update this and upcoming events based on recurrence id and start_date >=start_date
                     $re_params['start_date'] = sanitize_text_field($_POST['start_date']);
                     $recurrence_dates = find_recurrence_dates($re_params);
-
-                    //$DEL_SQL = 'UPDATE ' . EVENTS_DETAIL_TABLE . " SET event_status = 'D' WHERE start_date >='" . $wpdb->escape($_POST['start_date']) . "' AND start_date NOT IN (" . $delete_in . ") AND recurrence_id = " . $_POST['recurrence_id'];
                     $UPDATE_SQL = "SELECT id,start_date,event_identifier FROM " . EVENTS_DETAIL_TABLE . " WHERE start_date >='" . sanitize_text_field($_POST['start_date']) . "' AND recurrence_id = %d and NOT event_status = 'D' ";
                 }
+				
 
                 //Recurrence Form modified and changes need to apply to all
                 if ($recurrence_form_modified && $_POST['recurrence_apply_changes_to'] > 1) {
@@ -104,13 +101,11 @@ function update_event($recurrence_arr = array()) {
 
                         $UPDATE_SQL = "SELECT id,start_date,event_identifier FROM " . EVENTS_DETAIL_TABLE . " WHERE recurrence_id = %d and NOT event_status = 'D' ORDER BY start_date";
                     } else {
-                        //Update this and upcoming events based on recurrence id and start_date >=start_date
-                        //$DEL_SQL = 'UPDATE ' . EVENTS_DETAIL_TABLE . " SET event_status = 'D' WHERE start_date >='" . $wpdb->escape($_POST['start_date']) . "' AND start_date NOT IN (" . $delete_in . ") AND recurrence_id = " . $_POST['recurrence_id'];
-                        $DEL_SQL = 'DELETE EDT, EAT FROM ' . EVENTS_DETAIL_TABLE . " EDT
+                       $DEL_SQL = 'DELETE EDT, EAT FROM ' . EVENTS_DETAIL_TABLE . " EDT
                             LEFT JOIN " . EVENTS_ATTENDEE_TABLE . " EAT
                                 ON EDT.id = EAT.event_id
                             WHERE EAT.id IS NULL
-                            AND EDT.start_date >='" . $wpdb->escape(sanitize_text_field($_POST['start_date'])) . "'
+                            AND EDT.start_date >='" . esc_sql(sanitize_text_field($_POST['start_date'])) . "'
                             AND EDT.start_date NOT IN (" . $delete_in . ")
                             AND recurrence_id = " . $_POST['recurrence_id'];
                         $UPDATE_SQL = "SELECT id,start_date,event_identifier FROM " . EVENTS_DETAIL_TABLE . " WHERE start_date >='" . sanitize_text_field($_POST['start_date']) . "' AND recurrence_id = %d AND NOT event_status = 'D'  ORDER BY start_date";
@@ -137,7 +132,10 @@ function update_event($recurrence_arr = array()) {
                                 'recurrence_event_end_date' => $v['event_end_date'],
                                 'recurrence_end_date' => $v['start_date'],
                                 'registration_start' => $v['registration_start'],
-                                'registration_end' => $v['registration_end']));
+                                'registration_end' => $v['registration_end'],
+								'bypass_nonce'				=> TRUE,
+								
+								));
                         } else {
 
                         }
@@ -150,8 +148,7 @@ function update_event($recurrence_arr = array()) {
                      */
                 }
 
-                $result = $wpdb->get_results($wpdb->prepare($UPDATE_SQL, array(sanitize_text_field($_POST['recurrence_id']))));
-
+                $result = $wpdb->get_results($wpdb->prepare($UPDATE_SQL, array(sanitize_text_field($_POST['recurrence_id']))));				
                 foreach ($result as $row) {
                     if ($row->start_date != '') {
                         $recurrence_dates[$row->start_date]['event_id'] = $row->id;
@@ -170,12 +167,15 @@ function update_event($recurrence_arr = array()) {
         count($recurrence_arr) == 0 && $_POST['recurrence_apply_changes_to'] > 1) {
 //skip the first update
     } else {
-
+		
+		//Filters the event description based on user level
+		$user_access = apply_filters( 'filter_hook_espresso_event_unfiltered_description', current_user_can('administrator') );
+		$_REQUEST['event_desc'] = is_admin() || $user_access ? $_REQUEST['event_desc'] : apply_filters( 'filter_hook_espresso_event_wp_kses_post_description', wp_kses_post( $_REQUEST['event_desc'] ) );
+		
         $event_meta = array(); //will be used to hold event meta data
-
         $event_id						= array_key_exists('event_id', $recurrence_arr) ? $recurrence_arr['event_id'] : (int)$_REQUEST['event_id'];
         $event_name						= sanitize_text_field($_REQUEST['event']);
-        $event_desc						= $_REQUEST['event_desc'];
+        $event_desc						= !empty($_REQUEST['event_desc']) ? $_REQUEST['event_desc'] : '';
         $display_desc					= sanitize_text_field($_REQUEST['display_desc']);
         $display_reg_form				= sanitize_text_field($_REQUEST['display_reg_form']);
 		$externalURL					= !empty($_REQUEST['externalURL']) ? esc_html($_REQUEST['externalURL']):'';
@@ -185,10 +185,10 @@ function update_event($recurrence_arr = array()) {
         $allow_overflow					= empty($_REQUEST['allow_overflow']) ? 'N' : sanitize_text_field($_REQUEST['allow_overflow']);
         $additional_limit				= !empty($_REQUEST['additional_limit']) && $_REQUEST['additional_limit'] > 0 ? (int)$_REQUEST['additional_limit'] : '5';
         $member_only					= empty($_REQUEST['member_only']) ? 'N' : sanitize_text_field($_REQUEST['member_only']);
-        $is_active						= sanitize_text_field($_REQUEST['is_active']);
-        $event_status					= sanitize_text_field($_REQUEST['event_status']);
-
-        //Get the first instance of the start and end times
+		$is_active						= !empty($_REQUEST['is_active']) ? sanitize_text_field($_REQUEST['is_active']) : 'Y';
+        $event_status					= !empty($_REQUEST['event_status']) ? sanitize_text_field($_REQUEST['event_status']) : 'A';
+       
+	    //Get the first instance of the start and end times
         $start_time						= sanitize_text_field($_REQUEST['start_time'][0]);
         $end_time						= sanitize_text_field($_REQUEST['end_time'][0]);
 
@@ -200,12 +200,12 @@ function update_event($recurrence_arr = array()) {
         $timezone_string				= empty($_REQUEST['timezone_string']) ? '' : sanitize_text_field($_REQUEST['timezone_string']);
 
         //Early discounts
-        $early_disc						= sanitize_text_field($_REQUEST['early_disc']);
-        $early_disc_date				= sanitize_text_field($_REQUEST['early_disc_date']);
-        $early_disc_percentage			= sanitize_text_field($_REQUEST['early_disc_percentage']);
+        $early_disc						= !empty($_REQUEST['early_disc']) ? sanitize_text_field($_REQUEST['early_disc']) : '';
+        $early_disc_date				= !empty($_REQUEST['early_disc_date']) ? sanitize_text_field($_REQUEST['early_disc_date']) : '';
+        $early_disc_percentage			= !empty($_REQUEST['early_disc_percentage']) ? sanitize_text_field($_REQUEST['early_disc_percentage']) : '';
 
         $conf_mail						= esc_html($_REQUEST['conf_mail']);
-        $use_coupon_code				= sanitize_text_field($_REQUEST['use_coupon_code']);
+        $use_coupon_code				= !empty($_REQUEST['use_coupon_code']) ? sanitize_text_field($_REQUEST['use_coupon_code']) : '';
         $alt_email						= isset($_REQUEST['alt_email']) && !empty($_REQUEST['alt_email']) ? sanitize_text_field($_REQUEST['alt_email']) : '';
 
         $send_mail						= sanitize_text_field($_REQUEST['send_mail']);
@@ -222,16 +222,10 @@ function update_event($recurrence_arr = array()) {
 
         $start_date						= array_key_exists('recurrence_start_date', $recurrence_arr) ? $recurrence_arr['recurrence_start_date'] : (empty($_REQUEST['start_date']) ? $_REQUEST['recurrence_start_date'] : sanitize_text_field($_REQUEST['start_date']));
         $end_date						= array_key_exists('recurrence_event_end_date', $recurrence_arr) ? $recurrence_arr['recurrence_event_end_date'] : (empty($_REQUEST['end_date']) ? sanitize_text_field($_REQUEST['recurrence_start_date']) : sanitize_text_field($_REQUEST['end_date']));
-
-        $visible_on						= array_key_exists('visible_on', $recurrence_arr) ? sanitize_text_field($recurrence_arr['visible_on']) : empty($_REQUEST['visible_on']) ? '' : sanitize_text_field($_REQUEST['visible_on']);
 		
 		$question_groups				= serialize($_REQUEST['question_groups']);
         $add_attendee_question_groups	= empty($_REQUEST['add_attendee_question_groups']) ? '' : $_REQUEST['add_attendee_question_groups'];
-		
-		
-		
-        
-		
+				
         //Venue Information
         $venue_title = isset($_REQUEST['venue_title']) ? sanitize_text_field($_REQUEST['venue_title']):'';
         $venue_url = isset($_REQUEST['venue_url']) ? sanitize_text_field($_REQUEST['venue_url']):'';
@@ -277,10 +271,10 @@ function update_event($recurrence_arr = array()) {
 
         
 
-        $event_meta['default_payment_status'] = sanitize_text_field($_REQUEST['default_payment_status']);
+        $event_meta['default_payment_status'] = !empty($_REQUEST['default_payment_status']) ? sanitize_text_field($_REQUEST['default_payment_status']) : '';
         $event_meta['venue_id'] = empty($_REQUEST['venue_id']) ? '' : (int)$_REQUEST['venue_id'][0];
-        $event_meta['additional_attendee_reg_info'] = sanitize_text_field($_REQUEST['additional_attendee_reg_info']);
-        $event_meta['add_attendee_question_groups'] = $add_attendee_question_groups;
+        $event_meta['additional_attendee_reg_info'] = !empty($_REQUEST['additional_attendee_reg_info']) ? sanitize_text_field($_REQUEST['additional_attendee_reg_info']) : '';
+		$event_meta['add_attendee_question_groups'] = $add_attendee_question_groups;
         $event_meta['date_submitted'] = sanitize_text_field($_REQUEST['date_submitted']);
 		
 		//Added for seating chart addon
@@ -306,16 +300,20 @@ function update_event($recurrence_arr = array()) {
 		}
 
 		//Process thumbnail image
+		$event_thumbnail_url = '';
 		if (isset($_REQUEST['upload_image']) && !empty($_REQUEST['upload_image']) ){
 			 $event_meta['event_thumbnail_url'] = sanitize_text_field($_REQUEST['upload_image']);
 			 $event_thumbnail_url = sanitize_text_field($event_meta['event_thumbnail_url']);
 		}
 			
-        if ($_REQUEST['emeta'] != '') {
+        if (!empty($_REQUEST['emeta'])) {
             foreach ($_REQUEST['emeta'] as $k => $v) {
                 $event_meta[$v] = sanitize_text_field($_REQUEST['emetad'][$k]);
             }
         }
+		
+		//Filter to update the event meta as needed
+		$event_meta = apply_filters('filter_hook_espresso_update_event_update_meta', $event_meta, $event_id);
 		
 		//print_r($_REQUEST['emeta'] );
         $event_meta = serialize($event_meta);
@@ -436,19 +434,28 @@ function update_event($recurrence_arr = array()) {
             }
         }
         //END CATEGORY MODIFICATION
-
-        $del_ppl = "DELETE FROM " . EVENTS_PERSONNEL_REL_TABLE . " WHERE event_id = '" . $event_id . "'";
-        $wpdb->query($wpdb->prepare($del_ppl, NULL));
-
-        if (!empty($_REQUEST['event_person'])) {
-            foreach ($_REQUEST['event_person'] as $k => $v) {
-                if (!empty($v)) {
-                    $sql_ppl = "INSERT INTO " . EVENTS_PERSONNEL_REL_TABLE . " (event_id, person_id) VALUES ('" . $event_id . "', '" . (int)$v . "')";
-					$wpdb->query($wpdb->prepare($sql_ppl, array()) );
-                }
-            }
-        }
-
+		
+		//Staff
+		$update_all_staff = FALSE;
+		if (isset($_POST['rem_apply_to_all_staff']) && $_POST['recurrence_apply_changes_to'] == 2){ 
+			$update_all_staff = TRUE;
+		}
+		
+		if ($_POST['event_id'] == $event_id || $update_all_staff == TRUE){
+			$del_ppl = "DELETE FROM " . EVENTS_PERSONNEL_REL_TABLE . " WHERE event_id = '" . $event_id . "'";
+			$wpdb->query($wpdb->prepare($del_ppl, NULL));
+			
+			if (!empty($_REQUEST['event_person'])) {
+				foreach ($_REQUEST['event_person'] as $k => $v) {
+					if (!empty($v)) {
+						$sql_ppl = "INSERT INTO " . EVENTS_PERSONNEL_REL_TABLE . " (event_id, person_id) VALUES ('" . $event_id . "', '" . (int)$v . "')";
+						$wpdb->query($wpdb->prepare($sql_ppl, array()) );
+					}
+				}
+			}
+		}
+		
+		//Venues
         $del_venues = "DELETE FROM " . EVENTS_VENUE_REL_TABLE . " WHERE event_id = '" . $event_id . "'";
         $wpdb->query($wpdb->prepare($del_venues, NULL));
 
@@ -460,11 +467,14 @@ function update_event($recurrence_arr = array()) {
                 }
             }
         }
-
+		
+		//Discounts
         $del_discounts = "DELETE FROM " . EVENTS_DISCOUNT_REL_TABLE . " WHERE event_id = '" . $event_id . "'";
         $wpdb->query($wpdb->prepare($del_discounts, NULL));
 
-		if (!empty($_REQUEST['event_discount'])) {
+		if (!empty($_REQUEST['event_discount']) && $_REQUEST['use_coupon_code'] == 'Y') {
+			//only re-add the coupon codes if they've specified to use all global coupon codes
+			//and 'specific' coupon codes
 			foreach ($_REQUEST['event_discount'] as $k => $v) {
 				if (!empty($v)) {
 					$sql_discount = "INSERT INTO " . EVENTS_DISCOUNT_REL_TABLE . " (event_id, discount_id) VALUES ('" . $event_id . "', '" . (int)$v . "')";
@@ -582,12 +592,12 @@ function update_event($recurrence_arr = array()) {
                     if ($post_id > 0)
                         $my_post['ID'] = $post_id;
 
-                    $my_post['post_title']		= esc_html($_REQUEST['event']);
+                    $my_post['post_title']		= sanitize_text_field($_REQUEST['event']);
                     $my_post['post_content']	= $post_content;
                     $my_post['post_status']		= 'publish';
 					$my_post['post_author']		= !empty($_REQUEST['user']) ? (int)$_REQUEST['user'] : '';
-          			$my_post['post_category']	= !empty($_REQUEST['post_category']) ? sanitize_text_field($_REQUEST['post_category']) : '';
-            		$my_post['tags_input']		= !empty($_REQUEST['post_tags']) ? sanitize_text_field($_REQUEST['post_tags']) : '';
+          			$my_post['post_category']	= !empty($_REQUEST['post_category']) ? $_REQUEST['post_category'] : '';
+            		$my_post['tags_input']		= !empty($_REQUEST['post_tags']) ? $_REQUEST['post_tags'] : '';
            			$my_post['post_type']		= !empty($post_type) ? $post_type : 'post';
 					
 					
@@ -696,7 +706,8 @@ function update_event($recurrence_arr = array()) {
 						'recurrence_event_end_date' => $r_d['event_end_date'],
 						'registration_start'		=> $r_d['registration_start'],
 						'registration_end'			=> $r_d['registration_end'],
-						'visible_on'				=> $r_d['visible_on']
+						'visible_on'				=> $r_d['visible_on'],
+						'bypass_nonce'				=> TRUE,
                 ));
             }
         }
@@ -704,4 +715,6 @@ function update_event($recurrence_arr = array()) {
     /*
      * End recursion, as part of recurring events.
      */
+	 
+	do_action('action_hook_espresso_update_event_success',$_REQUEST);
 }

@@ -19,9 +19,9 @@ function event_espresso_exact_payment_settings() {
 	$exact_settings = get_option('event_espresso_exact_settings');
 	if (empty($exact_settings)) {
 		if (file_exists(EVENT_ESPRESSO_GATEWAY_DIR . "/exact/exact-logo.png")) {
-			$button_url = EVENT_ESPRESSO_GATEWAY_URL . "/exact/exact-logo.png";
+			$exact_settings['button_url'] = EVENT_ESPRESSO_GATEWAY_URL . "/exact/exact-logo.png";
 		} else {
-			$button_url = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/exact/exact-logo.png";
+			$exact_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/exact/exact-logo.png";
 		}
 		$exact_settings['exact_login_id'] = '';
 		$exact_settings['exact_transaction_key'] = '';
@@ -30,10 +30,13 @@ function event_espresso_exact_payment_settings() {
 		$exact_settings['test_transactions'] = false;
 		$exact_settings['bypass_payment_page'] = 'N';
 		$exact_settings['force_ssl_return'] = false;
-		$exact_settings['button_url'] = $button_url;
 		if (add_option('event_espresso_exact_settings', $exact_settings, '', 'no') == false) {
 			update_option('event_espresso_exact_settings', $exact_settings);
 		}
+	}
+
+	if ( ! isset( $exact_settings['button_url'] ) || ! file_exists( $exact_settings['button_url'] )) {
+		$exact_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
 	}
 
 	//Open or close the postbox div
@@ -103,15 +106,15 @@ function event_espresso_display_exact_settings() {
 							<label for="button_url">
 								<?php _e('Button Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=button_image"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input type="text" name="button_url" size="35" value="<?php echo (($exact_settings['button_url'] == '') ? $button_url : $exact_settings['button_url'] ); ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=button_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>
+							<input class="upload_url_input" type="text" name="button_url" size="35" value="<?php echo (isset($exact_settings['button_url']) ? $exact_settings['button_url'] : ''  ); ?>" />
+							<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>
 							</li>
 						<li>
 							<label for="image_url">
 								<?php _e('Image URL', 'event_espresso'); ?> <a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=exact_image_url_info"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
-							<input type="text" name="image_url" size="35" value="<?php echo $exact_settings['image_url']; ?>" />
-							<a href="media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=580&amp;rel=image_url" id="add_image" class="thickbox" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>
+							<input class="upload_url_input" type="text" name="image_url" size="35" value="<?php echo $exact_settings['image_url']; ?>" />
+							<a class="upload_image_button" title="Add an Image"><img src="images/media-button-image.gif" alt="Add an Image"></a>
 							<br />
 							<?php _e('(used for your business/personal logo on the E-xact payment page)', 'event_espresso'); ?>
 						</li>
@@ -149,12 +152,14 @@ function event_espresso_display_exact_settings() {
 							echo select_input('bypass_payment_page', $values, $exact_settings['bypass_payment_page']);
 							?>
 							 </li>
+						<?php if (espresso_check_ssl() == TRUE || ( isset($exact_settings['force_ssl_return']) && $exact_settings['force_ssl_return'] == 1 )) {?>
 						<li>
 							<label for="force_ssl_return">
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $exact_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
+							<?php }?>
 						<li>
 							<label><?php _e('Current Button Image', 'event_espresso'); ?></label>
 							<?php echo '<img src="' . $exact_settings['button_url'] . '" />'; ?></li>

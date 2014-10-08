@@ -80,7 +80,11 @@ function espresso_process_firstdata($payment_data) {
 	$payment_data['txn_details'] = serialize($_REQUEST);
 
 	$result = $mylphp->curl_process($myorder); # use curl methods
-
+	if( ! is_array($result) ){
+		//sometimes curl_process returns a string instead of an array, which is dumb. 
+		//but we can use their decodeXML method to fix that
+		$result = $mylphp->decodeXML($result);
+	}
 	if ($myorder["debugging"]) {
 		echo "<p>var_dump of order data:</p> ";
 		var_dump($myorder);
@@ -91,9 +95,9 @@ function espresso_process_firstdata($payment_data) {
 		echo '<h3 style="color:#ff0000;" title="Payments will not be processed">' . __('End of Debugging / Sandbox output (this will go away when you switch to live transactions)', 'event_espresso') . '</h3>';
 	}
 
-	if (!empty($result)) {
+	if (!empty($result) ) {
 		$payment_data['txn_details'] = serialize($result);
-		$payment_data['txn_id'] = $result["r_ordernum"];
+		$payment_data['txn_id'] = isset($result["r_ordernum"]) ? $result["r_ordernum"] : '';
 		if ($result["r_approved"] != "APPROVED" && $result["r_approved"] != "DECLINED") {
 			if ($result['r_approved'] != '<')
 				echo "<br />Status: " . $result['r_approved'];
@@ -106,6 +110,6 @@ function espresso_process_firstdata($payment_data) {
 			$payment_data['payment_status'] = 'Completed';
 		}
 	}
-	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }

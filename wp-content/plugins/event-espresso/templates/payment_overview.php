@@ -15,7 +15,7 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	?>
 			<td><?php echo stripslashes_deep($fname . ' ' . $lname) ?></td>
 		</tr>
 		<tr>
-			<?php echo $txn_type == '' ? '' : '<td>' . __('Payment Type:', 'event_espresso') . '</td> <td>' . espresso_payment_type($txn_type) . '</td>'; ?> <?php echo ($payment_date == '' || ($payment_status == 'Pending' && (espresso_payment_type($txn_type) == 'Invoice' || espresso_payment_type($txn_type) == 'Offline payment'))) ? '' : '<tr><td>' . __('Payment Date:', 'event_espresso') . '</td> <td>' . event_date_display($payment_date) . '</td></tr>'; ?>
+			<?php echo $txn_type == '' ? '' : '<td>' . __('Payment Type:', 'event_espresso') . '</td> <td>' . stripslashes_deep(espresso_payment_type($txn_type)) . '</td>'; ?> <?php echo ($payment_date == '' || ($payment_status == 'Pending' && (espresso_payment_type($txn_type) == 'Invoice' || espresso_payment_type($txn_type) == 'Offline payment'))) ? '' : '<tr><td>' . __('Payment Date:', 'event_espresso') . '</td> <td>' . event_date_display($payment_date) . '</td></tr>'; ?>
 		</tr>
 		<tr>
 			<td><?php _e('Amount Paid/Owed:', 'event_espresso'); ?></td>
@@ -27,7 +27,25 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	?>
 			<td>
 				<?php _e('Payment Status:', 'event_espresso'); ?>
 			</td>
-			<td><?php echo $payment_status ?></td>
+			<?php // localize all the things!
+				switch( $payment_status ) {
+					case 'Pending':
+						$payment_status_translated = __( 'Pending', 'event_espresso' );
+						break;
+					case 'Incomplete':
+						$payment_status_translated = __( 'Incomplete', 'event_espresso' );
+						break;
+					case 'Completed':
+						$payment_status_translated = __( 'Completed', 'event_espresso' );
+						break;
+					case 'Payment Declined':
+						$payment_status_translated = __( 'Payment Declined', 'event_espresso' );
+						break;
+					default:
+						$payment_status_translated = __("Error", "event_espresso");
+				}
+			?>
+			<td><?php echo $payment_status_translated; ?></td>
     </tr>
 		<tr>
 			<td>
@@ -43,3 +61,6 @@ do_action('action_hook_espresso_log', __FILE__, 'FILE LOADED', '');	?>
 	</table>
 	</div>
 </div><!-- / .event-display-boxes -->
+<form>
+	<input  type="hidden" name="allow_leave_page" id="allow_leave_page" value="true"/>
+</form>

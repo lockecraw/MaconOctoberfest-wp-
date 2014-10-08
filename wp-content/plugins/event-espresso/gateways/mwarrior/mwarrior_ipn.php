@@ -30,7 +30,7 @@ function espresso_process_mwarrior($payment_data) {
 		$payment_data['txn_id'] = $mwarrior->response['responseData']['transactionID'];
 		if ($mwarrior->response['status'] == 'approved') {
 			?>
-			<h2><?php _e('Thank You!', 'event_espresso'); ?></h2>
+			
 			<p><?php _e('Your transaction has been processed.', 'event_espresso'); ?></p>
 			<?php
 			$payment_data['payment_status'] = 'Completed';
@@ -44,7 +44,7 @@ function espresso_process_mwarrior($payment_data) {
 				<p><strong>Error:</strong> (<?php echo $resp['responseCode']; ?> - <?php echo $resp['responseMessage']; ?>) - <?php echo urldecode($resp['authMessage']); ?></p>
 				<?php
 			}
-			$payment_data['payment_status'] = 'Declined';
+			$payment_data['payment_status'] = 'Payment Declined';
 		}
 
 		//Debugging option
@@ -80,6 +80,6 @@ function espresso_process_mwarrior($payment_data) {
 		}
 		wp_mail($payment_data['contact'], $subject, $body);
 	}
-	add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
+	//add_action('action_hook_espresso_email_after_payment', 'espresso_email_after_payment');
 	return $payment_data;
 }

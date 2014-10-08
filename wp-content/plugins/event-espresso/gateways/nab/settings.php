@@ -21,6 +21,10 @@ function event_espresso_nab_settings() {
 		}
 	}
 
+	if ( ! isset( $nab_settings['button_url'] ) || ! file_exists( $nab_settings['button_url'] )) {
+		$nab_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
+	}
+
 	//Open or close the postbox div
 	if (empty($_REQUEST['deactivate_nab'])
 					&& (!empty($_REQUEST['activate_nab'])
@@ -102,6 +106,11 @@ function event_espresso_display_nab_settings() {
 				</td>
 			</tr>
 		</table>
+		<?php 
+		if (espresso_check_ssl() == FALSE){
+			espresso_ssl_required_gateway_message();
+		}
+		?>
 		<p>
 			<input type="hidden" name="update_nab" value="update_nab" />
 			<input class="button-primary" type="submit" name="Submit" value="<?php _e('Update NAB Settings', 'event_espresso') ?>" id="save_nab_settings" />

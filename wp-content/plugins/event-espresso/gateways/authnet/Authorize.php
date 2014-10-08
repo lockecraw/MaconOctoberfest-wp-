@@ -135,15 +135,19 @@ class Espresso_Authorize extends Espresso_PaymentGateway {
 	public function submitButton($button_url, $gateway) {
 		$this->prepareSubmit();
 		global $gateway_name;
-		echo '<li><form  method="post" name="payment_form" action="' . $this->gatewayUrl . '">';
+		echo ' <div id="' . $gateway . '-payment-option-dv" class="off-site-payment-gateway payment-option-dv">
+			<img class="off-site-payment-gateway-img" width="16" height="16" src="' . EVENT_ESPRESSO_PLUGINFULLURL . '/images/icons/external-link.png" alt="click to visit this payment gateway">
+			<form  method="post" name="payment_form" action="' . $this->gatewayUrl . '">';
 		foreach ($this->fields as $name => $value) {
 			echo "<input type=\"hidden\" name=\"$name\" value=\"$value\"/>\n";
 		}
 		foreach ($this->_additional_line_items as $value) {
 			echo "<input type=\"hidden\" name=\"x_line_item\" value=\"$value\"/>\n";
 		}
-		echo '<input class="espresso_payment_button_' . $gateway . '" type="image" alt="Pay using ' . $gateway_name . '" src="' . $button_url . '" />';
-		echo '</form></li>';
+		echo '<input id="' . $gateway . '-payment-option-lnk" class="payment-option-lnk allow-leave-page" type="image" alt="Pay using ' . $gateway_name . '" src="' . $button_url . '" />';
+            echo '
+		 	</form>
+		</div>';
 	}
 
 	/**
@@ -172,6 +176,7 @@ class Espresso_Authorize extends Espresso_PaymentGateway {
 		foreach ($this->_additional_line_items as $value) {
 			echo "<input type=\"hidden\" name=\"x_line_item\" value=\"$value\"/>\n";
 		}
+           echo "<input type=\"hidden\" id=\"bypass_payment_page\" name=\"bypass_payment_page\" value=\"true\"/>\n";
 		echo "<p style=\"text-align:center;\"><br/><br/>If you are not automatically redirected to ";
 		echo "the payment website within 5 seconds...<br/><br/>\n";
 		echo "<input type=\"submit\" value=\"Click Here\"></p>\n";

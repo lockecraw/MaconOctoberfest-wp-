@@ -21,6 +21,10 @@ function event_espresso_ideal_payment_settings() {
 		}
 	}
 
+	if ( ! isset( $ideal_settings['button_url'] ) || ! file_exists( $ideal_settings['button_url'] )) {
+		$ideal_settings['button_url'] = EVENT_ESPRESSO_PLUGINFULLURL . "gateways/pay-by-credit-card.png";
+	}
+
 	//Open or close the postbox div
 	if (empty($_REQUEST['deactivate_ideal'])
 					&& (!empty($_REQUEST['activate_ideal'])
@@ -88,16 +92,14 @@ function event_espresso_display_ideal_settings() {
 							<br />
 							<?php _e('(Make sure you enable test mode in your Mollie account).', 'event_espresso'); ?>
 						</li>
-					</ul>
-				</td>
-				<td valign="top"> 
-					<ul>
+					<?php if (espresso_check_ssl() == TRUE || ( isset($ideal_settings['force_ssl_return']) && $ideal_settings['force_ssl_return'] == 1 )) {?>
 						<li>
 							<label for="force_ssl_return">
 								<?php _e('Force HTTPS on Return URL', 'event_espresso'); ?>
 								<a class="thickbox" href="#TB_inline?height=300&width=400&inlineId=force_ssl_return"><img src="<?php echo EVENT_ESPRESSO_PLUGINFULLURL ?>/images/question-frame.png" width="16" height="16" /></a>
 							</label>
 							<input name="force_ssl_return" type="checkbox" value="1" <?php echo $ideal_settings['force_ssl_return'] ? 'checked="checked"' : '' ?> /></li>
+							<?php }?>
 					</ul></td>
 			</tr>
 		</table>

@@ -57,6 +57,7 @@ class PluginUpdateEngineChecker {
 	public $lang_domain = ''; //used to hold the localization domain for translations .
 	public $dismiss_upgrade; //for setting the dismiss upgrade option (per plugin).
 	public $pue_install_key; //we'll customize this later so each plugin can have it's own install key!
+	public $extra_stats; //used to contain an array of key/value pairs that will be sent as extra stats.
 		
 	/**
 	 * Class constructor.
@@ -73,6 +74,10 @@ class PluginUpdateEngineChecker {
 	 */
 	function __construct( $metadataUrl, $slug = '', $options = array() ){
 		$this->metadataUrl = $metadataUrl;
+		if ( is_array($slug ) ) {
+			$premium = array_values($slug['premium']);
+			$slug = $premium[0];
+		}
 		$this->slug = $slug;
 		$tr_slug = str_replace('-','_',$this->slug);
 		$this->pluginFile = get_option('pue_file_loc_'.$this->slug);
@@ -89,7 +94,8 @@ class PluginUpdateEngineChecker {
 			'checkPeriod' => 12,
 			'plugin_path' => '',
 			'option_key' => 'pue_site_license_key',
-			'options_page_slug' => null
+			'options_page_slug' => null,
+			'extra_stats' => array() //this is an array of key value pairs for extra stats being tracked.
 		);
 		
 		$options = wp_parse_args( $options, $defaults );
@@ -101,6 +107,7 @@ class PluginUpdateEngineChecker {
 		$this->plugin_path = $plugin_path;
 		$this->option_key = $option_key;
 		$this->options_page_slug = $options_page_slug;
+		$this->extra_stats = $extra_stats;
 
 		
 		if ( !empty($this->plugin_path) ) {
@@ -156,10 +163,8 @@ class PluginUpdateEngineChecker {
 		if ( $this->checkPeriod > 0 ){
 			
 			//Trigger the check via Cron
-			add_filter('cron_schedules', array(&$this, '_addCustomSchedule'));
 			if ( !wp_next_scheduled($cronHook) && !defined('WP_INSTALLING') ) {
-				$scheduleName = 'every' . $this->checkPeriod . 'hours';
-				wp_schedule_event(time(), $scheduleName, $cronHook);
+				wp_schedule_event(time(), 'daily', $cronHook);
 			}
 			add_action($cronHook, array(&$this, 'checkForUpdates'));
 			
@@ -177,23 +182,6 @@ class PluginUpdateEngineChecker {
 		add_action( "wp_ajax_".$this->dismiss_upgrade, array(&$this, 'dashboard_dismiss_upgrade')); 
 	}
 	
-	
-	/**
-	 * Add our custom schedule to the array of Cron schedules used by WP.
-	 * 
-	 * @param array $schedules
-	 * @return array
-	 */
-	function _addCustomSchedule($schedules){
-		if ( $this->checkPeriod && ($this->checkPeriod > 0) ){
-			$scheduleName = 'every' . $this->checkPeriod . 'hours';
-			$schedules[$scheduleName] = array(
-				'interval' => $this->checkPeriod * 3600, 
-				'display' => sprintf('Every %d hours', $this->checkPeriod),
-			);
-		}		
-		return $schedules;
-	}
 
 	function hook_into_wp_update_api() {
 		$this->set_api();
@@ -288,6 +276,8 @@ class PluginUpdateEngineChecker {
 			$options
 		);
 
+		$this->_send_extra_stats(); //we'll trigger an extra stats update here.
+
 		//Try to parse the response
 		$pluginInfo = null;
 		if ( !is_wp_error($result) && isset($result['response']['code']) && ($result['response']['code'] == 200) && !empty($result['body']) ){
@@ -299,6 +289,40 @@ class PluginUpdateEngineChecker {
 		
 		return $pluginInfo;
 	}
+
+
+
+
+	private function _send_extra_stats() {
+		//first if we don't have a stats array then lets just get out.
+		if ( empty( $this->extra_stats) ) return;
+
+
+		//set up args sent in body
+		$body = array(
+			'extra_stats' => $this->extra_stats,
+			'user_api_key' => $this->api_secret_key,
+			'pue_stats_request' => 1,
+			'domain' => $this->current_domain,
+			'pue_plugin_slug' => $this->slug,
+			'pue_plugin_version' => $this->getInstalledVersion()
+			);
+
+		//setup up post args
+		$args = array(
+			'timeout' => 10,
+			'blocking' => TRUE,
+			'user-agent' => 'PUE-stats-carrier',
+			'body' => $body,
+			'blocking' => TRUE,
+			'sslverify' => FALSE
+			);
+
+		$resp = wp_remote_post($this->metadataUrl, $args);
+		
+	}
+
+
 	
 	/**
 	 * Retrieve the latest update (if any) from the configured API endpoint.
