@@ -934,6 +934,12 @@ function event_espresso_show_price_types($event_id, $is_donation = false) {
 		<span class="event-detail-label">Price:</span>
 		<table class="price_list">
 			<tr>
+				<td>Men's CX5</td>
+				<td>9:15 A.M.</td>
+				<td>30 min</td>
+				<td>$25</td>
+			</tr>
+			<tr>
 				<td>Masters 35+/45+ (CX1/CX2/CX3)</td>
 				<td>10:00 A.M.</td>
 				<td>45 min</td>
@@ -994,7 +1000,13 @@ function event_espresso_show_price_types($event_id, $is_donation = false) {
 					$surcharge = " + {$result->surcharge}% " . __('Surcharge', 'event_espresso');
 				}
 			}
+			
+			if ($early_price_data = early_discount_amount($event_id, $result->event_cost)) {
+				$result->event_cost = $early_price_data['event_price'];
+				$message = __(' Early Pricing*', 'event_espresso');
+			}
 
+			
 			?>
 			<tr>
 				<td class="price_type"><?php echo $result->price_type; ?></td>
@@ -1017,6 +1029,7 @@ function event_espresso_show_price_types($event_id, $is_donation = false) {
 			//it's the Octoberfest Beer Garden
 			?>
 	<div class="addToCartInstructions">
+		<em>*Early pricing does not apply to Homebrew Competition</em><br/>
 		<em>To register for this event, please click register and navigate to the registration system.</em>
 	</div>
 	<?php

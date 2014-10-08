@@ -43,7 +43,7 @@
 	</div>
 		<a id="homeLogo" href="<?php echo get_permalink( 56 ); ?>" title="Come Celebrate!"></a>
 	<div id="hiddenHomeLogo">
-		<img src="<?php bloginfo('template_url'); ?>/images/MaconOctoberfest-Logo2013.png" alt="<?php bloginfo('name'); ?>" />
+		<img src="<?php bloginfo('template_url'); ?>/images/MaconOctoberfest-Logo2014.png" alt="<?php bloginfo('name'); ?>" />
 	</div>
 	<?php if (have_posts()) : while (have_posts()) : the_post();?>
 		<div id="homeText">

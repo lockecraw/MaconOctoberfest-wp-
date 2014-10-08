@@ -57,6 +57,7 @@ h1.eventTitle {
 	margin: 0px 0px 10px 0px;
 }
 
+
 h1 a:link,
 h1 a:visited{
 	color: #86311E;
@@ -81,6 +82,18 @@ h2.eventTitle {
 	text-transform: uppercase;
 	margin: 10px 0px 0px 0px;
 }
+
+h2.earlyTickets {
+	font-family: "futura-pt-condensed",sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 25px;
+	color: #CF7229;
+	text-transform: uppercase;
+	margin: 10px 0px 0px 0px;
+	float: left;
+}
+
 
 h2.performersTitle {
 	font-family: "museo",serif;

@@ -50,6 +50,12 @@ $this_event_id = $event_id;
 	if(!empty($event_meta['event_thumbnail_url'])){
 		echo apply_filters('filter_hook_espresso_display_featured_image', $event_id, !empty($event_meta['event_thumbnail_url']) ? $event_meta['event_thumbnail_url'] : '');
 	}
+	if($event_id == 21){
+		echo '<img class="alignright" src="https://maconoctoberfest.com/wp/wp-content/uploads/2014/08/2014-MaconOctoberfestLogo-250x216.png"/>';
+	}	
+	if($event_id == 25){
+		echo '<img class="alignright" src="https://maconoctoberfest.com/wp/wp-content/uploads/2014/10/WienerDogRace1.png"/>';
+	}	
 	?>
 	<h1 class="eventTitle" id="event_title-<?php echo $event_id ?>">
 		<a title="<?php echo stripslashes_deep($event_name) ?>" class="a_event_title" id="a_event_title-<?php echo $event_id ?>" href="<?php echo $registration_url; ?>">
@@ -58,35 +64,35 @@ $this_event_id = $event_id;
 	</h1>
 	<div class="event-content">
 		<?php
-		if($event_id == 11){
+		if($event_id == 21){
 			//it's the Octoberfest Beer Garden
 			?>
 			<div class="event-details">
 				<div class="event-detail event-detail-price" id="p_event_price-3">
 					<span class="event-detail-label">Price:</span>
-					<span class="event-detail-value">$25.00 - $75.00</span>
+					<span class="event-detail-value">$8.00 adv - $40.00 adv</span>
 				</div>
 				<hr class="event-details" />
 				<div class="event-detail event-detail-price" id="event_date-3">
 					<span class="event-detail-label">Day 1:</span>
-					<span class="event-detail-value">Saturday, October 19th, 2013</span>
+					<span class="event-detail-value">Friday, October 24th, 2014</span>
+				</div>
+				<div class="event-detail event-detail-time">
+					<span class="event-detail-label">Start Time:</span>
+					<span class="event-detail-value">4:00 pm</span>&nbsp;&nbsp;&nbsp;
+					<span class="event-detail-label">End Time: </span>
+					<span class="event-detail-value">10:00 pm</span>
+				</div>
+				<hr class="event-details" />
+				<div class="event-detail event-detail-price" id="event_date-3">
+					<span class="event-detail-label">Day 2:</span>
+					<span class="event-detail-value">Saturday, October 25th, 2014</span>
 				</div>
 				<div class="event-detail event-detail-time">
 					<span class="event-detail-label">Start Time:</span>
 					<span class="event-detail-value">11:00 am</span>&nbsp;&nbsp;&nbsp;
 					<span class="event-detail-label">End Time: </span>
-					<span class="event-detail-value">8:00 pm</span>
-				</div>
-				<hr class="event-details" />
-				<div class="event-detail event-detail-price" id="event_date-3">
-					<span class="event-detail-label">Day 2:</span>
-					<span class="event-detail-value">Sunday, October 20th, 2013</span>
-				</div>
-				<div class="event-detail event-detail-time">
-					<span class="event-detail-label">Start Time:</span>
-					<span class="event-detail-value">12:00 pm</span>&nbsp;&nbsp;&nbsp;
-					<span class="event-detail-label">End Time: </span>
-					<span class="event-detail-value">7:00 pm</span>
+					<span class="event-detail-value">10:00 pm</span>
 				</div>
 				<hr class="event-details" />
 			</div>

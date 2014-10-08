@@ -17,24 +17,22 @@ Version: 1.0
 
 #homeLogo {
 	width: 495px;
-	height: 380px;
-	margin: 0 auto;
+	height: 370px;
+	margin: 10px auto 0 auto;
 }
 
 a#homeLogo {
 	display: block;
 	background: no-repeat url('images/MaconOctoberfest-HomeLogo.png') 0 0;
 	width: 443px;
-	height: 380px;
-	margin: 0 auto;
+	height: 370px;
 }
 
 a:hover#homeLogo {
 	display: block;
 	background: no-repeat url('images/MaconOctoberfest-HomeLogo.png') 0 -372px;
 	width: 443px;
-	height: 380px;
-	margin: 0 auto;
+	height: 370px;
 }
 
 
@@ -1000,3 +998,19 @@ table#prizes {
 	margin-bottom: 8px;
 }
 .placeholder { color: #aaa; }
+
+#showcase {
+	width: 90%;
+	margin: 0 auto;
+	height: 150px;
+	padding: 17px;
+}
+
+#post-entries .lshowcase-logos {
+	background: #FFFFFF;
+	overflow: hidden;
+	border: 3px solid #86311E;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}

@@ -10,11 +10,13 @@
 	  </tr>
 	  <tr>
 		<td colspan="2" align="right" valign="top">
-		<span class="price">Ticket Qty: [ticket_qty]</span><br>
-		Price: [cost]<br>
+		<span class="price">Ticket Qty: [ticket_qty]</span>*<br>
+		Price: [cost] x [ticket_qty]<br>
 		  [fname] [lname] (ID: [att_id])<br>
-		  [registration_id]
+		  [registration_id]<br/><br/>
 		  </td>
 	  </tr>
 	</table>
+	<br/>
+	*This e-ticket is worth [ticket_qty] [ticket_type] entries at the gate on a first-come, first-served basis and is only valid for the first [ticket_qty] entries/scans. Please duplicate and distribute with caution. Everyone must be 21 years of age or older with valid ID to drink alcohol.
 </div>

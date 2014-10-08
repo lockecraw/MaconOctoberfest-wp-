@@ -100,8 +100,7 @@
 			<a href="<?php echo home_url(); ?>/buy-tickets/" id="buyTickets" title="Buy Tickets"></a>
 			<div id="buyTicktesList">
 				<ul>
-					<li><a href="<?php echo home_url(); ?>/event-registration/?ee=11">Beer Garden</a></li>
-					<li><a href="<?php echo home_url(); ?>/event-registration/?ee=3">Founders Feast</a></li>
+					<li><a href="<?php echo home_url(); ?>/event-registration/?ee=21">Beer Garden</a></li>
 					<li><a href="<?php echo home_url(); ?>/event-registration/?ee=15">Brewers Brunch</a></li>
 				</ul>
 			</div>
@@ -110,9 +109,8 @@
 			<a href="<?php echo home_url(); ?>/register/" id="register" title="Register for Competitions"></a>
 			<div id="registerList">
 				<ul>
-					<li><a href="<?php echo home_url(); ?>/event-registration/?ee=8">Homebrew Contest</a></li>
+					<li><a href="<?php echo home_url(); ?>/events/wiener-dog-race/">Wiener Dog Race</a></li>
 					<li><a href="<?php echo home_url(); ?>/event-registration/?ee=9">Cyclocross Bike Race</a></li>
-					<li><a href="<?php echo home_url(); ?>/event-registration/?ee=10">Singer-songwriter Competition</a></li>
 				</ul>
 			</div>
 		</div>

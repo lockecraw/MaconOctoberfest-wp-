@@ -9,6 +9,7 @@ function event_espresso_shopping_cart() {
 	event_espresso_add_event_process(5,"Donation");
 	event_espresso_add_event_process(17,"Donation");
 	event_espresso_add_event_process(18,"Donation");
+	event_espresso_add_event_process(19,"Donation");
 	$events_in_session = isset( $_SESSION['espresso_session']['events_in_session'] ) ? $_SESSION['espresso_session']['events_in_session'] : event_espresso_clear_session( TRUE );
 
 	if ( event_espresso_invoke_cart_error( $events_in_session ) )
