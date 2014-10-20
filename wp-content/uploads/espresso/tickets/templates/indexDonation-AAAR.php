@@ -1,3 +1,6 @@
+<style>
+<?php include('css/red.css');?>
+</style>
 <div class="ticket">
 	<table width="100%" border="0">
 	  <tr>
